@@ -266,9 +266,9 @@ function loadQuestion(index) {
     }
     document.getElementById('Q_num').innerHTML = '<p>Q' + (index + 1) +'</p>' + HistoryHTML;
 
-    //スキップボタンの作成
-    let next_btns = document.getElementsByClassName("next_btn");
-    next_btns[0].innerText = "スキップする ▶"
+    // //スキップボタンの作成
+    // let next_btns = document.getElementsByClassName("next_btn");
+    // next_btns[0].innerText = "スキップする ▶"
 }
 
 function checkAnswer(isCorrect) {
