@@ -191,6 +191,14 @@ footer .footer_content {
   padding-bottom: 20px;
   border-bottom: 1px solid #444;
 }
+@media (max-width: 768px) {
+  footer .footer_content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+  }
+}
 footer .footer_content .footer_logo .motto {
   font-size: 0.8rem;
   color: #aaa;
@@ -205,10 +213,24 @@ footer .footer_content .footer_links {
   display: flex;
   gap: 20px;
 }
+@media (max-width: 768px) {
+  footer .footer_content .footer_links {
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+  }
+}
 footer .footer_content .footer_links li a {
   font-size: 0.9rem;
   color: #ccc;
   text-decoration: none;
+}
+@media (max-width: 768px) {
+  footer .footer_content .footer_links li a {
+    display: block;
+    padding: 12px 0;
+    border-bottom: 1px dashed #444;
+  }
 }
 footer .footer_content .footer_links li a:hover {
   color: #fff;
