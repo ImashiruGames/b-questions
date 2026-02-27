@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imashiru - 学習分析</title>
+    <link rel="stylesheet" href="../css/destyle.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/play_short.css">
+    <link rel="stylesheet" href="../css/analysis.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+    </style>
+</head>
+
+<body class="light_theme">
+    <div id="header-placeholder"></div>
+    <div id="user_info_bar"></div>
+
+    <main>
+        <div class="breadcrumb"><a href="index.html">HOME</a> >> 学習分析レポート</div>
+
+        <section class="introduction">
+            <!-- <h2>アルゴリズム道場 -基本情報B問題特化-</h2> -->
+            <h2>学習分析レポート</h2>
+        </section>
+
+        <div id="analysis_content" style="display: none;">
+            <div style="display:flex;">
+                <div class="analysis_section">
+                    <div class="flex-center">
+                        <h3>カテゴリー別 習得率</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                    <p>カテゴリーごとの問題消化率</p>
+                </div>
+
+                <div class="analysis_section">
+                    <div class="category-selector">
+                        <div class="flex_center">
+                            <div class="wrapper">
+                                <label for="categoryFilter">表示カテゴリー:</label>
+                                <select id="categoryFilter" style="color:black;">
+                                    <option value="制御構文">制御構文</option>
+                                    <option value="データ構造">データ構造</option>
+                                    <option value="構造体・クラス">構造体・クラス</option>
+                                    <option value="数値計算系">数値計算系</option>
+                                    <option value="定番アルゴリズム系">定番アルゴリズム系</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-center">
+                        <h3>テーマ別 詳細進捗</h3>
+                    </div>
+                    <div class="theme-analysis-wrapper">
+
+
+                        <div class="chart-area" style="position: relative; height: 300px; width: 100%;">
+                            <canvas id="themeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="introduction">
+                <h2>コメント</h2>
+                <p id="comment-area">基礎固めは順調です。次は「データの塊」を攻略しましょう！
+                    現在、制御構文の習得率は高いですが、アルゴリズム問題で得点源となる「多次元配列」や「連結リスト」といったデータ構造系がこれからの課題です。
+                    おすすめの学習ルートは、得意な「for文」の知識を「配列」の操作に繋げることです。未着手の「ビット演算」や「端数処理」は、隙間時間で一気に確認するだけでもレーダーチャートの形が整い、全体のバランスが良くなりますよ。
+                </p>
+            </div>
+
+
+
+            <div class="button-container">
+                <a href="play_short.html" class="back-btn">◀ 問題集に戻る</a>
+            </div>
+        </div>
+
+        <div id="login_required_msg" class="login_warning" style="display: none;">
+            <p>分析機能を利用するには、ショート問題集画面でログインして問題を解いてください。</p>
+            <a href="play_short.html" class="back-btn">問題集へ戻る</a>
+        </div>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- ログインモーダル -->
+    <div id="login_modal" class="modal" style="display: none;">
+        <div class="modal_content">
+            <h2>ログイン</h2>
+            <p>ユーザー名を入力してください（記録用）</p>
+            <input type="text" id="login_username" placeholder="ユーザー名"
+                style="padding: 10px; font-size: 1.2rem; width: 80%; margin: 20px 0;">
+            <div class="flex_center"><button id="login_btn" class="next_btn">ログイン</button></div>
+        </div>
+    </div>
+
+    <script src="../js/header.js"></script>
+    <script src="../js/footer.js"></script>
+    <script src="../js/user_info_bar.js"></script>
+    
+    <script src="../js/analysisComment.js"></script>
+    <script src="../short_questions/questions.js"></script>
+    <script src="../js/user_manager.js"></script>
+    <script src="../js/analysis.js"></script>
+
+    <!-- analysis.html専用のイベントハンドラ -->
+    <script>
+        // データを保持するためのグローバル変数（ページを開いている間だけ記憶）
+        var globalMasterData = null;
+        var globalProcessedData = null;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- 1. ログアウトボタンの処理 ---
+            var logoutBtn = document.getElementById('logout_btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function () {
+                    if (confirm("ログアウトしますか？")) {
+                        if (typeof UserManager !== 'undefined') {
+                            UserManager.logout();
+                            location.reload();
+                        }
+                    }
+                });
+            }
+
+            // --- 2. ログインボタンの処理 ---
+            var loginBtn = document.getElementById('login_btn');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', function () {
+                    var nameInput = document.getElementById('login_username');
+                    if (nameInput && nameInput.value !== "") {
+                        if (typeof UserManager !== 'undefined') {
+                            UserManager.login(nameInput.value);
+                            location.reload();
+                        }
+                    }
+                });
+            }
+
+            // --- 3. データの初期集計と描画の司令塔 ---
+            if (typeof UserManager !== 'undefined') {
+                UserManager.init();
+
+                if (UserManager.currentUser) {
+                    document.getElementById('analysis_content').style.display = 'block';
+                    document.getElementById('login_required_msg').style.display = 'none';
+
+                    // 【集計フェーズ】ページ読み込み時に1回だけ実行
+                    globalMasterData = aggregateTotalQuestions();
+
+                    // ユーザーの正解履歴をマージ
+                    var historyIds = UserManager.getHistory();
+                    globalMasterData = aggregateUserProgress(historyIds, globalMasterData);
+
+                    // 赤・緑・金のデータを取得
+                    globalProcessedData = makeData();
+
+                    // 【描画フェーズ】
+                    var filterElement = document.getElementById('categoryFilter');
+                    var initialCategory = filterElement.value;
+
+                    // レーダーチャートは「全体の分析」なので1回描画すればOK
+                    renderCategoryChart(globalMasterData);
+
+                    // テーマ別グラフとコメントは、選ばれているカテゴリで描画
+                    updateDashboard(initialCategory);
+
+                    // 【イベント監視】プルダウンが変更された時
+                    filterElement.addEventListener('change', function () {
+                        updateDashboard(this.value); // 選ばれた値でもう一度描画
+                    });
+
+                } else {
+                    document.getElementById('analysis_content').style.display = 'none';
+                    document.getElementById('login_required_msg').style.display = 'block';
+                }
+            }
+        });
+
+        // --- 4. 画面の部品を更新する命令 ---
+        function updateDashboard(selectedCategory) {
+            // すでに集計済みのデータを使って、必要な形に加工するだけ
+            var analysisData = analyzeCategoryProgress(globalMasterData, globalProcessedData, selectedCategory);
+
+            // 描画関数にデータを渡す
+            renderThemeChart(analysisData);
+            renderComment(analysisData, selectedCategory);
+        }
+    </script>
+</body>
+
+</html>

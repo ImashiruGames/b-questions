@@ -1,0 +1,168 @@
+@charset "UTF-8";
+/* _layout.scss : 全体のレイアウト（大掃除・道場最適化済） */
+body {
+  width: 100vw;
+  overflow-x: hidden;
+  font-family: sans-serif;
+  background-color: #f4f4f4;
+  color: #222;
+  overscroll-behavior: none;
+}
+
+section {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* --- ヘッダー --- */
+header {
+  background-color: #1e1e1e;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 3px solid #000;
+}
+header .title {
+  height: 3rem;
+  width: 90vw;
+  max-width: 1200px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.1rem;
+}
+header .menu {
+  background-color: #333;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+header .menu ul {
+  display: flex;
+  width: 90vw;
+  max-width: 1200px;
+}
+header .menu ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #555;
+  transition: none;
+  cursor: pointer;
+}
+header .menu ul li:first-child {
+  border-left: 1px solid #555;
+}
+header .menu ul li:hover {
+  background-color: #000;
+}
+header .menu ul .menuLink {
+  height: 2.5rem;
+  padding: 0 1.5rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+header .menu a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* --- メインコンテンツ枠 --- */
+main {
+  margin: 0 auto;
+  width: 95vw;
+  max-width: 1000px;
+  line-height: 1.6;
+  padding: 30px 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  min-height: 80vh;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  /* パンくずリスト */
+}
+main .breadcrumb {
+  font-size: 0.85rem;
+  margin-bottom: 2rem;
+  color: #666;
+  border-bottom: 1px dotted #ccc;
+  padding-bottom: 10px;
+}
+main .breadcrumb a {
+  color: #0056b3;
+  text-decoration: none;
+}
+main .breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* --- 汎用見出しエリア --- */
+.introduction {
+  margin-bottom: 30px;
+}
+.introduction h2 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  border-bottom: 2px solid #333;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+  color: #111;
+}
+.introduction p {
+  line-height: 1.8;
+  color: #333;
+}
+
+/* --- フッター --- */
+footer {
+  background-color: #1e1e1e;
+  color: #f8fafc;
+  padding: 30px 20px 20px;
+  margin-top: auto;
+  border-top: 3px solid #000;
+}
+footer .footer_content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #444;
+}
+footer .footer_content .footer_logo .motto {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-bottom: 5px;
+}
+footer .footer_content .footer_logo .brand {
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+footer .footer_content .footer_links {
+  display: flex;
+  gap: 20px;
+}
+footer .footer_content .footer_links li a {
+  font-size: 0.9rem;
+  color: #ccc;
+  text-decoration: none;
+}
+footer .footer_content .footer_links li a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+footer .copyright {
+  text-align: center;
+  padding-top: 15px;
+}
+footer .copyright small {
+  font-size: 0.75rem;
+  color: #888;
+}/*# sourceMappingURL=layout.css.map */

@@ -1,0 +1,112 @@
+/* _analysis.scss : 学習分析画面専用のスタイル（道場スタイル最適化） */
+
+// --- 変数定義（他ファイルと統一） ---
+$color-border: #333;
+$color-bg-light: #fafafa;
+$color-accent: #FFF9C4; // シャンパンゴールド
+$color-alert: #c62828;  // ストイックな赤
+
+// --- グラフを囲むセクション（道場スタイル） ---
+.analysis_section {
+    padding: 25px;
+    margin: 0 auto 30px auto;
+    width: 45%;
+    border: 2px solid $color-border;
+    background-color: #fff;
+
+    h3 {
+        font-size: 1.25rem;
+        color: $color-border; // 青色をやめ、知的な黒に統一
+        border-bottom: 2px solid $color-border; // ストイックな直線
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    p {
+        color: #666;
+        font-size: 0.9rem;
+        margin-top: 10px;
+        text-align: center;
+    }
+}
+
+// --- カテゴリ選択プルダウンエリア ---
+.category-selector {
+    background-color: $color-bg-light;
+    padding: 15px 20px;
+    border: 1px solid $color-border;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+
+    label {
+        font-size: 14px;
+        color: $color-border;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+}
+
+#categoryFilter {
+    height: auto !important;
+    appearance: auto; 
+    background-color: $color-accent !important;
+    color: $color-border !important;
+    padding: 10px 15px;
+    border: 2px solid $color-border; // 丸角を廃止し、2pxの直線枠に
+    border-radius: 0; // 丸角NG
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.5;
+    min-width: 200px;
+    cursor: pointer;
+}
+
+// --- グラフコンテナ ---
+.chart-container {
+    position: relative;
+    margin: 0 auto;
+    height: 350px;
+    width: 100%;
+    max-width: 600px;
+}
+
+// --- ボタン類 ---
+.button-container {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: $color-border;
+    color: white;
+    text-decoration: none;
+    border: none;
+    font-weight: bold;
+    border-radius: 0; // 丸角NG
+
+    &:hover {
+        background-color: #000; // ストイックな黒へ即時変化
+    }
+}
+
+// --- 未ログイン時の警告モーダル風エリア ---
+.login_warning {
+    text-align: center;
+    padding: 60px 20px;
+    background: #fff;
+    border: 3px solid $color-border; // 丸角と影を廃止し、太枠に
+    max-width: 600px;
+    margin: 50px auto;
+
+    p {
+        font-size: 1.1rem;
+        color: $color-alert; // 落ち着いた赤色
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+}

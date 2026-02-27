@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imashiru - 基本情報科目B演習</title>
+    <link rel="stylesheet" href="../css/destyle.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/play_short.css">
+
+</head>
+
+
+<body class="light_theme">
+    <div id="header-placeholder"></div>
+
+    <div id="user_info_bar">
+        <span id="current_username_display">ゲスト</span>
+        <span style="font-size: 0.8em; margin-left: 10px;">(総正解数: <span id="user_unique_solved_count">0</span>問)</span>
+        <a href="analysis.html" style="margin-left: 15px; font-size: 0.9em; text-decoration: none; color: #007bff;">📊
+            分析画面へ</a>
+        <button id="logout_btn"
+            style="display: none; margin-left: 10px; padding: 2px 8px; font-size: 0.8rem;">ログアウト</button>
+    </div>
+
+    <main>
+        <div class="breadcrumb"><a href="index.html">HOME</a> >> ショート問題集</div>
+
+        <section class="introduction">
+            <h2>アルゴリズム道場 -基本情報B問題特化-</h2>
+            <!-- <h2>B問題対策稽古場💻ショート問題集</h2> -->
+        </section>
+
+        <div id="progress_dashboard">
+            <div id="counter_display">
+                <span style="font-weight: bold; margin-right: 10px;">PROGRESS:</span>
+                <span id="counter" style="font-family: monospace; font-size: 1.1rem;">0/0</span>
+            </div>
+            <div id="progress_palette"></div>
+        </div>
+
+        <div id="layout_wrapper">
+            <section id="problem_side">
+                <h3 id="Q_num" class="question-header">Loading...</h3>
+                <pre id="text" class="question-text"></pre>
+                <div id="example" class="question-example"></div>
+                <div class="code_container">
+                    <pre id="code_display"></pre>
+                </div>
+
+            </section>
+
+            <section id="answer_side">
+                <div id="answer_grid_short">
+                    <p class="instruction">正解だと思うものを選んでください：</p>
+                    <div class="choice_container">
+                    </div>
+                </div>
+
+                <div id="explainbox" style="display:none;">
+                    <div id="result_display" class="result-bar" style="display: none;"></div>
+
+                    <div class="explanation-content">
+                        <h3 class="explanation-title">解説</h3>
+                        <div id="theme_template" class="theme-banner"></div>
+                        <div id="common_logic" class="logic-box"></div>
+                        <div id="specific_explanation" class="specific-box"></div>
+                    </div>
+                </div>
+
+                <div class="action-area">
+                    <button class="next_btn solid-btn">次の問題へ ▶</button>
+                </div>
+            </section>
+        </div>
+        </section>
+        </div>
+
+    </main>
+
+    <!-- 完了モーダル -->
+    <div id="completion_modal" class="modal" style="display: none;">
+        <div class="modal_content" style="border-radius: 0; border: 2px solid #333;">
+            <h2 style="border-bottom: 2px solid #333; padding-bottom: 10px;">結果発表</h2>
+
+            <div id="result_stats" style="font-size: 1.4rem; font-weight: bold; margin: 15px 0;">
+                正解数：<span id="modal_correct">0</span> / <span id="modal_total">0</span>
+            </div>
+
+            <div id="wrong_list_area" style="display: none; text-align: left; margin-bottom: 20px;">
+                <h3 style="font-size: 1rem; background-color: #f4f4f4; border: 1px solid #333; padding: 5px;">復習が必要な問題
+                </h3>
+                <table
+                    style="width: 100%; border-collapse: collapse; font-size: 0.9rem; border: 1px solid #333; border-top: none;">
+                    <tbody id="wrong_list_tbody">
+                    </tbody>
+                </table>
+                <button onclick="retryWrongQuestions()"
+                    style="width: 100%; margin-top: 10px; padding: 12px; font-size: 1rem; font-weight: bold; background-color: #333; color: #fff; border: none; cursor: pointer;">
+                    間違えた問題だけを再挑戦する
+                </button>
+            </div>
+
+            <button onclick="restartGame()"
+                style="width: 100%; margin-top: 10px; padding: 10px; font-size: 1rem; border: 1px solid #333; background-color: #fff; cursor: pointer;">
+                同じ設定で最初からやり直す
+            </button>
+            <a href="index.html"
+                style="display: block; width: 100%; margin-top: 10px; padding: 10px; font-size: 1rem; text-align: center; border: 1px solid #ccc; background-color: #eee; color: #333; text-decoration: none; box-sizing: border-box;">
+                HOMEへ戻る
+            </a>
+        </div>
+    </div>
+
+    <div id="login_modal" class="modal" style="display: none;">
+        <div class="modal_content">
+            <h2>ログイン</h2>
+            <p>ユーザー名を入力してください（記録用）</p>
+            <input type="text" id="login_username" placeholder="ユーザー名"
+                style="padding: 10px; font-size: 1.2rem; width: 80%; margin: 20px 0;">
+            <div class="flex_center"><button id="login_btn" class="next_btn">開始する</button></div>
+        </div>
+    </div>
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/header.js"></script>
+    <script src="../js/footer.js"></script>
+    <script src="../short_questions/theme_templates.js"></script>
+    <script src="../short_questions/questions.js"></script>
+    <script src="../js/user_manager.js"></script>
+    <script src="../js/play_short.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 1. 初期化処理（ページを開いた瞬間に1回だけ実行）
+            if (typeof UserManager !== 'undefined') {
+                UserManager.init();
+            }
+
+            initPlayScreen();
+
+            // 2. 「次の問題へ」ボタンの監視（アロー関数排除）
+            let nextBtns = document.querySelectorAll('.next_btn');
+            for (let i = 0; i < nextBtns.length; i++) {
+                nextBtns[i].addEventListener('click', function () {
+                    // クラス名に next_btn を持つ無関係なボタン（ログイン等）を除外する安全策
+                    if (this.innerText.indexOf("次の問題へ") !== -1 || this.innerText.indexOf("結果へ") !== -1) {
+                        if (typeof nextQuestion === 'function') {
+                            nextQuestion();
+                        }
+                    }
+                });
+            }
+
+            // 3. 出題数変更・リスタート系の監視
+            let limitSelect = document.getElementById('question_limit_select');
+            if (limitSelect) {
+                limitSelect.addEventListener('change', function () {
+                    if (typeof restartGame === 'function') restartGame();
+                });
+            }
+            let modalRestartBtn = document.getElementById('modal_restart_btn');
+            if (modalRestartBtn) {
+                modalRestartBtn.addEventListener('click', function () {
+                    if (typeof restartGame === 'function') restartGame();
+                });
+            }
+
+            // 4. ユーザー管理（ログイン・ログアウト）の監視
+            let loginBtn = document.getElementById('login_btn');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', function () {
+                    let nameInput = document.getElementById('login_username');
+                    if (nameInput && nameInput.value.trim() !== "") {
+                        if (typeof UserManager !== 'undefined') {
+                            UserManager.login(nameInput.value.trim());
+                        }
+                    } else {
+                        alert("ユーザー名を入力してください");
+                    }
+                });
+            }
+            let logoutBtn = document.getElementById('logout_btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function () {
+                    if (confirm("ログアウトしますか？")) {
+                        if (typeof UserManager !== 'undefined') {
+                            UserManager.logout();
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

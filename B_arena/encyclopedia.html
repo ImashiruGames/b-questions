@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imashiru - プログラミング図鑑＆復習録</title>
+    <link rel="stylesheet" href="../css/destyle.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="light_theme">
+    <div id="header-placeholder"></div>
+    <div id="user_info_bar"></div>
+
+    <main>
+        <div class="breadcrumb"><a href="index.html">HOME</a> >> プログラミング図鑑＆復習録</div>
+        <section class="introduction">
+            <h2>アルゴリズム道場 -基本情報B問題特化-</h2>
+            <h2>プログラミング図鑑＆復習録</h2>
+            <p>これまでに解いた問題の記録を振り返り、弱点を克服しましょう。すべてのカードを「完全習得（金枠）」に染め上げることが目標です。</p>
+        </section>
+
+        <div id="encyclopedia-container"></div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <div id="explanation_modal" class="modal" style="display: none;">
+        <div class="modal_content">
+            <h2 id="modal_title">Loading...</h2>
+            <div id="modal_body"></div>
+            <button id="close_modal_btn" class="next_btn" style="margin-top: 20px;">閉じる ✖</button>
+        </div>
+    </div>
+
+    <script src="../js/header.js"></script>
+    <script src="../js/footer.js"></script>
+    <script src="../js/user_info_bar.js"></script>
+    <script src="../js/user_manager.js"></script>
+    <script src="../short_questions/questions.js"></script>
+    <script src="../js/encyclopedia.js"></script> </body>
+</html>

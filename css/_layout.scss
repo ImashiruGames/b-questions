@@ -1,0 +1,261 @@
+/* _layout.scss : 全体のレイアウト */
+
+body {
+    width: 100vw;
+    overflow-x: hidden;
+    font-family: sans-serif;
+    background-color: #f4f4f4; // 青みを抜き、ストイックなグレーに統一
+    color: #222;
+    overscroll-behavior: none;
+}
+
+section {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+/* --- ヘッダー --- */
+header {
+    background-color: #1e1e1e; // 濃い黒系で引き締める
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 3px solid #000; // 下部に太い直線を配置
+
+    //回転させたい
+    #mobile_menu_toggle{
+        transition:transform 0.5s ease-out;
+        &:hover{
+            transform: rotate(360deg);
+        }
+    }
+
+    .title {
+        height: 3rem;
+        width: 90vw;
+        max-width: 1200px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 1.1rem;
+    }
+
+    .menu {
+        background-color: #333;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        ul {
+            display: flex;
+            width: 90vw; // 画面幅の90%を使う
+            max-width: 1200px; // 最大幅も設定
+            padding: 0;
+            margin: 0;
+
+            .blank {
+                display: none;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+                display: block;
+                flex: 1; // ★最重要ポイント：すべてのリンクを「均等な幅」に引き伸ばす
+                border-right: 1px solid #555;
+                transition: none;
+
+                &:first-of-type {
+                    border-left: 1px solid #555;
+                }
+
+                &:hover {
+                    background-color: #000;
+                }
+            }
+
+            li.menuLink {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 2.8rem;
+                padding: 0; // 幅はflex:1で自動計算されるため、paddingは不要になります
+                font-weight: bold;
+                font-size: 0.95rem;
+
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    /* --- スマホ専用：ドロップダウンメニュー化 --- */
+    .mobile-only {
+        display: none; // PCでは隠す
+    }
+
+    @media (max-width: 768px) {
+        .title {
+            width: 95vw;
+            justify-content: space-between; // タイトルと歯車を左右に分ける
+        }
+
+        .mobile-only {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
+        .menu {
+            display: none; // ★初期状態は隠す
+
+            // 💡 JSで .is-open クラスが付与されたらパキッと表示
+            &.is-open {
+                display: block; 
+                
+            }
+
+            ul {
+                flex-direction: column; // 横並びを縦並びに変更
+                width: 100%;
+
+                a {
+                    width: 100%;
+                    border-right: none; // 右の区切り線を消す
+                    border-bottom: 1px solid #555; // 代わりに下線を引く
+
+                    &:first-of-type {
+                        border-left: none;
+                    }
+                }
+
+                li.menuLink {
+                    height: 3.5rem; // スマホでは指で押しやすいように高さを広げる
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}
+
+// リンクのaタグがレイアウトを崩さないためのリセット
+header .menu a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* --- メインコンテンツ枠 --- */
+main {
+    margin: 0 auto;
+    width: 95vw;
+    max-width: 1000px;
+    line-height: 1.6;
+    padding: 30px 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc; // ★フワッとした影（box-shadow）を廃止し、直線の枠線に
+    min-height: 80vh;
+    margin-top: 20px;
+    margin-bottom: 40px;
+
+    /* パンくずリスト */
+    .breadcrumb {
+        font-size: 0.85rem;
+        margin-bottom: 2rem;
+        color: #666;
+        border-bottom: 1px dotted #ccc; // 下線を引いてヘッダーエリアと区別
+        padding-bottom: 10px;
+
+        a {
+            color: #0056b3;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+/* --- 汎用見出しエリア --- */
+.introduction {
+    margin-bottom: 30px;
+
+    h2 {
+        font-size: 1.4rem;
+        font-weight: bold;
+        border-bottom: 2px solid #333; // ★丸角の緑の図形（clip-path）を完全廃止し、ストイックな下線に
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+        color: #111;
+    }
+
+    p {
+        line-height: 1.8;
+        color: #333;
+    }
+}
+
+/* --- フッター --- */
+footer {
+    background-color: #1e1e1e;
+    color: #f8fafc;
+    padding: 30px 20px 20px;
+    margin-top: auto;
+    border-top: 3px solid #000; // ヘッダーと同じ太い直線で挟む
+
+    .footer_content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #444;
+
+        .footer_logo {
+            .motto {
+                font-size: 0.8rem;
+                color: #aaa;
+                margin-bottom: 5px;
+            }
+
+            .brand {
+                font-size: 1.2rem;
+                font-weight: bold;
+                letter-spacing: 1px;
+            }
+        }
+
+        .footer_links {
+            display: flex;
+            gap: 20px;
+
+            li a {
+                font-size: 0.9rem;
+                color: #ccc;
+                text-decoration: none;
+
+                &:hover {
+                    color: #fff;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .copyright {
+        text-align: center;
+        padding-top: 15px;
+
+        small {
+            font-size: 0.75rem;
+            color: #888;
+        }
+    }
+}

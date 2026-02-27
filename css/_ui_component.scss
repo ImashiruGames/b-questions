@@ -1,0 +1,60 @@
+/* _ui_component.scss : 汎用UIパーツ（大掃除済） */
+
+/* --- テーブル共通 --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #333; // 直線の枠線を追加
+}
+th, td {
+    border-bottom: 1px solid #ccc;
+    padding: 12px 10px;
+    text-align: left;
+}
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+/* --- 汎用ユーティリティ --- */
+// html側の class="flex-center" との揺れを吸収するため、両方定義しておきます
+.flex_center, .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- 汎用フォームパーツ --- */
+select {
+    height: auto;
+    padding: 8px 12px;
+    border: 1px solid #333;
+    border-radius: 0; // 丸角NG
+    background-color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* --- 汎用ボタン（次へ、開始など） --- */
+.next_btn, .start_btn {
+    display: block;
+    width: 80%; 
+    max-width: 400px; // 広がりすぎ防止
+    margin: 15px auto;
+    padding: 15px 0; 
+    
+    background-color: #333; 
+    color: white; 
+    border: 2px solid #333; // 枠線をあえてつける
+    border-radius: 0; // 丸角NG
+    
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    
+    // アニメーション・スケール変化NG（色のみパキッと切り替える）
+    &:hover {
+        background-color: #000; 
+    }
+}

@@ -1,0 +1,98 @@
+@charset "UTF-8";
+/* _analysis.scss : 学習分析画面専用のスタイル（道場スタイル最適化） */
+.analysis_section {
+  padding: 25px;
+  margin: 0 auto 30px auto;
+  width: 45%;
+  border: 2px solid #333;
+  background-color: #fff;
+}
+.analysis_section h3 {
+  font-size: 1.25rem;
+  color: #333;
+  border-bottom: 2px solid #333;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.analysis_section p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.category-selector {
+  background-color: #fafafa;
+  padding: 15px 20px;
+  border: 1px solid #333;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+.category-selector label {
+  font-size: 14px;
+  color: #333;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+#categoryFilter {
+  height: auto !important;
+  -webkit-appearance: auto;
+     -moz-appearance: auto;
+          appearance: auto;
+  background-color: #FFF9C4 !important;
+  color: #333 !important;
+  padding: 10px 15px;
+  border: 2px solid #333;
+  border-radius: 0;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+  min-width: 200px;
+  cursor: pointer;
+}
+
+.chart-container {
+  position: relative;
+  margin: 0 auto;
+  height: 350px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  border: none;
+  font-weight: bold;
+  border-radius: 0;
+}
+.back-btn:hover {
+  background-color: #000;
+}
+
+.login_warning {
+  text-align: center;
+  padding: 60px 20px;
+  background: #fff;
+  border: 3px solid #333;
+  max-width: 600px;
+  margin: 50px auto;
+}
+.login_warning p {
+  font-size: 1.1rem;
+  color: #c62828;
+  margin-bottom: 20px;
+  font-weight: bold;
+}/*# sourceMappingURL=analysis.css.map */

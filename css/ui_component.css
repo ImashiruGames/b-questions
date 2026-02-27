@@ -1,0 +1,57 @@
+@charset "UTF-8";
+/* _ui_component.scss : 汎用UIパーツ（大掃除済） */
+/* --- テーブル共通 --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #333;
+}
+
+th, td {
+  border-bottom: 1px solid #ccc;
+  padding: 12px 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+/* --- 汎用ユーティリティ --- */
+.flex_center, .flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- 汎用フォームパーツ --- */
+select {
+  height: auto;
+  padding: 8px 12px;
+  border: 1px solid #333;
+  border-radius: 0;
+  background-color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* --- 汎用ボタン（次へ、開始など） --- */
+.next_btn, .start_btn {
+  display: block;
+  width: 80%;
+  max-width: 400px;
+  margin: 15px auto;
+  padding: 15px 0;
+  background-color: #333;
+  color: white;
+  border: 2px solid #333;
+  border-radius: 0;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.next_btn:hover, .start_btn:hover {
+  background-color: #000;
+}/*# sourceMappingURL=ui_component.css.map */

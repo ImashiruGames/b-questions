@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imashiru - 基本情報科目B演習</title>
+    <link rel="stylesheet" href="../css/destyle.css">
+    <!-- <link rel="stylesheet" href="../css/pages.css"> -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- <link rel="stylesheet" href="../css/play_short.css"> -->
+</head>
+
+<body class="light_theme">
+    <div id="header-placeholder"></div>
+    <div id="user_info_bar"></div>
+    <main>
+        <!-- パンくずリスト（breadcrumb trail) -->
+        <div class="breadcrumb">HOME</div>
+        <section class="introduction">
+            <h2>アルゴリズム道場 -基本情報B問題特化-</h2>
+            <p>本サイトは、基本情報技術者試験のB問題（アルゴリズムとプログラミング）に特化した、ステップアップ型のWeb問題集です。<br>
+                隙間時間を活用し、PC・タブレット・スマートフォンから無料で演習に取り組むことができます。基礎から応用まで網羅された問題と、試行錯誤を促す完全解説により、プログラミング初学者から試験直前の総仕上げまで、あなたの論理的思考力を着実に育成します。
+            </p>
+        </section>
+
+
+
+        <section id="control-panel">
+            <div style="margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+                <strong style="display: block; margin-bottom: 8px;">【表示オプション】</strong>
+                <label style="margin-right: 15px;">
+                    <input type="checkbox" id="filter_incorrect"> <span>間違えた問題（復習対象）のみ表示</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="filter_unattempted"> <span>未着手の問題のみ表示</span>
+                </label>
+            </div>
+
+            <div id="start-button-area"
+                style="text-align: right; margin-top: 15px; border-top: 1px solid #ccc; padding-top: 10px;">
+                <label style="font-weight: bold; margin-right: 15px;">
+                    出題数: <input type="number" id="question_limit" value="10" min="1"
+                        style="width: 60px; padding: 5px; border: 1px solid #333; text-align: center;"> 問
+                </label>
+                <button id="start_exam_btn"
+                    style="padding: 10px 20px; font-size: 16px; background-color: #333; color: #fff; border: none; cursor: pointer;">選択した問題を開始する</button>
+            </div>
+        </section>
+
+        <div id="total_medals_area"
+            style="margin-bottom: 20px; padding: 15px; border: 1px solid #333; background-color: #fafafa; text-align: center;">
+        </div>
+
+        <section id="category-container"></section>
+        </section>
+    </main>
+    <div id="footer-placeholder"></div>
+</body>
+<script src="../js/header.js"></script>
+<script src="../js/footer.js"></script>
+<script src="../js/user_info_bar.js"></script>
+
+<script src="../short_questions/theme_templates.js"></script>
+<script src="../js/user_manager.js"></script>
+<script src="../short_questions/questions.js"></script>
+<script>
+    // UserManagerの初期化を先に行う
+    if (typeof UserManager !== 'undefined') {
+        UserManager.init();
+    }
+
+    // ユーザーの統計データを取得
+    let currentUsername = UserManager.currentUser;
+    let userStats = {};
+    if (currentUsername) {
+        let statsKey = 'bucket_stats_' + currentUsername;
+        userStats = JSON.parse(localStorage.getItem(statsKey) || "{}");
+    }
+
+    // サブテーマのステータス（未着手・間違いあり等）を判定する関数
+    // サブテーマのステータスとトロフィーを判定する関数
+    function checkSubthemeStatus(category, theme, subtheme) {
+        let hasIncorrect = false;
+        let hasUnattempted = false;
+
+        // トロフィー計算用のカウント変数
+        let totalCount = 0;      // 総問題数
+        let attemptedCount = 0;  // 1回でも解いた問題数
+        let greenCount = 0;      // 1回以上正解した問題数
+        let goldCount = 0;       // 5回以上正解した問題数（金条件）
+
+        for (let i = 0; i < short_questions.length; i++) {
+            let q = short_questions[i];
+            if (q.category === category && q.theme === theme && q.subtheme === subtheme) {
+                totalCount++;
+                let qId = UserManager.generateId(q);
+                let s = userStats[qId];
+
+                if (!s) {
+                    hasUnattempted = true;
+                } else {
+                    // 1回でも解いていれば（正解・不正解問わず）
+                    if (s.correct > 0 || s.incorrect > 0) {
+                        attemptedCount++;
+                    }
+                    // 1回以上正解（緑）
+                    if (s.correct >= 1) {
+                        greenCount++;
+                    }
+                    // 5回以上正解（金）
+                    if (s.correct >= 5) {
+                        goldCount++;
+                    }
+
+                    if (s.incorrect > 0) {
+                        hasIncorrect = true;
+                    }
+                }
+            }
+        }
+
+        // トロフィーのランクを決定
+        let trophy = "none";
+        if (totalCount > 0) {
+            if (goldCount === totalCount) {
+                trophy = "gold";     // 全て金条件
+            } else if (greenCount === totalCount) {
+                trophy = "silver";   // 全て1回以上正解
+            } else if (attemptedCount === totalCount) {
+                trophy = "bronze";   // 全て1回以上解答（不正解含む）
+            }
+        }
+
+        if (totalCount === 0) {
+            return { hasIncorrect: false, hasUnattempted: true, totalCount: 0, trophy: "none" };
+        }
+
+        return {
+            hasIncorrect: hasIncorrect,
+            hasUnattempted: hasUnattempted,
+            totalCount: totalCount,
+            trophy: trophy
+        };
+    }
+
+    // --- フェーズ1＆3：HTML要素の動的生成とデータ埋め込み ---
+    let container = document.querySelector("#category-container");
+
+    let totalBronze = 0;
+    let totalSilver = 0;
+    let totalGold = 0;
+    let foundTargetTheme = false;
+
+    for (let categoryName in categories) {
+        let section = document.createElement("section");
+        section.classList.add("category-group");
+
+        let catHeader = document.createElement("div");
+        catHeader.classList.add("category-header");
+        // catHeader.innerHTML = `<label><input type="checkbox" class="cat-check" value="${categoryName}" checked> <span>${categoryName}</span></label>`;
+        section.appendChild(catHeader);
+
+        let categoryHasTarget = false;
+        let themes = categories[categoryName];
+
+        for (let themeName in themes) {
+            let themeContainer = document.createElement("div");
+            themeContainer.classList.add("theme-container");
+
+            let themeHeader = document.createElement("div");
+            themeHeader.classList.add("theme-header");
+            // themeHeader.innerHTML = `<label><input type="checkbox" class="theme-check" value="${themeName}" checked> <span>${themeName}</span></label>`;
+            themeContainer.appendChild(themeHeader);
+
+            let subthemeList = document.createElement("div");
+            subthemeList.classList.add("subtheme-list");
+
+            let subthemes = themes[themeName];
+
+            // このテーマに未着手が1つでもあるか調べる
+            let themeHasUnattempted = false;
+            for (let subthemeName in subthemes) {
+                let status = checkSubthemeStatus(categoryName, themeName, subthemeName);
+                if (status.hasUnattempted === true) {
+                    themeHasUnattempted = true;
+                    break;
+                }
+            }
+
+            //未着手があり、まだ全体のターゲットが決まっていない場合
+            let isTargetTheme = false;
+            if (themeHasUnattempted == true && foundTargetTheme == false) {
+                isTargetTheme = true;
+                foundTargetTheme = true;
+                categoryHasTarget = true
+            }
+
+            for (let subthemeName in subthemes) {
+                let subthemeItem = document.createElement("div");
+                subthemeItem.classList.add("subtheme-item");
+
+                // 💡 ここで過去の学習データを照合！
+                let status = checkSubthemeStatus(categoryName, themeName, subthemeName);
+
+                let isChecked = "";
+                if (isTargetTheme == true) {
+                    isChecked = "checked";
+                }
+
+                if (status.trophy === "gold") {
+                    totalGold++;
+                } else if (status.trophy === "silver") {
+                    totalSilver++;
+                } else if (status.trophy === "bronze") {
+                    totalBronze++;
+                }
+
+                // HTMLの属性（目印）としてステータスを書き込む
+                subthemeItem.setAttribute("data-incorrect", status.hasIncorrect ? "true" : "false");
+                subthemeItem.setAttribute("data-unattempted", status.hasUnattempted ? "true" : "false");
+
+                let trophyHtml = "";
+                if (status.trophy === "gold") {
+                    trophyHtml = `<img src="../img/medal_gold.png" class="medal-icon-left" alt="金メダル">`;
+                } else if (status.trophy === "silver") {
+                    trophyHtml = `<img src="../img/medal_silver.png" class="medal-icon-left" alt="銀メダル">`;
+                } else if (status.trophy === "bronze") {
+                    trophyHtml = `<img src="../img/medal_bronze.png" class="medal-icon-left" alt="銅メダル">`;
+                }
+
+                // チェックボックスの横に「総問題数」と「メダル画像」を追加
+                subthemeItem.innerHTML = `
+                <label>
+                    <span class="medal-slot">${trophyHtml}</span>
+                    <input type="checkbox" class="sub-check" value="${subthemeName}" data-category="${categoryName}" data-theme="${themeName}" ${isChecked}>
+                    <span>${subthemeName} <small>(全${status.totalCount}問)</small></span>
+                </label>
+            `; subthemeList.appendChild(subthemeItem);
+            }
+
+            let themeCheckedStr = "";
+            let recommend = "";
+            if (isTargetTheme == true) {
+                themeCheckedStr = "checked";
+                recommend = "　👈おすすめ！"
+                themeHeader.style.backgroundColor = "gold";
+            }
+            themeHeader.innerHTML = `<label><input type="checkbox" class="theme-check" value="${themeName}" ${themeCheckedStr}> <span>${themeName}${recommend}</span></label>`;
+            themeContainer.appendChild(subthemeList);
+            section.appendChild(themeContainer);
+        }
+
+        let catCheckedStr = "";
+        if (categoryHasTarget == true) {
+            catCheckedStr = "checked";
+        }
+        catHeader.innerHTML = `<label><input type="checkbox" class="cat-check" value="${categoryName}" ${catCheckedStr}> <span>${categoryName}</span></label>`;
+        container.appendChild(section);
+
+        let medalArea = document.getElementById("total_medals_area");
+        if (medalArea) {
+            medalArea.innerHTML = `
+        <strong style="margin-right: 15px;">獲得メダル総数:</strong>
+        
+        <span class="medal-tooltip-container" data-tooltip="すべての問題に1回以上挑戦した印（不正解含む）">
+            <img src="../img/medal_bronze.png" class="medal-icon" alt="銅メダル">
+            <span class="medal-count">${totalBronze}</span>
+        </span>
+        
+        <span class="medal-tooltip-container" data-tooltip="すべての問題に1回以上正解した印">
+            <img src="../img/medal_silver.png" class="medal-icon" alt="銀メダル">
+            <span class="medal-count">${totalSilver}</span>
+        </span>
+        
+        <span class="medal-tooltip-container" data-tooltip="すべての問題を5回以上正解した完全習得の印">
+            <img src="../img/medal_gold.png" class="medal-icon" alt="金メダル">
+            <span class="medal-count">${totalGold}</span>
+        </span>
+    `;
+        }
+    }
+
+    // --- フェーズ2：一方向連動の実装（前回から変更なし） ---
+    let catChecks = document.querySelectorAll(".cat-check");
+    for (let i = 0; i < catChecks.length; i++) {
+        catChecks[i].addEventListener("change", function () {
+            let section = this.parentElement.parentElement.parentElement;
+            let childChecks = section.querySelectorAll("input[type='checkbox']");
+            for (let j = 0; j < childChecks.length; j++) {
+                childChecks[j].checked = this.checked;
+            }
+        });
+    }
+
+    let themeChecks = document.querySelectorAll(".theme-check");
+    for (let i = 0; i < themeChecks.length; i++) {
+        themeChecks[i].addEventListener("change", function () {
+            let themeDiv = this.parentElement.parentElement.parentElement;
+            let childChecks = themeDiv.querySelectorAll(".sub-check");
+            for (let j = 0; j < childChecks.length; j++) {
+                childChecks[j].checked = this.checked;
+            }
+        });
+    }
+
+    // --- フェーズ4：フィルタリング機能の実装 ---
+    let filterIncorrect = document.getElementById("filter_incorrect");
+    let filterUnattempted = document.getElementById("filter_unattempted");
+
+    function applyFilters() {
+        let showIncorrectOnly = filterIncorrect.checked;
+        let showUnattemptedOnly = filterUnattempted.checked;
+
+        let allItems = document.querySelectorAll(".subtheme-item");
+
+        for (let i = 0; i < allItems.length; i++) {
+            let item = allItems[i];
+            let isIncorrect = item.getAttribute("data-incorrect") === "true";
+            let isUnattempted = item.getAttribute("data-unattempted") === "true";
+
+            // デフォルトは表示
+            item.style.display = "";
+
+            // 「間違えた問題のみ表示」がONなのに、間違えていない場合は隠す
+            if (showIncorrectOnly && !isIncorrect) {
+                item.style.display = "none";
+            }
+
+            // 「未着手のみ表示」がONなのに、未着手がない場合は隠す
+            if (showUnattemptedOnly && !isUnattempted) {
+                item.style.display = "none";
+            }
+        }
+    }
+
+    // --- フェーズ5：問題開始ボタンのデータ受け渡し処理 ---
+    let startBtn = document.getElementById("start_exam_btn");
+    if (startBtn) {
+        startBtn.addEventListener("click", function () {
+            let limitInput = document.getElementById("question_limit");
+            let limitValue = parseInt(limitInput.value, 10);
+
+            if (isNaN(limitValue) || limitValue <= 0) {
+                alert("正しい出題数を入力してください。");
+                return;
+            }
+
+            let subChecks = document.querySelectorAll(".sub-check");
+            let targetTargets = [];
+
+            for (let i = 0; i < subChecks.length; i++) {
+                let checkbox = subChecks[i];
+                let itemDiv = checkbox.parentElement.parentElement;
+
+                // チェックが入っていて、かつ非表示（フィルタリング）されていないものを対象にする
+                if (checkbox.checked && itemDiv.style.display !== "none") {
+                    targetTargets.push({
+                        category: checkbox.getAttribute("data-category"),
+                        theme: checkbox.getAttribute("data-theme"),
+                        subtheme: checkbox.value
+                    });
+                }
+            }
+
+            if (targetTargets.length === 0) {
+                alert("出題対象の問題が1つも選択されていません。");
+                return;
+            }
+
+            // sessionStorageにJSONという文字列データに変換して一時保存
+            sessionStorage.setItem("imashiru_target_subthemes", JSON.stringify(targetTargets));
+            sessionStorage.setItem("imashiru_question_limit", limitValue);
+
+            // プレイ画面へ画面遷移
+            window.location.href = "play_short.html";
+        });
+    }
+
+    // フィルター用チェックボックスにイベントを紐付け
+    filterIncorrect.addEventListener("change", applyFilters);
+    filterUnattempted.addEventListener("change", applyFilters);
+
+    // ログインログアウト
+    var logoutBtn = document.getElementById('logout_btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function () {
+            if (confirm("ログアウトしますか？")) {
+                if (typeof UserManager !== 'undefined') {
+                    UserManager.logout();
+                    location.reload();
+                }
+            }
+        });
+    }
+
+    // --- 2. ログインボタンの処理 ---
+    var loginBtn = document.getElementById('login_btn');
+    if (loginBtn) {
+        loginBtn.addEventListener('click', function () {
+            var nameInput = document.getElementById('login_username');
+            if (nameInput && nameInput.value !== "") {
+                if (typeof UserManager !== 'undefined') {
+                    UserManager.login(nameInput.value);
+                    location.reload();
+                }
+            }
+        });
+    }
+</script>
+</body>
+
+</html>

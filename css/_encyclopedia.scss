@@ -1,0 +1,104 @@
+/* _encyclopedia.scss : プログラミング図鑑用のスタイル */
+
+$color-border: #333;
+
+.encyclo-category {
+    margin-bottom: 50px;
+
+    .cat-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        background-color: $color-border;
+        color: #fff;
+        padding: 10px 20px;
+        border: 2px solid $color-border;
+        margin-bottom: 25px;
+    }
+}
+
+.encyclo-theme {
+    margin-left: 20px; // 階層を下げる
+    margin-bottom: 30px;
+
+    .theme-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-bottom: 2px solid #666;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+        color: $color-border;
+    }
+}
+
+.card-grid {
+    display: grid;
+    // 画面幅に応じてカードを自動的に並べる（1枚の最小幅は220px）
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+// --- 図鑑のカードデザイン ---
+.encyclo-card {
+    border: 2px solid #ccc;
+    background-color: #fff;
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-radius: 0; // 丸角NG
+
+    &:hover {
+        background-color: #f9f9f9;
+        border-color: #000;
+    }
+
+    // 状態ごとのストイックな太枠装飾
+    &.card-unattempted { border-color: #ccc; }
+    &.card-red { border: 3px solid #c62828; background-color: #fffafa; }
+    &.card-green { border: 3px solid #2e7d32; background-color: #f4fbf4; }
+    &.card-gold { border: 3px solid #fbc02d; background-color: #fffdf0; }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px dashed #ccc;
+        padding-bottom: 8px;
+
+        .q-id { 
+            font-weight: bold; 
+            font-size: 1.2rem; 
+        }
+
+        .badge {
+            font-size: 0.8rem;
+            padding: 3px 8px;
+            font-weight: bold;
+            border: 1px solid #333;
+            background-color: #eee;
+            color: #333;
+
+            &.card-red { background-color: #c62828; color: #fff; border-color: #c62828; }
+            &.card-green { background-color: #2e7d32; color: #fff; border-color: #2e7d32; }
+            &.card-gold { background-color: #fbc02d; color: #000; border-color: #fbc02d; }
+        }
+    }
+
+    .card-stats {
+        font-family: Consolas, monospace;
+        font-size: 1.2rem;
+        text-align: center;
+        background-color: #f4f4f4;
+        padding: 5px;
+        border: 1px solid #ddd;
+        font-weight: bold;
+    }
+
+    .card-desc {
+        font-size: 0.9rem;
+        color: #444;
+        font-weight: bold;
+        flex-grow: 1;
+    }
+}
