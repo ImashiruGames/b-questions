@@ -9,8 +9,7 @@ $color-alert: #c62828;  // ストイックな赤
 // --- グラフを囲むセクション（道場スタイル） ---
 .analysis_section {
     padding: 25px;
-    margin: 0 auto 30px auto;
-    width: 45%;
+    width: 100%;
     border: 2px solid $color-border;
     background-color: #fff;
 
@@ -28,6 +27,32 @@ $color-alert: #c62828;  // ストイックな赤
         font-size: 0.9rem;
         margin-top: 10px;
         text-align: center;
+    }
+}
+
+.analysis-grid-container {
+    display: grid;
+    gap: 30px; // 要素間の隙間
+    width: 100%;
+    margin-bottom: 30px;
+
+    // 【PC版】上段にグラフ2つ、下段にコメント全幅
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "category theme"
+        "comment comment";
+
+    .category-section { grid-area: category; }
+    .theme-section { grid-area: theme; }
+    .comment-section { grid-area: comment; }
+
+    // 【スマホ版】縦1列になり、要望通りの順番に入れ替わる
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "comment"  // 1番目：コメント
+            "theme"    // 2番目：テーマ別（棒グラフ）
+            "category";// 3番目：カテゴリー（レーダー）
     }
 }
 

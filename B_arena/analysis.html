@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../css/destyle.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/play_short.css">
-    <link rel="stylesheet" href="../css/analysis.css">
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -29,8 +28,9 @@
         </section>
 
         <div id="analysis_content" style="display: none;">
-            <div style="display:flex;">
-                <div class="analysis_section">
+            <div class="analysis-grid-container">
+
+                <div class="analysis_section category-section">
                     <div class="flex-center">
                         <h3>カテゴリー別 習得率</h3>
                     </div>
@@ -39,8 +39,8 @@
                     </div>
                     <p>カテゴリーごとの問題消化率</p>
                 </div>
-
-                <div class="analysis_section">
+                
+                <div class="analysis_section theme-section">
                     <div class="category-selector">
                         <div class="flex_center">
                             <div class="wrapper">
@@ -59,22 +59,19 @@
                         <h3>テーマ別 詳細進捗</h3>
                     </div>
                     <div class="theme-analysis-wrapper">
-
-
                         <div class="chart-area" style="position: relative; height: 300px; width: 100%;">
                             <canvas id="themeChart"></canvas>
                         </div>
                     </div>
                 </div>
-            </div>
 
-
-            <div class="introduction">
-                <h2>コメント</h2>
-                <p id="comment-area">基礎固めは順調です。次は「データの塊」を攻略しましょう！
-                    現在、制御構文の習得率は高いですが、アルゴリズム問題で得点源となる「多次元配列」や「連結リスト」といったデータ構造系がこれからの課題です。
-                    おすすめの学習ルートは、得意な「for文」の知識を「配列」の操作に繋げることです。未着手の「ビット演算」や「端数処理」は、隙間時間で一気に確認するだけでもレーダーチャートの形が整い、全体のバランスが良くなりますよ。
-                </p>
+                <div class="introduction comment-section">
+                    <h2>コメント</h2>
+                    <p id="comment-area">基礎固めは順調です。次は「データの塊」を攻略しましょう！
+                        現在、制御構文の習得率は高いですが、アルゴリズム問題で得点源となる「多次元配列」や「連結リスト」といったデータ構造系がこれからの課題です。
+                        おすすめの学習ルートは、得意な「for文」の知識を「配列」の操作に繋げることです。未着手の「ビット演算」や「端数処理」は、隙間時間で一気に確認するだけでもレーダーチャートの形が整い、全体のバランスが良くなりますよ。
+                    </p>
+                </div>
             </div>
 
 
@@ -107,7 +104,7 @@
     <script src="../js/header.js"></script>
     <script src="../js/footer.js"></script>
     <script src="../js/user_info_bar.js"></script>
-    
+
     <script src="../js/analysisComment.js"></script>
     <script src="../short_questions/questions.js"></script>
     <script src="../js/user_manager.js"></script>

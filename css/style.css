@@ -925,8 +925,7 @@ input[type=checkbox]:checked::after {
 /* _analysis.scss : 学習分析画面専用のスタイル（道場スタイル最適化） */
 .analysis_section {
   padding: 25px;
-  margin: 0 auto 30px auto;
-  width: 45%;
+  width: 100%;
   border: 2px solid #333;
   background-color: #fff;
 }
@@ -943,6 +942,30 @@ input[type=checkbox]:checked::after {
   font-size: 0.9rem;
   margin-top: 10px;
   text-align: center;
+}
+
+.analysis-grid-container {
+  display: grid;
+  gap: 30px;
+  width: 100%;
+  margin-bottom: 30px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "category theme" "comment comment";
+}
+.analysis-grid-container .category-section {
+  grid-area: category;
+}
+.analysis-grid-container .theme-section {
+  grid-area: theme;
+}
+.analysis-grid-container .comment-section {
+  grid-area: comment;
+}
+@media (max-width: 768px) {
+  .analysis-grid-container {
+    grid-template-columns: 1fr;
+    grid-template-areas: "comment" "theme" "category";
+  }
 }
 
 .category-selector {
