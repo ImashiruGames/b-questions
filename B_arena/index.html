@@ -52,13 +52,32 @@
             style="margin-bottom: 20px; padding: 15px; border: 1px solid #333; background-color: #fafafa; text-align: center;">
         </div>
 
-        <div id="login_modal" class="modal" style="display: none;">
+        <!-- <div id="login_modal" class="modal" style="display: none;">
             <div class="modal_content">
                 <h2>ログイン</h2>
                 <p>ユーザー名を入力してください</p>
                 <input type="text" id="login_username" placeholder="ユーザー名"
                     style="padding: 10px; font-size: 1.2rem; width: 80%; margin: 20px 0;">
                 <div class="flex_center"><button id="login_btn" class="next_btn">開始する</button></div>
+            </div>
+        </div> -->
+        <div id="login_modal" class="modal" style="display: none;">
+            <div class="modal_content" style="border: 2px solid #333; border-radius: 0;">
+                <h2 style="border-bottom: 2px solid #333; padding-bottom: 10px;">プレイヤー登録</h2>
+                <p style="margin-top: 15px;">道場で呼ばれたい名前を入力してください</p>
+
+                <input type="text" id="login_username" placeholder="ニックネーム"
+                    style="padding: 10px; font-size: 1.2rem; width: 80%; margin: 15px 0; border: 1px solid #ccc;">
+
+                <p style="font-size: 0.85rem; color: #d9534f; font-weight: bold; margin-bottom: 20px;">
+                    ※一度決めた名前は変更できません
+                </p>
+
+                <div class="flex_center">
+                    <button id="login_btn" class="next_btn" style="background-color: #333; color: white;">
+                        この名前で開始する
+                    </button>
+                </div>
             </div>
         </div>
 

@@ -9,9 +9,8 @@ footer.innerHTML = `
         
         <ul class="footer_links">
             <li><a href="index.html">ホーム</a></li>
-            <li><a href="#">利用規約</a></li>
-            <li><a href="#">プライバシーポリシー</a></li>
-            <li><a hred="#">このサイトの使い方</a></li>
+            <li><a href="terms.html">利用規約</a></li>
+            <li><a href="privacy.html">プライバシーポリシー</a></li>
         </ul>
     </div>
     <div class="copyright">

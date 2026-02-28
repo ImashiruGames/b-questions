@@ -5,6 +5,7 @@
 
 var UserManager = {
     currentUser: null,
+    isDemoMode: false,
 
     // 初期化
     init: function () {
@@ -125,7 +126,7 @@ var UserManager = {
         let logoutBtn = document.getElementById('logout_btn');
         let loginTriggerBtn = document.getElementById('login_trigger_btn');
 
-        if (this.currentUser) {
+        if (this.isDemoMode && this.currentUser) {
             if (logoutBtn) logoutBtn.style.display = 'inline-block';
             if (loginTriggerBtn) loginTriggerBtn.style.display = 'none';
         } else {
@@ -134,20 +135,25 @@ var UserManager = {
         }
     },
 
-    setupAuthEvents: function() {
+    setupAuthEvents: function () {
         let self = this; // function() の中で UserManager 自身を参照できるようにする
 
-        // ログインボタンの処理
+        // ログイン（名前登録）ボタンの処理
         let loginBtn = document.getElementById('login_btn');
         if (loginBtn && !loginBtn.hasAttribute('data-bound')) {
             loginBtn.addEventListener('click', function () {
                 let nameInput = document.getElementById('login_username');
-                if (nameInput && nameInput.value.trim() !== "") {
-                    self.login(nameInput.value.trim());
-                    // ログイン成功時は画面を再読み込み（リロード）して最新状態にする
-                    window.location.reload(); 
+                let inputName = nameInput ? nameInput.value.trim() : "";
+
+                if (inputName !== "") {
+                    // 💡【追加】名前変更不可の最終確認ダイアログを出す
+                    if (confirm("「" + inputName + "」で登録します。\n一度決めた名前は変更できませんが、よろしいですか？")) {
+                        self.login(inputName);
+                        // 登録成功時は画面を再読み込みして道場へ
+                        window.location.reload();
+                    }
                 } else {
-                    alert("ユーザー名を入力してください");
+                    alert("名前を入力してください");
                 }
             });
             loginBtn.setAttribute('data-bound', 'true'); // 二重登録防止
@@ -157,10 +163,12 @@ var UserManager = {
         let logoutBtn = document.getElementById('logout_btn');
         if (logoutBtn && !logoutBtn.hasAttribute('data-bound')) {
             logoutBtn.addEventListener('click', function () {
-                if (confirm("ログアウトしますか？")) {
-                    self.logout();
-                    // ログアウト時はHOME画面（index.html）へ強制遷移
-                    window.location.href = "index.html"; 
+                if (UserManager.isDemoMode) {
+                    if (confirm("ログアウトしますか？")) {
+                        self.logout();
+                        // ログアウト時はHOME画面（index.html）へ強制遷移
+                        window.location.href = "index.html";
+                    }
                 }
             });
             logoutBtn.setAttribute('data-bound', 'true'); // 二重登録防止

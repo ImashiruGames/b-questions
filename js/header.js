@@ -12,9 +12,6 @@ header.innerHTML = `
             <a href="index.html">
                 <li class="menuLink">HOME</li>
             </a>
-            <a href="play_short.html">
-                <li class="menuLink">実験用</li>
-            </a>
             <a href="analysis.html">
                 <li class="menuLink">分析</li>
             </a>
