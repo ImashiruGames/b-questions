@@ -8,6 +8,7 @@ $color-alert: #c62828;  // ストイックな赤
 
 // --- グラフを囲むセクション（道場スタイル） ---
 .analysis_section {
+    box-sizing: border-box;
     padding: 25px;
     width: 100%;
     border: 2px solid $color-border;
@@ -39,6 +40,11 @@ $color-alert: #c62828;  // ストイックな赤
     gap: 30px; // 要素間の隙間
     width: 100%;
     margin-bottom: 30px;
+
+    > * {
+        min-width: 0;
+        box-sizing: border-box; // コメントエリア等のはみ出しもこれで防げます
+    }
 
     // 【PC版】上段にグラフ2つ、下段にコメント全幅
     grid-template-columns: 1fr 1fr;

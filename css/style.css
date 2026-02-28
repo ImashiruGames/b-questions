@@ -924,6 +924,7 @@ input[type=checkbox]:checked::after {
 
 /* _analysis.scss : 学習分析画面専用のスタイル（道場スタイル最適化） */
 .analysis_section {
+  box-sizing: border-box;
   padding: 25px;
   width: 100%;
   border: 2px solid #333;
@@ -952,6 +953,12 @@ input[type=checkbox]:checked::after {
   gap: 30px;
   width: 100%;
   margin-bottom: 30px;
+}
+.analysis-grid-container > * {
+  min-width: 0;
+  box-sizing: border-box;
+}
+.analysis-grid-container {
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "category theme" "comment comment";
 }
