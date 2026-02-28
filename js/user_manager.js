@@ -2,6 +2,7 @@
  * ユーザー管理クラス (Shared Logic)
  * play_short.html と analysis.html で共有
  */
+
 var UserManager = {
     currentUser: null,
 
@@ -14,6 +15,8 @@ var UserManager = {
             this.showLoginModal();
         }
         this.updateUI();
+
+        this.setupAuthEvents();
     },
 
     // ログイン処理
@@ -46,22 +49,22 @@ var UserManager = {
     },
 
     // 結果をローカルストレージに保存
-    recordResult: function(question, isCorrect){
-        if(!this.currentUser) return;
+    recordResult: function (question, isCorrect) {
+        if (!this.currentUser) return;
 
         let qId = this.generateId(question);
         let statsKey = 'bucket_stats_' + this.currentUser;
 
         let stats = JSON.parse(localStorage.getItem(statsKey) || "{}");
 
-        if(!stats[qId]){
+        if (!stats[qId]) {
             console.log("初めての問題！", qId);
-            stats[qId] = { correct: 0, incorrect: 0};
+            stats[qId] = { correct: 0, incorrect: 0 };
         }
 
-        if(isCorrect){
+        if (isCorrect) {
             stats[qId].correct++;
-        }else{
+        } else {
             stats[qId].incorrect++;
         }
 
@@ -78,19 +81,20 @@ var UserManager = {
         if (!this.currentUser) return [];
         let statsKey = 'bucket_stats_' + this.currentUser;
         let stats = JSON.parse(localStorage.getItem(statsKey) || "{}");
-        
+
         // function() を使った記述に修正
-        return Object.keys(stats).filter(function(key) {
+        return Object.keys(stats).filter(function (key) {
             return stats[key].correct > 0;
-        });    
+        });
     },
 
     // モーダル表示（アロー関数を排除）
     showLoginModal: function () {
         let modal = document.getElementById('login_modal');
+        console.log("showLoginModalメソッド")
         if (modal) {
             modal.style.display = 'flex';
-            setTimeout(function() {
+            setTimeout(function () {
                 modal.classList.add('show');
             }, 10);
         }
@@ -108,12 +112,12 @@ var UserManager = {
         if (statDisplay && this.currentUser) {
             let statsKey = 'bucket_stats_' + this.currentUser;
             let stats = JSON.parse(localStorage.getItem(statsKey) || "{}");
-            
+
             // アロー関数を排除
-            let solvedCount = Object.keys(stats).filter(function(key) {
+            let solvedCount = Object.keys(stats).filter(function (key) {
                 return stats[key].correct > 0;
             }).length;
-            
+
             statDisplay.textContent = solvedCount;
         }
 
@@ -127,6 +131,39 @@ var UserManager = {
         } else {
             if (logoutBtn) logoutBtn.style.display = 'none';
             if (loginTriggerBtn) loginTriggerBtn.style.display = 'inline-block';
+        }
+    },
+
+    setupAuthEvents: function() {
+        let self = this; // function() の中で UserManager 自身を参照できるようにする
+
+        // ログインボタンの処理
+        let loginBtn = document.getElementById('login_btn');
+        if (loginBtn && !loginBtn.hasAttribute('data-bound')) {
+            loginBtn.addEventListener('click', function () {
+                let nameInput = document.getElementById('login_username');
+                if (nameInput && nameInput.value.trim() !== "") {
+                    self.login(nameInput.value.trim());
+                    // ログイン成功時は画面を再読み込み（リロード）して最新状態にする
+                    window.location.reload(); 
+                } else {
+                    alert("ユーザー名を入力してください");
+                }
+            });
+            loginBtn.setAttribute('data-bound', 'true'); // 二重登録防止
+        }
+
+        // ログアウトボタンの処理
+        let logoutBtn = document.getElementById('logout_btn');
+        if (logoutBtn && !logoutBtn.hasAttribute('data-bound')) {
+            logoutBtn.addEventListener('click', function () {
+                if (confirm("ログアウトしますか？")) {
+                    self.logout();
+                    // ログアウト時はHOME画面（index.html）へ強制遷移
+                    window.location.href = "index.html"; 
+                }
+            });
+            logoutBtn.setAttribute('data-bound', 'true'); // 二重登録防止
         }
     }
 };

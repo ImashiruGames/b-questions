@@ -52,6 +52,16 @@
             style="margin-bottom: 20px; padding: 15px; border: 1px solid #333; background-color: #fafafa; text-align: center;">
         </div>
 
+        <div id="login_modal" class="modal" style="display: none;">
+            <div class="modal_content">
+                <h2>ログイン</h2>
+                <p>ユーザー名を入力してください</p>
+                <input type="text" id="login_username" placeholder="ユーザー名"
+                    style="padding: 10px; font-size: 1.2rem; width: 80%; margin: 20px 0;">
+                <div class="flex_center"><button id="login_btn" class="next_btn">開始する</button></div>
+            </div>
+        </div>
+
         <section id="category-container"></section>
         </section>
     </main>
@@ -381,32 +391,32 @@
     filterIncorrect.addEventListener("change", applyFilters);
     filterUnattempted.addEventListener("change", applyFilters);
 
-    // ログインログアウト
-    var logoutBtn = document.getElementById('logout_btn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function () {
-            if (confirm("ログアウトしますか？")) {
-                if (typeof UserManager !== 'undefined') {
-                    UserManager.logout();
-                    location.reload();
-                }
-            }
-        });
-    }
+    // // ログインログアウト
+    // var logoutBtn = document.getElementById('logout_btn');
+    // if (logoutBtn) {
+    //     logoutBtn.addEventListener('click', function () {
+    //         if (confirm("ログアウトしますか？")) {
+    //             if (typeof UserManager !== 'undefined') {
+    //                 UserManager.logout();
+    //                 location.reload();
+    //             }
+    //         }
+    //     });
+    // }
 
-    // --- 2. ログインボタンの処理 ---
-    var loginBtn = document.getElementById('login_btn');
-    if (loginBtn) {
-        loginBtn.addEventListener('click', function () {
-            var nameInput = document.getElementById('login_username');
-            if (nameInput && nameInput.value !== "") {
-                if (typeof UserManager !== 'undefined') {
-                    UserManager.login(nameInput.value);
-                    location.reload();
-                }
-            }
-        });
-    }
+    // // --- 2. ログインボタンの処理 ---
+    // var loginBtn = document.getElementById('login_btn');
+    // if (loginBtn) {
+    //     loginBtn.addEventListener('click', function () {
+    //         var nameInput = document.getElementById('login_username');
+    //         if (nameInput && nameInput.value !== "") {
+    //             if (typeof UserManager !== 'undefined') {
+    //                 UserManager.login(nameInput.value);
+    //                 location.reload();
+    //             }
+    //         }
+    //     });
+    // }
 </script>
 </body>
 

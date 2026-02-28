@@ -116,7 +116,7 @@
     <div id="login_modal" class="modal" style="display: none;">
         <div class="modal_content">
             <h2>ログイン</h2>
-            <p>ユーザー名を入力してください（記録用）</p>
+            <p>ユーザー名を入力してください</p>
             <input type="text" id="login_username" placeholder="ユーザー名"
                 style="padding: 10px; font-size: 1.2rem; width: 80%; margin: 20px 0;">
             <div class="flex_center"><button id="login_btn" class="next_btn">開始する</button></div>
@@ -164,31 +164,6 @@
             if (modalRestartBtn) {
                 modalRestartBtn.addEventListener('click', function () {
                     if (typeof restartGame === 'function') restartGame();
-                });
-            }
-
-            // 4. ユーザー管理（ログイン・ログアウト）の監視
-            let loginBtn = document.getElementById('login_btn');
-            if (loginBtn) {
-                loginBtn.addEventListener('click', function () {
-                    let nameInput = document.getElementById('login_username');
-                    if (nameInput && nameInput.value.trim() !== "") {
-                        if (typeof UserManager !== 'undefined') {
-                            UserManager.login(nameInput.value.trim());
-                        }
-                    } else {
-                        alert("ユーザー名を入力してください");
-                    }
-                });
-            }
-            let logoutBtn = document.getElementById('logout_btn');
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', function () {
-                    if (confirm("ログアウトしますか？")) {
-                        if (typeof UserManager !== 'undefined') {
-                            UserManager.logout();
-                        }
-                    }
                 });
             }
         });
