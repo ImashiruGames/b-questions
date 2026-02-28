@@ -928,6 +928,8 @@ input[type=checkbox]:checked::after {
   width: 100%;
   border: 2px solid #333;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
 }
 .analysis_section h3 {
   font-size: 1.25rem;
@@ -945,6 +947,7 @@ input[type=checkbox]:checked::after {
 }
 
 .analysis-grid-container {
+  box-sizing: border-box;
   display: grid;
   gap: 30px;
   width: 100%;

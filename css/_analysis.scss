@@ -12,6 +12,9 @@ $color-alert: #c62828;  // ストイックな赤
     width: 100%;
     border: 2px solid $color-border;
     background-color: #fff;
+    display: flex;
+    flex-direction: column;
+
 
     h3 {
         font-size: 1.25rem;
@@ -31,6 +34,7 @@ $color-alert: #c62828;  // ストイックな赤
 }
 
 .analysis-grid-container {
+    box-sizing: border-box;
     display: grid;
     gap: 30px; // 要素間の隙間
     width: 100%;
