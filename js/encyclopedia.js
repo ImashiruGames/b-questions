@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // カテゴリの中身（テーマ群）をまとめる枠
         const catContent = document.createElement('div');
-        catContent.style.padding = "10px 0 10px 15px"; // 少し右にズラして階層を表現
+        catContent.style.padding = "5px 0 5px 10px"; // 少し右にズラして階層を表現
 
         for (const theme in groupedData[category]) {
             // 💡【変更】中見出し（テーマ）も <details> にして入れ子にする

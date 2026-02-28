@@ -1035,7 +1035,6 @@ input[type=checkbox]:checked::after {
 }
 
 .encyclo-theme {
-  margin-left: 20px;
   margin-bottom: 30px;
 }
 .encyclo-theme .theme-title {
