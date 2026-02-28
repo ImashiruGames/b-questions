@@ -193,9 +193,17 @@ function loadQuestion(index) {
         showCompletionModal();
         return;
     }
+    let instructionElement = document.getElementById("instruction");
+
+    if(instructionElement) {
+        instructionElement.innerHTML = '正解だと思うものを選んでください：';
+        instructionElement.style.color = '#333';
+        instructionElement.style.fontWeight = 'normal';
+        instructionElement.style.fontSize = '1rem';
+    }
 
     console.log(document.getElementById("progress_dashboard").getBoundingClientRect().top)
-    window.scrollTo(0,document.getElementById("progress_dashboard").getBoundingClientRect().top)
+    window.scrollTo(0, document.getElementById("progress_dashboard").getBoundingClientRect().top)
 
     let q = activeQuestions[index];
     let subthemeSteps = [];
@@ -264,7 +272,7 @@ function loadQuestion(index) {
     else if (s.incorrect > 0) {
         HistoryHTML = `　${s.incorrect},${s.correct}`
     }
-    document.getElementById('Q_num').innerHTML = '<p>Q' + (index + 1) +'</p>' + HistoryHTML;
+    document.getElementById('Q_num').innerHTML = '<p>Q' + (index + 1) + '</p>' + HistoryHTML;
 
     // //スキップボタンの作成
     // let next_btns = document.getElementsByClassName("next_btn");
@@ -274,6 +282,7 @@ function loadQuestion(index) {
 function checkAnswer(isCorrect) {
     let resultDiv = document.getElementById('result_display');
     let explainBox = document.getElementById('explainbox');
+    let instructionElement = document.querySelector('#instruction');
 
     resultDiv.style.display = 'block';
     explainBox.style.display = 'block';
@@ -282,8 +291,21 @@ function checkAnswer(isCorrect) {
         streak = streak + 1;
         correctCountInRound++;
         isAnswered = true;
+
+        if(instructionElement) {
+            instructionElement.innerHTML = '⭕ 正解！お見事！';
+            instructionElement.style.color = '#2e7d32';
+            instructionElement.style.fontWeight = 'bold';
+            instructionElement.style.fontSize = '1.2rem';
+        }
     } else {
         streak = 0;
+        // 💡【追加】不正解時は「再挑戦できること」を赤字で強く促す
+        if (instructionElement) {
+            instructionElement.innerHTML = '❌ 不正解！別の選択肢をタップして再挑戦！';
+            instructionElement.style.color = '#c62828';
+            instructionElement.style.fontWeight = 'bold';
+        }
     }
 
     updatePalette(currentPallet, isCorrect);
@@ -294,7 +316,7 @@ function checkAnswer(isCorrect) {
             resultDiv.textContent = '正解！';
             resultDiv.className = ' result-bar correct';
         }
-        else{
+        else {
             resultDiv.textContent = '不正解';
             resultDiv.className = ' result-bar incorrect';
         }

@@ -183,6 +183,7 @@ $color-primary: #0056b3;
             margin: 0;
             font-family: inherit;
             white-space: pre;
+            user-select: text;
         }
     }
 }
@@ -195,7 +196,7 @@ $color-primary: #0056b3;
         width: 45%;
     }
 
-    .instruction {
+    #instruction {
         font-weight: bold;
         margin-bottom: 10px;
     }

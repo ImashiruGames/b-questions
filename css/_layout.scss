@@ -7,6 +7,7 @@ body {
     background-color: #f4f4f4; // 青みを抜き、ストイックなグレーに統一
     color: #222;
     overscroll-behavior: none;
+    user-select: none;
 }
 
 section {
