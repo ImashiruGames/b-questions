@@ -17,6 +17,14 @@ section {
   margin-bottom: 2rem;
 }
 
+@keyframes spin-forward {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 /* --- ヘッダー --- */
 header {
   background-color: #1e1e1e;
@@ -26,11 +34,8 @@ header {
   align-items: center;
   border-bottom: 3px solid #000;
 }
-header #mobile_menu_toggle {
-  transition: transform 0.5s ease-out;
-}
-header #mobile_menu_toggle:hover {
-  transform: rotate(360deg);
+header #mobile_menu_toggle.is-spinning {
+  animation: spin-forward 0.4s ease-out;
 }
 header .title {
   height: 3rem;
@@ -102,10 +107,12 @@ header .mobile-only {
     padding: 0 10px;
   }
   header .menu {
-    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.1s ease-out;
   }
   header .menu.is-open {
-    display: block;
+    max-height: 400px;
   }
   header .menu ul {
     flex-direction: column;
@@ -985,6 +992,7 @@ input[type=checkbox]:checked::after {
   margin-bottom: 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .category-selector label {
   font-size: 14px;

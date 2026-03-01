@@ -80,6 +80,7 @@ function makeData() {
 function analyzeCategoryProgress(masterStats, processedData, targetCategory) {
     var res = {
         labels: [], redData: [], greenData: [], goldData: [],
+        redRaw: [], greenRaw: [], goldRaw: [],
         totalThemes: 0, completedThemes: 0, unstartedThemes: [], overallRate: 0
     };
     var totalSolved = 0;
@@ -97,6 +98,10 @@ function analyzeCategoryProgress(masterStats, processedData, targetCategory) {
         res.redData.push(Math.round((counts[0] / totalCount) * 100));
         res.greenData.push(Math.round((counts[1] / totalCount) * 100));
         res.goldData.push(Math.round((counts[2] / totalCount) * 100));
+
+        res.redRaw.push(counts[0]);
+        res.greenRaw.push(counts[1]);
+        res.goldRaw.push(counts[2]);
 
         if (counts[2] >= totalCount && totalCount > 0) {
             res.completedThemes++;
@@ -116,6 +121,8 @@ function renderCategoryChart(totalStats) {
     var ctx = document.getElementById('categoryChart').getContext('2d');
     var labels = [];
     var data = [];
+    var rawSolved = [];
+    var rawTotal = [];
 
     // for..inループで配列に変換
     for (var cat in totalStats.categories) {
@@ -123,6 +130,8 @@ function renderCategoryChart(totalStats) {
         var s = totalStats.categories[cat];
         var rate = s.total > 0 ? Math.round((s.solved / s.total) * 100) : 0;
         data.push(rate);
+        rawSolved.push(s.solved);
+        rawTotal.push(s.total);
     }
 
     new Chart(ctx, {
@@ -132,6 +141,8 @@ function renderCategoryChart(totalStats) {
             datasets: [{
                 label: '習得率 (%)',
                 data: data,
+                rawSolved: rawSolved,
+                rawTotal: rawTotal,
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 2,
@@ -140,7 +151,19 @@ function renderCategoryChart(totalStats) {
         },
         options: {
             scales: { r: { angleLines: { display: true }, suggestedMin: 0, suggestedMax: 100, ticks: { stepSize: 20 } } },
-            responsive: true, maintainAspectRatio: false
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            var idx = context.dataIndex;
+                            var solved = context.dataset.rawSolved[idx];
+                            var total = context.dataset.rawTotal[idx];
+                            return '習得: ' + solved + ' / ' + total + ' 問 (' + context.raw + '%)';
+                        }
+                    }
+                }
+            }
         }
     });
 }
@@ -160,14 +183,26 @@ function renderThemeChart(analysisData) {
         data: {
             labels: analysisData.labels,
             datasets: [
-                { label: '苦手', data: analysisData.redData, backgroundColor: '#E57373', stack: 'stack0', barThickness: 20, borderRadius: 0 },
-                { label: '習得中', data: analysisData.greenData, backgroundColor: '#81C784', stack: 'stack0', barThickness: 20, borderRadius: 0 },
-                { label: '完全習得', data: analysisData.goldData, backgroundColor: '#FFF176', stack: 'stack0', barThickness: 20, borderRadius: 0 }
+                { label: '苦手', data: analysisData.redData,rawData: analysisData.redRaw, backgroundColor: '#E57373', stack: 'stack0', barThickness: 20, borderRadius: 0 },
+                { label: '習得中', data: analysisData.greenData, rawData: analysisData.greenRaw, backgroundColor: '#81C784', stack: 'stack0', barThickness: 20, borderRadius: 0 },
+                { label: '完全習得', data: analysisData.goldData, rawData: analysisData.goldRaw, backgroundColor: '#FFF176', stack: 'stack0', barThickness: 20, borderRadius: 0 }
             ]
         },
         options: {
             indexAxis: 'y', animation: false, responsive: true, maintainAspectRatio: false,
-            scales: { x: { stacked: true, max: 100 }, y: { stacked: true } }
+            scales: { x: { stacked: true, max: 100 }, y: { stacked: true } },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            var label = context.dataset.label || '';
+                            // 忍ばせておいた rawData から、今ホバーしている場所の数値を取り出す
+                            var rawValue = context.dataset.rawData[context.dataIndex];
+                            return label + ': ' + rawValue + ' 問';
+                        }
+                    }
+                }
+            }
         }
     });
 }

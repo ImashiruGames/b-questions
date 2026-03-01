@@ -24,11 +24,25 @@ header.innerHTML = `
 `;
 
 // 2. スマホ用：歯車ボタンを押した時の開閉（トグル）処理
-const menuToggleBtn = document.getElementById("mobile_menu_toggle");
+const menuToggle = document.getElementById("mobile_menu_toggle");
 const globalMenu = document.getElementById("global_menu");
 
-if (menuToggleBtn && globalMenu) {
-    menuToggleBtn.addEventListener("click", function() {
+if (menuToggle && globalMenu) {
+    menuToggle.addEventListener("click", function() {
+
+    });
+}
+
+if (menuToggle) {
+    menuToggle.addEventListener('click', function() {
+        if (this.classList.contains('is-spinning')) return;
+
+        // 1. 回転クラスを付与してアニメーション開始
+        this.classList.add('is-spinning');
         globalMenu.classList.toggle("is-open");
+
+        setTimeout(() => {
+            this.classList.remove('is-spinning');
+        }, 400); 
     });
 }

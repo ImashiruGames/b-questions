@@ -15,6 +15,15 @@ section {
     margin-bottom: 2rem;
 }
 
+@keyframes spin-forward {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 /* --- ヘッダー --- */
 header {
@@ -26,10 +35,9 @@ header {
     border-bottom: 3px solid #000; // 下部に太い直線を配置
 
     //回転させたい
-    #mobile_menu_toggle{
-        transition:transform 0.5s ease-out;
-        &:hover{
-            transform: rotate(360deg);
+    #mobile_menu_toggle {
+        &.is-spinning {
+            animation: spin-forward 0.4s ease-out;
         }
     }
 
@@ -113,12 +121,13 @@ header {
         }
 
         .menu {
-            display: none; // ★初期状態は隠す
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.1s ease-out;
 
             // 💡 JSで .is-open クラスが付与されたらパキッと表示
             &.is-open {
-                display: block; 
-                
+                max-height: 400px;;
             }
 
             ul {
@@ -219,12 +228,11 @@ footer {
         padding-bottom: 20px;
         border-bottom: 1px solid #444;
 
-        // 💡【追加】スマホ時は横並びを解除し、縦並びの中央寄せにする
         @media (max-width: 768px) {
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: 30px; // ロゴとリンクの間に余白を作る
+            gap: 30px;
         }
 
         .footer_logo {
