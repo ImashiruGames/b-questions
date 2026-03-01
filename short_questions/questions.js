@@ -50,11 +50,11 @@ const short_questions = [
     "category": "制御構文",
     "theme": "if文",
     "subtheme": "境界値の判定",
-    "text": "年齢 age に応じた料金を判定するプログラムにおいて、「4歳から9歳までは300円」というルールを適用するための条件式を、空欄 [  ] に入れて完成させてください。このプログラムでは、age が3歳以下の場合は既に除外されています。",
+    "text": "年齢 age に応じた料金を判定するプログラムにおいて、「4歳から9歳までは300円」というルールを適用するための条件式を、空欄 [  ] に入れて完成させてください。",
     "example": "age = 9 のとき、戻り値が 300 になる必要があります。",
     "code": "01  整数型: age, ret\n02  <span class=\"if\">if (age ≤ 3)</span>\n03     ret ← 100\n04  <span class=\"if\">elseif ([      ])</span>\n05     ret ← 300",
     "choices": ["age ≤ 9", "age < 9", "age < 10", "age ≥ 4"],
-    "specific_explanation": "1. 境界の特定\n   基準となる数値を確認します。今回の料金プランが切り替わる境界の上限値は「9」歳です。\n\n2. 含むか含まないか\n   以上以下、またはより大きい・未満かを見極めて演算子を決定します。「9歳まで」というルールは 9歳を「含む」ため、以下（≤）を選択するのが適切です。既に 2行目の条件によって「3歳以下」のケースは除外されているため、この <span class=\"italic\">elseif では 9歳以下（≤ 9）であることのみを判定すれば、自動的に「4歳以上かつ9歳以下」という範囲を正しくカバーできます。\n   <div class=\"important\">elseif (age ≤ 9)</div>"
+    "specific_explanation": "1. 境界の特定\n   基準となる数値を確認します。今回の料金プランが切り替わる境界の上限値は「9」歳です。\n\n2. 含むか含まないか\n   以上以下、またはより大きい・未満かを見極めて演算子を決定します。「9歳まで」というルールは 9歳を「含む」ため、以下（≤）を選択するのが適切です。既に 2行目の条件によって「3歳以下」のケースは除外されているため、この elseif では 9歳以下（≤ 9）であることのみを判定すれば、自動的に「4歳以上かつ9歳以下」という範囲を正しくカバーできます。\n   <div class=\"important\">elseif (age ≤ 9)</div>"
   },
   {
     "id": 5,
@@ -70,15 +70,15 @@ const short_questions = [
       "else に近い条件式ほど優先度が高くなる",
       "全ての条件式を評価し、最後に「真」だったものが適用される"
     ],
-    "specific_explanation": "1. 優先順位の確認\n   if 文は上から順に判定されます。一度条件に合致すると、それ以降の elseif や <span class=\"italic\">else</span> は無視されます。\n\n2. 排他性チェック\n   したがって、より「厳しい条件」や「特殊なケース」（例：3歳以下）を先に書かないと、より広い条件（例：9歳以下）に吸収されてしまい、正しい判定ができなくなります。\n   <div class=\"important\">上から順に判定され、一つでも合致すれば以降は実行されない</div>"
+    "specific_explanation": "1. 優先順位の確認\n   if 文は上から順に判定されます。一度条件に合致すると、それ以降の elseif や else は無視されます。\n\n2. 排他性チェック\n   したがって、より「厳しい条件」や「特殊なケース」（例：3歳以下）を先に書かないと、より広い条件（例：9歳以下）に吸収されてしまい、正しい判定ができなくなります。\n   <div class=\"important\">上から順に判定され、一つでも合致すれば以降は実行されない</div>"
   },
   {
     "id": 6,
     "category": "制御構文",
     "theme": "再帰関数",
     "subtheme": "ベースケース（終了条件）",
-    "text": "階乗を計算する再帰関数 <span class=\"italic\">Fact(m)</span> において、計算を停止して値を確定させる「ベースケース」として最も適切な条件（空欄 [  b  ]）を選んでください。なお、数学的に <span class=\"italic\">0! = 1</span> と定義されています。",
-    "example": "<span class=\"italic\">m = 1</span> のとき、処理は <span class=\"italic\">1 × Fact(0)</span> を呼び出します。この <span class=\"italic\">Fact(0)</span> が正しく <span class=\"italic\">1</span> を返す必要があります。",
+    "text": "階乗を計算する再帰関数 Fact(m) において、計算を停止して値を確定させる「ベースケース」として最も適切な条件（空欄 [  b  ]）を選んでください。なお、数学的に 0! = 1 と定義されています。",
+    "example": "m = 1 のとき、処理は 1 × Fact(0) を呼び出します。この Fact(0) が正しく 1 を返す必要があります。",
     "code": "01  整数型: m\n02  Fact(整数型: m)\n03  <span class=\"if\">if (m > 0)</span>\n04     return m × Fact(m - 1)\n05  <span class=\"if\">elseif ([      b      ])</span>\n06     return 1",
     "choices": [
       "m が 0 と等しい",
@@ -86,7 +86,7 @@ const short_questions = [
       "m が 0 より小さい",
       "m が 1 以下"
     ],
-    "specific_explanation": "1. 最小単位の特定\n   階乗の再帰的な定義では、<span class=\"italic\">m! = m × (m - 1)!</span> と表されます。この連鎖は <span class=\"italic\">m</span> が 0 になるまで続きます。問題文に「<span class=\"italic\">0! = 1</span>」とある通り、計算の最終地点である <span class=\"italic\">m = 0</span> をベースケース（停止条件）として定義します。\n\n2. 停止条件を 0 にする理由\n   もし停止条件を <span class=\"italic\">m = 1</span> にした場合、引数に 0 が渡されたときに正しく <span class=\"italic\">1</span> を返せなくなります。また、プログラムの構造上、<span class=\"italic\">m = 1</span> のときは 3行目の <span class=\"italic\">if</span> 文（<span class=\"italic\">m > 0</span>）が真となり、<span class=\"italic\">1 × Fact(0)</span> を実行しようとします。この呼び出しに正しく答えるためには、<span class=\"italic\">Fact(0)</span> を判定できる条件が必要です。\n   <div class=\"important\">elseif (m = 0)</div>"
+    "specific_explanation": "1. 最小単位の特定\n   階乗の再帰的な定義では、m! = m × (m - 1)! と表されます。この連鎖は (m - 1)! が 0 になるまで、つまり m が 1 のときまでは再帰処理が続きます。問題文に「0! = 1」とある通り、計算の最終地点である m = 0 をベースケース（停止条件）として定義します。\n\n2. 戻り値の確定\n   引数に 0 が渡されたときに正しく 1 を返せるように、Fact(0) を判定できる条件が必要です。\n   <div class=\"important\">elseif (m = 0)</div>"
   },
   // 2問目
   // --- テーマ1：配列の操作とループの仕組み ---
@@ -95,33 +95,33 @@ const short_questions = [
     "category": "データ構造",
     "theme": "配列",
     "subtheme": "要素の入れ替え（スワップ）",
-    "text": "配列 <span class=\"italic\">array</span> の要素 <span class=\"italic\">array[i]</span> と <span class=\"italic\">array[j]</span> の値を入れ替える際、一方が消えないようにするための正しい手順を選んでください。空欄 [  b  ] に入る適切な式はどれですか。ここで、<span class=\"italic\">tmp</span> は一時的な値を保持するための変数です。",
-    "example": "<span class=\"italic\">array[i] = 10, array[j] = 20</span> のとき、最終的に <span class=\"italic\">array[i] = 20, array[j] = 10</span> にしたい。",
+    "text": "配列 array の要素 array[i] と array[j] の値を入れ替える際、一方が消えないようにするための正しい手順を選んでください。空欄 [  b  ] に入る適切な式はどれですか。ここで、tmp は一時的な値を保持するための変数です。",
+    "example": "array[i] = 10, array[j] = 20 のとき、最終的に array[i] = 20, array[j] = 10 にしたい。",
     "code": "01  整数型の配列: array\n02  整数型: tmp, i, j\n03  tmp ← array[i]\n04  array[i] ← array[j]\n05  [      b      ] ← tmp",
     "choices": ["array[j]", "array[i]", "tmp", "array[0]"],
-    "specific_explanation": "1. 退避用変数の利用\n   上書きで値が消えてしまわないよう、まず片方の値（<span class=\"italic\">array[i]</span>）を一時変数 <span class=\"italic\">tmp</span> に保存しておきます。\n\n2. 三段階の代入\n   次に <span class=\"italic\">array[i]</span> に <span class=\"italic\">array[j]</span> の値を代入して上書きします。この時点で元の <span class=\"italic\">array[i]</span> は消えますが、<span class=\"italic\">tmp</span> に残っているため安心です。最後に、空いた（上書き可能な状態の）<span class=\"italic\">array[j]</span> へ退避していた <span class=\"italic\">tmp</span> の値を戻します。\n   <div class=\"important\">array[j] ← tmp</div>"
+    "specific_explanation": "1. 退避用変数の利用\n   上書きで値が消えてしまわないよう、まず片方の値（array[i]）を一時変数 tmp に保存しておきます。\n\n2. 三段階の代入\n   次に array[i] に array[j] の値を代入して上書きします。この時点で元の array[i] は消えますが、tmp に残っているため安心です。最後に、空いた（上書き可能な状態の）array[j] へ退避していた tmp の値を戻します。\n   <div class=\"important\">array[j] ← tmp</div>"
   },
   {
     "id": 8,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "要素数 <span class=\"italic\">n</span> の配列 <span class=\"italic\">array</span> を逆順に並べ替えるとき、入れ替え処理を繰り返す回数として最も適切なものはどれですか。ここで、<span class=\"italic\">n</span> は配列の要素数を表します。",
-    "example": "<span class=\"italic\">n = 6</span> のとき、3回（1番目と6番目、2番目と5番目、3番目と4番目）入れ替えれば完了します。",
+    "text": "要素数 n の配列 array を逆順に並べ替えるとき、入れ替え処理を繰り返す回数として最も適切なものはどれですか。ここで、n は配列の要素数を表します。",
+    "example": "n = 6 のとき、3回（1番目と6番目、2番目と5番目、3番目と4番目）入れ替えれば完了します。",
     "code": "   01  整数型の配列: array\n   02  整数型: n, i\n   03  n ← arrayの要素数\n   04  <span class=\"for\">for (i を 1 から [   回数   ] まで 1 ずつ増やす)</span>\n   05     // 入れ替え処理（スワップ）を実行\n   06  <span class=\"for\">endfor</span>",
     "choices": ["n ÷ 2 の商", "n", "n - 1", "n ÷ 2 の余り"],
-    "specific_explanation": "1. 開始と終了の数値\n   逆順の並べ替えは、配列の「端と端」をペアにして交換する作業です。1回の交換で2つの要素の位置が確定するため、全体の半分（<span class=\"italic\">n ÷ 2</span> の商）まで繰り返せば、すべての要素が正しく並び替わります。\n\n2. 繰り返し回数の性質\n   もし <span class=\"italic\">n</span> 回（要素数分）繰り返してしまうと、一度入れ替わって逆順になった要素を再び入れ替えることになり、結果として元の順序に戻ってしまいます。そのため、中央で止める計算式が必要となります。\n   <div class=\"important\">n ÷ 2 の商</div>"
+    "specific_explanation": "1. 開始と終了の数値\n   逆順の並べ替えは、配列の「端と端」をペアにして交換する作業です。1回の交換で2つの要素の位置が確定するため、全体の半分（n ÷ 2 の商）まで繰り返せば、すべての要素が正しく並び替わります。\n\n2. 繰り返し回数の性質\n   もし n 回（要素数分）繰り返してしまうと、一度入れ替わって逆順になった要素を再び入れ替えることになり、結果として元の順序に戻ってしまいます。そのため、中央で止める計算式が必要となります。\n   <div class=\"important\">n ÷ 2 の商</div>"
   },
   {
     "id": 9,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "ループ変数の計算利用",
-    "text": "添え字が 1 から始まる要素数 <span class=\"italic\">n</span> の配列 <span class=\"italic\">array</span> において、左側の添え字 <span class=\"italic\">i</span> に対応する「右側のペアの添え字」を求める式（空欄 [  a  ]）を選んでください。",
-    "example": "<span class=\"italic\">n = 10</span> のとき、<span class=\"italic\">i = 1</span> ならペアとなる右端は <span class=\"italic\">10</span>、<span class=\"italic\">i = 2</span> なら右端は <span class=\"italic\">9</span> です。",
+    "text": "添え字が 1 から始まる要素数 n の配列 array において、左側の添え字 i に対応する「右側のペアの添え字」を求める式（空欄 [  a  ]）を選んでください。",
+    "example": "n = 10 のとき、i = 1 ならペアとなる右端は 10、i = 2 なら右端は 9 です。",
     "code": "01  整数型の配列: array\n02  整数型: n, i, right\n03  n ← arrayの要素数\n04  <span class=\"for\">for (i を 1 から (n ÷ 2 の商) まで 1 ずつ増やす)</span>\n05     right ← [      a      ]\n06     // array[i] と array[right] を入れ替える\n07  <span class=\"for\">endfor</span>",
     "choices": ["n - i + 1", "n - i", "n - i - 1", "i + (n ÷ 2)"],
-    "specific_explanation": "1. 規則性の発見\n   ペアになる添え字の法則性を探ります。例にある通り、<span class=\"italic\">n = 10</span> のとき「<span class=\"italic\">1</span> と <span class=\"italic\">10</span>」「<span class=\"italic\">2</span> と <span class=\"italic\">9</span>」がペアになります。これらの合計値（<span class=\"italic\">i + right</span>）に注目すると、どのペアも常に <span class=\"italic\">11</span>（つまり <span class=\"italic\">n + 1</span>）になることがわかります。\n\n2. ずれの調整\n   「<span class=\"italic\">i + right = n + 1</span>」という等式から、求めたい <span class=\"italic\">right</span> について式を整理すると、<span class=\"italic\">right = n + 1 - i</span> となります。添え字が 1 始まりの場合、単純な <span class=\"italic\">n - i</span> では数値が 1 足りなくなるため、この「+1」が重要な調整役となります。\n   <div class=\"important\">right ← n - i + 1</div>"
+    "specific_explanation": "1. 規則性の発見\n   ペアになる添え字の法則性を探ります。例にある通り、n = 10 のとき「1 と 10」「2 と 9」がペアになります。これらの合計値（i + right）に注目すると、どのペアも常に 11（つまり n + 1）になることがわかります。\n\n2. ずれの調整\n   「i + right = n + 1」という等式から、求めたい right について式を整理すると、right = n + 1 - i となります。添え字が 1 始まりの場合、単純な n - i では数値が 1 足りなくなるため、この「+1」が重要な調整役となります。\n   <div class=\"important\">right ← n - i + 1</div>"
   },
 
   // --- テーマ2：条件分岐と再帰のロジック ---
@@ -130,8 +130,8 @@ const short_questions = [
     "category": "制御構文",
     "theme": "if文",
     "subtheme": "境界値の判定",
-    "text": "年齢 <span class=\"italic\">age</span> が「10歳以上18歳未満」という範囲に該当するかを正しく判定する複合条件式を選んでください。",
-    "example": "<span class=\"italic\">age = 10</span> は対象、<span class=\"italic\">age = 18</span> は対象外です。",
+    "text": "年齢 age が「10歳以上18歳未満」という範囲に該当するかを正しく判定する複合条件式を選んでください。",
+    "example": "age = 10 は対象、age = 18 は対象外です。",
     "code": "   01  整数型: age\n   02  <span class=\"if\">if ([      条件式      ])</span>\n   03     return \"対象\"\n   04  <span class=\"if\">endif</span>",
     "choices": [
       "(age ≥ 10) and (age < 18)",
@@ -139,15 +139,15 @@ const short_questions = [
       "(age ≥ 10) or (age < 18)",
       "(age ≥ 10) and (age ≤ 18)"
     ],
-    "specific_explanation": "1. 境界の特定\n   判定の基準となる数値は「10」と「18」です。問題文の「10歳以上」は 10 を含みますが、「18歳未満」は 18 を含みません。このため、演算子はそれぞれ <span class=\"italic\">≥</span> と <span class=\"italic\"><</span> を使用するのが適切です。\n\n2. 含むか含まないか\n   「10歳以上」と「18歳未満」の2つの条件を、同時に（共に真であるときに）満たす必要があるため、論理演算子 <span class=\"italic\">and</span> を用いて結合します。もし <span class=\"italic\">or</span> を使ってしまうと、「10歳以上であるか、または18歳未満であるか」という意味になり、すべての年齢が条件に合致してしまうため注意が必要です。\n   <div class=\"important\">(age ≥ 10) and (age < 18)</div>"
+    "specific_explanation": "1. 境界の特定\n   判定の基準となる数値は「10」と「18」です。問題文の「10歳以上」は 10 を含みますが、「18歳未満」は 18 を含みません。このため、演算子はそれぞれ ≥ と < を使用するのが適切です。\n\n2. 含むか含まないか\n   「10歳以上」と「18歳未満」の2つの条件を、同時に（共に真であるときに）満たす必要があるため、論理演算子 and を用いて結合します。もし or を使ってしまうと、「10歳以上であるか、または18歳未満であるか」という意味になり、すべての年齢が条件に合致してしまうため注意が必要です。\n   <div class=\"important\">(age ≥ 10) and (age < 18)</div>"
   },
   {
     "id": 11,
     "category": "制御構文",
     "theme": "if文",
     "subtheme": "多分岐の論理",
-    "text": "多分岐処理（if-elseif-else）を用いて年齢 <span class=\"italic\">age</span> に応じた料金 <span class=\"italic\">ret</span> を計算します。3歳の子供（<span class=\"italic\">age = 3</span>）の料金が確実に「100円」と判定されるために、条件式の記述順序として注意すべき点はどれですか。",
-    "example": "3歳の子供（<span class=\"italic\">age = 3</span>）のとき、100円の条件（<span class=\"italic\">≤ 3</span>）と300円の条件（<span class=\"italic\">≤ 9</span>）のどちらにも合致する可能性があることに注目しましょう。",
+    "text": "多分岐処理（if-elseif-else）を用いて年齢 age に応じた料金 ret を計算するアルゴリズムです。3歳の子供（age = 3）の料金が確実に「100円」と判定されるために、条件式の記述順序として注意すべき点はどれですか。",
+    "example": "3歳の子供（age = 3）のとき、100円の条件（≤ 3）と300円の条件（≤ 9）のどちらにも合致する可能性があることに注目しましょう。",
     "code": "   01  整数型: age, ret\n   02  <span class=\"if\">if (age ≤ 3)</span>\n   03     ret ← 100\n   04  <span class=\"if\">elseif (age ≤ 9)</span>\n   05     ret ← 300\n   06  <span class=\"if\">else</span>\n   07     ret ← 500\n   08  <span class=\"if\">endif</span>",
     "choices": [
       "より限定的な条件（範囲の狭い条件）を先に記述すること",
@@ -155,7 +155,7 @@ const short_questions = [
       "数値の大きい順（降順）に条件式を並べること",
       "どのような順序で記述しても、最終的な判定結果は変わらない"
     ],
-    "specific_explanation": "1. 優先順位の確認\n   <span class=\"italic\">if</span> 文は上から順に判定されます。一度条件に合致すると、それ以降の <span class=\"italic\">elseif</span> や <span class=\"italic\">else</span> は無視されます。\n\n2. 排他性チェック\n   ある条件に合致すると以降の判定は行われないため、「より厳しい条件（範囲の狭い条件）」を先に書くのがセオリーです。今回の例では「3歳以下」は「9歳以下」という広い範囲にも含まれてしまうため、先に「3歳以下」を判定しないと、300円として処理されてしまうミスが起こります。\n   <div class=\"important\">厳しい（範囲の狭い）条件を上に書く</div>"
+    "specific_explanation": "1. 優先順位の確認\n   if 文は上から順に判定されます。一度条件に合致すると、それ以降の elseif や else は無視されます。\n\n2. 排他性チェック\n   ある条件に合致すると以降の判定は行われないため、「より厳しい条件（範囲の狭い条件）」を先に書くのがセオリーです。今回の例では「3歳以下」は「9歳以下」という広い範囲にも含まれてしまうため、先に「3歳以下」を判定しないと、300円として処理されてしまうミスが起こります。\n   <div class=\"important\">厳しい（範囲の狭い）条件を上に書く</div>"
   },
   {
     "id": 12,
@@ -163,7 +163,7 @@ const short_questions = [
     "theme": "再帰関数",
     "subtheme": "ベースケース（終了条件）",
     "text": "再帰関数において、自分自身を呼び出すのを停止して具体的な値を返し、計算を確定させる役割を持つ部分の名称として、最も適切なものを選んでください。",
-    "example": "<span class=\"italic\">Fact(3)</span> は内部で <span class=\"italic\">3 × Fact(2)</span> を呼び出しますが、この連鎖が無限に続かないようにするための「ストッパー」となる役割のことです。",
+    "example": "Fact(3) は内部で 3 × Fact(2) を呼び出しますが、この連鎖が無限に続かないようにするための「ストッパー」となる役割のことです。",
     "code": "   01  整数型: m\n   02  Fact(整数型: m)\n   03  <span class=\"if\">if (m > 0)</span>\n   04     return m × Fact(m - 1)\n   05  <span class=\"if\">elseif (m = 0)</span>\n   06     return 1\n   07  <span class=\"if\">endif</span>",
     "choices": [
       "ベースケース（終了条件）",
@@ -171,7 +171,7 @@ const short_questions = [
       "無限ループ",
       "例外処理"
     ],
-    "specific_explanation": "1. 最小単位の特定\n   再帰処理において、これ以上問題を分割できない最小の状態（例：<span class=\"italic\">m = 0</span>）を「ベースケース」と呼びます。\n\n2. 戻り値の確定\n   ベースケースに到達した際に具体的な数値（この例では <span class=\"italic\">1</span>）を返すことで、それまで積み上がっていた計算の連鎖が逆順に解決され、最終的な解が導き出されます。もしこれが存在しないと、処理は無限に自分自身を呼び出し続け、エラーとなってしまいます。\n   <div class=\"important\">ベースケース（終了条件）</div>"
+    "specific_explanation": "1. 最小単位の特定\n   再帰処理において、これ以上問題を分割できない最小の状態（例：m = 0）を「ベースケース」と呼びます。\n\n2. 戻り値の確定\n   ベースケースに到達した際に具体的な数値（この例では 1）を返すことで、それまで積み上がっていた計算の連鎖が逆順に解決され、最終的な解が導き出されます。もしこれが存在しないと、処理は無限に自分自身を呼び出し続け、エラーとなってしまいます。\n   <div class=\"important\">ベースケース（終了条件）</div>"
   },
   // 3問目
   // --- テーマ1：配列操作と累積計算の基本 ---
@@ -180,8 +180,8 @@ const short_questions = [
     "category": "数値計算系",
     "theme": "n進法",
     "subtheme": "重み付けの累積",
-    "text": "<span class=\"italic\">n</span>進数の各桁が格納された配列 <span class=\"italic\">t</span> を10進数に変換するプログラムです。上位桁から順に処理を行う場合、空欄 [  b  ] に入る累積計算の式を選んでください。ここで、<span class=\"italic\">m</span> は配列の要素数、<span class=\"italic\">n</span> は基数、<span class=\"italic\">ret</span> は累積された10進数値を表します。",
-    "example": "3進数「120」を変換する場合、上位桁から順に処理すると、累積値 <span class=\"italic\">ret</span> は 1 → 5 → 15 と変化して最終的な値が確定します。",
+    "text": "n進数の各桁が格納された配列 t を10進数に変換するプログラムです。上位桁から順に処理を行う場合、空欄 [  b  ] に入る累積計算の式を選んでください。ここで、m は配列の要素数、n は基数、ret は累積された10進数値を表します。",
+    "example": "3進数「120」を変換する場合、上位桁から順に処理すると、累積値 ret は 1 → 5 → 15 と変化して最終的な値が確定します。",
     "code": "   01  cardinal(整数型の配列: t, 整数型: m, 整数型: n)\n   02  整数型: i, ret\n   03  ret ← 0\n   04  <span class=\"for\">for (i を 1 から m まで 1 ずつ増やす)</span>\n   05     ret ← [      b      ]\n   06  <span class=\"for\">endfor</span>\n   07  return ret",
     "choices": [
       "ret * n + t[i]",
@@ -189,15 +189,15 @@ const short_questions = [
       "ret * t[i] + n",
       "(ret + t[i]) * n"
     ],
-    "specific_explanation": "1. 桁の重み付け（シフト）\n   上位桁から順に処理する場合、次の桁へ進むたびに現在までの合計値 <span class=\"italic\">ret</span> を基数 <span class=\"italic\">n</span> 倍することで、位（くらい）を一つずつ左へずらしていきます。例えば10進数で「12」に「3」を加えて「123」にするには、12を10倍してから3を足すのと同じ原理です。\n\n2. 新しい桁の加算\n   <span class=\"italic\">n</span> 倍して空いた一の位に、現在注目している桁の数字 <span class=\"italic\">t[i]</span> を加えることで、累積的に10進数への変換が行われます。この手法はホーナー法（Horner's method）とも呼ばれます。\n   <div class=\"important\">ret ← ret * n + t[i]</div>"
+    "specific_explanation": "1. 桁の重み付け（シフト）\n   上位桁から順に処理する場合、次の桁へ進むたびに現在までの合計値 ret を基数 n 倍することで、位（くらい）を一つずつ左へずらしていきます。例えば10進数で「12」に「3」を加えて「123」にするには、12を10倍してから3を足すのと同じ原理です。\n\n2. 新しい桁の加算\n   n 倍して空いた一の位に、現在注目している桁の数字 t[i] を加えることで、累積的に10進数への変換が行われます。この手法はホーナー法（Horner's method）とも呼ばれます。\n   <div class=\"important\">ret ← ret * n + t[i]</div>"
   },
   {
     "id": 14,
     "category": "データ構造",
     "theme": "配列",
     "subtheme": "要素の入れ替え（スワップ）",
-    "text": "配列 <span class=\"italic\">array</span> の要素を逆順に並べ替える処理の一部です。左側の要素 <span class=\"italic\">array[left]</span> と右側の要素 <span class=\"italic\">array[right]</span> を入れ替える際、空欄 [  b  ] に入る適切な字句を選んでください。ここで、<span class=\"italic\">tmp</span> は一時的な値を保持するための変数です。",
-    "example": "<span class=\"italic\">array[left] = 10, array[right] = 20</span> のとき、<span class=\"italic\">tmp</span> を使って値を回し、最終的に <span class=\"italic\">array[left] = 20, array[right] = 10</span> にします。",
+    "text": "配列 array の要素を逆順に並べ替える処理の一部です。左側の要素 array[left] と右側の要素 array[right] を入れ替える際、空欄 [  b  ] に入る適切な字句を選んでください。ここで、tmp は一時的な値を保持するための変数です。",
+    "example": "array[left] = 10, array[right] = 20 のとき、tmp を使って値を回し、最終的に array[left] = 20, array[right] = 10 にします。",
     "code": "   01  整数型の配列: array\n   02  整数型: tmp, left, right\n   03  tmp ← array[right]\n   04  array[right] ← array[left]\n   05  [      b      ] ← tmp",
     "choices": [
       "array[left]",
@@ -205,15 +205,15 @@ const short_questions = [
       "tmp",
       "array[1]"
     ],
-    "specific_explanation": "1. 退避用変数の利用\n   2つのコップ（<span class=\"italic\">array[left]</span> と <span class=\"italic\">array[right]</span>）の中身を入れ替えるとき、そのまま片方をもう一方に注ぐと中身が混ざって（上書きされて）消えてしまいます。そのため、まず「空のコップ」である <span class=\"italic\">tmp</span> に片方の値を退避させます。\n\n2. 三段階の代入\n   次に、空いたコップ（<span class=\"italic\">array[right]</span>）に、もう一方の値（<span class=\"italic\">array[left]</span>）を移します。最後に、最初に <span class=\"italic\">tmp</span> へ退避させておいた元の値を、まだ入れ替わっていないコップ（<span class=\"italic\">array[left]</span>）に戻すことで交換が完了します。この「三角形を描くような値の移動」がスワップの鉄則です。\n   <div class=\"important\">array[left] ← tmp</div>"
+    "specific_explanation": "1. 退避用変数の利用\n   2つのコップ（array[left] と array[right]）の中身を入れ替えるとき、そのまま片方をもう一方に注ぐと中身が混ざって（上書きされて）消えてしまいます。そのため、まず「空のコップ」である tmp に片方の値を退避させます。\n\n2. 三段階の代入\n   次に、空いたコップ（array[right]）に、もう一方の値（array[left]）を移します。最後に、最初に tmp へ退避させておいた元の値を、まだ入れ替わっていないコップ（array[left]）に戻すことで交換が完了します。この「三角形を描くような値の移動」がスワップの鉄則です。\n   <div class=\"important\">array[left] ← tmp</div>"
   },
   {
     "id": 15,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "ループ変数の計算利用",
-    "text": "添え字が 1 から始まる要素数 <span class=\"italic\">n</span> の配列 <span class=\"italic\">array</span> において、左側の添え字 <span class=\"italic\">left</span> とペアになる「右側の添え字」を求める式（空欄 [  a  ]）を選んでください。",
-    "example": "<span class=\"italic\">n = 4</span> のとき：<span class=\"italic\">left = 1</span> なら右端は <span class=\"italic\">4</span>、<span class=\"italic\">left = 2</span> なら右端は <span class=\"italic\">3</span> です。",
+    "text": "添え字が 1 から始まる要素数 n の配列 array において、左側の添え字 left とペアになる「右側の添え字」を求める式（空欄 [  a  ]）を選んでください。",
+    "example": "n = 4 のとき：left = 1 なら右端は 4、left = 2 なら右端は 3 です。",
     "code": "   01  整数型の配列: array\n   02  整数型: n, left, right\n   03  n ← arrayの要素数\n   04  <span class=\"for\">for (left を 1 から (n ÷ 2 の商) まで 1 ずつ増やす)</span>\n   05     right ← [      a      ]\n   06     // array[left] と array[right] を入れ替える\n   07  <span class=\"for\">endfor</span>",
     "choices": [
       "n - left + 1",
@@ -221,7 +221,7 @@ const short_questions = [
       "n - left - 1",
       "left + (n ÷ 2)"
     ],
-    "specific_explanation": "1. 規則性の発見\n   ペアになる添え字の関係性を数値で確認します。例にある <span class=\"italic\">n = 4</span> の場合、「<span class=\"italic\">1</span> と <span class=\"italic\">4</span>」「<span class=\"italic\">2</span> と <span class=\"italic\">3</span>」がペアです。このとき、どのペアも合計値（<span class=\"italic\">left + right</span>）が常に <span class=\"italic\">5</span>（つまり <span class=\"italic\">n + 1</span>）になるという規則性が見つかります。\n\n2. ずれの調整\n   「<span class=\"italic\">left + right = n + 1</span>」という不変の等式から、求めたい <span class=\"italic\">right</span> を導き出すと、<span class=\"italic\">right = n + 1 - left</span> となります。添え字が 1 始まりの場合、単純に <span class=\"italic\">n</span> から引くだけでは値が 1 小さくなってしまうため、この「+1」による調整が不可欠です。\n   <div class=\"important\">right ← n - left + 1</div>"
+    "specific_explanation": "1. 規則性の発見\n   ペアになる添え字の関係性を数値で確認します。例にある n = 4< の場合、「1 と 4」「2 と 3」がペアです。このとき、どのペアも合計値（left + right）が常に <5（つまり n + 1）になるという規則性が見つかります。\n\n2. ずれの調整\n   「left + right = n + 1」という不変の等式から、求めたい right を導き出すと、right = n + 1 - left となります。添え字が 1 始まりの場合、単純に n から引くだけでは値が 1 小さくなってしまうため、この「+1」による調整が不可欠です。\n   <div class=\"important\">right ← n - left + 1</div>"
   },
 
   // --- テーマ2：条件分岐とプログラムの堅牢性 ---
@@ -252,7 +252,7 @@ const short_questions = [
     "category": "制御構文",
     "theme": "if文",
     "subtheme": "多分岐の論理",
-    "text": "年齢 age に応じて入場料 ret を決定する。5行目の else に到達するのはどのような条件か。",
+    "text": "年齢 age に応じて入場料 ret を決定する。6行目の else に到達するのはどのような条件か。",
     "example": "age = 10 の場合、10 ≤ 3 と 10 ≤ 9 が共に偽となり else へ進む。",
     "code": "   01  整数型: age, ret\n   02  <span class=\"if\">if (age ≤ 3)</span>\n   03     ret ← 100\n   04  <span class=\"if\">elseif (age ≤ 9)</span>\n   05     ret ← 300\n   06  <span class=\"if\">else</span>\n   07     ret ← 500\n   08  <span class=\"if\">endif</span>",
     "choices": [
@@ -266,7 +266,7 @@ const short_questions = [
 
   // 4問目
   // --- テーマ1：再帰の終了条件と制御フロー ---
-{
+  {
     "id": 19,
     "category": "制御構文",
     "theme": "再帰関数",
@@ -287,29 +287,34 @@ const short_questions = [
     "category": "制御構文",
     "theme": "再帰関数",
     "subtheme": "ベースケース（終了条件）",
-    "text": "階乗を計算する再帰関数 Fact(m) において、もし 4行目の条件式を m = 1 と書き換え、5行目で return 1 とした場合、この関数は正しく動作しますか。ただし引数 m は 1 以上の整数とします。",
-    "example": "m = 3 のときにどのような計算プロセスをたどるか想像してみましょう。",
-    "code": "1 Fact(整数型: m)\n2<span class=\"if\"> if (m>0)</span>\n3     return m * Fact(m - 1)\n4<span class=\"if\"> elseif (m = 1)<\/span>\n5     return 1",
+    "text": "Fact(m) において、再帰継続の条件（3行目）を m > 1 に、停止条件（5行目）を m = 1 に変更した場合、m が 1 以上の範囲で正しく動作するか。",
+    "example": "m = 2 のとき 2 * Fact(1) となり、Fact(1) が 1 を返せば 2 * 1 = 2 で計算が完了する。",
+    "code": "   01  整数型: m\n   02  Fact(整数型: m)\n   03  <span class=\"if\">if (m > 0)</span>\n   04     return m * Fact(m - 1)\n   05  <span class=\"if\">elseif (m = 0)</span>\n   06     return 1\n   07  <span class=\"if\">endif</span>",
     "choices": [
       "正しく動作する",
-      "Fact(0) を呼び出したときに無限再帰になる",
-      "どのような数に対しても常に -1 を返すようになる",
-      "コンパイルエラーになる"
+      "Fact(0) が呼び出され無限再帰になる",
+      "常に 0 を返すようになる",
+      "1 以外の値で実行するとエラーになる"
     ],
-    "specific_explanation": "1. 最小単位の特定\n   m \ge 1 の範囲であれば、m=1 をベースケースにしても 3 times 2 times 1 と計算が進み、正しく動作します。\n\n2. 戻り値の確定\n   数学的な定義 0! = 1 を含める場合は m=0 まで必要ですが、1! で止めても正の整数の階乗計算としては成立します。\n   <div class=\"important\">正の整数の範囲なら正しく動作する<\/div>"
+    "specific_explanation": "1. 最小単位の特定\nm ≧ 1 の範囲であれば、終着点を 1!（m = 1）としても階乗の計算結果に影響はない。\n\n2. 戻り値の確定\n1! = 1 であるため、m = 1 の時に 1 を返せば、正の整数の階乗として数学的に正しい結果が得られる。\n<div class=\"important\">正の整数の範囲なら m = 1 停止でも問題ない</div>"
   },
 
   // --- テーマ2：再帰的処理と計算ロジック ---
-  {
+{
     "id": 21,
     "category": "制御構文",
     "theme": "再帰関数",
     "subtheme": "再帰的処理",
-    "text": "階乗の公式 n! = n times (n-1)! を再帰関数 Fact(m) としてプログラムで実装する場合、空欄 [ a ] に入る適切な式を選んでください。ここで、m は階乗を計算する対象の整数です。",
-    "example": "入力: m = 3 の場合、3 * Fact(2) が実行されるような式を考える。",
-    "code": "1  Fact(整数型: m)\n2  <span class=\"if\">if (m > 0)<\/span>\n3     return [    a    ]",
-    "choices": ["m times Fact(m - 1)", "(m - 1) times Fact(m)", "m + Fact(m - 1)", "Fact(m - 1)"],
-    "specific_explanation": "1. 一回り小さい形への変換\n   「現在の値 m」に、「一つ小さい値 m-1 の階乗の結果」を掛け合わせることで、階乗の連鎖を表現します。\n\n2. 再帰呼び出し\n   自分自身の関数 Fact を、引数を 1 減らして呼び出すことがポイントです。\n   <div class=\"important\">return m times Fact(m - 1)<\/div>"
+    "text": "階乗 n! = n * (n-1)! を再帰関数 Fact(m) で実装する。空欄 [ a ] に入る式を選べ。",
+    "example": "m = 3 のとき、3 * Fact(2) を呼び出すことで階乗の計算を連鎖させる。",
+    "code": "   01  整数型: m\n   02  Fact(整数型: m)\n   03  <span class=\"if\">if (m > 0)</span>\n   04     return [    a    ]\n   05  <span class=\"if\">endif</span>",
+    "choices": [
+      "m * Fact(m - 1)",
+      "(m - 1) * Fact(m)",
+      "m + Fact(m - 1)",
+      "Fact(m - 1)"
+    ],
+    "specific_explanation": "1. 一回り小さい形への変換\n「現在の値 m」に「一つ小さい値 m - 1 の計算結果」を掛け合わせることで、階乗の定義をプログラムに落とし込む。\n\n2. 再帰呼び出し\n自分自身（Fact）を引数 m - 1 で呼び出し、より小さな問題を解かせることで最終的な解を得る。\n<div class=\"important\">return m * Fact(m - 1)</div>"
   },
   {
     "id": 22,
@@ -858,7 +863,7 @@ const short_questions = [
       "a: 1, b: 1",
       "a: 2, b: 2"
     ],
-    "specific_explanation": "1. 入れ替えの規則性\n   「転置」とは、行列の「行」と「列」を入れ替える操作です。元のインデックスが <span class=\"italic\">A[i][j]</span> であれば、転記先は行と列を反転させた <span class=\"italic\">B[j][i]</span> となります。\n\n2. 端の処理\n   正方形の配列（2×2）であれば、ループ範囲を変えずに添え字を入れ替えるだけで全ての要素を正しく転記できます。\n   <div class=\"important\">B[j][i] ← A[i][j]</div>"
+    "specific_explanation": "1. 入れ替えの規則性\n   「転置」とは、行列の「行」と「列」を入れ替える操作です。元のインデックスが A[i][j] であれば、転記先は行と列を反転させた B[j][i] となります。\n\n2. 端の処理\n   正方形の配列（2×2）であれば、ループ範囲を変えずに添え字を入れ替えるだけで全ての要素を正しく転記できます。\n   <div class=\"important\">B[j][i] ← A[i][j]</div>"
   },
   {
     "id": 63,
@@ -874,7 +879,7 @@ const short_questions = [
       "i",
       "j + 1"
     ],
-    "specific_explanation": "1. 入れ替えの規則性\n   左右反転（水平反転）させる場合、行番号 <span class=\"italic\">i</span> はそのままに、列番号 <span class=\"italic\">j</span> だけを「右端からの距離」に変換します。\n\n2. 端の処理\n   列の最大数が2の場合、<span class=\"italic\">j=1</span> のときは <span class=\"italic\">2</span> へ、<span class=\"italic\">j=2</span> のときは <span class=\"italic\">1</span> へ移動させる必要があるため、<span class=\"italic\">(最大数 + 1) - j</span>、つまり <span class=\"italic\">3 - j</span> という計算式が導かれます。\n   <div class=\"important\">B[i][3 - j] ← A[i][j]</div>"
+    "specific_explanation": "1. 入れ替えの規則性\n   左右反転（水平反転）させる場合、行番号 i はそのままに、列番号 j だけを「右端からの距離」に変換します。\n\n2. 端の処理\n   列の最大数が2の場合、j=1 のときは 2 へ、j=2 のときは 1 へ移動させる必要があるため、(最大数 + 1) - j、つまり 3 - j という計算式が導かれます。\n   <div class=\"important\">B[i][3 - j] ← A[i][j]</div>"
   },
   {
     "id": 64,
@@ -890,7 +895,7 @@ const short_questions = [
       "1: j, 2: i",
       "1: 3 - j, 2: 3 - i"
     ],
-    "specific_explanation": "1. 入れ替えの規則性\n   180度回転は「上下反転」かつ「左右反転」を行う操作です。したがって、行と列の両方を逆順に計算する必要があります。\n\n2. 端の処理\n   要素数が2の場合、逆順のインデックスはどちらも <span class=\"italic\">3 - 現在の添え字</span> で求められます。\n   <div class=\"important\">B[3 - i][3 - j] ← A[i][j]</div>"
+    "specific_explanation": "1. 入れ替えの規則性\n   180度回転は「上下反転」かつ「左右反転」を行う操作です。したがって、行と列の両方を逆順に計算する必要があります。\n\n2. 端の処理\n   要素数が2の場合、逆順のインデックスはどちらも 3 - 現在の添え字 で求められます。\n   <div class=\"important\">B[3 - i][3 - j] ← A[i][j]</div>"
   },
   {
     "id": 65,
@@ -906,7 +911,7 @@ const short_questions = [
       "j mod 2",
       "(j + 1) mod 2"
     ],
-    "specific_explanation": "1. 範囲内に収める\n   剰余演算（mod）を使うと、数値を一定の範囲で循環させることができます。<span class=\"italic\">j mod 2</span> の結果は必ず <span class=\"italic\">0</span> か <span class=\"italic\">1</span> になります。\n\n2. リセット処理\n   1から始まる要素番号に合わせるため、結果に <span class=\"italic\">+1</span> をします。<span class=\"italic\">j=1</span> のときは <span class=\"italic\">1 mod 2 + 1 = 2</span>、<span class=\"italic\">j=2</span> のときは <span class=\"italic\">2 mod 2 + 1 = 1</span> となり、交互に入れ替わる動きが実現できます。\n   <div class=\"important\">B[(j mod 2) + 1][j]</div>"
+    "specific_explanation": "1. 範囲内に収める\n   剰余演算（mod）を使うと、数値を一定の範囲で循環させることができます。j mod 2 の結果は必ず 0 か 1 になります。\n\n2. リセット処理\n   1から始まる要素番号に合わせるため、結果に +1 をします。j=1 のときは 1 mod 2 + 1 = 2、j=2 のときは 2 mod 2 + 1 = 1 となり、交互に入れ替わる動きが実現できます。\n   <div class=\"important\">B[(j mod 2) + 1][j]</div>"
   },
   {
     "id": 66,
@@ -922,7 +927,7 @@ const short_questions = [
       "i mod 2",
       "j mod 2"
     ],
-    "specific_explanation": "1. 範囲内に収める\n   市松模様のように「隣り合う要素と異なる状態」を作るには、行番号と列番号の和の偶奇を利用するのが定石です。\n\n2. リセット処理\n   <span class=\"italic\">(i + j) mod 2</span> を計算すると、合計が偶数のマスは <span class=\"italic\">0</span>、奇数のマスは <span class=\"italic\">1</span> となり、0と1が交互に並ぶパターンが作れます。\n   <div class=\"important\">(i + j) mod 2</div>"
+    "specific_explanation": "1. 範囲内に収める\n   市松模様のように「隣り合う要素と異なる状態」を作るには、行番号と列番号の和の偶奇を利用するのが定石です。\n\n2. リセット処理\n   (i + j) mod 2 を計算すると、合計が偶数のマスは 0、奇数のマスは 1 となり、0と1が交互に並ぶパターンが作れます。\n   <div class=\"important\">(i + j) mod 2</div>"
   },
   {
     "id": 67,
@@ -938,7 +943,7 @@ const short_questions = [
       "((j + 1) mod 2) + 1",
       "((i + j) mod 2) + 1"
     ],
-    "specific_explanation": "1. 範囲内に収める\n   実行例の <span class=\"italic\">A[2, 2] → B[1, 1]</span> に注目します。<span class=\"italic\">j=2</span> のときに転記先の列番号が <span class=\"italic\">1</span> になる計算式を探します。\n\n2. リセット処理\n   <span class=\"italic\">j=1</span> のときは <span class=\"italic\">1 mod 2 + 1 = 2</span>、<span class=\"italic\">j=2</span> のときは <span class=\"italic\">2 mod 2 + 1 = 1</span> となります。これは選択肢アの計算式と一致し、2つの状態を交互に繰り返す周期的な動きを作っています。\n   <div class=\"important\">b = (j mod 2) + 1</div>"
+    "specific_explanation": "1. 範囲内に収める\n   実行例の A[2, 2] → B[1, 1] に注目します。j=2 のときに転記先の列番号が 1 になる計算式を探します。\n\n2. リセット処理\n   j=1 のときは 1 mod 2 + 1 = 2、j=2 のときは 2 mod 2 + 1 = 1</span> となります。これは選択肢アの計算式と一致し、2つの状態を交互に繰り返す周期的な動きを作っています。\n   <div class=\"important\">b = (j mod 2) + 1</div>"
   },
   // 17問目
   {
@@ -955,7 +960,7 @@ const short_questions = [
       "0回",
       "1回"
     ],
-    "specific_explanation": "1. 外側と内側の役割の把握\n   このプログラムは、行（i）と列（j）の二重ループの中に、さらに <span class=\"italic\">while</span> ループを持つ構造です。<span class=\"italic\">while</span> ループの回数は変数 <span class=\"italic\">j</span> に依存しています。\n\n2. 内側の終了条件\n   条件式が <span class=\"italic\">k < j</span> であり、<span class=\"italic\">k</span> が 1 から始まって 1 ずつ増えるため、実行される <span class=\"italic\">k</span> の値は <span class=\"italic\">1, 2, 3, 4</span> の 4 つとなります。\n   <div class=\"important\">j = 5 のとき、回数は j - 1 = 4 回</div>"
+    "specific_explanation": "1. 外側と内側の役割の把握\n   このプログラムは、行（i）と列（j）の二重ループの中に、さらに while ループを持つ構造です。while ループの回数は変数 j に依存しています。\n\n2. 内側の終了条件\n   条件式が k < j であり、k が 1 から始まって 1 ずつ増えるため、実行される k の値は 1, 2, 3, 4 の 4 つとなります。\n   <div class=\"important\">j = 5 のとき、回数は j - 1 = 4 回</div>"
   },
   {
     "id": 69,
@@ -971,7 +976,7 @@ const short_questions = [
       "5回",
       "25回"
     ],
-    "specific_explanation": "1. 外側と内側の役割の把握\n   変数 <span class=\"italic\">j</span> が 5 から 1 まで変化する間、各ステップで <span class=\"italic\">j - 1</span> 回の加算が行われます。\n\n2. 内側の終了条件\n   各 <span class=\"italic\">j</span> における回数を合計すると、<span class=\"italic\">(5-1) + (4-1) + (3-1) + (2-1) + (1-1)</span> すなわち <span class=\"italic\">4 + 3 + 2 + 1 + 0 = 10</span> となります。\n   <div class=\"important\">合計回数 = 10回</div>"
+    "specific_explanation": "1. 外側と内側の役割の把握\n   変数 j が 5 から 1 まで変化する間、各ステップで j - 1 回の加算が行われます。\n\n2. 内側の終了条件\n   各 j における回数を合計すると、(5-1) + (4-1) + (3-1) + (2-1) + (1-1) すなわち 4 + 3 + 2 + 1 + 0 = 10 となります。\n   <div class=\"important\">合計回数 = 10回</div>"
   },
   {
     "id": 70,
@@ -987,7 +992,7 @@ const short_questions = [
       "変わらない",
       "j回増える"
     ],
-    "specific_explanation": "1. 内側の終了条件\n   「未満（<）」から「以下（<=）」に変更すると、<span class=\"italic\">k</span> が <span class=\"italic\">j</span> と等しいときもループが実行されるようになります。\n\n2. 外側と内側の役割の把握\n   <span class=\"italic\">j = 5</span> の場合、変更前は <span class=\"italic\">k</span> が 1 から 4 までの 4回実行されますが、変更後は <span class=\"italic\">k = 5</span> の回が追加されるため、実行回数は 4 回から 5 回へと「1回」増えます。\n   <div class=\"important\">境界値が含まれるようになるため、実行回数は 1 増える</div>"
+    "specific_explanation": "1. 内側の終了条件\n   「未満（<）」から「以下（<=）」に変更すると、k が j と等しいときもループが実行されるようになります。\n\n2. 外側と内側の役割の把握\n   j = 5 の場合、変更前は k が 1 から 4 までの 4回実行されますが、変更後は k = 5 の回が追加されるため、実行回数は 4 回から 5 回へと「1回」増えます。\n   <div class=\"important\">境界値が含まれるようになるため、実行回数は 1 増える</div>"
   },
   {
     "id": 71,
@@ -1003,7 +1008,7 @@ const short_questions = [
       "a: 45\nb: row × col × (col + 1) ÷ 2",
       "a: 45\nb: col × row × (row + 1) ÷ 2"
     ],
-    "specific_explanation": "1. 規則性の発見\n   1つの行について、j が col から 1 まで減る間に α は <span class=\"italic\">(col - 1) + (col - 2) + ... + 0</span> 回実行されます。これは等差数列の和の公式により <span class=\"italic\">col × (col - 1) ÷ 2</span> と表せます。\n\n2. ずれの調整\n   これが <span class=\"italic\">row</span> 行分繰り返されるため、全体の総回数は <span class=\"italic\">row × col × (col - 1) ÷ 2</span> となります。行数3、列数5を代入すると <span class=\"italic\">3 × 5 × 4 ÷ 2 = 30</span> です。\n   <div class=\"important\">a: 30, b: row × col × (col - 1) ÷ 2</div>"
+    "specific_explanation": "1. 規則性の発見\n   1つの行について、j が col から 1 まで減る間に α は (col - 1) + (col - 2) + ... + 0 回実行されます。これは等差数列の和の公式により col × (col - 1) ÷ 2 と表せます。\n\n2. ずれの調整\n   これが row 行分繰り返されるため、全体の総回数は row × col × (col - 1) ÷ 2 となります。行数3、列数5を代入すると 3 × 5 × 4 ÷ 2 = 30 です。\n   <div class=\"important\">a: 30, b: row × col × (col - 1) ÷ 2</div>"
   },
   {
     "id": 72,
@@ -1019,7 +1024,7 @@ const short_questions = [
       "1行目の最大値",
       "1列目の要素の平均値"
     ],
-    "specific_explanation": "1. 規則性の発見\n   加算命令 <span class=\"italic\">α</span> は、現在の要素に右隣の要素を足し合わせています。これを繰り返すことで、配列内の値が累積されていく動きになります。\n\n2. ずれの調整\n   ループの回転方向（減らす）や <span class=\"italic\">while</span> の範囲により、特定の場所（この場合は左端の列など）にその行の計算結果が集約されていくアルゴリズムの基本構造です。\n   <div class=\"important\">右隣の値を加算し続けるため累積的な値となる</div>"
+    "specific_explanation": "1. 規則性の発見\n   加算命令 α は、現在の要素に右隣の要素を足し合わせています。これを繰り返すことで、配列内の値が累積されていく動きになります。\n\n2. ずれの調整\n   ループの回転方向（減らす）や while の範囲により、特定の場所（この場合は左端の列など）にその行の計算結果が集約されていくアルゴリズムの基本構造です。\n   <div class=\"important\">右隣の値を加算し続けるため累積的な値となる</div>"
   },
   {
     "id": 73,
@@ -3665,7 +3670,7 @@ const short_questions = [
     "category": "制御構文",
     "theme": "while文",
     "subtheme": "フラグによる終了判定",
-    "text": "入力された数値 num が 0 になるまで合計を加算し続けるプログラムです。空欄 [  a  ] に入る、ループを適切に開始するための初期化処理を選んでください。",
+    "text": "入力された数値 num が 0 になるまで合計を加算し続けるプログラムです。空欄 [  a  ] に入る処理を選んでください。ここで、readInput()とは、入力した値を受け取る関数です",
     "example": "最初に while文の条件式 `num ≠ 0` が評価されるとき、num の中にどんな値が入っていればループの中に入ることができるでしょうか。",
     "code": "1  sumInput()\n2  整数型: sum ← 0, num\n3  [      a      ]\n4  <span class=\"while\">while (num ≠ 0)</span>\n5     sum ← sum + num\n6     num ← readInput()  // 外部から数値を読み込む\n7  <span class=\"endwhile\">endwhile</span>\n8  return sum",
     "choices": [
@@ -3698,7 +3703,7 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "フラグによる終了判定",
     "text": "データ通信プログラムで、データを受信するまで待機する処理です。変数 status が \"READY\" になるまで待つループを構築したい場合、空欄 [  a  ] に入る適切な条件式を選んでください。",
-    "example": "「準備完了（READY）になるまで繰り返す」ということは、「準備完了（READY）ではない間」はずっと待ち続ける、という日本語を条件式に当てはめてみましょう。",
+    "example": "どんな条件の時にずっと待ち続けるのか、ということを考えて条件式に当てはめてみましょう。",
     "code": "1  waitConnection()\n2  文字列型: status ← \"WAITING\"\n3  <span class=\"while\">while ([      a      ])</span>\n4     status ← checkStatus()\n5     sleep(1)  // 1秒待機\n6  <span class=\"endwhile\">endwhile</span>\n7  return",
     "choices": [
       "status ≠ \"READY\"",
@@ -3712,7 +3717,7 @@ const short_questions = [
     "id": 264,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "フラグによる終了判定",
+    "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "配列 data に含まれる正の数だけを順番に処理し、0または負の数（終端記号）が現れた時点で処理を即座に打ち切るプログラムです。空欄 [  a  ] に入る適切な継続条件を選んでください。",
     "example": "配列から取り出した data[i] の値が、どのような条件を満たす場合に「まだ処理を続けてよい」と判断できるか考えます。",
     "code": "1  processPositiveData(整数型の配列: data)\n2  整数型: i ← 1\n3  <span class=\"while\">while ([      a      ])</span>\n4     // 正の数に対する処理\n5     i ← i + 1\n6  <span class=\"endwhile\">endwhile</span>\n7  return i - 1",
@@ -3722,6 +3727,6 @@ const short_questions = [
       "data[i] == 0",
       "data[i] ≠ 0"
     ],
-    "specific_explanation": "1. 異常系の考慮\n   この配列では、0以下の数が終端を示す「番兵（センチネル）」または終了フラグのような役割を果たしています。\n\n2. 変数の変化\n   正の数である間は処理を続行したいため、現在の要素 <span class=\"italic\">data[i]</span> が 0 より大きいことが継続条件となります。条件を満たさなくなった時点でループは終了します。\n   <div class=\"important\">while (data[i] > 0)</div>"
+    "specific_explanation": "1. 変数の変化\n   正の数である間は処理を続行したいため、現在の要素 data[i] が 0 より大きいことが継続条件となります。条件を満たさなくなった時点でループは終了します。\n\n2. 異常系の考慮\n   この配列では、0以下の数が終端を示す「番兵（センチネル）」または終了フラグのような役割を果たしています。\n   <div class=\"important\">while (data[i] > 0)</div>"
   }
 ]

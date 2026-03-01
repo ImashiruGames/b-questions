@@ -207,12 +207,12 @@ function initPlayScreen() {
     }
 }
 
-// 💡 リスタート機能も超シンプルになります。以下の形に上書きしてください。
 function restartGame() {
     document.getElementById('completion_modal').classList.remove('show');
     document.getElementById('completion_modal').style.display = 'none';
 
-    // データはsessionStorageに残っているので、画面をリロードするだけで同じ設定で再開されます
+    window.scrollTo(0, document.getElementById("Q_num").getBoundingClientRect().top)
+
     location.reload();
 }
 
@@ -230,8 +230,8 @@ function loadQuestion(index) {
         instructionElement.style.fontSize = '1rem';
     }
 
-    console.log(document.getElementById("progress_dashboard").getBoundingClientRect().top)
-    window.scrollTo(0, document.getElementById("progress_dashboard").getBoundingClientRect().top)
+    window.scrollTo(0, document.getElementById("Q_num").getBoundingClientRect().top)
+    console.log(document.getElementById("Q_num").getBoundingClientRect().top)
 
     let q = activeQuestions[index];
     let subthemeSteps = [];
@@ -317,7 +317,7 @@ function checkAnswer(isCorrect) {
 
     if (isCorrect) {
         streak = streak + 1;
-        correctCountInRound++;
+
         isAnswered = true;
 
         if (instructionElement) {
@@ -328,7 +328,6 @@ function checkAnswer(isCorrect) {
         }
     } else {
         streak = 0;
-        // 💡【追加】不正解時は「再挑戦できること」を赤字で強く促す
         if (instructionElement) {
             instructionElement.innerHTML = '❌ 不正解！別の選択肢をタップして再挑戦！';
             instructionElement.style.color = '#c62828';
@@ -343,6 +342,7 @@ function checkAnswer(isCorrect) {
         if (isCorrect) {
             resultDiv.textContent = '正解！';
             resultDiv.className = ' result-bar correct';
+            correctCountInRound++;
         }
         else {
             resultDiv.textContent = '不正解';

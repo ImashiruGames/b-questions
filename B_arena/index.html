@@ -23,17 +23,20 @@
                 隙間時間を活用し、PC・タブレット・スマートフォンから無料で演習に取り組むことができます。基礎から応用まで網羅された問題と、試行錯誤を促す完全解説により、プログラミング初学者から試験直前の総仕上げまで、あなたの論理的思考力を着実に育成します。
             </p>
         </section>
-
+        
+        <div id="total_medals_area"
+            style="margin-bottom: 20px; padding: 15px; border: 1px solid #333; background-color: #fafafa; text-align: center;">
+        </div>
 
 
         <section id="control-panel">
             <div style="margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
                 <strong style="display: block; margin-bottom: 8px;">【表示オプション】</strong>
+                <label>
+                    <input type="checkbox" id="filter_unattempted"> <span>new!のみ表示</span>
+                </label>
                 <label style="margin-right: 15px;">
                     <input type="checkbox" id="filter_incorrect"> <span>間違えた問題（復習対象）のみ表示</span>
-                </label>
-                <label>
-                    <input type="checkbox" id="filter_unattempted"> <span>未着手の問題のみ表示</span>
                 </label>
             </div>
 
@@ -48,9 +51,6 @@
             </div>
         </section>
 
-        <div id="total_medals_area"
-            style="margin-bottom: 20px; padding: 15px; border: 1px solid #333; background-color: #fafafa; text-align: center;">
-        </div>
 
         <!-- <div id="login_modal" class="modal" style="display: none;">
             <div class="modal_content">

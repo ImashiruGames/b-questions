@@ -126,7 +126,7 @@ function renderCategoryChart(totalStats) {
 
     // for..inループで配列に変換
     for (var cat in totalStats.categories) {
-        labels.push(cat);
+        labels.push(cat[0]);
         var s = totalStats.categories[cat];
         var rate = s.total > 0 ? Math.round((s.solved / s.total) * 100) : 0;
         data.push(rate);
