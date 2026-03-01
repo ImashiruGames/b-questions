@@ -40,6 +40,12 @@
             <div id="progress_palette"></div>
         </div>
 
+<div class="debug-container" style="text-align: center; margin-top: 30px; border-top: 1px dashed #ccc; padding-top: 20px;">
+    <span style="font-size: 0.8rem; color: #999; font-weight: bold; margin-right: 10px;">【指定IDプレイ】</span>
+    <input type="number" id="debug_id_input" placeholder="ID" style="width: 80px; padding: 5px; border: 2px solid #333; border-radius: 0; outline: none;">
+    <button id="debug_jump_btn" style="padding: 5px 15px; background-color: #333; color: #fff; border: none; font-weight: bold; cursor: pointer;">出題</button>
+</div>
+
         <div id="layout_wrapper">
             <section id="problem_side">
                 <h3 id="Q_num" class="question-header">Loading...</h3>
@@ -113,7 +119,7 @@
         </div>
     </div>
 
-    <div id="login_modal" class="modal" style="display: none;">
+    <!-- <div id="login_modal" class="modal" style="display: none;">
         <div class="modal_content">
             <h2>ログイン</h2>
             <p>ユーザー名を入力してください</p>
@@ -121,7 +127,9 @@
                 style="padding: 10px; font-size: 1.2rem; width: 80%; margin: 20px 0;">
             <div class="flex_center"><button id="login_btn" class="next_btn">開始する</button></div>
         </div>
-    </div>
+    </div> -->
+
+
     <div id="footer-placeholder"></div>
 
     <script src="../js/makeHeader.js"></script>

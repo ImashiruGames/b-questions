@@ -100,6 +100,16 @@ function weightedSort(questions) {
     return clone;
 }
 
+const debugJumpBtn = document.getElementById('debug_jump_btn');
+if (debugJumpBtn) {
+    debugJumpBtn.addEventListener('click', function () {
+        const inputId = document.getElementById('debug_id_input').value;
+        if (inputId) {
+            // 指定したIDをURLに付与して画面を再読み込みする
+            window.location.href = `play_short.html?id=${inputId}`;
+        }
+    });
+}
 
 function initPalette() {
     let paletteContainer = document.getElementById('progress_palette');
@@ -120,45 +130,63 @@ function initPalette() {
     }
 }
 
-// --- 【新規追加】新しい初期化関数（これだけで全準備が整います） ---
+// --- 💡【変更】新しい初期化関数（ID指定プレイ対応版） ---
 function initPlayScreen() {
-    let limitStr = sessionStorage.getItem("imashiru_question_limit");
-    let targetsStr = sessionStorage.getItem("imashiru_target_subthemes");
-
-    if (!limitStr || !targetsStr) {
-        alert("問題データが渡されませんでした。HOME画面に戻ります。");
-        window.location.href = "index.html";
-        return;
-    }
-
-    limitQuestions = parseInt(limitStr, 10);
-    let targetSubthemes = JSON.parse(targetsStr);
+    // 1. まずURLにIDの指定があるかチェックする
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetId = urlParams.get('id');
 
     activeQuestions = [];
 
-    // HOME画面で選ばれた問題だけを抽き出す
-    for (let i = 0; i < short_questions.length; i++) {
-        let q = short_questions[i];
-        let isMatch = false;
-        for (let j = 0; j < targetSubthemes.length; j++) {
-            let t = targetSubthemes[j];
-            if (q.category === t.category && q.theme === t.theme && q.subtheme === t.subtheme) {
-                isMatch = true;
-                break;
+    if (targetId) {
+        // 【A】ID指定がある場合（デバッグ・お気に入り復習モード）
+        const specificQuestion = short_questions.find(q => q.id == targetId);
+        if (specificQuestion) {
+            activeQuestions = [specificQuestion];
+            limitQuestions = 1; // 1問だけ出題する
+        } else {
+            alert("指定されたIDの問題は見つかりませんでした。");
+            return;
+        }
+    } else {
+        // 【B】通常のプレイ（HOME画面から遷移してきた場合）
+        let limitStr = sessionStorage.getItem("imashiru_question_limit");
+        let targetsStr = sessionStorage.getItem("imashiru_target_subthemes");
+
+        if (!limitStr || !targetsStr) {
+            alert("問題データが渡されませんでした。HOME画面に戻ります。");
+            window.location.href = "index.html";
+            return;
+        }
+
+        limitQuestions = parseInt(limitStr, 10);
+        let targetSubthemes = JSON.parse(targetsStr);
+
+        // HOME画面で選ばれた問題だけを抽き出す
+        for (let i = 0; i < short_questions.length; i++) {
+            let q = short_questions[i];
+            let isMatch = false;
+            for (let j = 0; j < targetSubthemes.length; j++) {
+                let t = targetSubthemes[j];
+                if (q.category === t.category && q.theme === t.theme && q.subtheme === t.subtheme) {
+                    isMatch = true;
+                    break;
+                }
+            }
+            if (isMatch) {
+                activeQuestions.push(q);
             }
         }
-        if (isMatch) {
-            activeQuestions.push(q);
+
+        activeQuestions = weightedSort(activeQuestions);
+
+        if (activeQuestions.length > limitQuestions) {
+            activeQuestions = activeQuestions.slice(0, limitQuestions);
         }
     }
 
-    activeQuestions = weightedSort(activeQuestions);
-
+    // --- ここから下は共通の初期化処理 ---
     wrongQuestionsInRound = [];
-    if (activeQuestions.length > limitQuestions) {
-        activeQuestions = activeQuestions.slice(0, limitQuestions);
-    }
-
     initPalette();
     currentIndex = 0;
     currentPallet = 0;
@@ -195,7 +223,7 @@ function loadQuestion(index) {
     }
     let instructionElement = document.getElementById("instruction");
 
-    if(instructionElement) {
+    if (instructionElement) {
         instructionElement.innerHTML = '正解だと思うものを選んでください：';
         instructionElement.style.color = '#333';
         instructionElement.style.fontWeight = 'normal';
@@ -292,7 +320,7 @@ function checkAnswer(isCorrect) {
         correctCountInRound++;
         isAnswered = true;
 
-        if(instructionElement) {
+        if (instructionElement) {
             instructionElement.innerHTML = '⭕ 正解！お見事！';
             instructionElement.style.color = '#2e7d32';
             instructionElement.style.fontWeight = 'bold';
