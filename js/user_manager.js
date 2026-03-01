@@ -5,7 +5,7 @@
 
 var UserManager = {
     currentUser: null,
-    isDemoMode: true,
+    isDemoMode: false,
 
     // 初期化
     init: function () {
