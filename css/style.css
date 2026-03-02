@@ -316,8 +316,6 @@ select {
 .category-group,
 .theme-container,
 .subtheme-item {
-  /* border: 1px solid #333; */
-  /* 直線の枠線 */
   margin-bottom: 10px;
 }
 
@@ -325,7 +323,6 @@ select {
 .theme-container {
   margin-left: 20px;
   border-radius: 0;
-  /* 丸角NG */
 }
 
 /* 区切り線（直線のみ） */
@@ -348,35 +345,6 @@ select {
 .subtheme-item small {
   color: #666;
   margin-left: 5px;
-}
-
-/* トロフィーバッジ（直線的でシンプルな四角形） */
-.badge {
-  display: inline-block;
-  padding: 2px 6px;
-  margin-left: 8px;
-  font-size: 12px;
-  font-weight: bold;
-  border: 1px solid #333;
-  vertical-align: middle;
-}
-
-.badge-gold {
-  background-color: #FFF176;
-  /* シャンパンゴールド */
-  color: #333;
-}
-
-.badge-silver {
-  background-color: #E0E0E0;
-  /* シルバー */
-  color: #333;
-}
-
-.badge-bronze {
-  background-color: #FFCC80;
-  /* ブロンズ */
-  color: #333;
 }
 
 #category-container {
@@ -405,7 +373,6 @@ select {
 .category-header {
   border-bottom: 1px solid #000;
   background-color: #e0e0e0;
-  /* padding: 10px; */
   font-weight: bolder;
 }
 
@@ -431,24 +398,15 @@ select {
 
 /* チェックボックスの基本スタイル（未チェック時） */
 input[type=checkbox] {
-  /* 1. OS標準のデザインを無効化（新技術） */
-  -moz-appearance: none;
-       appearance: none;
   -webkit-appearance: none;
-  /* スマホなどの古いブラウザ対応 */
-  /* 2. 直線的でシンプルな四角形を作成 */
+     -moz-appearance: none;
+          appearance: none;
   width: 18px;
-  /* ボックスの横幅 */
   height: 18px;
-  /* ボックスの縦幅 */
   border: 2px solid #333;
-  /* 直線の太い枠線 */
-  background-color: #fff;
-  /* 背景色は白 */
+  background-color: white;
   cursor: pointer;
-  /* マウスカーソルを指マークに */
-  /* テキストとの位置調整 */
-  margin: 0 8px 0 0;
+  margin-right: 8px;
   vertical-align: middle;
 }
 
@@ -462,42 +420,30 @@ input[type=checkbox]:not(:checked) + span {
   color: #999;
 }
 
-/* 3. チェックが入っている時のスタイル（新技術） */
 input[type=checkbox]:checked::after {
   content: "✔";
-  /* 新技術：文字を挿入 */
   display: block;
   color: white;
-  background-color: black;
+  background-color: #2589d0;
   /* 文字色を黒に指定 */
   font-size: 16px;
-  /* フォントサイズをボックスに合わせる */
-  font-weight: bolder;
-  /* 文字を太くする */
   text-align: center;
-  /* 左右の中央ぞろえ */
   line-height: 15px;
-  /* 上下の中央ぞろえ（ボックスの高さと同じにする） */
 }
 
 /* メダルアイコンのスタイル（文字の高さに合わせて整列） */
 .medal-icon {
   width: 22px;
-  /* 画像の大きさを指定（必要に応じて微調整してください） */
   height: auto;
   vertical-align: middle;
-  /* 文字の中央の高さに揃える */
   margin-left: 8px;
   /* 左の文字との間に少し余白を空ける */
 }
 
-/* メダルのツールチップコンテナ */
 .medal-tooltip-container {
   position: relative;
   display: inline-block;
   margin: 0 15px;
-  cursor: help;
-  /* マウスカーソルを「？」マークにして説明があることを示唆 */
 }
 
 /* 個数表示の文字スタイル */
@@ -514,14 +460,12 @@ input[type=checkbox]:checked::after {
   content: attr(data-tooltip);
   /* HTMLに書いた説明文を読み込む */
   display: none;
-  /* 初期状態は完全に隠す */
   position: absolute;
   bottom: 120%;
   /* メダルの少し上に配置 */
   left: 50%;
   transform: translateX(-50%);
   background-color: #333;
-  /* ストイックな黒背景 */
   color: #fff;
   padding: 6px 12px;
   font-size: 12px;
@@ -533,7 +477,6 @@ input[type=checkbox]:checked::after {
   z-index: 100;
 }
 
-/* マウスを乗せた瞬間にパキッと表示（アニメーションなし） */
 .medal-tooltip-container:hover::after {
   display: block;
 }
@@ -542,16 +485,13 @@ input[type=checkbox]:checked::after {
 .subtheme-item label {
   display: flex;
   align-items: center;
-  /* 縦の中央揃え */
   cursor: pointer;
 }
 
 /* メダル専用の固定幅スペース（スロット） */
 .medal-slot {
   width: 28px;
-  /* メダルがちょうど収まる幅を指定 */
   flex-shrink: 0;
-  /* 画面が狭くてもこの空間は縮めない */
   text-align: center;
   display: inline-block;
 }
@@ -563,10 +503,29 @@ input[type=checkbox]:checked::after {
   vertical-align: middle;
 }
 
-/* テキスト部分との余白調整 */
 .subtheme-item label > span:last-child {
   margin-left: 8px;
-  /* チェックボックスと文字の隙間 */
+}
+
+#start_exam_btn {
+  font-family: monospace;
+  margin-top: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  background-color: #FFD700;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+
+#total_medals_area {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #333;
+  background-color: #fafafa;
+  text-align: center;
 }
 
 /* play_short.scss (完全版) */

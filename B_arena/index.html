@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imashiru - 基本情報科目B演習</title>
     <link rel="stylesheet" href="../css/destyle.css">
-    <!-- <link rel="stylesheet" href="../css/pages.css"> -->
     <link rel="stylesheet" href="../css/style.css">
-    <!-- <link rel="stylesheet" href="../css/play_short.css"> -->
 </head>
 
 <body class="light_theme">
@@ -24,8 +22,7 @@
             </p>
         </section>
         
-        <div id="total_medals_area"
-            style="margin-bottom: 20px; padding: 15px; border: 1px solid #333; background-color: #fafafa; text-align: center;">
+        <div id="total_medals_area">
         </div>
 
 
@@ -33,7 +30,7 @@
             <div style="margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
                 <strong style="display: block; margin-bottom: 8px;">【表示オプション】</strong>
                 <label>
-                    <input type="checkbox" id="filter_unattempted"> <span>new!のみ表示</span>
+                    <input type="checkbox" id="filter_unattempted" checked> <span>new!のみ表示</span>
                 </label>
                 <label style="margin-right: 15px;">
                     <input type="checkbox" id="filter_incorrect"> <span>間違えた問題（復習対象）のみ表示</span>
@@ -42,25 +39,16 @@
 
             <div id="start-button-area"
                 style="text-align: right; margin-top: 15px; border-top: 1px solid #ccc; padding-top: 10px;">
-                <label style="font-weight: bold; margin-right: 15px;">
-                    出題数: <input type="number" id="question_limit" value="5" min="1"
-                        style="width: 60px; padding: 5px; border: 1px solid #333; text-align: center;"> 問
-                </label>
-                <button id="start_exam_btn"
-                    style="padding: 10px 20px; font-size: 16px; background-color: #333; color: #fff; border: none; cursor: pointer;">選択した問題を開始する</button>
+                <div class="flex-center">
+                    <label style="font-weight: bold; margin-right: 15px;">
+                        出題数: <input type="number" id="question_limit" value="5" min="1"
+                            style="width: 60px; padding: 5px; border: 1px solid #333; text-align: center;"> 問
+                    </label>
+                </div>
+                <p id="start_exam_btn">演習を開始する　</p>
             </div>
         </section>
 
-
-        <!-- <div id="login_modal" class="modal" style="display: none;">
-            <div class="modal_content">
-                <h2>ログイン</h2>
-                <p>ユーザー名を入力してください</p>
-                <input type="text" id="login_username" placeholder="ユーザー名"
-                    style="padding: 10px; font-size: 1.2rem; width: 80%; margin: 20px 0;">
-                <div class="flex_center"><button id="login_btn" class="next_btn">開始する</button></div>
-            </div>
-        </div> -->
         <div id="login_modal" class="modal" style="display: none;">
             <div class="modal_content" style="border: 2px solid #333; border-radius: 0;">
                 <h2 style="border-bottom: 2px solid #333; padding-bottom: 10px;">名前登録</h2>
