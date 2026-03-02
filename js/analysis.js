@@ -120,6 +120,7 @@ function analyzeCategoryProgress(masterStats, processedData, targetCategory) {
 function renderCategoryChart(totalStats) {
     var ctx = document.getElementById('categoryChart').getContext('2d');
     var labels = [];
+    var fullLabels = [];
     var data = [];
     var rawSolved = [];
     var rawTotal = [];
@@ -127,6 +128,7 @@ function renderCategoryChart(totalStats) {
     // for..inループで配列に変換
     for (var cat in totalStats.categories) {
         labels.push(cat[0]);
+        fullLabels.push(cat);
         var s = totalStats.categories[cat];
         var rate = s.total > 0 ? Math.round((s.solved / s.total) * 100) : 0;
         data.push(rate);
@@ -143,6 +145,7 @@ function renderCategoryChart(totalStats) {
                 data: data,
                 rawSolved: rawSolved,
                 rawTotal: rawTotal,
+                fullLabels: fullLabels,
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 2,
@@ -153,8 +156,15 @@ function renderCategoryChart(totalStats) {
             scales: { r: { angleLines: { display: true }, suggestedMin: 0, suggestedMax: 100, ticks: { stepSize: 20 } } },
             responsive: true, maintainAspectRatio: false,
             plugins: {
+                legend: {
+                    onClick: null
+                },
                 tooltip: {
                     callbacks: {
+                        title: function(context) {
+                            var idx = context[0].dataIndex;
+                            return context[0].dataset.fullLabels[idx];
+                        },
                         label: function(context) {
                             var idx = context.dataIndex;
                             var solved = context.dataset.rawSolved[idx];
@@ -192,6 +202,9 @@ function renderThemeChart(analysisData) {
             indexAxis: 'y', animation: false, responsive: true, maintainAspectRatio: false,
             scales: { x: { stacked: true, max: 100 }, y: { stacked: true } },
             plugins: {
+                legend: {
+                    onClick: null
+                },
                 tooltip: {
                     callbacks: {
                         label: function(context) {
@@ -207,35 +220,75 @@ function renderThemeChart(analysisData) {
     });
 }
 
-// 7. 描画処理：コメントエリア（データを受け取って置換するだけ）
+// 7. 描画処理：コメントエリア（3変数対応版）
 function renderComment(analysisData, selectedCategory) {
-    var commentIndex = 0;
-    var targetThemeName = "";
+    var statusKey = "";
+    var isCompletionPhase = false;
 
     if (analysisData.totalThemes > 0 && analysisData.completedThemes === analysisData.totalThemes) {
-        commentIndex = 3;
+        statusKey = "all_gold";
+        isCompletionPhase = true;
     } else if (analysisData.completedThemes >= analysisData.totalThemes / 2 && analysisData.totalThemes > 0) {
-        commentIndex = 4;
-    } else if (analysisData.overallRate > 0) {
-        commentIndex = 1;
-        targetThemeName = analysisData.unstartedThemes.length > 0 ? analysisData.unstartedThemes[0] : "さらなる高み";
-    } else if (analysisData.labels.length > 0) {
-        commentIndex = 0;
-    } else {
-        commentIndex = 2;
+        statusKey = "almost_done";
+        isCompletionPhase = true;
+    } else if (analysisData.unstartedThemes.length === 0 && analysisData.labels.length > 0) {
+        statusKey = "all_played";
+        isCompletionPhase = true;
     }
 
-    var rawText = firstcomment[commentIndex] + secondcomment[commentIndex] + thirdcomment[commentIndex];
+    if (!isCompletionPhase) {
+        statusKey = analyzeUserStatus(selectedCategory);
+    }
+
+    // 3つのテーマ変数を抽出する処理
+    var theme_unstarted = "さらなる高み";
+    if (analysisData.unstartedThemes.length > 0) {
+        theme_unstarted = analysisData.unstartedThemes[0];
+    }
+
+    var theme_best = "";
+    var theme_worst = "";
+    var maxBest = -1;
+    var maxWorst = -1;
+
+    for (var i = 0; i < analysisData.labels.length; i++) {
+        var successCount = analysisData.greenRaw[i] + analysisData.goldRaw[i];
+        if (successCount > maxBest && successCount > 0) {
+            maxBest = successCount;
+            theme_best = analysisData.labels[i];
+        }
+    }
+    // まだ1問も正解がない場合の保険
+    if (theme_best === "" && analysisData.labels.length > 0) {
+        theme_best = analysisData.labels[0];
+    }
+
+// ② 次に「一番苦戦しているテーマ (worst)」を決める（※bestと同じものは除外する）
+    for (var j = 0; j < analysisData.labels.length; j++) {
+        if (analysisData.labels[j] === theme_best) continue; // 【追加】bestと同じテーマはスキップ
+
+        if (analysisData.redRaw[j] > maxWorst && analysisData.redRaw[j] > 0) {
+            maxWorst = analysisData.redRaw[j];
+            theme_worst = analysisData.labels[j];
+        }
+    }
+    // まだ正解・不正解がない場合のフォールバック
+    if (theme_best === "" && analysisData.labels.length > 0) theme_best = analysisData.labels[0];
+    if (theme_worst === "" && analysisData.labels.length > 0) theme_worst = analysisData.labels[0];
+
+    var commentObj = isCompletionPhase ? completionComments[statusKey] : commentsData[statusKey];
+    
+    if (!commentObj) {
+        commentObj = commentsData["pattern1_new"];
+    }
+
+    var rawText = commentObj.first + commentObj.second + commentObj.third;
     var processedText = rawText.split("{{category}}").join(selectedCategory);
+    processedText = processedText.split("{{theme_unstarted}}").join(theme_unstarted);
+    processedText = processedText.split("{{theme_best}}").join(theme_best);
+    processedText = processedText.split("{{theme_worst}}").join(theme_worst);
 
-    if (targetThemeName !== "") {
-        processedText = processedText.split("{{theme}}").join(targetThemeName);
-    }
-
-    commentReader(processedText,0,"");
-
-    // var finalHtml = '<span style="font-size:1.3rem">' + processedText.charAt(0) + '</span>' + processedText.slice(1);
-    // commentArea.innerHTML = finalHtml;
+    commentReader(processedText, 0, "");
 }
 
 function commentReader(comment,i,com) {
@@ -244,5 +297,65 @@ function commentReader(comment,i,com) {
         com += comment.charAt(i);
         commentArea.innerHTML = com;
         setTimeout(function(){commentReader(comment,++i,com)},1)
+    }
+}
+
+// 8. ユーザーの序盤ステータス判定（案B：平均誤答率ベース＋厳格ボーナス）
+function analyzeUserStatus(targetCategory) {
+    var currentUser = UserManager.currentUser;
+    if (!currentUser) return "pattern1_new";
+
+    var statsKey = 'bucket_stats_' + currentUser;
+    var stats = JSON.parse(localStorage.getItem(statsKey) || "{}");
+
+    var attemptedCount = 0;
+    var totalIncorrect = 0;
+    var activeThemes = {};
+    
+    // カテゴリ内の問題に対するユーザーの成績を集計
+    for (var i = 0; i < short_questions.length; i++) {
+        var q = short_questions[i];
+        if (q.category === targetCategory) {
+            var qId = UserManager.generateId(q);
+            var s = stats[qId];
+            
+            if (s && (s.correct > 0 || s.incorrect > 0)) {
+                attemptedCount++;
+                totalIncorrect += s.incorrect;
+                activeThemes[q.theme] = true;
+            }
+        }
+    }
+
+    // 着手したテーマの種類数をカウント
+    var activeThemesCount = 0;
+    for (var key in activeThemes) {
+        activeThemesCount++;
+    }
+
+    // --- 判定ロジック ---
+    if (attemptedCount === 0) {
+        return "pattern1_new"; // 完全新規
+    }
+
+    var averageIncorrect = totalIncorrect / attemptedCount;
+
+    // 序盤（15問未満）特有の学習スタイル判定
+    if (attemptedCount >= 6 && attemptedCount < 15) {
+        if (activeThemesCount === 1) {
+            return "pattern5_focus"; // 一点集中
+        }
+        if (activeThemesCount >= 3) {
+            return "pattern6_scatter"; // 好奇心分散
+        }
+    }
+
+    // 絶好調・好調・苦戦の判定
+    if (averageIncorrect >= 1.0) {
+        return "pattern4_struggle"; // 初動・苦戦
+    } else if (attemptedCount >= 6 && averageIncorrect <= 0.2) {
+        return "pattern2_excellent"; // 初動・絶好調
+    } else {
+        return "pattern3_good"; // 初動・好調
     }
 }

@@ -658,7 +658,6 @@ function nextQuestion() {
     loadQuestion(currentIndex);
 }
 
-
 // [現役] 完了モーダル表示
 function showCompletionModal() {
     let modal = document.getElementById('completion_modal');
