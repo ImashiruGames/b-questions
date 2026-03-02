@@ -13,7 +13,6 @@
     <div id="header-placeholder"></div>
     <div id="user_info_bar"></div>
     <main>
-        <!-- パンくずリスト（breadcrumb trail) -->
         <div class="breadcrumb">HOME</div>
         <section class="introduction">
             <h2>アルゴリズム道場 -基本情報B問題特化-</h2>
@@ -21,28 +20,24 @@
                 隙間時間を活用し、PC・タブレット・スマートフォンから無料で演習に取り組むことができます。基礎から応用まで網羅された問題と、試行錯誤を促す完全解説により、プログラミング初学者から試験直前の総仕上げまで、あなたの論理的思考力を着実に育成します。
             </p>
         </section>
-        
-        <div id="total_medals_area">
-        </div>
 
+        <div id="total_medals_area"></div>
 
         <section id="control-panel">
-            <div style="margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
-                <strong style="display: block; margin-bottom: 8px;">【表示オプション】</strong>
+            <div class="filter-options-container">
+                <strong class="filter-options-title">【表示オプション】</strong>
                 <label>
                     <input type="checkbox" id="filter_unattempted" checked> <span>new!のみ表示</span>
                 </label>
-                <label style="margin-right: 15px;">
+                <label class="filter-label-margin">
                     <input type="checkbox" id="filter_incorrect"> <span>間違えた問題（復習対象）のみ表示</span>
                 </label>
             </div>
 
-            <div id="start-button-area"
-                style="text-align: right; margin-top: 15px; border-top: 1px solid #ccc; padding-top: 10px;">
+            <div id="start-button-area" class="start-button-area">
                 <div class="flex-center">
-                    <label style="font-weight: bold; margin-right: 15px;">
-                        出題数: <input type="number" id="question_limit" value="5" min="1"
-                            style="width: 60px; padding: 5px; border: 1px solid #333; text-align: center;"> 問
+                    <label class="question-limit-label">
+                        出題数: <input type="number" id="question_limit" value="5" min="1" class="question-limit-input"> 問
                     </label>
                 </div>
                 <p id="start_exam_btn">演習を開始する　</p>
@@ -50,19 +45,18 @@
         </section>
 
         <div id="login_modal" class="modal" style="display: none;">
-            <div class="modal_content" style="border: 2px solid #333; border-radius: 0;">
-                <h2 style="border-bottom: 2px solid #333; padding-bottom: 10px;">名前登録</h2>
-                <p style="margin-top: 15px;">あなたの名前を入力してください</p>
+            <div class="modal_content login-modal-content">
+                <h2 class="login-modal-title">名前登録</h2>
+                <p class="login-modal-desc">あなたの名前を入力してください</p>
 
-                <input type="text" id="login_username" placeholder="ニックネーム"
-                    style="padding: 10px; font-size: 1.2rem; width: 80%; margin: 15px 0; border: 1px solid #ccc;">
+                <input type="text" id="login_username" placeholder="ニックネーム" class="login-username-input">
 
-                <p style="font-size: 0.85rem; color: #d9534f; font-weight: bold; margin-bottom: 20px;">
+                <p class="login-modal-warning">
                     ※一度決めた名前は変更できません
                 </p>
 
                 <div class="flex_center">
-                    <button id="login_btn" class="next_btn" style="background-color: #333; color: white;">
+                    <button id="login_btn" class="next_btn login-btn-solid">
                         この名前で開始する
                     </button>
                 </div>
@@ -70,7 +64,6 @@
         </div>
 
         <section id="category-container"></section>
-        </section>
     </main>
     <div id="footer-placeholder"></div>
 </body>
@@ -168,6 +161,7 @@
     let totalSilver = 0;
     let totalGold = 0;
     let foundTargetTheme = false;
+    let recommendedTotalQuestions = 0; // 追加：おすすめ問題の総数
 
     for (let categoryName in categories) {
         let section = document.createElement("section");
@@ -175,7 +169,6 @@
 
         let catHeader = document.createElement("div");
         catHeader.classList.add("category-header");
-        // catHeader.innerHTML = `<label><input type="checkbox" class="cat-check" value="${categoryName}" checked> <span>${categoryName}</span></label>`;
         section.appendChild(catHeader);
 
         let categoryHasTarget = false;
@@ -187,7 +180,6 @@
 
             let themeHeader = document.createElement("div");
             themeHeader.classList.add("theme-header");
-            // themeHeader.innerHTML = `<label><input type="checkbox" class="theme-check" value="${themeName}" checked> <span>${themeName}</span></label>`;
             themeContainer.appendChild(themeHeader);
 
             let subthemeList = document.createElement("div");
@@ -195,7 +187,6 @@
 
             let subthemes = themes[themeName];
 
-            // このテーマに未着手が1つでもあるか調べる
             let themeHasUnattempted = false;
             for (let subthemeName in subthemes) {
                 let status = checkSubthemeStatus(categoryName, themeName, subthemeName);
@@ -205,100 +196,147 @@
                 }
             }
 
-            //未着手があり、まだ全体のターゲットが決まっていない場合
             let isTargetTheme = false;
             if (themeHasUnattempted == true && foundTargetTheme == false) {
                 isTargetTheme = true;
                 foundTargetTheme = true;
-                categoryHasTarget = true
+                categoryHasTarget = true;
             }
 
             for (let subthemeName in subthemes) {
                 let subthemeItem = document.createElement("div");
                 subthemeItem.classList.add("subtheme-item");
 
-                // 💡 ここで過去の学習データを照合！
                 let status = checkSubthemeStatus(categoryName, themeName, subthemeName);
 
+                // 💡 変更：おすすめテーマの中で、未着手(new)のサブテーマ「のみ」チェックする
                 let isChecked = "";
-                if (isTargetTheme == true) {
+                if (isTargetTheme == true && status.hasUnattempted == true) {
                     isChecked = "checked";
+                    recommendedTotalQuestions += status.totalCount; // おすすめ問題数を合算
                 }
 
-                if (status.trophy === "gold") {
-                    totalGold++;
-                } else if (status.trophy === "silver") {
-                    totalSilver++;
-                } else if (status.trophy === "bronze") {
-                    totalBronze++;
-                }
+                if (status.trophy === "gold") totalGold++;
+                else if (status.trophy === "silver") totalSilver++;
+                else if (status.trophy === "bronze") totalBronze++;
 
-                // HTMLの属性（目印）としてステータスを書き込む
                 subthemeItem.setAttribute("data-incorrect", status.hasIncorrect ? "true" : "false");
                 subthemeItem.setAttribute("data-unattempted", status.hasUnattempted ? "true" : "false");
 
                 let trophyHtml = "";
-                if (status.trophy === "gold") {
-                    trophyHtml = `<img src="../img/medal_gold.png" class="medal-icon-left" alt="金メダル">`;
-                } else if (status.trophy === "silver") {
-                    trophyHtml = `<img src="../img/medal_silver.png" class="medal-icon-left" alt="銀メダル">`;
-                } else if (status.trophy === "bronze") {
-                    trophyHtml = `<img src="../img/medal_bronze.png" class="medal-icon-left" alt="銅メダル">`;
-                }
+                if (status.trophy === "gold") trophyHtml = `<img src="../img/medal_gold.png" class="medal-icon-left" alt="金メダル">`;
+                else if (status.trophy === "silver") trophyHtml = `<img src="../img/medal_silver.png" class="medal-icon-left" alt="銀メダル">`;
+                else if (status.trophy === "bronze") trophyHtml = `<img src="../img/medal_bronze.png" class="medal-icon-left" alt="銅メダル">`;
 
-                // チェックボックスの横に「総問題数」と「メダル画像」を追加
                 subthemeItem.innerHTML = `
                 <label>
                     <span class="medal-slot">${trophyHtml}</span>
                     <input type="checkbox" class="sub-check" value="${subthemeName}" data-category="${categoryName}" data-theme="${themeName}" ${isChecked}>
                     <span>${subthemeName} <small>(全${status.totalCount}問)</small></span>
-                </label>
-            `; subthemeList.appendChild(subthemeItem);
+                </label>`; 
+                subthemeList.appendChild(subthemeItem);
             }
 
-            let themeCheckedStr = "";
             let recommend = "";
             if (isTargetTheme == true) {
-                themeCheckedStr = "checked";
-                recommend = "　👈おすすめ！"
-                themeHeader.style.backgroundColor = "gold";
+                recommend = "　👈おすすめ！";
+                themeHeader.classList.add("is-recommended");
             }
-            themeHeader.innerHTML = `<label><input type="checkbox" class="theme-check" value="${themeName}" ${themeCheckedStr}> <span>${themeName}${recommend}</span></label>`;
+            // 親チェックボックスはHTML生成時はcheckedを空にしておき、後でJSで再計算する
+            themeHeader.innerHTML = `<label><input type="checkbox" class="theme-check" value="${themeName}"> <span>${themeName}${recommend}</span></label>`;
             themeContainer.appendChild(subthemeList);
             section.appendChild(themeContainer);
         }
 
-        let catCheckedStr = "";
-        if (categoryHasTarget == true) {
-            catCheckedStr = "checked";
-        }
-        catHeader.innerHTML = `<label><input type="checkbox" class="cat-check" value="${categoryName}" ${catCheckedStr}> <span>${categoryName}</span></label>`;
+        catHeader.innerHTML = `<label><input type="checkbox" class="cat-check" value="${categoryName}"> <span>${categoryName}</span></label>`;
         container.appendChild(section);
 
         let medalArea = document.getElementById("total_medals_area");
         if (medalArea) {
             medalArea.innerHTML = `
-        <strong style="margin-right: 15px;">獲得メダル総数:</strong>
-        
+        <strong class="medal-total-title">獲得メダル総数:</strong>
         <span class="medal-tooltip-container" data-tooltip="すべての問題に1回以上挑戦した印（不正解含む）">
             <img src="../img/medal_bronze.png" class="medal-icon" alt="銅メダル">
             <span class="medal-count">${totalBronze}</span>
         </span>
-        
         <span class="medal-tooltip-container" data-tooltip="すべての問題に1回以上正解した印">
             <img src="../img/medal_silver.png" class="medal-icon" alt="銀メダル">
             <span class="medal-count">${totalSilver}</span>
         </span>
-        
         <span class="medal-tooltip-container" data-tooltip="すべての問題を5回以上正解した完全習得の印">
             <img src="../img/medal_gold.png" class="medal-icon" alt="金メダル">
             <span class="medal-count">${totalGold}</span>
-        </span>
-    `;
+        </span>`;
         }
     }
 
-    // --- フェーズ2：一方向連動の実装（前回から変更なし） ---
+    // 💡 追加：初期出題数の動的設定
+    if (recommendedTotalQuestions > 0) {
+        let limitInput = document.getElementById("question_limit");
+        if (limitInput) {
+            limitInput.value = Math.min(10, recommendedTotalQuestions);
+        }
+    }
+
+
+    // --- フェーズ2：双方向連動と半選択（Indeterminate）の実装 ---
+
+    // 子要素の状況を見て、親・祖父のチェック状態を正しく更新する関数
+    function updateParentCheckboxStates(section) {
+        let catCheck = section.querySelector(".cat-check");
+        if (!catCheck) return;
+        
+        let themeContainers = section.querySelectorAll(".theme-container");
+        let catAllChecked = true;
+        let catSomeChecked = false;
+
+        for (let i = 0; i < themeContainers.length; i++) {
+            let themeContainer = themeContainers[i];
+            let themeCheck = themeContainer.querySelector(".theme-check");
+            let subChecks = themeContainer.querySelectorAll(".sub-check");
+
+            let subAllChecked = true;
+            let subSomeChecked = false;
+
+            if (subChecks.length === 0) {
+                subAllChecked = false;
+            } else {
+                for (let j = 0; j < subChecks.length; j++) {
+                    if (subChecks[j].checked) {
+                        subSomeChecked = true;
+                    } else {
+                        subAllChecked = false;
+                    }
+                }
+            }
+
+            // テーマ（親）の状態更新
+            if (themeCheck) {
+                themeCheck.checked = subAllChecked;
+                themeCheck.indeterminate = subSomeChecked && !subAllChecked;
+
+                // カテゴリ（祖父）用の状況集計
+                if (themeCheck.checked) {
+                    catSomeChecked = true;
+                } else if (themeCheck.indeterminate || subSomeChecked) {
+                    catSomeChecked = true;
+                    catAllChecked = false;
+                } else {
+                    catAllChecked = false;
+                }
+            }
+        }
+
+        // カテゴリ（祖父）の状態更新
+        catCheck.checked = catAllChecked;
+        if (themeContainers.length === 0) {
+             catCheck.indeterminate = false;
+        } else {
+             catCheck.indeterminate = catSomeChecked && !catAllChecked;
+        }
+    }
+
+    // イベントリスナーの登録（一番上のカテゴリをクリックした時）
     let catChecks = document.querySelectorAll(".cat-check");
     for (let i = 0; i < catChecks.length; i++) {
         catChecks[i].addEventListener("change", function () {
@@ -306,20 +344,44 @@
             let childChecks = section.querySelectorAll("input[type='checkbox']");
             for (let j = 0; j < childChecks.length; j++) {
                 childChecks[j].checked = this.checked;
+                childChecks[j].indeterminate = false; // 子の半選択状態もクリアする
             }
         });
     }
 
+    // イベントリスナーの登録（真ん中のテーマをクリックした時）
     let themeChecks = document.querySelectorAll(".theme-check");
     for (let i = 0; i < themeChecks.length; i++) {
         themeChecks[i].addEventListener("change", function () {
-            let themeDiv = this.parentElement.parentElement.parentElement;
-            let childChecks = themeDiv.querySelectorAll(".sub-check");
-            for (let j = 0; j < childChecks.length; j++) {
-                childChecks[j].checked = this.checked;
+            let themeContainer = this.parentElement.parentElement.parentElement;
+            let subChecks = themeContainer.querySelectorAll(".sub-check");
+            for (let j = 0; j < subChecks.length; j++) {
+                subChecks[j].checked = this.checked;
             }
+            // 親であるカテゴリの状態を再計算
+            let section = themeContainer.parentElement;
+            updateParentCheckboxStates(section);
         });
     }
+
+    // イベントリスナーの登録（一番下のサブテーマをクリックした時）
+    let subChecksAll = document.querySelectorAll(".sub-check");
+    for (let i = 0; i < subChecksAll.length; i++) {
+        subChecksAll[i].addEventListener("change", function () {
+            let subthemeList = this.parentElement.parentElement; // label -> div.subtheme-item
+            let themeContainer = subthemeList.parentElement.parentElement; // div.subtheme-list -> div.theme-container
+            let section = themeContainer.parentElement; // div.theme-container -> section
+            updateParentCheckboxStates(section);
+        });
+    }
+
+    // 初期描画完了時に、全セクションの半選択状態を計算して反映する
+    let sections = document.querySelectorAll(".category-group");
+    for (let i = 0; i < sections.length; i++) {
+        updateParentCheckboxStates(sections[i]);
+    }
+
+    // (ここから下はフェーズ4の applyFilters 等が続きます)
 
     // --- フェーズ4：フィルタリング機能の実装 ---
     let filterIncorrect = document.getElementById("filter_incorrect");
@@ -336,17 +398,16 @@
             let isIncorrect = item.getAttribute("data-incorrect") === "true";
             let isUnattempted = item.getAttribute("data-unattempted") === "true";
 
-            // デフォルトは表示
-            item.style.display = "";
+            item.classList.remove("is-hidden");
 
             // 「間違えた問題のみ表示」がONなのに、間違えていない場合は隠す
             if (showIncorrectOnly && !isIncorrect) {
-                item.style.display = "none";
+                item.classList.add("is-hidden");
             }
 
             // 「未着手のみ表示」がONなのに、未着手がない場合は隠す
             if (showUnattemptedOnly && !isUnattempted) {
-                item.style.display = "none";
+                item.classList.add("is-hidden");
             }
         }
     }
@@ -397,33 +458,6 @@
     // フィルター用チェックボックスにイベントを紐付け
     filterIncorrect.addEventListener("change", applyFilters);
     filterUnattempted.addEventListener("change", applyFilters);
-
-    // // ログインログアウト
-    // var logoutBtn = document.getElementById('logout_btn');
-    // if (logoutBtn) {
-    //     logoutBtn.addEventListener('click', function () {
-    //         if (confirm("ログアウトしますか？")) {
-    //             if (typeof UserManager !== 'undefined') {
-    //                 UserManager.logout();
-    //                 location.reload();
-    //             }
-    //         }
-    //     });
-    // }
-
-    // // --- 2. ログインボタンの処理 ---
-    // var loginBtn = document.getElementById('login_btn');
-    // if (loginBtn) {
-    //     loginBtn.addEventListener('click', function () {
-    //         var nameInput = document.getElementById('login_username');
-    //         if (nameInput && nameInput.value !== "") {
-    //             if (typeof UserManager !== 'undefined') {
-    //                 UserManager.login(nameInput.value);
-    //                 location.reload();
-    //             }
-    //         }
-    //     });
-    // }
 </script>
 </body>
 

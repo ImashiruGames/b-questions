@@ -75,44 +75,6 @@ function weightedSort(questions) {
     return clone;
 }
 
-/* // --- レガシー関数（ユーティリティ） ---
-// ※ weightedSortへ移行した旧処理
-function decideWeight(questions) {
-    let statsKey = 'bucket_stats_' + UserManager.currentUser;
-    let stats = JSON.parse(localStorage.getItem(statsKey) || "{}");
-
-    let clone = [];
-    for (let i = 0; i < questions.length; i++) {
-        clone.push(questions[i]);
-    }
-
-    for (let i = 0; i < clone.length; i++) {
-        let q = clone[i];
-        let qId = UserManager.generateId(q);
-        let s = stats[qId];
-        let weight = 1;
-
-        if (!s || (s.correct == 0 && s.incorrect == 0)) {
-            weight = 3;
-        }
-        else if (s.incorrect > 0) {
-            weight = 1 + (s.incorrect * 2);
-        }
-        else if (s.correct > 0) {
-            weight = 0.1;
-        }
-
-        q._randomScore = Math.random() * weight;
-
-        clone.sort(function (a, b) {
-            return b._randomScore - a._randomScore;
-        })
-
-        return clone;
-    }
-}
-*/
-
 // ==========================================
 // 3. 初期化・ルーティング処理
 // ==========================================
@@ -225,19 +187,16 @@ function initPalette() {
         paletteContainer.appendChild(box);
     }
 }
-
-
-/* // --- レガシー関数（初期化・ルーティング系） ---
 // ※ index.html側（別画面）でのカテゴリ選択へ移行したため不要
 
-function countUpCategories(){
-    for(let category in categories){
-        categoryAndThemeNumDictionary[category] = {"categoryNum":0}
-        for(let theme in categories[category]){
+function countUpCategories() {
+    for (let category in categories) {
+        categoryAndThemeNumDictionary[category] = { "categoryNum": 0 }
+        for (let theme in categories[category]) {
             categoryAndThemeNumDictionary[category][theme] = 0
         }
     }
-    for(let i=0;i<short_questions.length;i++){
+    for (let i = 0; i < short_questions.length; i++) {
         let category = short_questions[i].category;
         let theme = short_questions[i].theme;
         categoryAndThemeNumDictionary[category]["categoryNum"] += 1;
@@ -255,15 +214,15 @@ function startGame() {
     console.log("startGame()");
     var first_selectvalue = document.getElementById('start_question_limit').value;
     console.log(first_selectvalue)
-    selectvalue = first_selectvalue.replace(/[０-９]/g,function(s){
+    selectvalue = first_selectvalue.replace(/[０-９]/g, function (s) {
         return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
-    }).replace(/\D/g,"");
+    }).replace(/\D/g, "");
     console.log(selectvalue)
-    if(selectvalue == ""){
+    if (selectvalue == "") {
         document.getElementById("caution").innerText = "⚠️数値を入力してください";
         return;
     }
-    if(first_selectvalue != selectvalue){
+    if (first_selectvalue != selectvalue) {
         document.getElementById("caution").innerText = "⚠️使用できない文字が含まれています！"
         return;
     }
@@ -272,8 +231,8 @@ function startGame() {
     startmodal.style.display = 'none';
 
     updateQuestionLimit(selectvalue);
-    initPalette();        
-    initNavigation();     
+    initPalette();
+    initNavigation();
 
 }
 
@@ -281,7 +240,7 @@ function updateQuestionLimit(value) {
     console.log("updateQuestionLimit()");
     const select = document.getElementById('question_limit_select');
     if (value) {
-        console.log(parseInt(value,10))
+        console.log(parseInt(value, 10))
         if (value === 'all') {
             limitQuestions = 9999;
         } else {
@@ -300,31 +259,31 @@ function updateQuestionLimit(value) {
 
 function initNavigation() {
     console.log("initNavigation()");
-    var parentContainer = document.getElementById('parent_categories'); 
+    var parentContainer = document.getElementById('parent_categories');
     if (!parentContainer) return;
 
-    parentContainer.innerHTML = ''; 
+    parentContainer.innerHTML = '';
 
     var isFirst = true;
     for (var categoryName in categories) {
-        var pBtn = document.createElement('button'); 
+        var pBtn = document.createElement('button');
         pBtn.className = 'parent_btn';
 
-        pBtn.innerText = categoryName + ":"+ String(categoryAndThemeNumDictionary[categoryName].categoryNum);
+        pBtn.innerText = categoryName + ":" + String(categoryAndThemeNumDictionary[categoryName].categoryNum);
 
         if (isFirst) {
             pBtn.classList.add('active');
-            renderChildThemes(categoryName); 
+            renderChildThemes(categoryName);
             isFirst = false;
         }
 
         pBtn.onclick = function () {
             console.log("ボタンが押されたよ")
-            var allParentBtns = document.querySelectorAll('.parent_btn'); 
+            var allParentBtns = document.querySelectorAll('.parent_btn');
             for (var i = 0; i < allParentBtns.length; i++) {
                 allParentBtns[i].classList.remove('active');
             }
-            this.classList.add('active'); 
+            this.classList.add('active');
 
             renderChildThemes(this.innerText);
         };
@@ -347,11 +306,11 @@ function renderChildThemes(categoryName) {
     for (var themeName in themes) {
         var cBtn = document.createElement('button');
         cBtn.className = 'child_btn';
-        cBtn.innerText = themeName +"("+ String(categoryAndThemeNumDictionary[categoryName][themeName])+")";
+        cBtn.innerText = themeName + "(" + String(categoryAndThemeNumDictionary[categoryName][themeName]) + ")";
 
         if (isFirst) {
             cBtn.classList.add('active');
-            filterQuestions(categoryName, themeName); 
+            filterQuestions(categoryName, themeName);
             isFirst = false;
         }
 
@@ -364,7 +323,7 @@ function renderChildThemes(categoryName) {
 
             var activeParent = document.querySelector('.parent_btn.active').innerText;
 
-            console.log(227,activeParent,this.innerText);
+            console.log(227, activeParent, this.innerText);
             filterQuestions(activeParent, this.innerText);
         };
         childContainer.appendChild(cBtn);
@@ -375,14 +334,14 @@ function filterQuestions(categoryName, themeName) {
     console.log("filterQuestions()")
     activeQuestions = [];
 
-    var categoryName = categoryName.replace(/\:\d+/g,"");
-    var themeName = themeName.replace(/\(\d+\)/g,"");
+    var categoryName = categoryName.replace(/\:\d+/g, "");
+    var themeName = themeName.replace(/\(\d+\)/g, "");
     for (var i = 0; i < short_questions.length; i++) {
         var q = short_questions[i];
 
-        console.log(categoryName,themeName)
+        console.log(categoryName, themeName)
         if (q.category === categoryName && q.theme === themeName) {
-            activeQuestions.push(q);  
+            activeQuestions.push(q);
         }
     }
 
@@ -394,13 +353,13 @@ function filterQuestions(categoryName, themeName) {
 
     initPalette();
 
-    currentIndex = 0; 
-    currentPallet = 0; 
-    correctCountInRound = 0; 
+    currentIndex = 0;
+    currentPallet = 0;
+    correctCountInRound = 0;
     for (let i = 0; i < 2; i++) {
         next_btn = document.getElementsByClassName("next_btn");
         next_btn[i].innerText = "次の問題へ ▶";
-    } 
+    }
 
     if (activeQuestions.length > 0) {
         loadQuestion(0);
@@ -409,7 +368,6 @@ function filterQuestions(categoryName, themeName) {
         document.getElementById('code_display').innerHTML = "";
     }
 }
-*/
 
 // ==========================================
 // 4. 描画・ゲーム進行ロジック
@@ -425,9 +383,7 @@ function loadQuestion(index) {
 
     if (instructionElement) {
         instructionElement.innerHTML = '正解だと思うものを選んでください：';
-        instructionElement.style.color = '#333';
-        instructionElement.style.fontWeight = 'normal';
-        instructionElement.style.fontSize = '1rem';
+        instructionElement.classList.remove('msg-success', 'msg-danger');
     }
 
     window.scrollTo(0, document.getElementById("Q_num").getBoundingClientRect().top)
@@ -445,8 +401,8 @@ function loadQuestion(index) {
 
     isFirstAnswer = true;
     isAnswered = false;
-    document.getElementById('explainbox').style.display = 'none';
-    document.getElementById('result_display').style.display = 'none';
+    document.getElementById('explainbox').classList.add('is-hidden');
+    document.getElementById('result_display').classList.add('is-hidden');
     document.getElementById('text').innerText = q.text;
     document.getElementById('example').innerText = q.example;
     document.getElementById('code_display').innerHTML = q.code;
@@ -457,8 +413,8 @@ function loadQuestion(index) {
     for (let i = 0; i < subthemeSteps.length; i++) {
         let step = subthemeSteps[i];
         common_logic_html += '<div class="step_item">' +
-            '<div style="color: #0056b3; font-weight: bold;">' + (i + 1) + '. ' + step[0] + '</div>' +
-            '<div style="font-size: 0.95em; color: #444; margin-left: 0.5em;">' + step[1] + '</div>' +
+            '<div class="step-title">' + (i + 1) + '. ' + step[0] + '</div>' +
+            '<div class="step-desc">' + step[1] + '</div>' +
             '</div>';
     }
     document.getElementById('common_logic').innerHTML = common_logic_html;
@@ -503,86 +459,14 @@ function loadQuestion(index) {
     document.getElementById('Q_num').innerHTML = '<p>Q' + (index + 1) + '</p>' + HistoryHTML;
 }
 
-/* // --- レガシー関数（描画系） ---
-function loadQuestion(index) {
-    console.log("loadQuestion()");
-    if (index >= activeQuestions.length) {
-        showCompletionModal();
-        return;
-    }
-
-    const q = activeQuestions[index];
-    let subthemeSteps = [];
-
-    if (categories[q.category] && categories[q.category][q.theme]) {
-        subthemeSteps = categories[q.category][q.theme][q.subtheme];
-    }
-
-    if (!subthemeSteps) {
-        subthemeSteps = [["データ未定義", "設定を確認してください"]];
-    }
-
-    console.log("currentIndex="+currentIndex);
-    isFirstAnswer = true;
-    isAnswered = false;
-    document.getElementById('explainbox').style.display = 'none';
-    document.getElementById('result_display').style.display = 'none';
-    document.getElementById('id').innerText = q.id;
-    document.getElementById('Q_num').innerText = 'Q' + (index + 1);
-    document.getElementById('text').innerText = q.text;
-    document.getElementById('example').innerText = q.example;
-    document.getElementById('code_display').innerHTML = q.code;
-
-    document.getElementById('counter').innerText = String(currentIndex+1)+"/"+String(activeQuestions.length);
-    document.getElementById('theme_template').innerHTML = '<strong>【テーマ】</strong> ' + q.category + '：' + q.theme;
-
-    let common_logic_html = '<p id="common_title">' + q.subtheme + '</p>';
-
-    subthemeSteps.forEach(function (step, i) {
-        common_logic_html += '<div class="step_item">' +
-            '<div style="color: #0056b3; font-weight: bold;">' + (i + 1) + '. ' + step[0] + '</div>' +
-            '<div style="font-size: 0.95em; color: #444; margin-left: 0.5em;">' + step[1] + '</div>' +
-            '</div>';
-    });
-
-    document.getElementById('common_logic').innerHTML = common_logic_html;
-
-    let rawExplanation = q.specific_explanation;
-    let formattedExplanation = rawExplanation.replace(/^(\d+\..+)$/gm, '<span class="explanation-header">$1</span>');
-    document.getElementById('specific_explanation').innerHTML = formattedExplanation;
-
-    const correctAnswer = q.choices[0];
-    const displayChoices = shuffleArray(q.choices);
-    const choiceContainer = document.querySelector('.choice_container');
-
-    choiceContainer.innerHTML = '';
-    displayChoices.forEach(function (choiceText) {
-        let btn = document.createElement('button');
-        btn.className = 'choice_btn';
-        btn.innerText = choiceText;
-
-        btn.onclick = function () {
-            if (isAnswered) return; 
-
-            isCorrect = choiceText === correctAnswer
-            checkAnswer(isCorrect);
-            if (isCorrect) { this.classList.add("OTAMESHI"); }
-            else { this.classList.add("incorrectBtn") }
-        };
-        choiceContainer.appendChild(btn);
-    });
-}
-*/
-
-
 // [現役] 正誤判定
 function checkAnswer(isCorrect) {
     let resultDiv = document.getElementById('result_display');
     let explainBox = document.getElementById('explainbox');
     let instructionElement = document.querySelector('#instruction');
 
-    resultDiv.style.display = 'block';
-    explainBox.style.display = 'block';
+    resultDiv.classList.remove('is-hidden');
+    explainBox.classList.remove('is-hidden');
 
     if (isCorrect) {
         streak = streak + 1;
@@ -591,16 +475,15 @@ function checkAnswer(isCorrect) {
 
         if (instructionElement) {
             instructionElement.innerHTML = '⭕ 正解！お見事！';
-            instructionElement.style.color = '#2e7d32';
-            instructionElement.style.fontWeight = 'bold';
-            instructionElement.style.fontSize = '1.2rem';
+            instructionElement.classList.remove('msg-danger');
+            instructionElement.classList.add('msg-success');
         }
     } else {
         streak = 0;
         if (instructionElement) {
             instructionElement.innerHTML = '❌ 不正解！別の選択肢をタップして再挑戦！';
-            instructionElement.style.color = '#c62828';
-            instructionElement.style.fontWeight = 'bold';
+            instructionElement.classList.remove('msg-success');
+            instructionElement.classList.add('msg-danger');
         }
     }
 
@@ -664,13 +547,11 @@ function showCompletionModal() {
     document.getElementById('modal_correct').innerText = correctCountInRound;
     document.getElementById('modal_total').innerText = activeQuestions.length;
     modal.classList.add('show');
-    modal.style.display = "flex";
 }
 
 // [現役] ゲーム再スタート
 function restartGame() {
     document.getElementById('completion_modal').classList.remove('show');
-    document.getElementById('completion_modal').style.display = 'none';
 
     window.scrollTo(0, document.getElementById("Q_num").getBoundingClientRect().top)
 
@@ -682,7 +563,7 @@ window.onload = function () {
     countUpCategories();
     initNavigation();
     if (typeof UserManager !== 'undefined') {
-        UserManager.init();   
+        UserManager.init();
     }
-    showStartModal();           
+    showStartModal();
 };

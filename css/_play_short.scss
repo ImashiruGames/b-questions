@@ -361,7 +361,6 @@ $color-primary: #0056b3;
 
 // --- モーダル (道場スタイル) ---
 .modal {
-    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -372,10 +371,6 @@ $color-primary: #0056b3;
     background-color: rgba(0, 0, 0, 0.8); // ストイックな暗さ
     align-items: center;
     justify-content: center;
-
-    &.show {
-        display: flex; // アニメーションなしでパキッと表示
-    }
 }
 
 .modal_content {
@@ -402,4 +397,161 @@ $color-primary: #0056b3;
         margin: 20px 0;
         font-weight: bold;
     }
+}
+
+/* ==========================================
+   Phase 2: play_short.html 抽出クラス
+   ========================================== */
+
+/* ユーザー情報バー関連 */
+.user-stats-text {
+    font-size: 0.8em;
+    margin-left: 10px;
+}
+
+.analysis-link {
+    margin-left: 15px;
+    font-size: 0.9em;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.logout-btn {
+    margin-left: 10px;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+}
+
+/* ダッシュボード関連 */
+.progress-label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.progress-counter {
+    font-family: monospace;
+    font-size: 1.1rem;
+}
+
+/* デバッグコンテナ関連 */
+.debug-container {
+    text-align: center;
+    margin-top: 30px;
+    border-top: 1px dashed #ccc;
+    padding-top: 20px;
+}
+
+.debug-label {
+    font-size: 0.8rem;
+    color: #999;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.debug-input {
+    width: 80px;
+    padding: 5px;
+    border: 2px solid #333;
+    border-radius: 0;
+    outline: none;
+}
+
+.debug-btn {
+    padding: 5px 15px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ロジック解説のステップ項目 */
+.step-title {
+    color: #0056b3;
+    font-weight: bold;
+}
+
+.step-desc {
+    font-size: 0.95em;
+    color: #444;
+    margin-left: 0.5em;
+}
+
+/* メッセージ状態クラス (JSから付与) */
+.msg-success {
+    color: #2e7d32 !important;
+    font-weight: bold !important;
+    font-size: 1.2rem !important;
+}
+
+.msg-danger {
+    color: #c62828 !important;
+    font-weight: bold !important;
+}
+
+/* モーダル内の要素 */
+.modal-title {
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+
+.wrong-list-area {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.wrong-list-title {
+    font-size: 1rem;
+    background-color: #f4f4f4;
+    border: 1px solid #333;
+    padding: 5px;
+}
+
+.wrong-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    border: 1px solid #333;
+    border-top: none;
+}
+
+.retry-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.restart-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #333;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.home-link-btn {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    text-align: center;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    color: #333;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+/* 汎用非表示クラス */
+.is-hidden {
+    display: none !important;
 }

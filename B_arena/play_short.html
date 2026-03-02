@@ -17,11 +17,9 @@
 
     <div id="user_info_bar">
         <span id="current_username_display">ゲスト</span>
-        <span style="font-size: 0.8em; margin-left: 10px;">(総正解数: <span id="user_unique_solved_count">0</span>問)</span>
-        <a href="analysis.html" style="margin-left: 15px; font-size: 0.9em; text-decoration: none; color: #007bff;">📊
-            分析画面へ</a>
-        <button id="logout_btn"
-            style="display: none; margin-left: 10px; padding: 2px 8px; font-size: 0.8rem;">ログアウト</button>
+        <span class="user-stats-text">(総正解数: <span id="user_unique_solved_count">0</span>問)</span>
+        <a href="analysis.html" class="analysis-link">📊 分析画面へ</a>
+        <button id="logout_btn" class="logout-btn is-hidden">ログアウト</button>
     </div>
 
     <main>
@@ -33,17 +31,17 @@
 
         <div id="progress_dashboard">
             <div id="counter_display">
-                <span style="font-weight: bold; margin-right: 10px;">PROGRESS:</span>
-                <span id="counter" style="font-family: monospace; font-size: 1.1rem;">0/0</span>
+                <span class="progress-label">PROGRESS:</span>
+                <span id="counter" class="progress-counter">0/0</span>
             </div>
             <div id="progress_palette"></div>
         </div>
 
-<div class="debug-container" style="text-align: center; margin-top: 30px; border-top: 1px dashed #ccc; padding-top: 20px;">
-    <span style="font-size: 0.8rem; color: #999; font-weight: bold; margin-right: 10px;">【指定IDプレイ】</span>
-    <input type="number" id="debug_id_input" placeholder="ID" style="width: 80px; padding: 5px; border: 2px solid #333; border-radius: 0; outline: none;">
-    <button id="debug_jump_btn" style="padding: 5px 15px; background-color: #333; color: #fff; border: none; font-weight: bold; cursor: pointer;">出題</button>
-</div>
+        <div class="debug-container">
+            <span class="debug-label">【指定IDプレイ】</span>
+            <input type="number" id="debug_id_input" placeholder="ID" class="debug-input">
+            <button id="debug_jump_btn" class="debug-btn">出題</button>
+        </div>
 
         <div id="layout_wrapper">
             <section id="problem_side">
@@ -62,8 +60,8 @@
                     </div>
                 </div>
 
-                <div id="explainbox" style="display:none;">
-                    <div id="result_display" class="result-bar" style="display: none;"></div>
+                <div id="explainbox" class="is-hidden">
+                    <div id="result_display" class="result-bar is-hidden"></div>
 
                     <div class="explanation-content">
                         <h3 class="explanation-title">解説</h3>
@@ -83,34 +81,29 @@
     </main>
 
     <!-- 完了モーダル -->
-    <div id="completion_modal" class="modal" style="display: none;">
-        <div class="modal_content" style="border-radius: 0; border: 2px solid #333;">
-            <h2 style="border-bottom: 2px solid #333; padding-bottom: 10px;">結果発表</h2>
+    <div id="completion_modal" class="modal">
+        <div class="modal_content">
+            <h2 class="modal-title">結果発表</h2>
 
-            <div id="result_stats" style="font-size: 1.4rem; font-weight: bold; margin: 15px 0;">
+            <div id="result_stats">
                 正解数：<span id="modal_correct">0</span> / <span id="modal_total">0</span>
             </div>
 
-            <div id="wrong_list_area" style="display: none; text-align: left; margin-bottom: 20px;">
-                <h3 style="font-size: 1rem; background-color: #f4f4f4; border: 1px solid #333; padding: 5px;">復習が必要な問題
-                </h3>
-                <table
-                    style="width: 100%; border-collapse: collapse; font-size: 0.9rem; border: 1px solid #333; border-top: none;">
+            <div id="wrong_list_area" class="wrong-list-area is-hidden">
+                <h3 class="wrong-list-title">復習が必要な問題</h3>
+                <table class="wrong-list-table">
                     <tbody id="wrong_list_tbody">
                     </tbody>
                 </table>
-                <button onclick="retryWrongQuestions()"
-                    style="width: 100%; margin-top: 10px; padding: 12px; font-size: 1rem; font-weight: bold; background-color: #333; color: #fff; border: none; cursor: pointer;">
+                <button onclick="retryWrongQuestions()" class="retry-btn">
                     間違えた問題だけを再挑戦する
                 </button>
             </div>
 
-            <button onclick="restartGame()"
-                style="width: 100%; margin-top: 10px; padding: 10px; font-size: 1rem; border: 1px solid #333; background-color: #fff; cursor: pointer;">
+            <button onclick="restartGame()" class="restart-btn">
                 同じ設定で最初からやり直す
             </button>
-            <a href="index.html"
-                style="display: block; width: 100%; margin-top: 10px; padding: 10px; font-size: 1rem; text-align: center; border: 1px solid #ccc; background-color: #eee; color: #333; text-decoration: none; box-sizing: border-box;">
+            <a href="index.html" class="home-link-btn">
                 HOMEへ戻る
             </a>
         </div>

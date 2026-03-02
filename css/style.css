@@ -325,22 +325,6 @@ select {
   border-radius: 0;
 }
 
-/* 区切り線（直線のみ） */
-.category-header,
-.theme-header {
-  border-bottom: 1px solid #ccc;
-  padding: 3px;
-  background-color: #f9f9f9;
-}
-
-.subtheme-item {
-  padding: 5px 10px;
-  border: none;
-  /* サブテーマ間は枠線なしでも可 */
-  border-bottom: 1px dashed #eee;
-  /* 直線の破線 */
-}
-
 /* サブテーマ横の小文字サイズ調整 */
 .subtheme-item small {
   color: #666;
@@ -365,7 +349,7 @@ select {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
-/* 各種ボックスの直線的なデザイン */
+/* 各種ボックスの直線的なデザイン（こちらが現在適用されている正） */
 .category-group {
   border: 1px solid #000;
 }
@@ -374,6 +358,7 @@ select {
   border-bottom: 1px solid #000;
   background-color: #e0e0e0;
   font-weight: bolder;
+  padding: 3px; /* コメントアウトした方から必要なプロパティだけ救出 */
 }
 
 .theme-container {
@@ -425,7 +410,6 @@ input[type=checkbox]:checked::after {
   display: block;
   color: white;
   background-color: #2589d0;
-  /* 文字色を黒に指定 */
   font-size: 16px;
   text-align: center;
   line-height: 15px;
@@ -437,7 +421,6 @@ input[type=checkbox]:checked::after {
   height: auto;
   vertical-align: middle;
   margin-left: 8px;
-  /* 左の文字との間に少し余白を空ける */
 }
 
 .medal-tooltip-container {
@@ -458,11 +441,9 @@ input[type=checkbox]:checked::after {
 /* ホバーで現れる説明文（ツールチップ本体） */
 .medal-tooltip-container::after {
   content: attr(data-tooltip);
-  /* HTMLに書いた説明文を読み込む */
   display: none;
   position: absolute;
   bottom: 120%;
-  /* メダルの少し上に配置 */
   left: 50%;
   transform: translateX(-50%);
   background-color: #333;
@@ -471,9 +452,7 @@ input[type=checkbox]:checked::after {
   font-size: 12px;
   font-weight: normal;
   white-space: nowrap;
-  /* 改行させない */
   border: 1px solid #000;
-  /* 丸角NGなので直線の枠線のみ */
   z-index: 100;
 }
 
@@ -526,6 +505,94 @@ input[type=checkbox]:checked::after {
   border: 1px solid #333;
   background-color: #fafafa;
   text-align: center;
+}
+
+/* ==========================================
+   Phase 1: index.html 抽出クラス
+   ========================================== */
+/* フィルターオプションエリア */
+.filter-options-container {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.filter-options-title {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.filter-label-margin {
+  margin-right: 15px;
+}
+
+/* 開始ボタンエリア */
+.start-button-area {
+  text-align: right;
+  margin-top: 15px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.question-limit-label {
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.question-limit-input {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #333;
+  text-align: center;
+}
+
+/* ログインモーダル */
+.login-modal-content {
+  border: 2px solid #333;
+  border-radius: 0;
+}
+
+.login-modal-title {
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+}
+
+.login-modal-desc {
+  margin-top: 15px;
+}
+
+.login-username-input {
+  padding: 10px;
+  font-size: 1.2rem;
+  width: 80%;
+  margin: 15px 0;
+  border: 1px solid #ccc;
+}
+
+.login-modal-warning {
+  font-size: 0.85rem;
+  color: #d9534f;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.login-btn-solid {
+  background-color: #333;
+  color: white;
+}
+
+/* メダル集計エリア */
+.medal-total-title {
+  margin-right: 15px;
+}
+
+/* JS操作用の状態クラス */
+.is-recommended {
+  background-color: gold !important;
+}
+
+.is-hidden {
+  display: none !important;
 }
 
 /* play_short.scss (完全版) */
@@ -848,7 +915,6 @@ input[type=checkbox]:checked::after {
 }
 
 .modal {
-  display: none;
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -859,9 +925,6 @@ input[type=checkbox]:checked::after {
   background-color: rgba(0, 0, 0, 0.8);
   align-items: center;
   justify-content: center;
-}
-.modal.show {
-  display: flex;
 }
 
 .modal_content {
@@ -886,6 +949,162 @@ input[type=checkbox]:checked::after {
   font-size: 1.5rem;
   margin: 20px 0;
   font-weight: bold;
+}
+
+/* ==========================================
+   Phase 2: play_short.html 抽出クラス
+   ========================================== */
+/* ユーザー情報バー関連 */
+.user-stats-text {
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+
+.analysis-link {
+  margin-left: 15px;
+  font-size: 0.9em;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.logout-btn {
+  margin-left: 10px;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+}
+
+/* ダッシュボード関連 */
+.progress-label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.progress-counter {
+  font-family: monospace;
+  font-size: 1.1rem;
+}
+
+/* デバッグコンテナ関連 */
+.debug-container {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px dashed #ccc;
+  padding-top: 20px;
+}
+
+.debug-label {
+  font-size: 0.8rem;
+  color: #999;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.debug-input {
+  width: 80px;
+  padding: 5px;
+  border: 2px solid #333;
+  border-radius: 0;
+  outline: none;
+}
+
+.debug-btn {
+  padding: 5px 15px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ロジック解説のステップ項目 */
+.step-title {
+  color: #0056b3;
+  font-weight: bold;
+}
+
+.step-desc {
+  font-size: 0.95em;
+  color: #444;
+  margin-left: 0.5em;
+}
+
+/* メッセージ状態クラス (JSから付与) */
+.msg-success {
+  color: #2e7d32 !important;
+  font-weight: bold !important;
+  font-size: 1.2rem !important;
+}
+
+.msg-danger {
+  color: #c62828 !important;
+  font-weight: bold !important;
+}
+
+/* モーダル内の要素 */
+.modal-title {
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+}
+
+.wrong-list-area {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.wrong-list-title {
+  font-size: 1rem;
+  background-color: #f4f4f4;
+  border: 1px solid #333;
+  padding: 5px;
+}
+
+.wrong-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  border: 1px solid #333;
+  border-top: none;
+}
+
+.retry-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.restart-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #333;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.home-link-btn {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  color: #333;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+/* 汎用非表示クラス */
+.is-hidden {
+  display: none !important;
 }
 
 /* _analysis.scss : 学習分析画面専用のスタイル（道場スタイル最適化） */
