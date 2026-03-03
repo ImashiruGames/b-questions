@@ -676,7 +676,7 @@ const short_questions = [
       "cnt ← 0"
     ],
     "specific_explanation": "1. 境界の特定\n   算出した必要枚数 cnt と実際の在庫数 stock[i] を比較します。在庫が不足している（stock[i] < cnt）状態を判定の基準とします。\n\n2. 含むか含まないか\n   在庫が足りない場合は、払い出す枚数 cnt を在庫数 stock[i] で上書きし、可能な限りの枚数を払い出します。\n   <div class=\"important\">cnt ← stock[i]</div>"
-  }, ,
+  },
   {
     "id": 48,
     "category": "データ構造",
