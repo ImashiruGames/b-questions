@@ -16,7 +16,7 @@ header.innerHTML = `
                 <li class="menuLink">分析</li>
             </a>
             <a href="encyclopedia.html">
-                <li class="menuLink">用語集</li>
+                <li class="menuLink">プログラミング図鑑</li>
             </a>
             <a href="achievement.html">
                 <li class="menuLink">アチーブメント</li>

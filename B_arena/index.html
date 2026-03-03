@@ -80,6 +80,7 @@
 <script src="../js/user_manager.js"></script>
 <script src="../short_questions/questions.js"></script>
 <script>
+    
     // UserManagerの初期化を先に行う
     if (typeof UserManager !== 'undefined') {
         UserManager.init();
@@ -107,7 +108,7 @@
         let totalCount = 0;      // 総問題数
         let attemptedCount = 0;  // 1回でも解いた問題数
         let greenCount = 0;      // 1回以上正解した問題数
-        let goldCount = 0;       // 5回以上正解した問題数（金条件）
+        let goldCount = 0;       // 3回以上正解した問題数（金条件）
 
         for (let i = 0; i < short_questions.length; i++) {
             let q = short_questions[i];
@@ -127,8 +128,8 @@
                     if (s.correct >= 1) {
                         greenCount++;
                     }
-                    // 5回以上正解（金）
-                    if (s.correct >= 5) {
+                    // 3回以上正解（金）
+                    if (s.correct >= 3) {
                         goldCount++;
                     }
 
@@ -317,7 +318,7 @@
             <img src="../img/medal_silver.png" class="medal-icon" alt="銀メダル">
             <span class="medal-count">${totalSilver}</span>
         </span>
-        <span class="medal-tooltip-container" data-tooltip="すべての問題を5回以上正解した完全習得の印">
+        <span class="medal-tooltip-container" data-tooltip="すべての問題を3回以上正解した完全習得の印">
             <img src="../img/medal_gold.png" class="medal-icon" alt="金メダル">
             <span class="medal-count">${totalGold}</span>
         </span>`;

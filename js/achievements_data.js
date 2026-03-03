@@ -16,7 +16,7 @@ var achievementsMaster = [
     // ② トロフィー系（テーマ・カテゴリー制覇）
     { id: "tr_bronze_1", category: "trophy", title: "はじめての銅メダル", condition: "1つのテーマで全ての問題に触れる" },
     { id: "tr_silver_1", category: "trophy", title: "はじめての銀メダル", condition: "1つのテーマで全ての問題に正解する" },
-    { id: "tr_gold_1", category: "trophy", title: "はじめての金メダル", condition: "1つのテーマを完全習得（5回正解）する" },
+    { id: "tr_gold_1", category: "trophy", title: "はじめての金メダル", condition: "1つのテーマを完全習得（3回正解）する" },
     { id: "tr_bronze_3", category: "trophy", title: "広がる視界", condition: "3つのテーマで銅メダルを獲得する" },
     { id: "tr_silver_3", category: "trophy", title: "実力の証明", condition: "3つのテーマで銀メダルを獲得する" },
     { id: "tr_gold_3", category: "trophy", title: "完璧主義者の片鱗", condition: "3つのテーマで金メダルを獲得する" },

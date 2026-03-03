@@ -53,7 +53,7 @@ function makeData() {
     var statsKey = 'bucket_stats_' + currentUser;
     var stats = JSON.parse(localStorage.getItem(statsKey) || "{}");
     var processedData = {};
-    var GOLD_THRESHOLD = 5;
+    var GOLD_THRESHOLD = 3; //金色
 
     for (var qId in stats) {
         var parts = qId.split('_');

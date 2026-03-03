@@ -118,9 +118,6 @@
         var globalProcessedData = null;
 
         document.addEventListener('DOMContentLoaded', function () {
-            if(typeof UserManager !== 'undefined') {
-                userManager.Unit()
-            }
             if(typeof AchievementChecker !== 'undefined'){
                 AchievementChecker.tryUnlock("fn_analysis");
             }
