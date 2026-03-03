@@ -300,7 +300,7 @@ const short_questions = [
   },
 
   // --- テーマ2：再帰的処理と計算ロジック ---
-{
+  {
     "id": 21,
     "category": "制御構文",
     "theme": "再帰関数",
@@ -409,16 +409,16 @@ const short_questions = [
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "要素数 8 のビット配列 bin を 3 ビット左シフトしたとき、空いた下位ビットを「0」で埋める処理です。ループ変数 i の範囲（空欄 a）として適切なものを選んでください。",
-    "example": "左に3つずらすと、配列の下位（添え字が小さい方）に3つ分の空きができます。配列の添え字は 1 から始まります。",
-    "code": "1  // シフト処理後に空いた下位ビットを 0 で埋める\n2  <span class=\"for\">for (i を [    a    ])</span>\n3     bin[i] ← 0\n4  <span class=\"for\">endfor</span>",
+    "text": "要素数 8 の配列 bin を 3 ビット左シフトし、空いた下位（添え字小）のビットを 0 で埋める。i の範囲（空欄 a）を選べ。",
+    "example": "添え字は 1 から開始。左シフトにより 1 から 3 番目が空きとなる。",
+    "code": "   01  整数型の配列: bin\n   02  整数型: i\n   03  // 空いた下位ビットを 0 で埋める\n   04  <span class=\"for\">for (i を [    a    ])</span>\n   05     bin[i] ← 0\n   06  <span class=\"for\">endfor</span>",
     "choices": [
       "1 から 3 まで",
       "1 から 8 まで",
       "6 から 8 まで",
       "4 から 8 まで"
     ],
-    "specific_explanation": "1. 開始と終了の数値\n   左シフト（添え字が大きくなる方向への移動）を行うと、元の 1番目から n 番目までのデータが上の位に移動し、下位の n 箇所が空の状態になります。\n\n2. ループ変数の計算利用\n   n=3 の場合、1, 2, 3番目の添え字を 0 でリセットする必要があります。\n   <div class=\"important\">1 から n (3) まで</div>"
+    "specific_explanation": "1. 開始と終了の数値\n左シフトによりデータが上位（添え字大）へ移動するため、下位（添え字小）に空きが生じる。3 ビットのシフトなら 1 から 3 番目が空の状態になる。\n\n2. 規則性の発見\n埋めるべき範囲は「空いた箇所そのもの」である。開始 1 から終了 3 までの反復により、対象の全ビットを 0 にリセットできる。\n<div class=\"important\">for (i を 1 から 3 まで 1 ずつ増やす)</div>"
   },
 
   // --- テーマ2：ループの順序とデータの保全 ---
@@ -661,16 +661,21 @@ const short_questions = [
   },
 
   // --- テーマ2：釣銭の算出ロジック（払い出し時） ---
-  {
+{
     "id": 47,
     "category": "制御構文",
     "theme": "if文",
     "subtheme": "境界値の判定",
-    "text": "払い出したい枚数 cnt に対して「在庫が不足している」場合、在庫にある全数を払い出すように調整します。空欄 [  a  ] に入る適切な処理を選んでください。ここで、stock[i] は現在の在庫数、money[i] は金種を表します。",
-    "example": "100円玉が 5枚 必要だが、在庫が 3枚 しかないとき、3枚 を払い出すように設定します。",
-    "code": "1  cnt ← change ÷ money[i]  // 商を求める\n2  <span class=\"if\">if (stock[i] < cnt)</span>\n3     [      a      ]\n4  <span class=\"endif\">endif</span>",
-    "choices": ["cnt ← stock[i]", "stock[i] ← cnt", "cnt ← cnt - 1", "cnt ← 0"],
-    "specific_explanation": "1. 境界の特定\n   必要な枚数 cnt が現在の在庫数 stock[i] を超えている（在庫不足）かを判定しています。\n\n2. 含むか含まないか\n   不足している場合は、在庫にある分だけ（stock[i]）を払い出す枚数として再設定し、可能な限りの釣銭を返せるようにします。\n   <div class=\"important\">cnt ← stock[i]</div>"
+    "text": "払い出す枚数 cnt が在庫数 stock[i] を上回る場合に、在庫の全数を払い出すための処理 [  a  ] を選んでください。",
+    "example": "100円玉が 5 枚必要でも在庫が 3 枚しかないとき、払い出す枚数を 3 枚に書き換えます。",
+    "code": "   01  整数型: change, money[i], stock[i], cnt\n   02  cnt ← change ÷ money[i]\n   03  <span class=\"if\">if (stock[i] < cnt)</span>\n   04     [      a      ]\n   05  <span class=\"if\">endif</span>",
+    "choices": [
+      "cnt ← stock[i]",
+      "stock[i] ← cnt",
+      "cnt ← cnt - 1",
+      "cnt ← 0"
+    ],
+    "specific_explanation": "1. 境界の特定\n算出した必要枚数 cnt と、実際の在庫数 stock[i] を比較します。在庫が不足している（stock[i] < cnt）状態を判定の基準とします。\n\n\n2. 含むか含まないか\n在庫が足りない場合は、払い出す枚数 cnt を現在ある在庫数 stock[i] で上書きし、可能な限りの枚数を出すように調整します。\n<div class=\"important\">cnt ← stock[i]</div>"
   },
   {
     "id": 48,
@@ -723,16 +728,16 @@ const short_questions = [
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "評価点（1点～5点）ごとの順位を計算するループにおいて、変数 i を 1 からではなく `2` から始めている理由として、最も適切なものはどれですか。",
-    "example": "3行目の処理 `rank[i] ← rank[i - 1] + freq[i - 1]` に注目し、もし i = 1 からループを始めてしまった場合にどうなるか考えてみましょう。",
-    "code": "1  rank[1] ← 1\n2  <span class=\"for\">for (i を 2 から 5 まで 1 ずつ増やす)</span>\n3     rank[i] ← rank[i - 1] + freq[i - 1]\n4  <span class=\"endfor\">endfor</span>",
+    "text": "評価点（1～5点）ごとの順位を計算する際、変数 i を 2 から開始している理由を選べ。",
+    "example": "i に具体的な値を代入してみよう。",
+    "code": "   01  整数型の配列: rank, freq\n   02  整数型: i\n   03  rank[1] ← 1\n   04  <span class=\"for\">for (i を 2 から 5 まで 1 ずつ増やす)</span>\n   05     rank[i] ← rank[i - 1] + freq[i - 1]\n   06  <span class=\"for\">endfor</span>",
     "choices": [
-      "最初の順位(rank[1])は 1位と決まっており、計算には前の値(rank[i-1])が必要だから",
-      "配列の添え字は 0 から始まるのが一般的だから",
-      "評価点 1点の商品は存在しないと仮定しているから",
-      "ループの回数を減らして効率化するため"
+      "最初の値は既知であり、計算に直前（i - 1）の要素が必要だから",
+      "配列の添え字は 0 から始めるのが一般的だから",
+      "評価点 5点 の順位を計算対象外とするため",
+      "ループ回数を減らして実行効率を向上させるため"
     ],
-    "specific_explanation": "1. 開始と終了の数値\n   このアルゴリズムは「一つ前の評価点の結果」を元に計算するため、最初の評価点（1点）についてはあらかじめ 1位と決めておく（初期化する）必要があります。\n\n2. 規則性の発見\n   2点目以降の順位を求める際に rank[i-1] を参照するため、ループは 2 から開始するのが論理的です。\n   <div class=\"important\">rank[1] は既知のため、2 以降を計算する</div>"
+    "specific_explanation": "1. 開始と終了の数値\nrank[1] は初期値（1位）として設定済みである。計算式で「一つ前の要素（i - 1）」を参照するため、添え字が 0 にならないよう 2 から開始する必要がある。\n\n<div class=\"important\">rank[1] は既知のため、計算は 2 番目から開始する</div>"
   },
 
   // --- テーマ2：順位の割り当てとデータ参照 ---
@@ -951,96 +956,96 @@ const short_questions = [
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "二重ループ",
-    "text": "プログラム sumNum のα部分が実行される回数を考えます。j の値が 5 のとき、while 文のループ（αの加算命令）は何回実行されますか。ここで、num は整数型の二次元配列です。",
-    "example": "j = 5 のとき、k は 1 から始まり「k < j」の間繰り返される",
-    "code": "1  sumNum(整数型の二次元配列: num)\n2  <span class=\"for\">for (i を numの行数 から 1 まで 1 ずつ減らす)</span>\n3     <span class=\"for\">for (j を numの列数 から 1 まで 1 ずつ減らす)</span>\n4        k ← 1\n5        <span class=\"while\">while (k < j)</span>\n6           num[i, k] ← num[i, k] + num[i, k + 1]  /* α */\n7           k ← k + 1\n8        <span class=\"while\">endwhile</span>\n9     <span class=\"for\">endfor</span>\n10 <span class=\"for\">endfor</span>",
+    "text": "プログラム sumNum のα部分が実行される回数を答えよ。j = 5 の時を考える。なお、num は整数型の二次元配列とする。",
+    "example": "k が 1 から始まり j 未満の間繰り返される。k に 1, 2... と順に代入して、条件を満たす個数を数えてみよう。",
+    "code": "   01  整数型の二次元配列: num\n   02  整数型: i, j, k\n   03  sumNum(num)\n   04  <span class=\"for\">for (i を numの行数 から 1 まで 1 ずつ減らす)</span>\n   05     <span class=\"for\">for (j を numの列数 から 1 まで 1 ずつ減らす)</span>\n   06        k ← 1\n   07        <span class=\"while\">while (k < j)</span>\n   08           num[i, k] ← num[i, k] + num[i, k + 1]  /* α */\n   09           k ← k + 1\n   10        <span class=\"while\">endwhile</span>\n   11     <span class=\"for\">endfor</span>\n   12  <span class=\"for\">endfor</span>",
     "choices": [
       "4回",
       "5回",
       "0回",
       "1回"
     ],
-    "specific_explanation": "1. 外側と内側の役割の把握\n   このプログラムは、行（i）と列（j）の二重ループの中に、さらに while ループを持つ構造です。while ループの回数は変数 j に依存しています。\n\n2. 内側の終了条件\n   条件式が k < j であり、k が 1 から始まって 1 ずつ増えるため、実行される k の値は 1, 2, 3, 4 の 4 つとなります。\n   <div class=\"important\">j = 5 のとき、回数は j - 1 = 4 回</div>"
+    "specific_explanation": "1. 外側と内側の役割の把握\ni は行、j は列、k は列内の累積計算を制御する。while 文の反復回数は変数 j の値に依存する。\n\n2. 内側の終了条件\nj = 5 のとき、条件 k < 5 を満たす整数 k は 1, 2, 3, 4 の計 4 つ。k = 5 に達した時点で条件が偽となり終了する。\n<div class=\"important\">j = 5 のとき、αは 4 回実行される</div>"
   },
   {
     "id": 69,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "二重ループ",
-    "text": "二次元配列 num の列数 col が 5 のとき、内側の for ループ（j のループ）が 1 周完了するまでに、αの加算命令は合計で何回実行されますか。",
-    "example": "j が 5, 4, 3, 2, 1 と変化するときの合計回数",
-    "code": "1  // numの列数 = 5 とする\n2  <span class=\"for\">for (j を 5 から 1 まで 1 ずつ減らす)</span>\n3     k ← 1\n4     <span class=\"while\">while (k < j)</span>\n5        /* αの処理 */\n6        k ← k + 1\n7     <span class=\"while\">endwhile</span>\n8  <span class=\"for\">endfor</span>",
+    "text": "列数 5 の配列において、α の処理が実行される合計回数を求めよ。",
+    "example": "j が 5, 4, 3, 2, 1 と変化するごとに while 文が何回動くか、順に書き出して合計してみよう。",
+    "code": "   01  整数型の二次元配列: num\n   02  整数型: j, k\n   03  <span class=\"for\">for (j を 5 から 1 まで 1 ずつ増やす)</span>\n   04     k ← 1\n   05     <span class=\"while\">while (k < j)</span>\n   06        /* αの処理 */\n   07        k ← k + 1\n   08     <span class=\"while\">endwhile</span>\n   09  <span class=\"for\">endfor</span>",
     "choices": [
       "10回",
       "15回",
       "5回",
       "25回"
     ],
-    "specific_explanation": "1. 外側と内側の役割の把握\n   変数 j が 5 から 1 まで変化する間、各ステップで j - 1 回の加算が行われます。\n\n2. 内側の終了条件\n   各 j における回数を合計すると、(5-1) + (4-1) + (3-1) + (2-1) + (1-1) すなわち 4 + 3 + 2 + 1 + 0 = 10 となります。\n   <div class=\"important\">合計回数 = 10回</div>"
+    "specific_explanation": "1. 外側と内側の役割の把握\nj が 5 から 1 まで変化する間、各ステップで while 文が実行される。反復回数は外側の変数 j に依存する。\n\n2. 内側の終了条件\nwhile 文は k = 1 から j 未満まで繰り返されるため、各ステップの回数は j - 1 回となる。4 + 3 + 2 + 1 + 0 を合計する。\n<div class=\"important\">合計回数 = 10回</div>"
   },
   {
     "id": 70,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "二重ループ",
-    "text": "ある二重ループの内側にある while 文の継続条件が、「k < j」から「k <= j」に変更されました。変数 j の値が 5 のとき、ループ内の「αの処理」が実行される回数は変更前と比べてどう変化しますか。",
-    "example": "変更前（k < 5）のときに k がいくつまでループに入るか、変更後（k <= 5）のときに k がいくつまでループに入るかを具体的に数えてみましょう。",
-    "code": "1  // 変更後のコード（j = 5 のときの実行を想定）\n2  k ← 1\n3  <span class=\"while\">while (k <= j)</span>\n4     /* αの処理 */\n5     k ← k + 1\n6  <span class=\"endwhile\">endwhile</span>",
+    "text": "二重ループ内にある while 文の条件が「k < j」から「k <= j」に変更されました。j = 5 のとき、αの処理の実行回数はどう変化しますか。",
+    "example": "k が 1 から始まる場合、k < 5 ではいくつまで、k <= 5 ではいくつまでループに入るかを数えてみましょう。",
+    "code": "   01  整数型: j, k\n   02  j ← 5, k ← 1\n   03  <span class=\"while\">while (k <= j)</span>\n   04     /* αの処理 */\n   05     k ← k + 1\n   06  <span class=\"while\">endwhile</span>",
     "choices": [
       "1回増える",
       "1回減る",
       "変わらない",
       "j回増える"
     ],
-    "specific_explanation": "1. 内側の終了条件\n   「未満（<）」から「以下（<=）」に変更すると、k が j と等しいときもループが実行されるようになります。\n\n2. 外側と内側の役割の把握\n   j = 5 の場合、変更前は k が 1 から 4 までの 4回実行されますが、変更後は k = 5 の回が追加されるため、実行回数は 4 回から 5 回へと「1回」増えます。\n   <div class=\"important\">境界値が含まれるようになるため、実行回数は 1 増える</div>"
+    "specific_explanation": "1. 外側と内側の役割の把握\nこの while 文の実行回数は、外側にある変数 j の値に依存しています。j = 5 のときに条件式がどのように変化するかを比較しましょう。\n\n2. 内側の終了条件\n条件が「未満（<）」から「以下（<=）」に変わると、k が j と等しいときもループが実行されます。j = 5 の場合は実行される k の値に 5 が加わるため、回数は 1 回増えることになります。\n<div class=\"important\">境界値が含まれるようになるため、実行回数は 1 増えます</div>"
   },
   {
     "id": 71,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "ループ変数の計算利用",
-    "text": "行数 row = 3、列数 col = 5 のデータを処理するプログラムにおいて、ループ内の「αの処理」が実行される総回数 a と、任意の row, col において総回数を求める計算式 b の正しい組み合わせを選んでください。",
-    "example": "1つの行（外側のループ変数 i が固定された状態）において、j が 5, 4, 3, 2, 1 と減っていく間に、内側の while ループがそれぞれ何回実行されるか足し合わせてみましょう。",
-    "code": "1  calcTotal(整数型: row, 整数型: col)\n2  <span class=\"for\">for (i を row から 1 まで 1 ずつ減らす)</span>\n3     <span class=\"for\">for (j を col から 1 まで 1 ずつ減らす)</span>\n4        k ← 1\n5        <span class=\"while\">while (k < j)</span>\n6           /* αの処理 */\n7           k ← k + 1\n8        <span class=\"endwhile\">endwhile</span>\n9     <span class=\"endfor\">endfor</span>\n10 <span class=\"endfor\">endfor</span>",
+    "text": "row = 3, col = 5 のデータを処理する際、αの総実行回数 a と、任意の row, col における計算式 b の組み合わせを選んでください。",
+    "example": "i が固定された 1 行分において、j が 5, 4, 3, 2, 1 と変化する間の while 文の回数を合計してみましょう。",
+    "code": "   01  calcTotal(整数型: row, 整数型: col)\n   02  整数型: i, j, k\n   03  <span class=\"for\">for (i を row から 1 まで 1 ずつ減らす)</span>\n   04     <span class=\"for\">for (j を col から 1 まで 1 ずつ減らす)</span>\n   05        k ← 1\n   06        <span class=\"while\">while (k < j)</span>\n   07           /* αの処理 */\n   08           k ← k + 1\n   09        <span class=\"while\">endwhile</span>\n   10     <span class=\"for\">endfor</span>\n   11  <span class=\"for\">endfor</span>",
     "choices": [
       "a: 30\nb: row × col × (col - 1) ÷ 2",
       "a: 30\nb: row × col × (row - 1) ÷ 2",
       "a: 45\nb: row × col × (col + 1) ÷ 2",
       "a: 45\nb: col × row × (row + 1) ÷ 2"
     ],
-    "specific_explanation": "1. 規則性の発見\n   1つの行について、j が col から 1 まで減る間に α は (col - 1) + (col - 2) + ... + 0 回実行されます。これは等差数列の和の公式により col × (col - 1) ÷ 2 と表せます。\n\n2. ずれの調整\n   これが row 行分繰り返されるため、全体の総回数は row × col × (col - 1) ÷ 2 となります。行数3、列数5を代入すると 3 × 5 × 4 ÷ 2 = 30 です。\n   <div class=\"important\">a: 30, b: row × col × (col - 1) ÷ 2</div>"
+    "specific_explanation": "1. 規則性の発見\nj が col から 1 まで減る間、内側のループは (j - 1) 回ずつ実行されます。1 行分の合計は (col - 1) + (col - 2) + ... + 0 となり、等差数列の公式により col × (col - 1) ÷ 2 で求められます。\n\n2. ずれの調整\nこの 1 行分の処理が row 行分繰り返されるため、全体の実行回数は行数を掛けた row × col × (col - 1) ÷ 2 となります。数値を代入すると 3 × 5 × 4 ÷ 2 = 30 です。\n<div class=\"important\">a: 30, b: row × col × (col - 1) ÷ 2</div>"
   },
   {
     "id": 72,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "ループ変数の計算利用",
-    "text": "プログラムのα部分で行っている処理の性質について考えます。このプログラムが終了したとき、二次元配列 num の num[1, 1] に格納されている値の説明として適切なものを選んでください。",
-    "example": "num[i, k] ← num[i, k] + num[i, k + 1]",
-    "code": "1  // 1行目の j = 2 のとき: num[1, 1] ← num[1, 1] + num[1, 2]\n2  // その後 j が増える（または減る）につれて、隣接要素が足し込まれる",
+    "text": "α部分で行っている処理の性質について考えます。プログラム終了後、二次元配列 num の num[1, 1] に格納されている値として適切なものを選んでください。",
+    "example": "i = 1, j = 2 のときの挙動を確認してみましょう。左隣の要素に、右隣の要素の値が足し込まれていきます。",
+    "code": "   01  整数型の二次元配列: num\n   02  整数型: i, j, k\n   03  <span class=\"for\">for (i を 1 から numの行数 まで 1 ずつ増やす)</span>\n   04     <span class=\"for\">for (j を 2 から numの列数 まで 1 ずつ増やす)</span>\n   05        k ← 1\n   06        <span class=\"while\">while (k < j)</span>\n   07           num[i, k] ← num[i, k] + num[i, k + 1]  /* α */\n   08           k ← k + 1\n   09        <span class=\"while\">endwhile</span>\n   10     <span class=\"for\">endfor</span>\n   11  <span class=\"for\">endfor</span>",
     "choices": [
       "1行目の要素の累積和の一部",
       "配列全体の合計値",
       "1行目の最大値",
       "1列目の要素の平均値"
     ],
-    "specific_explanation": "1. 規則性の発見\n   加算命令 α は、現在の要素に右隣の要素を足し合わせています。これを繰り返すことで、配列内の値が累積されていく動きになります。\n\n2. ずれの調整\n   ループの回転方向（減らす）や while の範囲により、特定の場所（この場合は左端の列など）にその行の計算結果が集約されていくアルゴリズムの基本構造です。\n   <div class=\"important\">右隣の値を加算し続けるため累積的な値となる</div>"
+    "specific_explanation": "1. 規則性の発見\n処理 α は、現在の要素 num[i, k] に右隣の num[i, k + 1] を加算しています。この操作を繰り返すことで、配列内の値が累積されていく動きになります。\n\n2. ずれの調整\nループの範囲や方向により、計算結果は特定の場所（この場合は左端の列など）に集約されます。右隣の値を順次加算し続けるため、最終的には累積的な値が算出されます。\n<div class=\"important\">右隣の値を加算し続けるため、累積的な値となります</div>"
   },
   {
     "id": 73,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "ループ変数の計算利用",
-    "text": "行数 row = 4, 列数 col = 3 の二次元配列 num を処理する場合、αの実行回数 a はいくらになりますか。",
-    "example": "公式 b = row × col × (col - 1) ÷ 2 を利用",
-    "code": "1  // row = 4, col = 3 を代入して計算せよ\n2  count ← 4 * (3 * (3 - 1) / 2)",
+    "text": "row = 4, col = 3 の二次元配列を処理する際、αの総実行回数を求めなさい。",
+    "example": "前問で導いた公式（row × col × (col - 1) ÷ 2）に値を当てはめてみましょう。",
+    "code": "   01  整数型の二次元配列: num\n   02  整数型: row ← 4, col ← 3, count ← 0, i, j, k\n   03  <span class=\"for\">for (i を row から 1 まで 1 ずつ減らす)</span>\n   04     <span class=\"for\">for (j を col から 1 まで 1 ずつ減らす)</span>\n   05        k ← 1\n   06        <span class=\"while\">while (k < j)</span>\n   07           count ← count + 1  // αの処理\n   08           k ← k + 1\n   09        <span class=\"while\">endwhile</span>\n   10     <span class=\"for\">endfor</span>\n   11  <span class=\"for\">endfor</span>",
     "choices": [
       "12回",
       "24回",
       "18回",
       "6回"
     ],
-    "specific_explanation": "1. 規則性の発見\n   1行あたりの回数は <span class=\"italic\">3 × (3 - 1) ÷ 2 = 3</span> 回です（具体的には j=3で2回、j=2で1回、j=1で0回）。\n\n2. ずれの調整\n   全 4 行に対して同じ処理を行うため、<span class=\"italic\">4 × 3 = 12</span> 回が総実行回数となります。\n   <div class=\"important\">a = 12</div>"
+    "specific_explanation": "1. 規則性の発見\n1行あたりの実行回数は col × (col - 1) ÷ 2 で計算できます。col = 3 を代入すると、1行につき 3 回実行されることがわかります。\n\n2. ずれの調整\nこの行ごとの処理が row = 4 回繰り返されるため、総回数は 4 × 3 = 12 回となります。\n<div class=\"important\">a = 12</div>"
   },
   // 18問目
 
@@ -1287,48 +1292,48 @@ const short_questions = [
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "配列の要素を右に1つずつずらす（右シフト）プログラムです。要素数 n = 5 のとき、右シフトを行うループ変数 i が取る値の範囲として正しいものを選んでください。",
-    "example": "データを上書きして消してしまわないよう、どの位置から移動を始めるべきか考えましょう。右側に空きを作る必要があります。",
-    "code": "1  shiftRight(文字列型の配列: tango)\n2    整数型: n ← 5\n3    work ← tango[n]\n4    <span class=\"for\">for (i を (n - 1) から 1 まで 1 ずつ減らす)</span>\n5       tango[i + 1] ← tango[i]\n6    <span class=\"for\">endfor</span>\n7    tango[1] ← work",
+    "text": "n = 5 の配列を右シフトする際、ループ変数 i が取る値の「順序」として正しいものを選んでください。",
+    "example": "末尾のデータから順に右へずらす必要があります。i の開始点と終着点を追ってみましょう。",
+    "code": "   01  文字列型の配列: tango\n   02  整数型: n ← 5, i, work\n   03  work ← tango[n]\n   04  <span class=\"for\">for (i を (n - 1) から 1 まで 1 ずつ減らす)</span>\n   05     tango[i + 1] ← tango[i]\n   06  <span class=\"for\">endfor</span>\n   07  tango[1] ← work",
     "choices": [
       "4, 3, 2, 1",
       "5, 4, 3, 2, 1",
       "1, 2, 3, 4",
       "4, 3, 2"
     ],
-    "specific_explanation": "1. 開始と終了の数値\n   開始値は <span class=\"italic\">n - 1</span>（つまり 4）です。終了値は <span class=\"italic\">1</span> です。1ずつ減らすため、i は 4 から 1 まで変化します。\n\n2. ループの役割\n   <span class=\"italic\">i = 4</span> のときに <span class=\"italic\">tango[5] ← tango[4]</span>、最後に <span class=\"italic\">i = 1</span> のときに <span class=\"italic\">tango[2] ← tango[1]</span> が行われ、全ての隙間が埋まります。\n   <div class=\"important\">i は 4, 3, 2, 1 の順に動く</div>"
+    "specific_explanation": "1. 開始と終了の数値\n右シフトではデータが上書きされないよう、後ろ（添え字の大きい方）から順に動かします。n = 5 のとき、i は n - 1 である 4 から開始し、1 まで 1 ずつ減少します。\n\n<div class=\"important\">i は 4, 3, 2, 1 の順に変化します</div>"
   },
   {
     "id": 90,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "配列の要素を右シフトするプログラムにおいて、処理の冒頭にある if 文の条件「n が 1 より大きい」の役割を説明したものとして、適切な組み合わせを選んでください。",
-    "example": "もし n = 1 （要素が1つしかない配列）のときに、無理にシフト処理や「n - 1」の計算を実行しようとすると何が起こるか想像してみましょう。",
-    "code": "1  shiftRight(文字列型の配列: tango)\n2    整数型: n ← tangoの要素数\n3    <span class=\"if\">if (n が 1 より大きい)</span>\n4       // ここで右シフト処理を実行する\n5    <span class=\"endif\">endif</span>",
+    "text": "右シフト処理の冒頭にある if 文の条件「n > 1」の役割として適切な組み合わせを選んでください。n は配列の要素数です。",
+    "example": "要素が 1 つしかない場合にシフトが必要か、また n = 0 のときに n - 1 を計算するとどうなるかを考えてみましょう。",
+    "code": "   01  整数型の配列: tango\n   02  整数型: n\n   03  n ← tangoの要素数\n   04  <span class=\"if\">if (n > 1)</span>\n   05     // ここで右シフト処理（i を n - 1 から開始など）を実行\n   06  <span class=\"if\">endif</span>",
     "choices": [
-      "a: 要素が1つ以下の場合は移動の必要がないため\nb: n=0 のときに n-1 が負の数になりエラーになるのを防ぐため",
+      "a: 要素が 1 つ以下の場合は移動の必要がないため\nb: n = 0 のときに n - 1 が負になりエラーになるのを防ぐため",
       "a: 要素が偶数のときだけ処理するため\nb: 文字列の長さを一定にするため",
       "a: 配列の添字を 0 から始めるように調整するため\nb: work 変数のメモリを節約するため",
-      "a: 配列の末尾が空文字でないことを確認するため\nb: i が 1 から始まるようにするため"
+      "a: 配率の末尾が空文字でないことを確認するため\nb: i が 1 から始まるようにするため"
     ],
-    "specific_explanation": "1. 開始と終了の数値\n   要素が1つの場合、ずらす先もずらす元も同一であり、処理を行う必要がありません。また、<span class=\"italic\">n = 0</span> の場合に <span class=\"italic\">n - 1</span> を計算してループを開始しようとすると、不正なインデックス参照の原因となります。\n\n2. ガード条件\n   このように、処理が成立しないケースを事前に除外する書き方は、プログラムの安定性を高める定石です。\n   <div class=\"important\">n > 1 のときのみ実行する</div>"
+    "specific_explanation": "1. 開始と終了の数値\n要素が 1 つのみの場合、移動元と移動先が同じになるため処理は不要です。また、n = 0 の場合に n - 1（開始値）を計算してループを作ろうとすると、不正なインデックス参照の原因となります。\n\n2. ガード条件\nこのように、処理が成立しないケースを事前に除外してプログラムの安定性を高める手法を「ガード条件」と呼びます。\n<div class=\"important\">n > 1 のときのみ実行することで異常系を回避しています</div>"
   },
   {
     "id": 91,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "配列の要素を右シフトする処理のトレースです。tango = {\"A\", \"B\", \"C\"} のとき、ループの 1 周目（i = 2）が終了した直後の配列の状態として正しいものを選んでください。",
-    "example": "i = 2 のとき、4行目の代入式 `tango[i + 1] ← tango[i]` は具体的にどの要素からどの要素へ値をコピーすることになるか追ってみましょう。",
-    "code": "1  // 要素数 n = 3, tango = {\"A\", \"B\", \"C\"} で右シフトを行う\n2  work ← tango[3]  // work に \"C\" を退避\n3  <span class=\"for\">for (i を 2 から 1 まで 1 ずつ減らす)</span>\n4     tango[i + 1] ← tango[i]\n5  <span class=\"for\">endfor</span>",
+    "text": "tango = {\"A\", \"B\", \"C\"} のとき、ループの 1 周目（i = 2）が終了した直後の配列の状態を選んでください。",
+    "example": "i = 2 のとき、代入式 tango[i + 1] ← tango[i] の両辺に具体的な数値を当てはめて、どの要素が上書きされるか追ってみましょう。",
+    "code": "   01  文字列型の配列: tango ← {\"A\", \"B\", \"C\"}\n   02  整数型: n ← 3, i\n   03  文字列型: work\n   04  work ← tango[3]\n   05  <span class=\"for\">for (i を 2 から 1 まで 1 ずつ減らす)</span>\n   06     tango[i + 1] ← tango[i]\n   07  <span class=\"for\">endfor</span>",
     "choices": [
       "{\"A\", \"B\", \"B\"}",
       "{\"A\", \"A\", \"C\"}",
       "{\"C\", \"B\", \"C\"}",
       "{\"A\", \"B\", \"C\"}"
     ],
-    "specific_explanation": "1. 開始と終了の数値\n   ループの1周目では <span class=\"italic\">i = 2</span> です。実行される命令は <span class=\"italic\">tango[2 + 1] ← tango[2]</span>、つまり <span class=\"italic\">tango[3] ← tango[2]</span> です。\n\n2. データの変化\n   <span class=\"italic\">tango[3]</span> の位置に <span class=\"italic\">tango[2]</span> の \"B\" がコピーされるため、配列は {\"A\", \"B\", \"B\"} という状態になります。この後、<span class=\"italic\">i = 1</span> の周で {\"A\", \"A\", \"B\"} となり、最後に <span class=\"italic\">tango[1]</span> に \"C\" が戻ります。\n   <div class=\"important\">1周目終了時: {\"A\", \"B\", \"B\"}</div>"
+    "specific_explanation": "1. 開始と終了の数値\nループ 1 周目の i は開始値である 2 です。このとき実行される命令は tango[2 + 1] ← tango[2]、つまり tango[3] ← tango[2] となります。\n\n2. データの変化\ntango[3] の位置に tango[2] の \"B\" がコピーされます。その結果、配列の状態は {\"A\", \"B\", \"B\"} に変化します。その後、i = 1 の周で \"A\" が右にずれます。\n<div class=\"important\">1周目終了時の状態は {\"A\", \"B\", \"B\"} です</div>"
   },
   // 22問目
   {
@@ -2675,21 +2680,21 @@ const short_questions = [
     ],
     "specific_explanation": "1. 退避用変数の利用\n   値を上書きすると元の値が消えてしまうため、最初に array[left] の値を一時変数 tmp に保存しておきます。\n\n2. 三段階の代入\n   まず、空いた array[left] に array[right] の値をコピーします。最後に、保存しておいた tmp の値を array[right] に戻すことで入れ替えが完了します。\n   <div class=\"important\">array[left] ← array[right]\narray[right] ← tmp</div>"
   },
-  {
+{
     "id": 178,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "配列を逆順に並べ替えるプログラムにおいて、ループの繰り返し回数（終了値）を「要素数 ÷ 2 の商」としている理由として適切なものはどれですか。",
-    "example": "左端と右端の要素をペアにして交換していきます。もし配列の端から端（要素数分）までループを回してしまうと、一度交換したペアがどうなるか想像してみましょう。",
-    "code": "1  reverse(整数型の配列: array)\n2    整数型: left, right, n, tmp\n3    n ← arrayの要素数\n4    <span class=\"for\">for (left を 1 から (n ÷ 2 の商) まで 1 ずつ増やす)</span>\n5       right ← n - left + 1\n6       // array[left] と array[right] の入れ替え処理\n7    <span class=\"for\">endfor</span>",
+    "text": "配列を逆順にする際、ループの終了値を「要素数 ÷ 2 の商」とする理由として適切なものを選んでください。",
+    "example": "要素数 4 の配列で、1番目から 4番目まで全ての要素を順に入れ替え続けた場合に何が起こるか考えてみましょう。",
+    "code": "   01  整数型の配列: array\n   02  整数型: left, right, n, tmp\n   03  n ← arrayの要素数\n   04  <span class=\"for\">for (left を 1 から (n ÷ 2 の商) まで 1 ずつ増やす)</span>\n   05     right ← n - left + 1\n   06     // array[left] と array[right] の入れ替え処理\n   07  <span class=\"for\">endfor</span>",
     "choices": [
-      "中央まで入れ替えれば、全ての並べ替えが完了するから",
-      "要素数分ループすると、入れ替えたものが元に戻ってしまうから",
-      "端の要素は入れ替える必要がないから",
-      "計算量を半分にして処理速度を上げるためだけの実装だから"
+      "中央まで入れ替えれば完了であり、それ以上回すと入れ替えた要素が元に戻ってしまうから",
+      "要素数が奇数の場合、中央の要素を入れ替えるとエラーになるから",
+      "配列の添え字が 1 から始まる場合、末尾の要素は計算対象外になるから",
+      "計算量を半分に抑えることがアルゴリズムの必須要件であるから"
     ],
-    "specific_explanation": "1. 開始と終了の数値\n   逆順処理では「左端と右端」のペアを入れ替えていきます。これを要素数分（端から端まで）繰り返すと、一度入れ替えたものを再度入れ替えてしまい、元の順序に戻ってしまいます。\n   <div class=\"important\">中央（n ÷ 2）で止めることで、ちょうど1回ずつ入れ替えが行われる</div>"
+    "specific_explanation": "1. 開始と終了の数値\n逆順処理は「左端と右端」をペアで入れ替えるため、中央（n ÷ 2）に到達した時点で全ての要素の移動が完了します。これを超えてループを継続すると、一度入れ替えたペアを再び入れ替えてしまい、結果として元の順序に戻ってしまいます。\n\n\n<div class=\"important\">中央で止めることで、ちょうど 1 回ずつ入れ替えが行われます</div>"
   },
   {
     "id": 179,
@@ -2702,16 +2707,21 @@ const short_questions = [
     "choices": ["age ≤ 9", "age < 9", "age ≥ 4", "age < 10"],
     "specific_explanation": "1. 境界の特定\n   基準となる数値は「9歳」です。問題文の「9歳まで」という表現から、9を境界として特定します。\n\n2. 含むか含まないか\n   「9歳まで」は9歳を含みます。既に3歳以下の判定が済んでいるため、ここでは上限である「9以下（≤ 9）」を判定すれば自動的に4〜9歳の範囲が定まります。\n   <div class=\"important\">elseif (age ≤ 9)</div>"
   },
-  {
+{
     "id": 180,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "ループ変数の計算利用",
-    "text": "配列の要素を逆順に並べ替えるプログラムです。左側の要素(array[left])に対応する「右側の要素の添え字」を算出する空欄 [  1  ] に入る式を選んでください。なお、配列の添え字は 1 から始まります。",
-    "example": "要素数(n)が5、leftが2のとき、入れ替え相手は 4番目(5 - 2 + 1 = 4)",
-    "code": "01 reverse(整数型の配列: array)\n02   整数型: left, right, n, tmp\n03   n ← arrayの要素数\n04   <span class=\"for\">for (left を 1 から (n ÷ 2 の商) まで 1 ずつ増やす)</span>\n05      right ← [  1  ]\n06      tmp ← array[right]\n07      array[right] ← array[left]\n08      array[left] ← tmp\n09   <span class=\"for\">endfor</span>",
-    "choices": ["n - left + 1", "n - left", "n - left - 1", "left + (n ÷ 2)"],
-    "specific_explanation": "1. 規則性の発見\n   添え字が1から始まる場合、1番目とn番目、2番目とn-1番目をペアにする必要があります。\n\n2. ずれの調整\n   n - left だけでは、left=1 のときに n-1 になってしまい1つずれます。正しい右端を指すためには +1 による補正が必要です。\n   <div class=\"important\">right ← n - left + 1</div>"
+    "text": "配列の要素を逆順にする処理です。left に対応する「右側の添え字」を算出する空欄 [  1  ] に入る式を選んでください。配列の添え字は 1 から始まります。",
+    "example": "left = 1 のとき right = n、left = 2 のとき right = n - 1 になるような、n と left を使った計算式を導いてみましょう。",
+    "code": "   01  整数型の配列: array\n   02  整数型: left, right, n, tmp\n   03  n ← arrayの要素数\n   04  <span class=\"for\">for (left を 1 から (n ÷ 2 の商) まで 1 ずつ増やす)</span>\n   05     right ← [  1  ]\n   06     tmp ← array[right]\n   07     array[right] ← array[left]\n   08     array[left] ← tmp\n   09  <span class=\"for\">endfor</span>",
+    "choices": [
+      "n - left + 1",
+      "n - left",
+      "n - left - 1",
+      "left + (n ÷ 2)"
+    ],
+    "specific_explanation": "1. 規則性の発見\nペアとなる添え字の合計値（left + right）に着目します。1番目と n 番目なら合計は n + 1、2番目と n - 1 番目なら合計はやはり n + 1 となり、常に一定の規則性があることがわかります。\n\n\n2. ずれの調整\n「left + right = n + 1」という等式から求めたい right を導き出すと、right = n + 1 - left となります。添え字が 1 から始まる場合、単に n から引くだけでは値が 1 小さくなるため、調整が必要です。\n\n<div class=\"important\">right ← n - left + 1</div>"
   },
   {
     "id": 181,
@@ -2871,16 +2881,16 @@ const short_questions = [
     "choices": ["ret", "i", "m", "n"],
     "specific_explanation": "1. 初期状態の設定\n   ret は計算結果を保持する変数ですが、同時に「エラー未発生」を示すフラグとしても機能しています。\n\n2. 状態の更新\n   一度 ret に -1 が代入されると、while文の継続条件である ret ≠ -1 が満たされなくなり、残りの処理をスキップして終了します。\n   <div class=\"important\">ret ≠ -1 をチェックすることで計算継続を判断している</div>"
   },
-  {
+{
     "id": 194,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "ループ変数の計算利用",
-    "text": "配列 t の要素番号 1 から 4 に順に {4, 0, 2, 5} が入っており、n=6 のとき、ループが 2回 終了した時点での ret の値はいくつですか。",
-    "example": "1回目: 4, 2回目: 4 * 6 + 0 = ?",
-    "code": "1  i ← 1, ret ← 0\n2  1回目：t[1]=4 を処理\n3  2回目：t[2]=0 を処理",
+    "text": "配列 t = {4, 0, 2, 5}、n = 6 のとき、プログラムを 2 回ループさせた直後の ret の値を求めなさい。",
+    "example": "i = 1 の時の計算結果を次の回の ret に代入して、順番に値を更新してみましょう。",
+    "code": "   01  整数型の配列: t ← {4, 0, 2, 5}\n   02  整数型: n ← 6, ret ← 0, i\n   03  <span class=\"for\">for (i を 1 から 4 まで 1 ずつ増やす)</span>\n   04     ret ← ret * n + t[i]\n   05  <span class=\"for\">endfor</span>",
     "choices": ["24", "4", "26", "881"],
-    "specific_explanation": "1. 規則性の発見\n   ループごとに ret = ret * n + t[i] が実行されます。\n\n2. ずれの調整\n   ・初期値：ret = 0 \n   ・1回目（i=1）：ret = 0 * 6 + 4 = 4 \n   ・2回目（i=2）：ret = 4 * 6 + 0 = 24 \n   2回終わった時点の ret は 24 となります。\n   <div class=\"important\">ret = 24</div>"
+    "specific_explanation": "1. 規則性の発見\nこの処理は n 進法を 10 進法に変換する際によく使われる手法です。現在の累積値 ret を n 倍して桁をずらし、新しい要素 t[i] を加算して数値を更新していきます。\n\n2. ずれの調整\ni = 1 のとき：0 * 6 + 4 = 4 となります。続く i = 2 のときには、前回求めた 4 を ret に代入して計算するため、4 * 6 + 0 = 24 と算出されます。\n\n\n<div class=\"important\">2回目終了時点の ret は 24 です</div>"
   },
   {
     "id": 195,
@@ -3005,148 +3015,148 @@ const short_questions = [
   },
 
   // for文
-  {
+{
     "id": 206,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "「Hello」という文字列を引数 n 回だけ画面に表示する関数 printHello(n) を作成したい。空欄 [  a  ] に入れるべき適切な終了値を答えなさい。",
-    "example": "printHello(3) → Hello Hello Hello",
-    "code": "1  void: printHello(整数型: n)\n2    <span class=\"for\">for (i を 1 から [  a  ] まで 1 ずつ増やす)</span>\n3       print(\"Hello\")\n4    <span class=\"for\">endfor</span>",
+    "text": "画面に文字を出力する命令を print(文字列) とします。「Hello」を n 回表示するための終了値 [  a  ] を選んでください。",
+    "example": "n = 3 のとき、i が 1, 2, 3 と変化して計 3 回実行される数値。 ",
+    "code": "   01  整数型: n, i\n   02  printHello(n)\n   03  <span class=\"for\">for (i を 1 から [  a  ] まで 1 ずつ増やす)</span>\n   04     print(\"Hello\")\n   05  <span class=\"for\">endfor</span>",
     "choices": ["n", "n - 1", "n + 1", "0"],
-    "specific_explanation": "1. 繰り返し回数の数え方\n変数 i は 1 からスタートします。n 回繰り返したい場合、1, 2, 3... と数えていき、ちょうど n になった回で終われば n 回になります。\n<div class=\"important\">for (i を 1 から n まで...)</div>\n\n2. 終了条件の特定\n1から始まる場合、終了値がそのまま実行回数と一致します。"
+    "specific_explanation": "1. 開始と終了の数値\ni が 1 から始まる場合、終了値を n に設定すれば、実行回数と終了値が一致します。1, 2, ..., n と数えることで正確に n 回の処理が行われます。\n\n\n<div class=\"important\">1 から開始して n 回繰り返すなら、終了値は n です</div>"
   },
   {
     "id": 207,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "0からスタートして n 回ループさせたい場合、空欄 [  a  ] に入れるべき適切な終了値を答えなさい。",
-    "example": "n=3 のとき、iは 0, 1, 2 と動き、計3回となる。",
-    "code": "1  void: loopZero(整数型: n)\n2    <span class=\"for\">for (i を 0 から [  a  ] まで 1 ずつ増やす)</span>\n3       process()\n4    <span class=\"for\">endfor</span>",
+    "text": "0 から開始して n 回処理を繰り返すための、適切な終了値 [  a  ] を選んでください。",
+    "example": "n = 3 のとき、i が 0, 1, 2 と変化して計 3 回となる数値。 ",
+    "code": "   01  整数型: n, i\n   02  loopZero(n)\n   03  <span class=\"for\">for (i を 0 から [  a  ] まで 1 ずつ増やす)</span>\n   04     process()\n   05  <span class=\"for\">endfor</span>",
     "choices": ["n - 1", "n", "n + 1", "1"],
-    "specific_explanation": "1. 開始値が0の場合の計算\n開始値が 0 の場合、n 回目のとき i の値は n よりも 1 小さい数になります。例えば3回なら 0, 1, 2 で終了です。\n<div class=\"important\">for (i を 0 から n - 1 まで...)</div>\n\n2. 終了値の特定\n「回数 - 1」が終了値になるのが 0 スタート時の鉄則です。"
+    "specific_explanation": "1. 開始と終了の数値\n0 から数え始める場合、n 回目のループにおける i の値は n - 1 になります。例えば 3 回繰り返すなら、0, 1, 2 となり、2（3 - 1）で終了する必要があります。\n\n\n<div class=\"important\">0 から開始して n 回繰り返すなら、終了値は n - 1 です</div>"
   },
   {
     "id": 208,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "ループ変数の計算利用",
-    "text": "1からnまでの「奇数のみ」を表示する関数 printOdd(n) を作成した。空欄 [  a  ] に入れるべきループの増分（step）を答えなさい。",
-    "example": "printOdd(5) → 1 3 5",
-    "code": "1  void: printOdd(整数型: n)\n2    <span class=\"for\">for (i を 1 から n まで [  a  ] ずつ増やす)</span>\n3       print(i)\n4    <span class=\"for\">endfor</span>",
+    "text": "1 から n までの奇数のみを print 命令で表示します。適切な増分（step）[  a  ] を選んでください。",
+    "example": "n = 5 のとき、i を 1 → 3 → 5 とスキップさせながら変化させます。",
+    "code": "   01  整数型: n, i\n   02  printOdd(n)\n   03  <span class=\"for\">for (i を 1 から n まで [  a  ] ずつ増やす)</span>\n   04     print(i)\n   05  <span class=\"for\">endfor</span>",
     "choices": ["2", "1", "3", "i + 2"],
-    "specific_explanation": "1. 数列の規則性の確認\n奇数は 1, 3, 5, 7... と続きます。前の数字に 2 足せば次の奇数になるため、増分（ステップ）は 2 です。\n<div class=\"important\">for (i を 1 から n まで 2 ずつ増やす)</div>\n\n2. ループ変数の活用\n増分を 2 に設定することで、ループ内で判定を行わずに効率よく奇数のみを抽出できます。"
+    "specific_explanation": "1. 規則性の発見\n奇数は 1, 3, 5... と、前の数に 2 を足した数値になります。増分を 2 に設定することで、偶数を飛ばして奇数のみを順番に処理できます。\n\n\n2. ずれの調整\n増分を 1 にして if 文で判定するよりも、増分そのものを 2 にする方がループ回数が半分になり効率的です。\n\n<div class=\"important\">2 ずつ増やすことで、1, 3, 5... と奇数のみを抽出できます</div>"
   },
-  {
+{
     "id": 209,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "配列 arr のすべての要素を合計する関数 sumArray(arr) です。最後の要素まで正しくアクセスするための空欄 [  a  ] を答えなさい。",
-    "example": "arr=[10, 20], len=2 のとき、arr[0]とarr[1]を足す。",
-    "code": "1  整数型: sumArray(整数型[]: arr, 整数型: len)\n2  整数型: total = 0\n3    <span class=\"for\">for (i を 0 から [  a  ] まで 1 ずつ増やす)</span>\n4       total = total + arr[i]\n5    <span class=\"for\">endfor</span>\n6  return total",
+    "text": "配列 arr の全要素を合計する処理です。最後の要素までアクセスするための終了値 [  a  ] を選んでください。",
+    "example": "要素数 len = 2 のとき、添字 0 と 1 の要素を足し合わせます。",
+    "code": "   01  整数型の配列: arr\n   02  整数型: len, total ← 0, i\n   03  sumArray(arr, len)\n   04  <span class=\"for\">for (i を 0 から [  a  ] まで 1 ずつ増やす)</span>\n   05     total ← total + arr[i]\n   06  <span class=\"for\">endfor</span>\n   07  return total",
     "choices": ["len - 1", "len", "len + 1", "1"],
-    "specific_explanation": "1. 配列の添字と要素数\n配列の添字（インデックス）は必ず 0 から始まります。要素数が len 個ある場合、最後の要素の添字は len - 1 です。\n<div class=\"important\">for (i を 0 から len - 1 まで...)</div>\n\n2. 範囲外アクセスの防止\nlen まで回してしまうと、存在しない領域にアクセスしてエラーになるため注意が必要です。"
+    "specific_explanation": "1. 開始と終了の数値\n配列の添字（インデックス）は 0 から始まります。そのため、要素数が len 個の場合、最後の要素の添字は len - 1 となります。\n\n\n2. 範囲外アクセスの防止\n終了値を len にしてしまうと、配列の範囲外（存在しない領域）を参照してしまいエラーが発生します。\n<div class=\"important\">0 から開始して全要素を辿るなら、終了値は len - 1 です</div>"
   },
   {
     "id": 210,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "整数 n から 1 までカウントダウンしながら表示する関数 countdown(n) です。空欄 [  a  ] に入れるべき適切な「増分」を答えなさい。",
-    "example": "countdown(3) → 3 2 1",
-    "code": "1  void: countdown(整数型: n)\n2    <span class=\"for\">for (i を n から 1 まで [  a  ] ずつ増やす)</span>\n3       print(i)\n4    <span class=\"for\">endfor</span>",
+    "text": "n から 1 までカウントダウン表示する処理です。適切な増分（step）[  a  ] を選んでください。",
+    "example": "countdown(3) とした場合、3, 2, 1 と数字を減らしながら出力します。",
+    "code": "   01  整数型: n, i\n   02  countdown(n)\n   03  <span class=\"for\">for (i を n から 1 まで [  a  ] ずつ増やす)</span>\n   04     print(i)\n   05  <span class=\"for\">endfor</span>",
     "choices": ["-1", "1", "0", "n - 1"],
-    "specific_explanation": "1. 逆順ループの考え方\n開始値が n（大）、終了値が 1（小）です。値を減らしていく必要があるため、増分はマイナスの値になります。\n<div class=\"important\">for (i を n から 1 まで -1 ずつ増やす)</div>\n\n2. カウンターの変化\n「1ずつ減らす」処理は、疑似コード上では「-1ずつ増やす」と表現します。"
+    "specific_explanation": "1. 開始と終了の数値\n開始値が n（大きい数）、終了値が 1（小さい数）であるため、値を減らしていく必要があります。疑似コードでは「-1 ずつ増やす」ことで値を減少させます。\n\n\n<div class=\"important\">値を 1 ずつ減らす場合は、増分に -1 を指定します</div>"
   },
   {
     "id": 211,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "整数 a から b までのすべての整数を足し合わせる関数 sumRange(a, b) です。空欄 [  a  ] に入れるべき開始値を答えなさい。",
-    "example": "sumRange(3, 5) → 12 (3 + 4 + 5)",
-    "code": "1  整数型: sumRange(整数型: a, 整数型: b)\n2  整数型: total = 0\n3    <span class=\"for\">for (i を [  a  ] から b まで 1 ずつ増やす)</span>\n4       total = total + i\n5    <span class=\"for\">endfor</span>\n6  return total",
+    "text": "整数 a から b までの全整数を足し合わせる処理です。適切な開始値 [  a  ] を選んでください。",
+    "example": "sumRange(3, 5) のとき、3 + 4 + 5 を計算します。",
+    "code": "   01  整数型: a, b, total ← 0, i\n   02  sumRange(a, b)\n   03  <span class=\"for\">for (i を [  a  ] から b まで 1 ずつ増やす)</span>\n   04     total ← total + i\n   05  <span class=\"for\">endfor</span>\n   06  return total",
     "choices": ["a", "1", "0", "b"],
-    "specific_explanation": "1. 変数を使った範囲指定\n「a から b まで」を足したいので、ループのスタート地点は変数 a そのものになります。\n<div class=\"important\">for (i を a から b まで 1 ずつ増やす)</div>\n\n2. 初期値の柔軟性\n開始値は常に 0 や 1 である必要はなく、引数で渡された任意の値を指定できます。"
+    "specific_explanation": "1. 開始と終了の数値\n「a から b まで」という指定があるため、ループの開始地点は変数 a そのものになります。開始値には 0 や 1 だけでなく、変数を利用することも可能です。\n\n\n<div class=\"important\">指定された範囲の開始地点を変数（a）で指定します</div>"
   },
   {
     "id": 212,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "ループ変数の計算利用",
-    "text": "0 から n までの「5の倍数（0, 5, 10...）」を表示したい。for文の設定だけで実現する場合、空欄 [  a  ] には何が入るか。",
-    "example": "n=12 のとき → 0 5 10",
-    "code": "1  void: printMultiples5(整数型: n)\n2    <span class=\"for\">for (i を 0 から n まで [  a  ] ずつ増やす)</span>\n3       print(i)\n4    <span class=\"for\">endfor</span>",
+    "text": "0 から n までの「5の倍数」を表示します。for 文の増分 [  a  ] を選んでください。",
+    "example": "n = 12 のとき、i が 0, 5, 10 と変化する数値の間隔を考えます。",
+    "code": "   01  整数型: n, i\n   02  printMultiples5(n)\n   03  <span class=\"for\">for (i を 0 から n まで [  a  ] ずつ増やす)</span>\n   04     print(i)\n   05  <span class=\"for\">endfor</span>",
     "choices": ["5", "1", "4", "i + 5"],
-    "specific_explanation": "1. 倍数のステップ設定\n0 の次を 5、その次を 10 と変化させたい場合、その差（ステップ）は 5 です。増分に 5 を指定すれば i は 5 ずつ進みます。\n<div class=\"important\">for (i を 0 から n まで 5 ずつ増やす)</div>\n\n2. 効率的なループ設計\nif文で「5で割り切れるか」を判定するよりも、ループの増分で調整する方が処理が速くなります。"
+    "specific_explanation": "1. 規則性の発見\n0 の次を 5、その次を 10 と変化させるには、その差である 5 を増分に設定します。i は 5 ずつ増えていくことになります。\n\n\n2. ずれの調整\nif 文で「5 で割り切れるか」を判定するよりも、増分で調整する方が無駄なループが発生せず、処理が効率的になります。\n<div class=\"important\">5 ずつ増やすことで、倍数のみを抽出できます</div>"
   },
   {
     "id": 213,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "配列の要素を「1つ飛ばし」に合計したい（index 0, 2, 4...）。ループ条件の空欄 [  a  ] に入る適切な式を答えなさい。",
-    "example": "arr=[1, 1, 1, 1], count=4 → arr[0]+arr[2] = 2",
-    "code": "1  整数型: sumSkip(整数型[]: arr, 整数型: count)\n2  整数型: total = 0\n3    <span class=\"for\">for (i を 0 から [  a  ] まで 2 ずつ増やす)</span>\n4       total = total + arr[i]\n5    <span class=\"for\">endfor</span>\n6  return total",
+    "text": "配列 arr を 1 つ飛ばし（添字 0, 2, 4...）に合計します。適切な終了値 [  a  ] を選んでください。",
+    "example": "要素数 count = 4 のとき、最後にアクセスすべき添字の最大値がいくつになるか確認しましょう。",
+    "code": "   01  整数型の配列: arr\n   02  整数型: count, total ← 0, i\n   03  sumSkip(arr, count)\n   04  <span class=\"for\">for (i を 0 から [  a  ] まで 2 ずつ増やす)</span>\n   05     total ← total + arr[i]\n   06  <span class=\"for\">endfor</span>\n   07  return total",
     "choices": ["count - 1", "count", "count / 2", "count + 1"],
-    "specific_explanation": "1. 配列アクセスの限界点\n増分が「2ずつ」であっても、終了条件は「最後の要素の添字（要素数 - 1）」を超えないように設定します。\n<div class=\"important\">for (i を 0 から count - 1 まで 2 ずつ増やす)</div>\n\n2. 終端判定の原則\nステップ数に関わらず、配列を走査する場合はインデックスの有効範囲を守ることが最優先です。"
+    "specific_explanation": "1. 開始と終了の数値\n増分が 2 であっても、配列にアクセスする際の有効なインデックス範囲は 0 から count - 1 までです。終了判定はこの最大値を超えないように設定します。\n\n\n2. 終端判定の原則\nステップ数に関わらず、配列の境界（要素数 - 1）を終了条件にするのが、安全に要素を走査する基本です。\n<div class=\"important\">終了値は通常通り count - 1 を指定します</div>"
   },
   {
     "id": 214,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "配列 arr の要素を、末尾から先頭に向かって順番に表示したい。ループの「開始値」として空欄 [  a  ] に入るものはどれか。",
-    "example": "arr=[10, 20, 30] (len=3) → 30, 20, 10 の順",
-    "code": "1  void: printReverse(整数型[]: arr, 整数型: len)\n2    <span class=\"for\">for (i を [  a  ] から 0 まで -1 ずつ増やす)</span>\n3       print(arr[i])\n4    <span class=\"for\">endfor</span>",
+    "text": "配列の要素を、末尾から先頭に向かって順番に表示します。開始値 [  a  ] を選んでください。",
+    "example": "要素数 len = 3 のとき、逆順のスタート地点（30 の位置）は何番目か追ってみましょう。",
+    "code": "   01  整数型の配列: arr ← {10, 20, 30}\n   02  整数型: len ← 3, i\n   03  printReverse(arr, len)\n   04  <span class=\"for\">for (i を [  a  ] から 0 まで -1 ずつ増やす)</span>\n   05     print(arr[i])\n   06  <span class=\"for\">endfor</span>",
     "choices": ["len - 1", "len", "len + 1", "0"],
-    "specific_explanation": "1. 末尾インデックスの特定\n配列の最後の要素の添字は「要素数 - 1」です。逆順処理ではここがスタート地点になります。\n<div class=\"important\">for (i を len - 1 から 0 まで -1 ずつ増やす)</div>\n\n2. 境界値エラーの回避\nlen から始めると、最初のループで範囲外（存在しない要素）を指してしまうためエラーになります。"
+    "specific_explanation": "1. 開始と終了の数値\n配列の最後の要素を指す添字は len - 1 です。逆順処理ではここを開始点とし、0 に向かって値を減らしていきます。\n\n\n2. 境界値の管理\nもし len から始めてしまうと、最初のループで「存在しない要素」を参照してしまい、エラーが発生します。\n<div class=\"important\">逆順ループの開始値は len - 1 となります</div>"
   },
   {
     "id": 215,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "処理 process() をちょうど n 回実行したい。カウンター i を 0 からスタートさせる場合、空欄 [  a  ] に入る終了値はどれか。",
-    "example": "n=3 のとき、i=0, i=1, i=2 で計3回実行される。",
-    "code": "1  void: runTimes(整数型: n)\n2    <span class=\"for\">for (i を 0 から [  a  ] まで 1 ずつ増やす)</span>\n3       process()\n4    <span class=\"for\">endfor</span>",
+    "text": "処理 process() をちょうど n 回実行します。i を 0 から開始する場合の終了値 [  a  ] を選んでください。",
+    "example": "n = 3 のとき、i が 0, 1, 2 と変化して計 3 回実行される数値です。",
+    "code": "   01  整数型: n, i\n   02  runTimes(n)\n   03  <span class=\"for\">for (i を 0 から [  a  ] まで 1 ずつ増やす)</span>\n   04     process()\n   05  <span class=\"for\">endfor</span>",
     "choices": ["n - 1", "n", "n + 1", "1"],
-    "specific_explanation": "1. 0始まりの回数カウント\n0, 1, 2... と数えて n 回目になるのは、数字が n - 1 のときです。3回なら 0, 1, 2 で終了します。\n<div class=\"important\">for (i を 0 から n - 1 まで...)</div>\n\n2. 終了値の計算式\n「0からn回」なら終了値は「n-1」、「1からn回」なら終了値は「n」とセットで覚えましょう。"
+    "specific_explanation": "1. 開始と終了の数値\n0 から数え始めて n 回繰り返す場合、終了値は n - 1 になります。3 回なら 0, 1, 2 で終了となり、終了値そのものは回数より 1 小さくなります。\n\n\n<div class=\"important\">0 から開始して n 回繰り返すなら、終了値は n - 1 です</div>"
   },
   {
     "id": 216,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "文字列 str のすべての文字を一文字ずつ表示したい。空欄 [  a  ] に入る適切な終了値を答えなさい。",
-    "example": "str='ABC' (length=3) → A B C",
-    "code": "1  void: printChars(文字列型: str)\n2    <span class=\"for\">for (i を 0 から [  a  ] まで 1 ずつ増やす)</span>\n3       print(str[i])\n4    <span class=\"for\">endfor</span>",
+    "text": "文字列 str の全文字を 1 文字ずつ表示します。適切な終了値 [  a  ] を選んでください。",
+    "example": "str = 'ABC'（3文字）のとき、添字 0, 1, 2 を順番に参照します。",
+    "code": "   01  文字列型: str\n   02  整数型: i\n   03  printChars(str)\n   04  <span class=\"for\">for (i を 0 から [  a  ] まで 1 ずつ増やす)</span>\n   05     print(str[i])\n   06  <span class=\"for\">endfor</span>",
     "choices": ["str.length - 1", "str.length", "str.length + 1", "1"],
-    "specific_explanation": "1. 文字列のインデックス範囲\n文字列の先頭は 0 番目、末尾は「文字数 - 1」番目です。\"ABC\"（3文字）なら 0, 1, 2 番目まで存在します。\n<div class=\"important\">for (i を 0 から str.length - 1 まで...)</div>\n\n2. 終端の指定\nstr.length まで指定すると、最後に範囲外を参照してエラーになる可能性があるため、-1 が必要です。"
+    "specific_explanation": "1. 開始と終了の数値\n文字列の添字は 0 から始まります。そのため、末尾の添字は「文字数 - 1」となります。\"ABC\"（3文字）なら、0, 1, 2 番目までを辿る必要があります。\n\n\n<div class=\"important\">0 から開始して末尾まで辿るなら、終了値は str.length - 1 です</div>"
   },
   {
     "id": 217,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "配列 arr の index 番目の要素から、最後の要素までを合計したい。空欄 [  a  ] に入る開始値を答えなさい。",
-    "example": "arr=[10, 20, 30], index=1 → 20 + 30 = 50",
-    "code": "1  整数型: sumFrom(整数型[]: arr, 整数型: index)\n2  整数型: total = 0\n3    <span class=\"for\">for (i を [  a  ] から arr.要素数 - 1 まで 1 ずつ増やす)</span>\n4       total = total + arr[i]\n5    <span class=\"for\">endfor</span>\n6  return total",
+    "text": "配列 arr の index 番目から最後までの要素を合計します。適切な開始値 [  a  ] を選んでください。",
+    "example": "index = 1 のとき、添字 1 番目から末尾までをループの対象にします。",
+    "code": "   01  整数型の配列: arr\n   02  整数型: index, total ← 0, i\n   03  sumFrom(arr, index)\n   04  <span class=\"for\">for (i を [  a  ] から arr.要素数 - 1 まで 1 ずつ増やす)</span>\n   05     total ← total + arr[i]\n   06  <span class=\"for\">endfor</span>\n   07  return total",
     "choices": ["index", "index + 1", "0", "1"],
-    "specific_explanation": "1. 開始位置の動的指定\n「index 番目から」という指示があるため、ループの開始地点にはそのまま引数の index を使います。\n<div class=\"important\">for (i を index から arr.要素数 - 1 まで...)</div>\n\n2. 途中からの走査\n0番目以外からループを開始することで、配列の特定範囲のみを効率よく処理できます。"
+    "specific_explanation": "1. 開始と終了の数値\n「index 番目から」という指定があるため、ループの開始地点には引数の index をそのまま使用します。開始値は 0 や 1 固定ではなく、変数で柔軟に指定できます。\n\n\n<div class=\"important\">特定の場所から開始する場合、その添字を変数で指定します</div>"
   },
   {
     "id": 218,
     "category": "制御構文",
     "theme": "for文",
     "subtheme": "範囲と終端判定",
-    "text": "1 から n までの奇数だけを足したい。増分を 2 に設定した場合、空欄 [  a  ] に入る終了値として最も適切なものはどれか。",
-    "example": "n=5 → 1, 3, 5 を足す",
-    "code": "1  整数型: sumOdd(整数型: n)\n2  整数型: total = 0\n3    <span class=\"for\">for (i を 1 から [  a  ] まで 2 ずつ増やす)</span>\n4       total = total + i\n5    <span class=\"for\">endfor</span>\n6  return total",
+    "text": "1 から n までの奇数のみを足し合わせます。増分が 2 のとき、適切な終了値 [  a  ] を選んでください。",
+    "example": "n = 5 のとき、1, 3, 5 までを合計の対象に含める設定を考えます。",
+    "code": "   01  整数型: n, total ← 0, i\n   02  sumOdd(n)\n   03  <span class=\"for\">for (i を 1 から [  a  ] まで 2 ずつ増やす)</span>\n   04     total ← total + i\n   05  <span class=\"for\">endfor</span>\n   06  return total",
     "choices": ["n", "n / 2", "n - 1", "n * 2"],
-    "specific_explanation": "1. 上限値の設定\nステップが 2 であっても、「どこまで含めるか」という壁の位置は変わりません。n まで含めたいので終了値は n です。\n<div class=\"important\">for (i を 1 から n まで 2 ずつ増やす)</div>\n\n2. ループの終了動作\ni が n を超えた瞬間にループが止まるため、n が偶数でも奇数でもこの指定で正しく動作します。"
+    "specific_explanation": "1. 開始と終了の数値\nステップ（増分）が 2 であっても、「どこまでを範囲に含めるか」という終了の境界線は n のまま変わりません。i が n を超えた時点でループは自動的に停止します。\n\n\n<div class=\"important\">対象に含めたい上限の数値（n）を終了値に指定します</div>"
   },
   {
     "id": 219,
