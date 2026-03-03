@@ -55,6 +55,48 @@ var AchievementChecker = {
         }
     },
 
+    silentUnlock: function (achievementId) {
+        if (UserManager && UserManager.unlockAchievement(achievementId)) {
+            console.log("過去の実績から復元: " + achievementId);
+        }
+    },
+    // 追加：過去のデータからアチーブメントを一括同期する（遡及処理）
+    // --------------------------------------------------
+    syncPastData: function () {
+        if (!UserManager || !UserManager.currentUser) return;
+
+        var statsKey = 'bucket_stats_' + UserManager.currentUser;
+        var stats = JSON.parse(localStorage.getItem(statsKey) || "{}");
+
+        var totalAttempted = 0;
+        var totalCorrect = 0;
+
+        // 過去の成績データを全走査
+        for (var qId in stats) {
+            var s = stats[qId];
+            if (s.correct > 0 || s.incorrect > 0) totalAttempted++;
+            if (s.correct > 0) totalCorrect++;
+        }
+
+        // --- マイルストーン系（累計）の遡及アンロック ---
+        if (totalAttempted >= 1) this.silentUnlock("ms_first_step");
+        if (totalCorrect >= 1) this.silentUnlock("ms_first_win");
+        if (totalAttempted >= 10) this.silentUnlock("ms_seeker_10");
+        if (totalCorrect >= 10) this.silentUnlock("ms_base_10");
+        if (totalAttempted >= 50) this.silentUnlock("ms_seeker_50");
+        if (totalCorrect >= 50) this.silentUnlock("ms_footprint_50");
+        if (totalAttempted >= 100) this.silentUnlock("ms_veteran_100");
+        if (totalCorrect >= 100) this.silentUnlock("ms_understand_100");
+        if (totalAttempted >= 1000) this.silentUnlock("ms_thousand");
+
+        // --- お気に入り系の遡及アンロック ---
+        var favs = UserManager.getFavorites();
+        if (favs.length >= 1) this.silentUnlock("fn_fav_1");
+        if (favs.length >= 10) this.silentUnlock("fn_fav_10");
+
+        // ※今後、新しい累計系アチーブメントを追加した場合は、
+        // checkInstant と、この syncPastData の両方に if 文を追加してください。
+    },
 
     // --------------------------------------------------
     // 2. 即時判定（アクションが起きた瞬間に呼ぶ）

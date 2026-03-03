@@ -84,6 +84,9 @@
     if (typeof UserManager !== 'undefined') {
         UserManager.init();
     }
+    if (typeof AchievementChecker !== 'undefined') {
+        AchievementChecker.syncPastData();
+    }
 
     // ユーザーの統計データを取得
     let currentUsername = UserManager.currentUser;
