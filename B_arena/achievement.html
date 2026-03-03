@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imashiru - アチーブメントコレクション</title>
+    <link rel="stylesheet" href="../css/destyle.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="light_theme">
+    <div id="header-placeholder"></div>
+    <div id="user_info_bar"></div>
+    
+    <main>
+        <div class="breadcrumb"><a href="index.html" style="color: #333; text-decoration: underline;">HOME</a> > アチーブメント</div>
+        
+        <section class="introduction">
+            <h2>アチーブメントコレクション</h2>
+            <p>あなたの学習の軌跡と、達成した記録の一覧です。<br>
+               条件を満たして、全てのアチーブメントの解放を目指しましょう。</p>
+            <div id="achievement_progress" class="achievement-progress-text"></div>
+        </section>
+
+        <section id="achievements_container"></section>
+    </main>
+    
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/makeHeader.js"></script>
+    <script src="../js/makeFooter.js"></script>
+    <script src="../js/makeUser_info_bar.js"></script>
+    
+    <script src="../js/achievements_data.js"></script>
+    <script src="../js/user_manager.js"></script>
+    
+    <script>
+        // UserManagerの初期化
+        if (typeof UserManager !== 'undefined') {
+            UserManager.init();
+        }
+
+        // 獲得済みデータの取得（日時も欲しいので直接localStorageを読む）
+        let currentUser = UserManager.currentUser;
+        let unlockedData = {};
+        if (currentUser) {
+            let achvKey = 'bucket_achievements_' + currentUser;
+            unlockedData = JSON.parse(localStorage.getItem(achvKey) || "{}");
+        }
+
+        let totalCount = achievementsMaster.length;
+        let unlockedCount = Object.keys(unlockedData).length;
+
+        // 進捗の表示
+        document.getElementById('achievement_progress').innerText = 
+            `獲得状況: ${unlockedCount} / ${totalCount} 個`;
+
+        // カテゴリー名の日本語化辞書
+        let categoryNames = {
+            "milestone": "マイルストーン（累計の努力）",
+            "trophy": "トロフィー（テーマ・カテゴリー制覇）",
+            "playstyle": "プレイスタイル（精度・試行錯誤）",
+            "function": "機能探索・アクション"
+        };
+
+        // マスターデータをカテゴリーごとに分類
+        let groupedAchievements = {};
+        for (let i = 0; i < achievementsMaster.length; i++) {
+            let achv = achievementsMaster[i];
+            if (!groupedAchievements[achv.category]) {
+                groupedAchievements[achv.category] = [];
+            }
+            groupedAchievements[achv.category].push(achv);
+        }
+
+        let container = document.getElementById('achievements_container');
+
+        // カテゴリーごとにHTMLを生成して描画
+        for (let cat in groupedAchievements) {
+            let catSection = document.createElement('div');
+            catSection.className = 'achievement-category';
+
+            let catTitle = document.createElement('div');
+            catTitle.className = 'achievement-category-title';
+            catTitle.innerText = "■ " + (categoryNames[cat] || cat);
+            catSection.appendChild(catTitle);
+
+            let grid = document.createElement('div');
+            grid.className = 'achievement-grid';
+
+            let items = groupedAchievements[cat];
+            for (let j = 0; j < items.length; j++) {
+                let a = items[j];
+                let itemDiv = document.createElement('div');
+                let isUnlocked = !!unlockedData[a.id];
+
+                if (isUnlocked) {
+                    // 【獲得済み】全て表示
+                    itemDiv.className = 'achievement-item';
+                    
+                    // 日付のフォーマット整形
+                    let dateObj = new Date(unlockedData[a.id]);
+                    let dateStr = dateObj.getFullYear() + "/" + 
+                                  ("0" + (dateObj.getMonth() + 1)).slice(-2) + "/" + 
+                                  ("0" + dateObj.getDate()).slice(-2);
+
+                    itemDiv.innerHTML = `
+                        <div>
+                            <div class="achievement-title">🏆 ${a.title}</div>
+                            <div class="achievement-condition">${a.condition}</div>
+                        </div>
+                        <div class="achievement-date">獲得日: ${dateStr}</div>
+                    `;
+                } else {
+                    // 【未獲得】secretの設定に応じて条件表示を切り替え
+                    itemDiv.className = 'achievement-item locked';
+                    let displayCondition = a.secret === true ? "条件：？？？" : "条件：" + a.condition;
+                    
+                    itemDiv.innerHTML = `
+                        <div>
+                            <div class="achievement-title">🔒 ？？？</div>
+                            <div class="achievement-condition">${displayCondition}</div>
+                        </div>
+                        <div class="achievement-date">未獲得</div>
+                    `;
+                }
+                grid.appendChild(itemDiv);
+            }
+            
+            catSection.appendChild(grid);
+            container.appendChild(catSection);
+        }
+    </script>
+</body>
+</html>

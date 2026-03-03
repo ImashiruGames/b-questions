@@ -32,6 +32,9 @@
                 <label class="filter-label-margin">
                     <input type="checkbox" id="filter_incorrect"> <span>間違えた問題（復習対象）のみ表示</span>
                 </label>
+                <label class="filter-label-margin">
+                    <input type="checkbox" id="filter_favorite"> <span>お気に入り（★）のみ表示</span>
+                </label>
             </div>
 
             <div id="start-button-area" class="start-button-area">
@@ -72,6 +75,8 @@
 <script src="../js/makeUser_info_bar.js"></script>
 
 <script src="../short_questions/theme_templates.js"></script>
+<script src="../js/achievements_data.js"></script>
+<script src="../js/achievement_checker.js"></script>
 <script src="../js/user_manager.js"></script>
 <script src="../short_questions/questions.js"></script>
 <script>
@@ -93,6 +98,7 @@
     function checkSubthemeStatus(category, theme, subtheme) {
         let hasIncorrect = false;
         let hasUnattempted = false;
+        let hasFavorite = false;
 
         // トロフィー計算用のカウント変数
         let totalCount = 0;      // 総問題数
@@ -127,6 +133,10 @@
                         hasIncorrect = true;
                     }
                 }
+
+                if (typeof UserManager !== 'undefined' && UserManager.isFavorite(q)) {
+                    hasFavorite = true;
+                }
             }
         }
 
@@ -143,18 +153,18 @@
         }
 
         if (totalCount === 0) {
-            return { hasIncorrect: false, hasUnattempted: true, totalCount: 0, trophy: "none" };
+            return { hasIncorrect: false, hasUnattempted: true, hasFavorite: false, totalCount: 0, trophy: "none" };
         }
 
         return {
             hasIncorrect: hasIncorrect,
             hasUnattempted: hasUnattempted,
+            hasFavorite: hasFavorite,
             totalCount: totalCount,
             trophy: trophy
         };
     }
 
-    // --- フェーズ1＆3：HTML要素の動的生成とデータ埋め込み ---
     // --- フェーズ1＆3：HTML要素の動的生成とデータ埋め込み ---
     let container = document.querySelector("#category-container");
 
@@ -162,7 +172,7 @@
     let totalSilver = 0;
     let totalGold = 0;
     let foundTargetTheme = false;
-    let recommendedTotalQuestions = 0; 
+    let recommendedTotalQuestions = 0;
 
     for (let categoryName in categories) {
         let section = document.createElement("section");
@@ -172,7 +182,6 @@
         catHeader.classList.add("category-header");
         section.appendChild(catHeader);
 
-        // ★追加：カテゴリーの中身を包み込むラッパー
         let catContent = document.createElement("div");
         catContent.classList.add("category-content");
         section.appendChild(catContent);
@@ -218,7 +227,7 @@
                 let isChecked = "";
                 if (isTargetTheme == true && status.hasUnattempted == true) {
                     isChecked = "checked";
-                    recommendedTotalQuestions += status.totalCount; 
+                    recommendedTotalQuestions += status.totalCount;
                 }
 
                 if (status.trophy === "gold") totalGold++;
@@ -227,6 +236,7 @@
 
                 subthemeItem.setAttribute("data-incorrect", status.hasIncorrect ? "true" : "false");
                 subthemeItem.setAttribute("data-unattempted", status.hasUnattempted ? "true" : "false");
+                subthemeItem.setAttribute("data-favorite", status.hasFavorite ? "true" : "false");
 
                 let trophyHtml = "";
                 if (status.trophy === "gold") trophyHtml = `<img src="../img/medal_gold.png" class="medal-icon-left" alt="金メダル">`;
@@ -238,7 +248,7 @@
                     <span class="medal-slot">${trophyHtml}</span>
                     <input type="checkbox" class="sub-check" value="${subthemeName}" data-category="${categoryName}" data-theme="${themeName}" ${isChecked}>
                     <span>${subthemeName} <small>(全${status.totalCount}問)</small></span>
-                </label>`; 
+                </label>`;
                 subthemeList.appendChild(subthemeItem);
             }
 
@@ -256,9 +266,9 @@
                     <span class="toggle-btn"></span>
                 </div>
             `;
-            
+
             // ★追加：アコーディオン開閉イベント（テーマ）
-            themeHeader.addEventListener("click", function(e) {
+            themeHeader.addEventListener("click", function (e) {
                 // チェックボックスやラベルを押した時は開閉しない（競合回避）
                 if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
                     if (e.target.tagName === 'SPAN' && e.target.parentElement.tagName === 'LABEL') return;
@@ -283,7 +293,7 @@
         `;
 
         // ★追加：アコーディオン開閉イベント（カテゴリー）
-        catHeader.addEventListener("click", function(e) {
+        catHeader.addEventListener("click", function (e) {
             if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
                 if (e.target.tagName === 'SPAN' && e.target.parentElement.tagName === 'LABEL') return;
                 section.classList.toggle("is-open");
@@ -324,7 +334,7 @@
     function updateParentCheckboxStates(section) {
         let catCheck = section.querySelector(".cat-check");
         if (!catCheck) return;
-        
+
         let themeContainers = section.querySelectorAll(".theme-container");
         let catAllChecked = true;
         let catSomeChecked = false;
@@ -366,9 +376,9 @@
 
         catCheck.checked = catAllChecked;
         if (themeContainers.length === 0) {
-             catCheck.indeterminate = false;
+            catCheck.indeterminate = false;
         } else {
-             catCheck.indeterminate = catSomeChecked && !catAllChecked;
+            catCheck.indeterminate = catSomeChecked && !catAllChecked;
         }
     }
 
@@ -380,7 +390,7 @@
             let childChecks = section.querySelectorAll("input[type='checkbox']");
             for (let j = 0; j < childChecks.length; j++) {
                 childChecks[j].checked = this.checked;
-                childChecks[j].indeterminate = false; 
+                childChecks[j].indeterminate = false;
             }
         });
     }
@@ -403,9 +413,9 @@
     let subChecksAll = document.querySelectorAll(".sub-check");
     for (let i = 0; i < subChecksAll.length; i++) {
         subChecksAll[i].addEventListener("change", function () {
-            let subthemeItem = this.parentElement.parentElement; 
-            let themeContainer = subthemeItem.parentElement.parentElement; 
-            let section = themeContainer.parentElement.parentElement; 
+            let subthemeItem = this.parentElement.parentElement;
+            let themeContainer = subthemeItem.parentElement.parentElement;
+            let section = themeContainer.parentElement.parentElement;
             updateParentCheckboxStates(section);
         });
     }
@@ -418,10 +428,12 @@
     // --- フェーズ4：フィルタリング機能の実装 ---
     let filterIncorrect = document.getElementById("filter_incorrect");
     let filterUnattempted = document.getElementById("filter_unattempted");
+    let filterFavorite = document.getElementById("filter_favorite");
 
     function applyFilters() {
         let showIncorrectOnly = filterIncorrect.checked;
         let showUnattemptedOnly = filterUnattempted.checked;
+        let showFavoriteOnly = filterFavorite.checked;
 
         let allItems = document.querySelectorAll(".subtheme-item");
 
@@ -429,6 +441,7 @@
             let item = allItems[i];
             let isIncorrect = item.getAttribute("data-incorrect") === "true";
             let isUnattempted = item.getAttribute("data-unattempted") === "true";
+            let isFavorite = item.getAttribute("data-favorite") === "true";
 
             item.classList.remove("is-hidden");
 
@@ -439,6 +452,11 @@
 
             // 「未着手のみ表示」がONなのに、未着手がない場合は隠す
             if (showUnattemptedOnly && !isUnattempted) {
+                item.classList.add("is-hidden");
+            }
+
+            // 「お気に入り」がONなのに、お気に入り問題がない場合は隠す
+            if (showFavoriteOnly && !isFavorite) {
                 item.classList.add("is-hidden");
             }
         }
@@ -488,8 +506,22 @@
     }
 
     // フィルター用チェックボックスにイベントを紐付け
-    filterIncorrect.addEventListener("change", applyFilters);
-    filterUnattempted.addEventListener("change", applyFilters);
+    filterIncorrect.addEventListener("change", function () {
+        if (this.checked) {
+            filterUnattempted.checked = false; // 間違えた問題をONにしたら、newをOFFにする
+        }
+        applyFilters();
+    });
+
+    filterUnattempted.addEventListener("change", function () {
+        if (this.checked) {
+            filterIncorrect.checked = false; // newをONにしたら、間違えた問題をOFFにする
+        }
+        applyFilters();
+    });
+
+    // お気に入りは独立して重ねがけ可能
+    filterFavorite.addEventListener("change", applyFilters);
 </script>
 </body>
 

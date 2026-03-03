@@ -46,7 +46,8 @@
     border-bottom: 1px solid #000;
     background-color: #e0e0e0;
     font-weight: bolder;
-    padding: 3px; /* コメントアウトした方から必要なプロパティだけ救出 */
+    padding: 3px;
+    /* コメントアウトした方から必要なプロパティだけ救出 */
 }
 
 .theme-container {
@@ -82,10 +83,12 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:indeterminate::after {
-    content: "－"; /* マイナスやハイフンなど */
+    content: "－";
+    /* マイナスやハイフンなど */
     display: block;
     color: white;
-    background-color: #999; /* 控えめなグレー */
+    background-color: #999;
+    /* 控えめなグレー */
     font-size: 16px;
     text-align: center;
     line-height: 15px;
@@ -307,13 +310,13 @@ input[type="checkbox"]:checked::after {
 /* 展開される中身の要素（デフォルトは非表示） */
 .category-content,
 .subtheme-list {
-    display: none; 
+    display: none;
 }
 
 /* 親に is-open クラスがついた時だけ中身を表示 */
-.category-group.is-open > .category-content,
-.theme-container.is-open > .subtheme-list {
-    display: block; 
+.category-group.is-open>.category-content,
+.theme-container.is-open>.subtheme-list {
+    display: block;
 }
 
 /* 折りたたみアイコン（▶ / ▼）のスタイル */
@@ -322,7 +325,7 @@ input[type="checkbox"]:checked::after {
     padding: 5px 15px;
     font-size: 1.2rem;
     user-select: none;
-    color: #666;
+    color: black;
 }
 
 /* アイコンの実体（CSSで生成） */
@@ -333,13 +336,59 @@ input[type="checkbox"]:checked::after {
 }
 
 /* 開いている時はアイコンを90度回転させて「▼」にする */
-.category-group.is-open > .category-header .toggle-btn::before,
-.theme-container.is-open > .theme-header .toggle-btn::before {
-    transform: rotate(90deg); 
+.category-group.is-open>.category-header .toggle-btn::before,
+.theme-container.is-open>.theme-header .toggle-btn::before {
+    transform: rotate(90deg);
 }
 
 /* ヘッダー全体をクリックできるようにカーソル変更 */
 .category-header,
 .theme-header {
     cursor: pointer;
+}
+
+/* ==========================================
+   アチーブメント獲得通知（トーストUI）
+   ========================================== */
+#achievement_toast_container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+    /* クリックを邪魔しない */
+}
+
+.achievement-toast {
+    background-color: rgba(0, 0, 0, 0.85);
+    /* 半透明の黒 */
+    color: #fff;
+    border: 1px solid #fff;
+    /* 直線の白枠 */
+    border-radius: 0;
+    /* 丸角NG */
+    padding: 15px 20px;
+    font-family: monospace;
+    font-size: 0.95rem;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+    /* ぼかさないソリッドな影 */
+
+    /* ふわっと浮くアニメーションNGのため、直線的に右からスライドイン */
+    transform: translateX(120%);
+    transition: transform 0.2s linear;
+}
+
+.achievement-toast.show {
+    transform: translateX(0);
+}
+
+.toast-title {
+    color: #FFD700;
+    /* 金色 */
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
 }

@@ -18,6 +18,9 @@ header.innerHTML = `
             <a href="encyclopedia.html">
                 <li class="menuLink">用語集</li>
             </a>
+            <a href="achievement.html">
+                <li class="menuLink">アチーブメント</li>
+            </a>
         </ul>
     </div>
 </header>
@@ -28,13 +31,13 @@ const menuToggle = document.getElementById("mobile_menu_toggle");
 const globalMenu = document.getElementById("global_menu");
 
 if (menuToggle && globalMenu) {
-    menuToggle.addEventListener("click", function() {
+    menuToggle.addEventListener("click", function () {
 
     });
 }
 
 if (menuToggle) {
-    menuToggle.addEventListener('click', function() {
+    menuToggle.addEventListener('click', function () {
         if (this.classList.contains('is-spinning')) return;
 
         // 1. 回転クラスを付与してアニメーション開始
@@ -43,6 +46,6 @@ if (menuToggle) {
 
         setTimeout(() => {
             this.classList.remove('is-spinning');
-        }, 400); 
+        }, 400);
     });
 }

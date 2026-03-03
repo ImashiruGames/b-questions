@@ -555,3 +555,133 @@ $color-primary: #0056b3;
 .is-hidden {
     display: none !important;
 }
+
+/* ==========================================
+   Phase 3: お気に入りボタン＆バッジ用スタイル
+   ========================================== */
+
+/* NEWバッジ */
+.new-badge {
+    color: #c62828;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 10px;
+    border: 1px solid #c62828;
+    padding: 1px 4px;
+}
+
+/* 履歴バッジ */
+.history-badge {
+    font-size: 0.8rem;
+    color: #666;
+    margin-left: 10px;
+}
+
+/* お気に入りボタン共通 */
+.fav-btn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #333;
+    transition: all 0.2s;
+}
+
+/* お気に入り【未登録】状態 */
+.fav-unregistered {
+    background-color: #fff;
+    color: #333;
+}
+
+.fav-unregistered:hover {
+    background-color: #eee;
+}
+
+/* お気に入り【登録済】状態 */
+.fav-registered {
+    background-color: #333;
+    color: #fff;
+}
+
+.fav-registered:hover {
+    background-color: #000;
+}
+
+/* ==========================================
+   Phase 5: アチーブメント一覧画面
+   ========================================== */
+.achievement-progress-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    display: inline-block;
+}
+
+.achievement-category {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.achievement-category-title {
+    border-bottom: 2px solid #333;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.achievement-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+@media (min-width: 768px) {
+    .achievement-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.achievement-item {
+    border: 2px solid #333;
+    padding: 15px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.achievement-item.locked {
+    background-color: #f4f4f4;
+    border: 1px dashed #999;
+    color: #666;
+}
+
+.achievement-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.achievement-item.locked .achievement-title {
+    border-bottom: 1px dashed #ccc;
+}
+
+.achievement-condition {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.achievement-date {
+    font-size: 0.85rem;
+    color: #2e7d32;
+    text-align: right;
+    font-weight: bold;
+    font-family: monospace;
+}

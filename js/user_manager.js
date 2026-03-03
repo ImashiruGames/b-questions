@@ -70,6 +70,7 @@ var UserManager = {
         }
 
         localStorage.setItem(statsKey, JSON.stringify(stats));
+        if (typeof AchievementChecker !== 'undefined') AchievementChecker.checkInstant();
     },
 
     // ID生成ロジック "制御構文_if文_1"が出力
@@ -87,6 +88,85 @@ var UserManager = {
         return Object.keys(stats).filter(function (key) {
             return stats[key].correct > 0;
         });
+    },
+
+    // --- 追加：お気に入り管理機能 ---
+
+    // 1. お気に入り状態の確認
+    isFavorite: function (question) {
+        if (!this.currentUser) return false;
+        let qId = this.generateId(question);
+        let favKey = 'bucket_favorites_' + this.currentUser;
+        let favorites = JSON.parse(localStorage.getItem(favKey) || "{}");
+        
+        // 存在すれば true、しなければ false を返す
+        return !!favorites[qId];
+    },
+
+    // 2. お気に入りの切り替え（登録・解除）
+    toggleFavorite: function (question) {
+        if (!this.currentUser) return false;
+        let qId = this.generateId(question);
+        let favKey = 'bucket_favorites_' + this.currentUser;
+        let favorites = JSON.parse(localStorage.getItem(favKey) || "{}");
+
+        if (favorites[qId]) {
+            // 既に登録されていれば削除（解除）
+            delete favorites[qId];
+        } else {
+            // 未登録なら true として追加（登録）
+            favorites[qId] = true;
+        }
+
+        // ストレージに保存し直す
+        localStorage.setItem(favKey, JSON.stringify(favorites));
+        
+        if (typeof AchievementChecker !== 'undefined') AchievementChecker.checkInstant();
+        // 変更後の状態を返す（画面の表示切り替え用）
+        return !!favorites[qId];
+    },
+
+    // 3. お気に入り登録されている問題IDの配列を取得（フィルター用）
+    getFavorites: function () {
+        if (!this.currentUser) return [];
+        let favKey = 'bucket_favorites_' + this.currentUser;
+        let favorites = JSON.parse(localStorage.getItem(favKey) || "{}");
+        
+        return Object.keys(favorites);
+    },
+
+    hasAchievement: function (achievementId) {
+        if (!this.currentUser) return false;
+        let achvKey = 'bucket_achievements_' + this.currentUser;
+        let achievements = JSON.parse(localStorage.getItem(achvKey) || "{}");
+        
+        return !!achievements[achievementId];
+    },
+
+    // 2. 新しいアチーブメントを獲得（保存）する
+    // ※ 既に獲得済みの場合は false を返し、新規獲得時のみ true を返す
+    unlockAchievement: function (achievementId) {
+        if (!this.currentUser) return false;
+        let achvKey = 'bucket_achievements_' + this.currentUser;
+        let achievements = JSON.parse(localStorage.getItem(achvKey) || "{}");
+
+        if (achievements[achievementId]) {
+            return false; // 獲得済み
+        } else {
+            // 現在の日時と共に保存（一覧画面で獲得日を表示するため）
+            achievements[achievementId] = new Date().toISOString();
+            localStorage.setItem(achvKey, JSON.stringify(achievements));
+            return true; // 新規獲得成功
+        }
+    },
+
+    // 3. 獲得済みのアチーブメントID配列を取得する（一覧画面用）
+    getUnlockedAchievements: function () {
+        if (!this.currentUser) return [];
+        let achvKey = 'bucket_achievements_' + this.currentUser;
+        let achievements = JSON.parse(localStorage.getItem(achvKey) || "{}");
+        
+        return Object.keys(achievements);
     },
 
     // モーダル表示（アロー関数を排除）

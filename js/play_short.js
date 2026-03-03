@@ -1,7 +1,3 @@
-/**
- * Imashiru Project - ショート問題集 統合スクリプト
- */
-
 // ==========================================
 // 1. 状態管理変数
 // ==========================================
@@ -16,11 +12,10 @@ let limitQuestions = 10;
 let correctCountInRound = 0;
 let categoryAndThemeNumDictionary = {};
 let wrongQuestionsInRound = [];
+let maxStreakInRound = 0;
 
 // [レガシーUI/機能で参照される変数]
 let isDevMode = false;
-const startmodal = document.getElementById('start_modal');
-
 
 // ==========================================
 // 2. ユーティリティ（共通処理）
@@ -140,6 +135,7 @@ function initPlayScreen() {
     currentIndex = 0;
     currentPallet = 0;
     correctCountInRound = 0;
+    maxStreakInRound = 0;
 
     let next_btns = document.getElementsByClassName("next_btn");
     for (let i = 0; i < next_btns.length; i++) {
@@ -204,12 +200,6 @@ function countUpCategories() {
     }
 }
 
-function showStartModal() {
-    console.log("showStartModal()");
-    startmodal.classList.add("show");
-    startmodal.style.display = "flex";
-}
-
 function startGame() {
     console.log("startGame()");
     var first_selectvalue = document.getElementById('start_question_limit').value;
@@ -226,9 +216,6 @@ function startGame() {
         document.getElementById("caution").innerText = "⚠️使用できない文字が含まれています！"
         return;
     }
-
-    startmodal.classList.remove('show');
-    startmodal.style.display = 'none';
 
     updateQuestionLimit(selectvalue);
     initPalette();
@@ -451,12 +438,41 @@ function loadQuestion(index) {
 
     let HistoryHTML = "";
     if (!s) {
-        HistoryHTML = `　<p style="color:red; font-size:0.7rem">NEW!</p>`
+        HistoryHTML = `<span class="new-badge">NEW!</span>`;
+    } else if (s.incorrect > 0) {
+        HistoryHTML = `<span class="history-badge">❌${s.incorrect} ⭕${s.correct}</span>`; // 少し見やすく記号を追加
     }
-    else if (s.incorrect > 0) {
-        HistoryHTML = `　${s.incorrect},${s.correct}`
+
+    let favText = "☆ お気に入りに追加";
+    let favClass = "fav-btn fav-unregistered";
+    if (typeof UserManager !== 'undefined' && UserManager.isFavorite(q)) {
+        favText = "★ お気に入り解除";
+        favClass = "fav-btn fav-registered";
     }
-    document.getElementById('Q_num').innerHTML = '<p>Q' + (index + 1) + '</p>' + HistoryHTML;
+
+    document.getElementById('Q_num').innerHTML = `
+        <div style="display: flex; align-items: center;">
+            <span>Q${index + 1}</span>
+            ${HistoryHTML}
+        </div>
+        <button id="favorite_btn" class="${favClass}">${favText}</button>
+    `;
+
+    let favBtn = document.getElementById('favorite_btn');
+    if (favBtn) {
+        favBtn.onclick = function () {
+            if (typeof UserManager !== 'undefined') {
+                let isFav = UserManager.toggleFavorite(q);
+                if (isFav) {
+                    this.innerText = "★ お気に入り解除";
+                    this.className = "fav-btn fav-registered";
+                } else {
+                    this.innerText = "☆ お気に入りに追加";
+                    this.className = "fav-btn fav-unregistered";
+                }
+            }
+        };
+    }
 }
 
 // [現役] 正誤判定
@@ -470,7 +486,9 @@ function checkAnswer(isCorrect) {
 
     if (isCorrect) {
         streak = streak + 1;
-
+        if (streak > maxStreakInRound) {
+            maxStreakInRound = streak;
+        }
         isAnswered = true;
 
         if (instructionElement) {
@@ -544,6 +562,20 @@ function nextQuestion() {
 // [現役] 完了モーダル表示
 function showCompletionModal() {
     let modal = document.getElementById('completion_modal');
+
+    if (typeof AchievementChecker !== 'undefined') {
+        // ★以下の sessionData の中身を正しい変数名に書き換えます
+        var sessionData = {
+            totalQuestions: activeQuestions.length, // 修正
+            correctCount: correctCountInRound,      // 修正
+            maxStreak: maxStreakInRound,            // 修正
+            filterUsed: sessionStorage.getItem("imashiru_filter_used") || "none" 
+        };
+
+        // セッション判定を実行
+        AchievementChecker.checkSessionEnd(sessionData);
+    }
+
     document.getElementById('modal_correct').innerText = correctCountInRound;
     document.getElementById('modal_total').innerText = activeQuestions.length;
     modal.classList.add('show');
@@ -557,13 +589,3 @@ function restartGame() {
 
     location.reload();
 }
-
-// --- レガシー関数（初期起動イベント） ---
-window.onload = function () {
-    countUpCategories();
-    initNavigation();
-    if (typeof UserManager !== 'undefined') {
-        UserManager.init();
-    }
-    showStartModal();
-};
