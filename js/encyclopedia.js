@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // ② 用意した箱の中に、問題データ（short_questions）を振り分けて入れていく
     for (let i = 0; i < short_questions.length; i++) {
         let q = short_questions[i];
+
+        if (!q) continue;
+        
         // ※万が一、templatesに無い新カテゴリの問題があった時のための安全策
         if (!groupedData[q.category]) groupedData[q.category] = {};
         if (!groupedData[q.category][q.theme]) groupedData[q.category][q.theme] = [];
