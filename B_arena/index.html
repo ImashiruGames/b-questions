@@ -155,13 +155,14 @@
     }
 
     // --- フェーズ1＆3：HTML要素の動的生成とデータ埋め込み ---
+    // --- フェーズ1＆3：HTML要素の動的生成とデータ埋め込み ---
     let container = document.querySelector("#category-container");
 
     let totalBronze = 0;
     let totalSilver = 0;
     let totalGold = 0;
     let foundTargetTheme = false;
-    let recommendedTotalQuestions = 0; // 追加：おすすめ問題の総数
+    let recommendedTotalQuestions = 0; 
 
     for (let categoryName in categories) {
         let section = document.createElement("section");
@@ -170,6 +171,11 @@
         let catHeader = document.createElement("div");
         catHeader.classList.add("category-header");
         section.appendChild(catHeader);
+
+        // ★追加：カテゴリーの中身を包み込むラッパー
+        let catContent = document.createElement("div");
+        catContent.classList.add("category-content");
+        section.appendChild(catContent);
 
         let categoryHasTarget = false;
         let themes = categories[categoryName];
@@ -209,11 +215,10 @@
 
                 let status = checkSubthemeStatus(categoryName, themeName, subthemeName);
 
-                // 💡 変更：おすすめテーマの中で、未着手(new)のサブテーマ「のみ」チェックする
                 let isChecked = "";
                 if (isTargetTheme == true && status.hasUnattempted == true) {
                     isChecked = "checked";
-                    recommendedTotalQuestions += status.totalCount; // おすすめ問題数を合算
+                    recommendedTotalQuestions += status.totalCount; 
                 }
 
                 if (status.trophy === "gold") totalGold++;
@@ -241,14 +246,50 @@
             if (isTargetTheme == true) {
                 recommend = "　👈おすすめ！";
                 themeHeader.classList.add("is-recommended");
+                themeContainer.classList.add("is-open"); // ★おすすめテーマは最初から開く
             }
-            // 親チェックボックスはHTML生成時はcheckedを空にしておき、後でJSで再計算する
-            themeHeader.innerHTML = `<label><input type="checkbox" class="theme-check" value="${themeName}"> <span>${themeName}${recommend}</span></label>`;
+
+            // ★変更：アイコン付きのFlexレイアウト
+            themeHeader.innerHTML = `
+                <div class="header-flex">
+                    <label><input type="checkbox" class="theme-check" value="${themeName}"> <span>${themeName}${recommend}</span></label>
+                    <span class="toggle-btn"></span>
+                </div>
+            `;
+            
+            // ★追加：アコーディオン開閉イベント（テーマ）
+            themeHeader.addEventListener("click", function(e) {
+                // チェックボックスやラベルを押した時は開閉しない（競合回避）
+                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+                    if (e.target.tagName === 'SPAN' && e.target.parentElement.tagName === 'LABEL') return;
+                    themeContainer.classList.toggle("is-open");
+                }
+            });
+
             themeContainer.appendChild(subthemeList);
-            section.appendChild(themeContainer);
+            catContent.appendChild(themeContainer); // category-content の中に入れる
         }
 
-        catHeader.innerHTML = `<label><input type="checkbox" class="cat-check" value="${categoryName}"> <span>${categoryName}</span></label>`;
+        if (categoryHasTarget == true) {
+            section.classList.add("is-open"); // ★おすすめカテゴリーは最初から開く
+        }
+
+        // ★変更：アイコン付きのFlexレイアウト
+        catHeader.innerHTML = `
+            <div class="header-flex">
+                <label><input type="checkbox" class="cat-check" value="${categoryName}"> <span>${categoryName}</span></label>
+                <span class="toggle-btn"></span>
+            </div>
+        `;
+
+        // ★追加：アコーディオン開閉イベント（カテゴリー）
+        catHeader.addEventListener("click", function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+                if (e.target.tagName === 'SPAN' && e.target.parentElement.tagName === 'LABEL') return;
+                section.classList.toggle("is-open");
+            }
+        });
+
         container.appendChild(section);
 
         let medalArea = document.getElementById("total_medals_area");
@@ -270,7 +311,6 @@
         }
     }
 
-    // 💡 追加：初期出題数の動的設定
     if (recommendedTotalQuestions > 0) {
         let limitInput = document.getElementById("question_limit");
         if (limitInput) {
@@ -281,7 +321,6 @@
 
     // --- フェーズ2：双方向連動と半選択（Indeterminate）の実装 ---
 
-    // 子要素の状況を見て、親・祖父のチェック状態を正しく更新する関数
     function updateParentCheckboxStates(section) {
         let catCheck = section.querySelector(".cat-check");
         if (!catCheck) return;
@@ -310,12 +349,10 @@
                 }
             }
 
-            // テーマ（親）の状態更新
             if (themeCheck) {
                 themeCheck.checked = subAllChecked;
                 themeCheck.indeterminate = subSomeChecked && !subAllChecked;
 
-                // カテゴリ（祖父）用の状況集計
                 if (themeCheck.checked) {
                     catSomeChecked = true;
                 } else if (themeCheck.indeterminate || subSomeChecked) {
@@ -327,7 +364,6 @@
             }
         }
 
-        // カテゴリ（祖父）の状態更新
         catCheck.checked = catAllChecked;
         if (themeContainers.length === 0) {
              catCheck.indeterminate = false;
@@ -336,52 +372,48 @@
         }
     }
 
-    // イベントリスナーの登録（一番上のカテゴリをクリックした時）
     let catChecks = document.querySelectorAll(".cat-check");
     for (let i = 0; i < catChecks.length; i++) {
         catChecks[i].addEventListener("change", function () {
-            let section = this.parentElement.parentElement.parentElement;
+            // 階層が深くなったため .parentElement の数を調整 (input -> label -> header-flex -> category-header -> section)
+            let section = this.parentElement.parentElement.parentElement.parentElement;
             let childChecks = section.querySelectorAll("input[type='checkbox']");
             for (let j = 0; j < childChecks.length; j++) {
                 childChecks[j].checked = this.checked;
-                childChecks[j].indeterminate = false; // 子の半選択状態もクリアする
+                childChecks[j].indeterminate = false; 
             }
         });
     }
 
-    // イベントリスナーの登録（真ん中のテーマをクリックした時）
     let themeChecks = document.querySelectorAll(".theme-check");
     for (let i = 0; i < themeChecks.length; i++) {
         themeChecks[i].addEventListener("change", function () {
-            let themeContainer = this.parentElement.parentElement.parentElement;
+            // (input -> label -> header-flex -> theme-header -> theme-container)
+            let themeContainer = this.parentElement.parentElement.parentElement.parentElement;
             let subChecks = themeContainer.querySelectorAll(".sub-check");
             for (let j = 0; j < subChecks.length; j++) {
                 subChecks[j].checked = this.checked;
             }
-            // 親であるカテゴリの状態を再計算
-            let section = themeContainer.parentElement;
+            // (theme-container -> category-content -> section)
+            let section = themeContainer.parentElement.parentElement;
             updateParentCheckboxStates(section);
         });
     }
 
-    // イベントリスナーの登録（一番下のサブテーマをクリックした時）
     let subChecksAll = document.querySelectorAll(".sub-check");
     for (let i = 0; i < subChecksAll.length; i++) {
         subChecksAll[i].addEventListener("change", function () {
-            let subthemeList = this.parentElement.parentElement; // label -> div.subtheme-item
-            let themeContainer = subthemeList.parentElement.parentElement; // div.subtheme-list -> div.theme-container
-            let section = themeContainer.parentElement; // div.theme-container -> section
+            let subthemeItem = this.parentElement.parentElement; 
+            let themeContainer = subthemeItem.parentElement.parentElement; 
+            let section = themeContainer.parentElement.parentElement; 
             updateParentCheckboxStates(section);
         });
     }
 
-    // 初期描画完了時に、全セクションの半選択状態を計算して反映する
     let sections = document.querySelectorAll(".category-group");
     for (let i = 0; i < sections.length; i++) {
         updateParentCheckboxStates(sections[i]);
     }
-
-    // (ここから下はフェーズ4の applyFilters 等が続きます)
 
     // --- フェーズ4：フィルタリング機能の実装 ---
     let filterIncorrect = document.getElementById("filter_incorrect");

@@ -395,6 +395,16 @@ input[type=checkbox] {
   vertical-align: middle;
 }
 
+input[type=checkbox]:indeterminate::after {
+  content: "－"; /* マイナスやハイフンなど */
+  display: block;
+  color: white;
+  background-color: #999; /* 控えめなグレー */
+  font-size: 16px;
+  text-align: center;
+  line-height: 15px;
+}
+
 /* チェックされている状態（デフォルト）の文字色 */
 input[type=checkbox] + span {
   color: #333;
@@ -593,6 +603,59 @@ input[type=checkbox]:checked::after {
 
 .is-hidden {
   display: none !important;
+}
+
+/* ==========================================
+   Phase 4: アコーディオン（折りたたみ）UI
+   ========================================== */
+/* ヘッダー内を横並びにするフレックスボックス */
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* 展開される中身の要素（デフォルトは非表示） */
+.category-content,
+.subtheme-list {
+  display: none;
+}
+
+/* 親に is-open クラスがついた時だけ中身を表示 */
+.category-group.is-open > .category-content,
+.theme-container.is-open > .subtheme-list {
+  display: block;
+}
+
+/* 折りたたみアイコン（▶ / ▼）のスタイル */
+.toggle-btn {
+  cursor: pointer;
+  padding: 5px 15px;
+  font-size: 1.2rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  color: #666;
+}
+
+/* アイコンの実体（CSSで生成） */
+.toggle-btn::before {
+  content: "▶";
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+/* 開いている時はアイコンを90度回転させて「▼」にする */
+.category-group.is-open > .category-header .toggle-btn::before,
+.theme-container.is-open > .theme-header .toggle-btn::before {
+  transform: rotate(90deg);
+}
+
+/* ヘッダー全体をクリックできるようにカーソル変更 */
+.category-header,
+.theme-header {
+  cursor: pointer;
 }
 
 /* play_short.scss (完全版) */
