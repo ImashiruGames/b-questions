@@ -282,21 +282,21 @@ const short_questions = [
     ],
     "specific_explanation": "1. 最小単位の特定\n階乗の定義における計算の終着点 0! = 1 をベースケースとする。\n\n2. 戻り値の確定\nm = 0 のときに再帰を停止し、具体的な値 1 を返すことで全体の計算を完結させる。\n<div class=\"important\">elseif (m が 0 と等しい)</div>"
   },
-  {
+{
     "id": 20,
     "category": "制御構文",
     "theme": "再帰関数",
     "subtheme": "ベースケース（終了条件）",
     "text": "Fact(m) において、再帰継続の条件（3行目）を m > 1 に、停止条件（5行目）を m = 1 に変更した場合、m が 1 以上の範囲で正しく動作するか。",
-    "example": "m = 2 のとき 2 * Fact(1) となり、Fact(1) が 1 を返せば 2 * 1 = 2 で計算が完了する。",
-    "code": "   01  整数型: m\n   02  Fact(整数型: m)\n   03  <span class=\"if\">if (m > 0)</span>\n   04     return m * Fact(m - 1)\n   05  <span class=\"if\">elseif (m = 0)</span>\n   06     return 1\n   07  <span class=\"if\">endif</span>",
+    "example": "m = 2 のとき、2 × Fact(1) という呼び出しが発生します。Fact(1) が elseif に到達できるかどうか確認してみましょう。",
+    "code": "01  整数型: m\n02  Fact(整数型: m)\n03  <span class=\"if\">if (m > 1)</span>\n04     return m × Fact(m - 1)\n05  <span class=\"if\">elseif (m = 1)</span>\n06     return 1\n07  <span class=\"if\">endif</span>",
     "choices": [
       "正しく動作する",
       "Fact(0) が呼び出され無限再帰になる",
       "常に 0 を返すようになる",
       "1 以外の値で実行するとエラーになる"
     ],
-    "specific_explanation": "1. 最小単位の特定\nm ≧ 1 の範囲であれば、終着点を 1!（m = 1）としても階乗の計算結果に影響はない。\n\n2. 戻り値の確定\n1! = 1 であるため、m = 1 の時に 1 を返せば、正の整数の階乗として数学的に正しい結果が得られる。\n<div class=\"important\">正の整数の範囲なら m = 1 停止でも問題ない</div>"
+    "specific_explanation": "1. 最小単位の特定\n   m ≥ 1 の範囲であれば、終着点を 1!（m = 1）としても階乗の計算結果に影響はありません。\n\n2. 戻り値の確定\n   1! = 1 であるため、m = 1 のときに 1 を返せば、正の整数の階乗として数学的に正しい結果が得られます。\n   <div class=\"important\">正の整数の範囲なら m = 1 停止でも問題ない</div>"
   },
 
   // --- テーマ2：再帰的処理と計算ロジック ---
@@ -305,16 +305,16 @@ const short_questions = [
     "category": "制御構文",
     "theme": "再帰関数",
     "subtheme": "再帰的処理",
-    "text": "階乗 n! = n * (n-1)! を再帰関数 Fact(m) で実装する。空欄 [ a ] に入る式を選べ。",
-    "example": "m = 3 のとき、3 * Fact(2) を呼び出すことで階乗の計算を連鎖させる。",
-    "code": "   01  整数型: m\n   02  Fact(整数型: m)\n   03  <span class=\"if\">if (m > 0)</span>\n   04     return [    a    ]\n   05  <span class=\"if\">endif</span>",
+    "text": "階乗 n! = n × (n-1)! を再帰関数 Fact(m) で実装する。空欄 [ a ] に入る式を選べ。",
+    "example": "m = 3 のとき、3 × Fact(?) という形になるはずです。? に何が入るか考えてみましょう。",
+    "code": "01  整数型: m\n02  Fact(整数型: m)\n03  <span class=\"if\">if (m > 0)</span>\n04     return [    a    ]\n05  <span class=\"if\">endif</span>",
     "choices": [
-      "m * Fact(m - 1)",
-      "(m - 1) * Fact(m)",
+      "m × Fact(m - 1)",
+      "(m - 1) × Fact(m)",
       "m + Fact(m - 1)",
       "Fact(m - 1)"
     ],
-    "specific_explanation": "1. 一回り小さい形への変換\n「現在の値 m」に「一つ小さい値 m - 1 の計算結果」を掛け合わせることで、階乗の定義をプログラムに落とし込む。\n\n2. 再帰呼び出し\n自分自身（Fact）を引数 m - 1 で呼び出し、より小さな問題を解かせることで最終的な解を得る。\n<div class=\"important\">return m * Fact(m - 1)</div>"
+    "specific_explanation": "1. 一回り小さい形への変換\n   「現在の値 m」に「一つ小さい値 m - 1 の計算結果」を掛け合わせることで、階乗の定義をプログラムに落とし込みます。\n\n2. 再帰呼び出し\n   自分自身（Fact）を引数 m - 1 で呼び出し、より小さな問題を解かせることで最終的な解を得ます。\n   <div class=\"important\">return m × Fact(m - 1)</div>"
   },
   {
     "id": 22,
@@ -322,26 +322,26 @@ const short_questions = [
     "theme": "再帰関数",
     "subtheme": "再帰的処理",
     "text": "階乗を計算する再帰関数 Fact(m) において、Fact(3) を呼び出したとき、関数内部で Fact 関数は合計で何回呼び出されますか。※最初の呼び出し Fact(3) も含めます。",
-    "example": "Fact(3) を呼び出すと、次に Fact(2) が、その次に Fact(1) が...と呼び出される。",
-    "code": "Fact(3) = 3 * Fact(2)\nFact(2) = 2 * Fact(1)\nFact(1) = 1 * Fact(0)\nFact(0) = 1 (停止)",
+    "example": "Fact(3) が Fact(2) を呼び出し、Fact(2) がさらに Fact(1) を呼び出す…という連鎖を手でたどってみましょう。どこで止まりますか。",
+    "code": "Fact(3) = 3 × Fact(2)\nFact(2) = 2 × Fact(1)\nFact(1) = 1 × Fact(0)\nFact(0) = 1 （停止）",
     "choices": ["4回", "3回", "2回", "5回"],
-    "specific_explanation": "1. 一回り小さい形への変換\n   m=3, 2, 1 までは if (m > 0) に入り、次の Fact を呼び出します。\n\n2. 最小単位の特定\n   m=0 になったとき、elseif (m = 0) に入って 1 を返し、再帰が止まります。よって呼び出しは 3, 2, 1, 0 の計4回です。\n   <div class=\"important\">Fact(3), Fact(2), Fact(1), Fact(0) の計4回<\/div>"
+    "specific_explanation": "1. 一回り小さい形への変換\n   m = 3, 2, 1 のあいだは if (m > 0) に入り、次の Fact を呼び出します。\n\n2. 最小単位の特定\n   m = 0 になったとき elseif (m = 0) に入り 1 を返して再帰が止まります。呼び出しは Fact(3), Fact(2), Fact(1), Fact(0) の計 4 回です。\n   <div class=\"important\">Fact(3), Fact(2), Fact(1), Fact(0) の計4回</div>"
   },
   {
     "id": 23,
     "category": "制御構文",
     "theme": "再帰関数",
-    "subtheme": "一回り小さい形への変換",
-    "text": "階乗を計算する再帰関数 Fact(m) において、もし 3行目を return m times Fact(m) と記述してしまった場合、どのような問題が発生しますか。ここで、m は階乗を計算する対象の整数です。",
-    "example": "入力: m = 3 の場合、3 * Fact(3) が実行され、これが無限に繰り返される。",
-    "code": "3     return m times Fact(m)",
+    "subtheme": "再帰的処理",
+    "text": "階乗を計算する再帰関数 Fact(m) において、もし 4行目を return m × Fact(m) と記述してしまった場合、どのような問題が発生しますか。",
+    "example": "m = 3 のとき、3 × Fact(3) が呼ばれます。次に Fact(3) の中ではまた何が呼ばれるか追ってみましょう。",
+    "code": "01  整数型: m\n02  Fact(整数型: m)\n03  <span class=\"if\">if (m > 0)</span>\n04     return m × Fact(m)  /* ← 誤り */\n05  <span class=\"if\">elseif (m = 0)</span>\n06     return 1\n07  <span class=\"if\">endif</span>",
     "choices": [
       "無限に自分を呼び出し続け、メモリ不足（スタックオーバーフロー）で停止する",
       "計算結果が常に 0 になる",
       "1回だけ呼び出して終了する",
       "コンパイル時にエラーが出る"
     ],
-    "specific_explanation": "1. 継続条件の更新（無限ループ回避）\n   再帰関数は、呼び出すごとに引数を「終了条件」に近づける必要があります。\n\n2. 変数の変化\n   引数が m のまま変化しない場合、終了条件である m=0 に決して到達しないため、無限に再帰を繰り返してしまいます。\n   <div class=\"important\">終了条件に近づかない再帰は無限ループになる<\/div>"
+    "specific_explanation": "1. 一回り小さい形への変換\n   再帰関数は、呼び出しのたびに引数を「終了条件に近づける」必要があります。正しくは Fact(m - 1) のように引数を 1 減らします。\n\n2. 最小単位の特定\n   引数が m のまま変化しない場合、終了条件 m = 0 に決して到達できないため、無限に再帰が続いてしまいます。\n   <div class=\"important\">終了条件に近づかない再帰は無限ループになる</div>"
   },
 
   // 5問目
@@ -386,10 +386,10 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "ビット列の処理を行うこのプログラムを for 文ではなく while 文で書き換える場合、ループ変数 i の更新処理としてループ内で忘れてはいけない処理はどれですか。",
-    "example": "while (i \u2264 8) の条件がいつか偽(false)になるように、ループ内で i の値を変更する必要がある。",
-    "code": "1  i \u2190 1\n2  <span class=\"while\">while (i \u2264 8)<\/span>\n3     // 計算処理...\n4     [      ?      ]\n5  <span class=\"while\">endwhile<\/span>",
-    "choices": ["i \u2190 i + 1", "i \u2190 0", "i \u2190 i - 1", "return retBin"],
-    "specific_explanation": "1. 変数の変化\n   while 文では、ループ内で条件に使っている変数（この場合は i）を更新しないと、条件がいつまでも真（true）のままになり、無限ループに陥ります。\n\n2. 継続条件の更新\n   for 文が自動で行ってくれる「カウントアップ」を、手動で記述する必要があります。\n   <div class=\"important\">i \u2190 i + 1<\/div>"
+    "example": "while (i ≤ 8) の条件がいつか偽(false)になるためには、ループ内で i をどう変化させる必要があるか考えてみましょう。",
+    "code": "01  整数型: i\n02  i ← 1\n03  <span class=\"while\">while (i ≤ 8)</span>\n04     /* 計算処理 */\n05     [      ?      ]\n06  <span class=\"while\">endwhile</span>",
+    "choices": ["i ← i + 1", "i ← 0", "i ← i - 1", "return retBin"],
+    "specific_explanation": "1. 変数の変化\n   while 文では、ループ内で条件に使っている変数（ここでは i）を更新しないと、条件がいつまでも真のままになり無限ループに陥ります。\n\n2. 継続条件の更新（無限ループ回避）\n   for 文が自動で行ってくれる「カウントアップ」を手動で記述する必要があります。\n   <div class=\"important\">i ← i + 1</div>"
   },
   // 6問目
   // --- テーマ1：論理シフトの仕組みと範囲判定 ---
@@ -428,10 +428,10 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "変数の変化",
     "text": "ビット配列 bin の要素を移動させるループ（i を bin の要素数-n から 1 まで 1 ずつ減らす）を while 文で実装する場合、ループ変数 i の更新処理としてループ内の最後に記述すべき処理はどれですか。",
-    "example": "while (i \u2265 1) の条件がいつか偽(false)になるように、ループ内で i の値を変更する必要がある。",
-    "code": "1  i \u2190 binの要素数 - n\n2  <span class=\"while\">while (i \u2265 1)<\/span>\n3     bin[i + n] \u2190 bin[i]\n4     [      ?      ]\n5  <span class=\"while\">endwhile<\/span>",
-    "choices": ["i \u2190 i - 1", "i \u2190 i + 1", "i \u2190 0", "i \u2190 binの要素数"],
-    "specific_explanation": "1. 継続条件の更新（無限ループ回避）\n   このループは「1 まで減らす」処理であるため、ループのたびに変数 i を 1 ずつ小さくする必要があります。\n\n2. 変数の変化\n   もし i を減らさないと、条件 i \u2265 1 が常に真のままとなり、プログラムが停止しなくなります。\n   <div class=\"important\">i \u2190 i - 1<\/div>"
+    "example": "while (i ≥ 1) の条件がいつか偽(false)になるためには、i をどちらの方向へ変化させる必要があるか考えてみましょう。",
+    "code": "01  整数型の配列: bin\n02  整数型: i, n\n03  i ← binの要素数 - n\n04  <span class=\"while\">while (i ≥ 1)</span>\n05     bin[i + n] ← bin[i]\n06     [      ?      ]\n07  <span class=\"while\">endwhile</span>",
+    "choices": ["i ← i - 1", "i ← i + 1", "i ← 0", "i ← binの要素数"],
+    "specific_explanation": "1. 継続条件の更新（無限ループ回避）\n   このループは「1 まで減らす」処理であるため、ループのたびに変数 i を 1 ずつ小さくする必要があります。\n\n2. 変数の変化\n   i を減らさないと条件 i ≥ 1 が常に真のままとなり、プログラムが停止しなくなります。\n   <div class=\"important\">i ← i - 1</div>"
   },
   // 7問目
   // --- テーマ1：剰余演算とループの継続条件 ---
@@ -441,10 +441,10 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "変数 num の値を 2 ずつ減らしながら加算を繰り返す while 文において、正しく合計値 sum を出し切るための「継続条件（空欄 a）」を選んでください。",
-    "example": "入力: num=7 \u2192 処理: sum に 7, 5, 3, 1 が順に加算され、num が -1 になった時点でループを終了させたい。",
-    "code": "1  while ([      a      ])\n2     sum \u2190 sum + num\n3     num \u2190 num - 2\n4  endwhile",
-    "choices": ["num \u2265 1", "num > 1", "num mod 2 = 0", "num \u2260 0"],
-    "specific_explanation": "1. 変数の変化\n   num は 2 ずつ減っていくため、最後は 1（奇数の場合）または 2（偶数の場合）になります。\n\n2. 継続条件の更新\n   数値が 1 以上の間は足し算を続け、0 以下になったら終了するように num \u2265 1 と設定するのが適切です。\n   <div class=\"important\">while (num \u2265 1)<\/div>"
+    "example": "num = 7 のとき、7, 5, 3, 1 の順に加算され、num が -1 になった時点でループを終了させたいとすると、継続条件はどう書けばよいでしょうか。",
+    "code": "01  整数型: num, sum ← 0\n02  <span class=\"while\">while ([      a      ])</span>\n03     sum ← sum + num\n04     num ← num - 2\n05  <span class=\"while\">endwhile</span>",
+    "choices": ["num ≥ 1", "num > 1", "num mod 2 = 0", "num ≠ 0"],
+    "specific_explanation": "1. 変数の変化\n   num は 2 ずつ減っていくため、最後は 1（奇数の場合）または 2（偶数の場合）になります。\n\n2. 継続条件の更新（無限ループ回避）\n   数値が 1 以上の間は加算を続け、0 以下になったら終了するよう num ≥ 1 と設定するのが適切です。\n   <div class=\"important\">while (num ≥ 1)</div>"
   },
   {
     "id": 31,
@@ -452,8 +452,8 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "フラグによる終了判定",
     "text": "引数として渡された変数 num が 0 以下の数値だった場合、このプログラムはどのような挙動になりますか。",
-    "example": "num = -5 のように負の数が渡されたとき、1行目の if 文の条件式 (num > 0) の判定結果がどうなるかを追ってみましょう。",
-    "code": "1  <span class=\"if\">if (num > 0)</span>\n2     // whileループ処理\n3  <span class=\"else\">else</span>\n4     return -1\n5  <span class=\"endif\">endif</span>",
+    "example": "num = -5 のとき、if 文の条件式 (num > 0) の判定結果がどうなるか追ってみましょう。",
+    "code": "01  整数型: num\n02  <span class=\"if\">if (num > 0)</span>\n03     /* while ループ処理 */\n04  <span class=\"if\">else</span>\n05     return -1\n06  <span class=\"if\">endif</span>",
     "choices": [
       "-1 を返して終了する",
       "無限ループになる",
@@ -480,16 +480,16 @@ const short_questions = [
     "category": "制御構文",
     "theme": "while文",
     "subtheme": "フラグの初期化",
-    "text": "ループ処理で合計値を計算する前に、変数を `sum ← 0` と初期化（リセット）している理由として最も適切なものはどれですか。",
-    "example": "もし sum が初期化されずに開始された場合、3行目の sum ← sum + num の「1回目の計算」で何が起こるか想像してみましょう。",
-    "code": "1  sum ← 0\n2  <span class=\"while\">while (num ≥ 1)</span>\n3     sum ← sum + num\n4     num ← num - 2\n5  <span class=\"endwhile\">endwhile</span>",
+    "text": "ループ処理で合計値を計算する前に、変数を sum ← 0 と初期化（リセット）している理由として最も適切なものはどれですか。",
+    "example": "sum が初期化されないまま 3行目の sum ← sum + num が初めて実行されると、どんな問題が起きるか考えてみましょう。",
+    "code": "01  整数型: num, sum\n02  sum ← 0\n03  <span class=\"while\">while (num ≥ 1)</span>\n04     sum ← sum + num\n05     num ← num - 2\n06  <span class=\"while\">endwhile</span>",
     "choices": [
       "以前の計算結果やゴミデータが残らないようにし、正しく加算を始めるため",
       "while文の継続条件に使用するため",
       "戻り値の型を整数型に確定させるため",
       "num の値が 0 のときでもエラーを出さないようにするため"
     ],
-    "specific_explanation": "1. フラグの初期化\n   集計処理（累積加算）を行う変数は、必ず処理の直前に「空の状態」にする必要があります。\n\n2. カウンタの用意\n   0 から始めないと、意図しない数値が足し込まれる原因になります。\n   <div class=\"important\">累積変数は 0 で初期化する</div>"
+    "specific_explanation": "1. フラグの初期化\n   集計処理（累積加算）を行う変数は、必ず処理の直前に「空の状態」にしておく必要があります。\n\n2. 変数の変化\n   0 から始めないと、意図しない数値が足し込まれる原因になります。\n   <div class=\"important\">累積変数は 0 で初期化する</div>"
   },
   // 8問目
   // --- テーマ1：2進法加算の論理と繰り上がり ---
@@ -521,10 +521,10 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "異常系の考慮",
     "text": "2進数加算のループ終了後、最上位桁からの「最後の繰り上がり」を処理します。空欄 [  条件  ] に入る適切なコードはどれですか。",
-    "example": "全ての桁の計算が終わった後、c が 1 なら、結果の先頭（または末尾）に 1 を足して桁を増やします。",
-    "code": "01  <span class=\"for\">endfor</span>\n02  <span class=\"if\">if ([  条件  ])</span>\n03     sumの末尾に 1 を追加する\n04  <span class=\"endif\">endif</span>",
-    "choices": ["c == 1", "c == 0", "bin1[i] == 1", "sumの要素数 > 0"],
-    "specific_explanation": "1. 異常系の考慮\n   全ての桁を計算し終えた後、最後に繰り上がり c が 1 として残っている場合があります（例：1+1 で桁が上がる場合）。これを処理しないと計算結果が不正になります。\n\n2. フラグによる終了判定\n   最後に c が 1 であるかを確認し、1 であれば新しい桁として 1 を追加することで、正しい加算結果（オーバーフロー分の桁上げ）を保証します。\n   <div class=\"important\">if (c == 1)</div>"
+    "example": "全ての桁の計算が終わった後、c に 1 が残っている場合と残っていない場合で処理を変えるには、c の値を何と比較すればよいか考えてみましょう。",
+    "code": "01  整数型: c\n02  /* for ループ終了後 */\n03  <span class=\"if\">if ([  条件  ])</span>\n04     sum の末尾に 1 を追加する\n05  <span class=\"if\">endif</span>",
+    "choices": ["c = 1", "c = 0", "bin1[i] = 1", "sum の要素数 > 0"],
+    "specific_explanation": "1. 異常系の考慮\n   全ての桁を計算し終えた後、最後に繰り上がり c が 1 として残っている場合があります。これを処理しないと計算結果が不正になります。\n\n2. フラグによる終了判定\n   c が 1 であれば新しい桁として 1 を追加することで、正しい加算結果（オーバーフロー分の桁上げ）を保証します。\n   <div class=\"important\">if (c = 1)</div>"
   },
   // 9問目
   // --- テーマ1：繰り返し減算による除算のロジック ---
@@ -579,10 +579,10 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "フラグの初期化",
     "text": "月をまたぐ計算で、中間の月をループで足し合わせる準備をします。ループ変数 i の初期値として適切なものを選んでください。ここで、from.month は開始月を表します。",
-    "example": "開始月が 1月なら、ループによる「丸ごと1ヶ月分」の加算は 2月から開始します。",
-    "code": "1  countDays(Date: from, Date: to)\n2  days ← mDay[from.month] - from.day // 開始月の残り日数\n3  i ← [      a      ]\n4  <span class=\"while\">while (i < to.month)</span>\n5     days ← days + mDay[i]\n6     i ← i + 1\n7  <span class=\"while\">endwhile</span>",
+    "example": "開始月が 1月なら、ループで「丸ごと1ヶ月分」加算するのは何月から始まりますか。",
+    "code": "01  countDays(Date: from, Date: to)\n02  整数型: i\n03  days ← mDay[from.month] - from.day  /* 開始月の残り日数 */\n04  i ← [      a      ]\n05  <span class=\"while\">while (i < to.month)</span>\n06     days ← days + mDay[i]\n07     i ← i + 1\n08  <span class=\"while\">endwhile</span>",
     "choices": ["from.month + 1", "from.month", "1", "to.month - 1"],
-    "specific_explanation": "1. フラグの初期化\n   開始月の日数はすでに 2行目で計算されています。したがって、次に処理すべきは「その翌月」からです。\n\n2. ずれの調整\n   開始月の月番号に 1 を足すことで、集計対象を正しく次の月にスライドさせます。\n   <div class=\"important\">i ← from.month + 1</div>"
+    "specific_explanation": "1. フラグの初期化\n   開始月の日数は 3行目で既に計算されています。次に処理すべきは「その翌月」からです。\n\n2. 変数の変化\n   開始月の月番号に 1 を足すことで、集計対象を正しく次の月にスライドさせます。\n   <div class=\"important\">i ← from.month + 1</div>"
   },
 
   // --- テーマ2：ループによる月またぎ処理と最終調整 ---
@@ -592,10 +592,10 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "中間の月（丸ごと1ヶ月ある月）を全て足し合わせるループにおいて、終了条件として適切なものを選んでください。ここで、i はループ変数、to.month は終了月を表します。",
-    "example": "1月から 4月の計算なら、ループで足すのは 2月と 3月のみです。",
-    "code": "1  i ← from.month + 1\n2  <span class=\"while\">while ([      1      ])</span>\n3     days ← days + mDay[i]\n4     i ← i + 1\n5  <span class=\"while\">endwhile</span>\n6  days ← days + to.day",
+    "example": "1月から4月の計算なら、ループで足すのは何月と何月だけか考えてみましょう。to.month 自体はループ内で処理すべきでしょうか。",
+    "code": "01  整数型: i\n02  i ← from.month + 1\n03  <span class=\"while\">while ([      1      ])</span>\n04     days ← days + mDay[i]\n05     i ← i + 1\n06  <span class=\"while\">endwhile</span>\n07  days ← days + to.day",
     "choices": ["i < to.month", "i ≤ to.month", "i < 12", "i ≠ to.month"],
-    "specific_explanation": "1. 変数の変化\n   終了月（to.month）は、1ヶ月丸ごと足すのではなく、特定の日（to.day）までを足す必要があります。\n\n2. 継続条件の更新\n   そのため、ループでは終了月の「手前（未満）」で処理を止め、終了月自体の計算はループの外で行うのが日付計算の定石です。\n   <div class=\"important\">while (i < to.month)</div>"
+    "specific_explanation": "1. 変数の変化\n   終了月（to.month）は丸ごと1ヶ月ではなく特定の日（to.day）までを足す必要があります。\n\n2. 継続条件の更新（無限ループ回避）\n   そのためループでは終了月の「手前（未満）」で処理を止め、終了月の計算はループの外で行うのが日付計算の定石です。\n   <div class=\"important\">while (i < to.month)</div>"
   },
   {
     "id": 42,
@@ -661,22 +661,22 @@ const short_questions = [
   },
 
   // --- テーマ2：釣銭の算出ロジック（払い出し時） ---
-{
+  {
     "id": 47,
     "category": "制御構文",
     "theme": "if文",
     "subtheme": "境界値の判定",
     "text": "払い出す枚数 cnt が在庫数 stock[i] を上回る場合に、在庫の全数を払い出すための処理 [  a  ] を選んでください。",
-    "example": "100円玉が 5 枚必要でも在庫が 3 枚しかないとき、払い出す枚数を 3 枚に書き換えます。",
-    "code": "   01  整数型: change, money[i], stock[i], cnt\n   02  cnt ← change ÷ money[i]\n   03  <span class=\"if\">if (stock[i] < cnt)</span>\n   04     [      a      ]\n   05  <span class=\"if\">endif</span>",
+    "example": "100円玉が 5 枚必要なのに在庫が 3 枚しかないとき、最終的に払い出せる枚数は何枚になるか考えてみましょう。",
+    "code": "01  整数型: change, money[i], stock[i], cnt\n02  cnt ← change ÷ money[i]\n03  <span class=\"if\">if (stock[i] < cnt)</span>\n04     [      a      ]\n05  <span class=\"if\">endif</span>",
     "choices": [
       "cnt ← stock[i]",
       "stock[i] ← cnt",
       "cnt ← cnt - 1",
       "cnt ← 0"
     ],
-    "specific_explanation": "1. 境界の特定\n算出した必要枚数 cnt と、実際の在庫数 stock[i] を比較します。在庫が不足している（stock[i] < cnt）状態を判定の基準とします。\n\n\n2. 含むか含まないか\n在庫が足りない場合は、払い出す枚数 cnt を現在ある在庫数 stock[i] で上書きし、可能な限りの枚数を出すように調整します。\n<div class=\"important\">cnt ← stock[i]</div>"
-  },
+    "specific_explanation": "1. 境界の特定\n   算出した必要枚数 cnt と実際の在庫数 stock[i] を比較します。在庫が不足している（stock[i] < cnt）状態を判定の基準とします。\n\n2. 含むか含まないか\n   在庫が足りない場合は、払い出す枚数 cnt を在庫数 stock[i] で上書きし、可能な限りの枚数を払い出します。\n   <div class=\"important\">cnt ← stock[i]</div>"
+  }, ,
   {
     "id": 48,
     "category": "データ構造",
@@ -1152,11 +1152,11 @@ const short_questions = [
     "category": "制御構文",
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
-    "text": "与えられた整数 n を素因数分解し、n が 1 になるまで繰り返すプログラムです。n = 7（素数）の場合、while文の条件式が「最後に判定（ループ終了の判定）」される際の i と n の値の組み合わせを選んでください。",
-    "example": "n = 7 のとき：i = 2から順に割れず、i = 7 で初めて割り切れて n = 1 になる",
-    "code": "01  primeNum(整数型: n)\n02  整数型: i = 2\n03  <span class=\"while\">while (i <= n)</span>\n04     <span class=\"if\">if (n % i == 0)</span>\n05        n = n / i\n06     <span class=\"else\">else</span>\n07        i = i + 1\n08     <span class=\"endif\">endif</span>\n09  <span class=\"while\">endwhile</span>",
+    "text": "与えられた整数 n を素因数分解し、n が 1 になるまで繰り返すプログラムです。n = 7（素数）の場合、while 文の条件式が「最後に判定（ループ終了の判定）」される際の i と n の値の組み合わせを選んでください。",
+    "example": "n = 7 のとき、i = 2 から始めて順に割り切れるか試していくと、どの i で初めて割り切れますか。その直後に n はいくつになりますか。",
+    "code": "01  primeNum(整数型: n)\n02  整数型: i ← 2\n03  <span class=\"while\">while (i ≤ n)</span>\n04     <span class=\"if\">if (n mod i = 0)</span>\n05        n ← n ÷ i\n06     <span class=\"if\">else</span>\n07        i ← i + 1\n08     <span class=\"if\">endif</span>\n09  <span class=\"while\">endwhile</span>",
     "choices": ["i: 7, n: 1", "i: 2, n: 7", "i: 7, n: 7", "i: 8, n: 1"],
-    "specific_explanation": "1. 変数の変化\n   n = 7 の場合、i が 2 から 6 までは割り切れず else 側を通って i が増え続けます。i = 7 になったとき、7 % 7 == 0 となり割り切れるため、n = n / 7 により n は 1 に更新されます。\n\n2. 異常系の考慮\n   n が 1 になった直後、ループの先頭に戻り while (7 <= 1) を判定します。この比較が「最後の判定」となり、結果が偽となるためループが終了します。\n   <div class=\"important\">終了直前の判定時：i = 7, n = 1</div>"
+    "specific_explanation": "1. 変数の変化\n   n = 7 の場合、i が 2 から 6 までは割り切れず else 側を通って i が増え続けます。i = 7 になったとき 7 mod 7 = 0 となり、n ← n ÷ 7 により n は 1 に更新されます。\n\n2. 異常系の考慮\n   n が 1 になった直後、ループ先頭で while (7 ≤ 1) を判定します。この比較が「最後の判定」となり、偽のためループが終了します。\n   <div class=\"important\">終了直前の判定時：i = 7, n = 1</div>"
   },
   {
     "id": 81,
@@ -1164,15 +1164,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "素因数分解のプログラムにおいて、変数 i（割る数）を増やす処理が else 側（割り切れなかった時）にのみ記述されている理由として、最も適切なものを選んでください。",
-    "example": "n = 12 のとき、2 で 2 回割り（12→6→3）、その後に 3 で割る必要がある",
-    "code": "01  <span class=\"while\">while (i <= n)</span>\n02     <span class=\"if\">if (n % i == 0)</span>\n03        n = n / i\n04     <span class=\"else\">else</span>\n05        i = i + 1\n06     <span class=\"endif\">endif</span>\n07  <span class=\"while\">endwhile</span>",
+    "example": "n = 12 のとき、i = 2 で割り切れた直後、i をすぐ 3 に増やしてしまうと何が起きるか考えてみましょう。",
+    "code": "01  整数型: i ← 2\n02  <span class=\"while\">while (i ≤ n)</span>\n03     <span class=\"if\">if (n mod i = 0)</span>\n04        n ← n ÷ i\n05     <span class=\"if\">else</span>\n06        i ← i + 1\n07     <span class=\"if\">endif</span>\n08  <span class=\"while\">endwhile</span>",
     "choices": [
       "同じ因数で複数回割り切れる可能性があるため",
       "i を増やすと n を超えてしまうため",
       "割り切れたときは i をリセットする必要があるため",
       "n が偶数のときだけ i を増やせばよいため"
     ],
-    "specific_explanation": "1. 変数の変化\n   例えば n = 12 の場合、まず i = 2 で割り切れます。このときすぐに i を 3 に増やしてしまうと、もう一度 2 で割る（12 = 2 * 2 * 3）ことができなくなります。\n\n2. 異常系の考慮\n   割り切れる間は同じ i で割り続け、その数値で割り切れなくなった（else）ときに初めて、次の数値を確認するために i を更新します。\n   <div class=\"important\">同じ素因数を複数持つ場合に対応するため、else でのみインクリメントする</div>"
+    "specific_explanation": "1. 変数の変化\n   n = 12 の場合、i = 2 で割り切れます。このときすぐに i を 3 に増やすと、もう一度 2 で割る（12 = 2 × 2 × 3）ことができなくなります。\n\n2. 異常系の考慮\n   割り切れる間は同じ i で割り続け、割り切れなくなった（else）ときに初めて i を更新します。これにより同じ素因数を複数持つケースにも対応できます。\n   <div class=\"important\">同じ素因数を複数持つ場合に対応するため、else でのみインクリメントする</div>"
   },
   {
     "id": 82,
@@ -1180,15 +1180,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "n = 4 のとき、この素因数分解プログラムが終了するまでの「i と n」の推移を正しく追っているものはどれですか。",
-    "example": "初期状態：n = 4, i = 2",
-    "code": "01  整数型: i = 2\n02  <span class=\"while\">while (i <= n)</span>\n03     <span class=\"if\">if (n % i == 0)</span>\n04        n = n / i\n05     <span class=\"else\">else</span>\n06        i = i + 1\n07     <span class=\"endif\">endif</span>\n08  <span class=\"while\">endwhile</span>",
+    "example": "初期状態：n = 4, i = 2 から出発して、それぞれの変化を 1 ステップずつ手でたどってみましょう。",
+    "code": "01  整数型: i ← 2\n02  <span class=\"while\">while (i ≤ n)</span>\n03     <span class=\"if\">if (n mod i = 0)</span>\n04        n ← n ÷ i\n05     <span class=\"if\">else</span>\n06        i ← i + 1\n07     <span class=\"if\">endif</span>\n08  <span class=\"while\">endwhile</span>",
     "choices": [
       "i=2で割る(n=2) → i=2で割る(n=1) → 終了判定",
       "i=2で割る(n=2) → i=3へ進む → 終了判定",
       "i=2, 3, 4と進む → i=4で割る(n=1) → 終了判定",
       "i=2で割る(n=2) → i=2で割る(n=1) → i=2, 3, 4と進む → 終了判定"
     ],
-    "specific_explanation": "1. 変数の変化\n   i = 2 で n = 4 は割り切れるため、n は 2 に更新されます。このとき i は増やさず再度ループ条件 (2 <= 2) を判定します。これも真なので再度 i = 2 で割り、n は 1 になります。\n\n2. 異常系の考慮\n   n が 1 になった時点で、ループ先頭の判定 while (2 <= 1) が偽となり、i を増やすことなく即座にループを抜けます。\n   <div class=\"important\">n が 1 になった瞬間に判定が終了し、ループを抜ける</div>"
+    "specific_explanation": "1. 変数の変化\n   i = 2 で n = 4 は割り切れるため、n は 2 に更新されます。このとき i は増やさず再度ループ条件 (2 ≤ 2) を判定します。これも真なので再度 i = 2 で割り、n は 1 になります。\n\n2. 異常系の考慮\n   n が 1 になった時点でループ先頭の判定 while (2 ≤ 1) が偽となり、i を増やすことなく即座にループを抜けます。\n   <div class=\"important\">n が 1 になった瞬間に判定が終了し、ループを抜ける</div>"
   },
   {
     "id": 83,
@@ -1584,15 +1584,15 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "境界値の判定",
     "text": "t1 と t2 から経過時間 t を求めたい。「t1 23:59:59」から「t2 00:00:01」のように、日付をまたぐ場合の処理を考えます。空欄 a に入る適切な条件式を選んでください。",
-    "example": "開始時刻 t1 = 86399 (23:59:59)\n終了時刻 t2 = 1 (00:00:01)",
-    "code": "1  // t1: 開始時刻の総秒数, t2: 終了時刻の総秒数\n2  <span class=\"if\">if ( [  a  ] )</span>\n3     t2 ← t2 + 86400\n4  <span class=\"if\">endif</span>\n5 t = t2 - t1",
+    "example": "t1 = 86399、t2 = 1 のとき、そのまま t2 - t1 を計算すると何が起きるか考えてみましょう。",
+    "code": "   01  整数型: t1, t2, t\n   02  <span class=\"if\">if ( [  a  ] )</span>\n   03     t2 ← t2 + 86400\n   04  <span class=\"if\">endif</span>\n   05  t ← t2 - t1",
     "choices": [
       "t1 が t2 より大きい",
       "t1 が t2 より小さい",
       "t1 が 86400 より大きい",
       "t2 が 0 と等しい"
     ],
-    "specific_explanation": "1. 境界の特定\n   通常、経過時間は <span class=\"italic\">t2 - t1</span> で求めますが、終了時刻（t2）が開始時刻（t1）よりも数値として小さい場合は「日付をまたいだ」と判断します。\n\n2. 含むか含まないか\n   <span class=\"italic\">t1 > t2</span> のときに補正を行うことで、負の数になるのを防ぎ、正しい経過時間を計算できるようにします。\n   <div class=\"important\">if (t1 > t2)</div>"
+    "specific_explanation": "1. 境界の特定\n   通常、経過時間は t2 - t1 で求めますが、終了時刻（t2）が開始時刻（t1）よりも数値として小さい場合は「日付をまたいだ」と判断します。\n\n2. 含むか含まないか\n   t1 > t2 のときに補正を行うことで、負の数になるのを防ぎ、正しい経過時間を計算できるようにします。\n   <div class=\"important\">if (t1 > t2)</div>"
   },
   {
     "id": 108,
@@ -1600,31 +1600,31 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "境界値の判定",
     "text": "日付をまたぐ際に加算している数値「86400」が表すものとして、正しい説明を選んでください。",
-    "example": "24時間 × 60分 × 60秒",
-    "code": "1  <span class=\"if\">if (t1 > t2)</span>\n2     t2 ← t2 + 86400\n3  <span class=\"if\">endif</span>",
+    "example": "1時間は何秒か、そこから順番に計算してみましょう。",
+    "code": "01  整数型: t1, t2\n02  <span class=\"if\">if (t1 > t2)</span>\n03     t2 ← t2 + 86400\n04  <span class=\"if\">endif</span>",
     "choices": [
       "1日分の総秒数",
       "1時間分の総秒数",
       "半日（12時間）の総秒数",
       "1分間の総秒数"
     ],
-    "specific_explanation": "1. 境界の特定\n   時刻の計算において、日付をまたぐ場合は終了時刻に「24時間分」の重みを加える必要があります。\n\n2. 含むか含まないか\n   <span class=\"italic\">24 × 60 × 60 = 86400</span> 秒を加算することで、翌日の時刻を「前日からの通算秒数」として扱うことができるようになります。\n   <div class=\"important\">86400 = 24 * 3600</div>"
+    "specific_explanation": "1. 境界の特定\n   時刻計算において、日付をまたぐ場合は終了時刻 t2 に「24時間分」を加える補正が必要です。\n\n2. 含むか含まないか\n   24 × 60 × 60 を計算すると 86400 秒となり、これが 1 日分の総秒数に相当します。この値を t2 に加算することで、翌日の時刻を「前日からの通算秒数」として扱えます。\n   <div class=\"important\">86400 = 24 × 60 × 60（1日分の総秒数）</div>"
   },
   {
     "id": 109,
     "category": "制御構文",
     "theme": "if文",
     "subtheme": "境界値の判定",
-    "text": "開始時刻 t1 と終了時刻 t2 の関係と、最終的な経過時間 t を求める式の組み合わせとして、正しいものを選んでください。",
-    "example": "23:59:59 (t1=86399) から 00:00:01 (t2=1) まで",
-    "code": "1  // 日付をまたぐ判定を行い、経過時間 t を計算する\n2  <span class=\"if\">if (t1 > t2)</span>\n3     t2 ← t2 + 86400\n4  <span class=\"if\">endif</span>\n5  t ← [  1  ]",
+    "text": "24時間が00:00:00の形式で与えられます。開始時刻 t1 と終了時刻 t2 の関係と、最終的な経過秒数 t を求める式の組み合わせとして、正しいものを選んでください。",
+    "example": "t1=86399（23:59:59）、t2=1（00:00:01）のとき、if 文による補正後の t2 はいくつになるか確認してみましょう。",
+    "code": "01  整数型: t1, t2, t\n02  <span class=\"if\">if (t1 > t2)</span>\n03     t2 ← t2 + 86400\n04  <span class=\"if\">endif</span>\n05  t ← [  1  ]",
     "choices": [
       "t2 - t1",
       "t1 - t2",
       "t1 + t2",
       "86400 - t1"
     ],
-    "specific_explanation": "1. 境界の特定\n   日付またぎの補正（t2 + 86400）が済んだ後は、単純に「終了時刻」から「開始時刻」を引くことで経過時間が得られます。\n\n2. 含むか含まないか\n   日付をまたがない通常ケース（t1 < t2）でも、補正なしの <span class=\"italic\">t2 - t1</span> で正しく計算できるため、共通の式として使用可能です。\n   <div class=\"important\">t = t2 - t1</div>"
+    "specific_explanation": "1. 境界の特定\n   日付をまたぐ補正（t2 + 86400）が済んだ後は、終了時刻から開始時刻を引くことで経過時間が求まります。\n\n2. 含むか含まないか\n   日付をまたがない通常ケース（t1 < t2）でも補正なしの t2 - t1 で正しく計算できます。どちらのケースも同じ式で対応できます。\n   <div class=\"important\">t ← t2 - t1</div>"
   },
   // 25問目
   {
@@ -1633,15 +1633,15 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "多分岐の論理",
     "text": "二つの駅間の運賃と特急料金を求めるプログラムです。引数で与えられた二つの駅番号が「同じ駅」を指している場合、計算ができないためエラー処理を行います。空欄 a に入る適切な条件式を選んでください。",
-    "example": "i = 3, j = 3 のとき、同一駅のため計算不可とする",
-    "code": "1  calcFare(整数型: i, 整数型: j)\n2  整数型の配列: fare\n3  <span class=\"if\">if ((i < 1) or (i > N) or (j < 1) or (j > N) or ( [  a  ] ))</span>\n4     fare[1] ← -1\n5     fare[2] ← -1\n6  <span class=\"if\">elseif</span> (i > j)\n7     /* (運賃計算処理) */\n8  <span class=\"if\">endif</span>",
+    "example": "i = 3, j = 3 のとき、このプログラムはどのような動作をすべきか考えてみましょう。",
+    "code": "01  calcFare(整数型: i, 整数型: j)\n02  整数型の配列: fare\n03  <span class=\"if\">if ((i < 1) or (i > N) or (j < 1) or (j > N) or ( [  a  ] ))</span>\n04     fare[1] ← -1\n05     fare[2] ← -1\n06  <span class=\"if\">elseif (i > j)</span>\n07     /* (運賃計算処理) */\n08  <span class=\"if\">endif</span>",
     "choices": [
       "i が j と等しい",
       "i が j と等しくない",
       "fareList[i, j] が 0 より大きい",
       "i + j が N と等しい"
     ],
-    "specific_explanation": "1. 優先順位の確認\n   正常な計算を行う前に、まずは「計算が不可能なケース（例外）」を最初に判定して除外する必要があります。\n\n2. 排他性チェック\n   駅番号が範囲外（1未満やNより大きい）であることに加え、出発駅と到着駅が同じ（<span class=\"italic\">i = j</span>）場合も、料金表の対角線上の要素（0）を参照することになり、仕様上エラーとして扱う必要があります。\n   <div class=\"important\">if (... or (i が j と等しい))</div>"
+    "specific_explanation": "1. 優先順位の確認\n   正常な計算の前に、まずは「計算が不可能なケース（例外）」を最初に判定して除外します。\n\n2. 排他性チェック\n   駅番号が範囲外であることに加え、出発駅と到着駅が同一（i = j）の場合も料金表の対角線上（値が 0）を参照することになり、仕様上エラーとして扱います。\n   <div class=\"important\">if (... or (i = j))</div>"
   },
   {
     "id": 111,
@@ -1649,15 +1649,15 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "多分岐の論理",
     "text": "駅番号が正しくない場合や、同一駅が指定された場合、このプログラムが返す「エラーを示す値」として適切なものを選んでください。",
-    "example": "駅番号 i = 0 (範囲外) のときの戻り値",
-    "code": "1  <span class=\"if\">if (駅番号が不正 または 同一駅)</span>\n2     fare[1] ← [  1  ]\n3     fare[2] ← [  1  ]\n4  <span class=\"if\">else</span>\n5     /* (正常な料金代入) */\n6  <span class=\"if\">endif</span>\n7  return fare",
+    "example": "fare[1] と fare[2] にどんな値が入っていれば、呼び出し側は「エラーが起きた」と判断できるか考えてみましょう。",
+    "code": "01  整数型の配列: fare\n02  <span class=\"if\">if (駅番号が不正 または 同一駅)</span>\n03     fare[1] ← [  1  ]\n04     fare[2] ← [  1  ]\n05  <span class=\"if\">else</span>\n06     /* (正常な料金代入) */\n07  <span class=\"if\">endif</span>\n08  return fare",
     "choices": [
       "-1",
       "0",
       "N",
       "null"
     ],
-    "specific_explanation": "1. 優先順位の確認\n   問題文の仕様により、駅番号が存在しない場合や、運賃・特急料金が 0 になる場合（同一駅など）は、特定のエラー値を入れることが決められています。\n\n2. 排他性チェック\n   「0」は料金表上の空き（対角線など）を示す値として使われているため、エラー時にはそれと区別できる負の数「-1」を格納して、呼び出し側に異常を伝えます。\n   <div class=\"important\">fare[1] ← -1, fare[2] ← -1</div>"
+    "specific_explanation": "1. 優先順位の確認\n   仕様により、駅番号が無効または同一駅の場合は特定のエラー値を返すことが決められています。\n\n2. 排他性チェック\n   「0」は料金表の対角線上の値として使われているため、エラーとの区別ができません。負の数「-1」を使うことで、呼び出し側に確実にエラーを伝えられます。\n   <div class=\"important\">fare[1] ← -1, fare[2] ← -1</div>"
   },
   {
     "id": 112,
@@ -1665,15 +1665,15 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "境界値の判定",
     "text": "駅番号の有効範囲を確認する条件式を検討しています。駅番号が 1 から N までであるとき、駅番号 i が「範囲外」であることを判定する正しい論理式を選んでください。",
-    "example": "N = 10 のとき、i = 0 や i = 11 は範囲外となる",
-    "code": "1  <span class=\"if\">if ( [  1  ] )</span>\n2     return \"エラー: 駅が存在しません\"\n3  <span class=\"if\">endif</span>",
+    "example": "N = 10 のとき、i = 0 はどちら方向へはみ出した値ですか。i = 11 の場合と合わせて考えてみましょう。",
+    "code": "01  整数型: i, N\n02  <span class=\"if\">if ( [  1  ] )</span>\n03     return \"エラー: 駅が存在しません\"\n04  <span class=\"if\">endif</span>",
     "choices": [
       "(i < 1) or (i > N)",
       "(i <= 1) or (i >= N)",
       "(i > 1) and (i < N)",
       "(i < 0) or (i > N + 1)"
     ],
-    "specific_explanation": "1. 境界の特定\n   有効な駅番号の下限は「1」、上限は「N」です。\n\n2. 含むか含まないか\n   範囲内が <span class=\"italic\">1 <= i <= N</span> なので、その否定である「1より小さい（< 1）」または「Nより大きい（> N）」場合にエラーと判定します。境界値である 1 と N は正常値として含める必要があります。\n   <div class=\"important\">(i < 1) or (i > N)</div>"
+    "specific_explanation": "1. 境界の特定\n   有効な駅番号の下限は「1」、上限は「N」です。\n\n2. 含むか含まないか\n   範囲内が 1 <= i <= N なので、その否定は「1 より小さい（< 1）」または「N より大きい（> N）」となります。境界値の 1 と N は正常値として含めます。\n   <div class=\"important\">(i < 1) or (i > N)</div>"
   },
   {
     "id": 113,
@@ -1730,15 +1730,15 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "複合条件",
     "text": "引数 iRank が「0」のときは全ての階級を対象とし、それ以外のときは指定された階級と一致する部屋を探します。空欄 [ a ] に入る適切な条件式を選んでください。",
-    "example": "iRank = 0 のとき：全ての部屋が対象 / iRank = 2 のとき：rankが2の部屋のみ対象",
-    "code": "   1  searchRoom(整数型: iRank, 整数型: iUsrn)\n   2  <span class=\"for\">for (i を 1 から rm の要素数 まで 1 ずつ増やす)</span>\n   3     <span class=\"if\">if ((rm[i].status が true) and (iUsrn <= rm[i].uMax))</span>\n   4        <span class=\"if\">if ([  a  ] or (iRank が rm[i].rank と等しい))</span>\n   5           /* 部屋番号を格納する処理 */\n   6        <span class=\"if\">endif</span>\n   7     <span class=\"if\">endif</span>\n   8  <span class=\"for\">endfor</span>",
+    "example": "iRank = 0 のとき、OR の左側の条件だけで条件全体を真にするには、どんな式を置けばよいか考えてみましょう。",
+    "code": "01  searchRoom(整数型: iRank, 整数型: iUsrn)\n02  <span class=\"for\">for (i を 1 から rm の要素数 まで 1 ずつ増やす)</span>\n03     <span class=\"if\">if ((rm[i].status が true) and (iUsrn <= rm[i].uMax))</span>\n04        <span class=\"if\">if ([  a  ] or (iRank が rm[i].rank と等しい))</span>\n05           /* 部屋番号を格納する処理 */\n06        <span class=\"if\">endif</span>\n07     <span class=\"if\">endif</span>\n08  <span class=\"for\">endfor</span>",
     "choices": [
       "iRank が 0 と等しい",
       "iRank が 0 と等しくない",
       "rm[i].rank が 0 と等しい",
       "rm[i].rank が 0 と等しくない"
     ],
-    "specific_explanation": "1. ANDとOR\n   「引数 iRank が 0 の場合は、部屋の階級は問わない」という仕様を実現するため、OR演算子の左側に「iRank が 0 である」という判定を置きます。\n\n2. 短絡評価の意識\n   <div class=\"important\">iRank が 0 と等しい</div>\n   が真であれば、ORの右側（階級の一致確認）を評価せずに条件全体が真となります。これにより「0のときは何でもOK」というロジックが成立します。"
+    "specific_explanation": "1. ANDとOR\n   「iRank が 0 の場合は階級を問わない」という仕様を実現するため、OR の左側に「iRank = 0」の判定を置きます。\n\n2. 短絡評価の意識\n   左側の条件「iRank = 0」が真であれば、OR の右側（階級の一致確認）を評価せずに条件全体が真となります。これにより「0 のときは何でもOK」というロジックが成立します。\n   <div class=\"important\">(iRank = 0) or (iRank = rm[i].rank)</div>"
   },
   {
     "id": 117,
@@ -1746,15 +1746,15 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "複合条件",
     "text": "利用人数 iUsrn が、部屋の最大利用可能人数 uMax を超えていないか判定する条件式を考えます。空欄 [  1  ] に入る適切な演算子を選んでください。",
-    "example": "iUsrn = 3, uMax = 2 のとき：条件不一致（定員オーバー）",
-    "code": "   1  searchRoom(整数型: iRank, 整数型: iUsrn)\n   2  <span class=\"for\">for (i を 1 から rm の要素数 まで 1 ずつ増やす)</span>\n   3     <span class=\"if\">if ((rm[i].status が true) and (iUsrn [  1  ] rm[i].uMax))</span>\n   4        /* 階級チェックと格納処理 */\n   5     <span class=\"if\">endif</span>\n   6  <span class=\"for\">endfor</span>",
+    "example": "iUsrn = 2, uMax = 2 のとき（定員ちょうど）、その部屋は利用できるはずです。この場合の条件式の結果を確認してみましょう。",
+    "code": "01  searchRoom(整数型: iRank, 整数型: iUsrn)\n02  <span class=\"for\">for (i を 1 から rm の要素数 まで 1 ずつ増やす)</span>\n03     <span class=\"if\">if ((rm[i].status が true) and (iUsrn [  1  ] rm[i].uMax))</span>\n04        /* 階級チェックと格納処理 */\n05     <span class=\"if\">endif</span>\n06  <span class=\"for\">endfor</span>",
     "choices": [
       "<=",
       "<",
       ">=",
       ">"
     ],
-    "specific_explanation": "1. 境界の特定\n   「利用人数が最大利用可能人数以下」であれば、その部屋を利用できます。\n\n2. 含むか含まないか\n   最大人数ちょうど（<span class=\"italic\">iUsrn = uMax</span>）の場合も利用可能であるため、等号を含む演算子が適切です。\n   <div class=\"important\">iUsrn <= rm[i].uMax</div>"
+    "specific_explanation": "1. ANDとOR\n   この if 文は「空き状態（status が true）」かつ「人数が定員内」という 2 条件を and で結んでいます。どちらか一方が偽になるだけで条件全体が偽となります。\n\n2. 短絡評価の意識\n   「以下（<=）」と「未満（<）」の違いが重要です。定員ちょうど（iUsrn = uMax）の場合も利用可能なため、等号を含む <= が適切です。\n   <div class=\"important\">iUsrn <= rm[i].uMax</div>"
   },
   {
     "id": 118,
@@ -1762,15 +1762,15 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "複合条件",
     "text": "「空き部屋である（statusがtrue）」かつ「人数が定員内」かつ「階級が一致（または0指定）」という3つの条件をすべて満たす部屋を抽出します。論理構造として適切なものを選んでください。",
-    "example": "status=false の部屋は、人数や階級に関わらず抽出されない",
-    "code": "   1  <span class=\"if\">if (rm[i].status が true と等しい)</span>\n   2     <span class=\"if\">if (iUsrn が rm[i].uMax 以下)</span>\n   3        <span class=\"if\">if (条件 [  1  ])</span>\n   4           /* 抽出処理 */\n   5        <span class=\"if\">endif</span>\n   6     <span class=\"if\">endif</span>\n   7  <span class=\"if\">endif</span>",
+    "example": "status が false の部屋がなぜ最初の if を通過できないか、外側から順に条件を追ってみましょう。",
+    "code": "01  <span class=\"if\">if (rm[i].status が true と等しい)</span>\n02     <span class=\"if\">if (iUsrn が rm[i].uMax 以下)</span>\n03        <span class=\"if\">if (条件 [  1  ])</span>\n04           /* 抽出処理 */\n05        <span class=\"if\">endif</span>\n06     <span class=\"if\">endif</span>\n07  <span class=\"if\">endif</span>",
     "choices": [
       "(iRank が 0 と等しい) or (iRank が rm[i].rank と等しい)",
       "(iRank が 0 と等しい) and (iRank が rm[i].rank と等しい)",
       "(iRank が 0 と等しくない) or (iRank が rm[i].rank と等しい)",
       "(iRank が 0 と等しくない) and (iRank が rm[i].rank と等しい)"
     ],
-    "specific_explanation": "1. ANDとOR\n   「指定が0」または「階級が一致」のどちらか一方で良いため、OR演算子を使用します。\n\n2. 優先順位の確認\n   外側のif文で「空き状態」と「人数」を絞り込んでいるため、最後に階級の「いずれかに合致」するかを判定します。\n   <div class=\"important\">(iRank が 0 と等しい) or (iRank が rm[i].rank と等しい)</div>"
+    "specific_explanation": "1. ANDとOR\n   「iRank が 0」または「rm[i].rank と一致する」のどちらかが真であればよいため、OR を使います。\n\n2. 短絡評価の意識\n   左側の「iRank = 0」が真の時点で右側を評価せずに条件が確定します。これにより「0 指定なら全階級 OK」というロジックが成立します。\n   <div class=\"important\">(iRank = 0) or (iRank = rm[i].rank)</div>"
   },
   {
     "id": 119,
@@ -1874,11 +1874,11 @@ const short_questions = [
     "category": "制御構文",
     "theme": "if文",
     "subtheme": "多分岐の論理",
-    "text": "文字列形式の数字を実数に変換するプログラムです。途中で「小数点（'.'）」を検出した際、それ以降の数字を『小数第一位』から順に計算していくための準備として、空欄 [  a  ] に入れるべき処理を選んでください。",
-    "example": "「12.3」の '.' を検出した直後、次の '3' を 3 × 0.1 として加算するための準備",
-    "code": "01  parseReal(文字型の配列: char, 整数型: num)\n02  実数型: real = 0.0,  cnt = 1.0\n03  <span class=\"for\">for (i を 1 から num まで 1 ずつ増やす)</span>\n04     整数型: tmp = getDec(i) /* 数字なら0-9、小数点なら-1を返す */\n05     <span class=\"if\">if (tmp == -1)</span>\n06        [  a  ]\n07     <span class=\"else\">else</span>\n08        /* 数字の場合の加算処理 */\n09        real = real + tmp * cnt\n10        cnt = cnt * 0.1\n11     <span class=\"endif\">endif</span>\n12  <span class=\"for\">endfor</span>",
-    "choices": ["cnt = 0.1", "cnt = 1.0", "cnt = cnt + 1.0", "real = 0.0"],
-    "specific_explanation": "1. 優先順位の確認\n   通常の数字（0-9）の処理を行う前に、まずは「小数点（-1）」という特殊な記号を <span class=\"if\">if</span> 文で先に判定して、計算モードを切り替えます。\n\n2. より「特殊なケース」を先に書こう\n   小数点が現れるまでは `cnt` を用いて整数部を計算しますが、小数点が見つかった瞬間に、次に来る数字の重みを「0.1（小数第一位）」に設定する必要があります。これにより、後続の数字が正しく小数として累積されます。\n   <div class=\"important\">cnt = 0.1</div>"
+    "text": "文字列形式の数字を実数に変換するプログラムです。途中で「小数点（'.'）」を検出した際、それ以降の数字を小数第一位から順に計算していくための準備として、空欄 [  a  ] に入れるべき処理を選んでください。",
+    "example": "「12.3」を変換するとき、小数点を検出した直後、次に来る '3' にかけるべき重みは何になるでしょうか。",
+    "code": "01  parseReal(文字型の配列: char, 整数型: num)\n02  実数型: real ← 0.0, cnt ← 1.0\n03  <span class=\"for\">for (i を 1 から num まで 1 ずつ増やす)</span>\n04     整数型: tmp ← getDec(i)  /* 数字なら0-9、小数点なら-1を返す */\n05     <span class=\"if\">if (tmp == -1)</span>\n06        [  a  ]\n07     <span class=\"if\">else</span>\n08        /* 数字の場合の加算処理 */\n09        real ← real + tmp * cnt\n10        cnt ← cnt * 0.1\n11     <span class=\"if\">endif</span>\n12  <span class=\"for\">endfor</span>",
+    "choices": ["cnt ← 0.1", "cnt ← 1.0", "cnt ← cnt + 1.0", "real ← 0.0"],
+    "specific_explanation": "1. 優先順位の確認\n   通常の数字（0-9）の処理を行う前に、「小数点（-1）」という特殊な記号を if 文で先に判定し、計算モードを切り替えます。\n\n2. 排他性チェック\n   小数点が見つかった瞬間に cnt を 0.1（小数第一位の重み）に設定します。これにより後続の数字が正しく小数として累積されます。\n   <div class=\"important\">cnt ← 0.1</div>"
   },
   {
     "id": 126,
@@ -1886,15 +1886,15 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "多分岐の論理",
     "text": "文字配列の中から「小数点」を検出し、その後の数字を小数として扱いたいです。小数点を通過した「後」の数字に対してのみ、桁数カウント（cnt）を更新したい場合のロジックとして適切なものを選んでください。",
-    "example": "218.05 の場合、'0' と '5' のときだけ cnt を更新する",
-    "code": "   1  <span class=\"if\">if (tmp が -1 と等しい)</span>\n   2     cnt <- 0.1\n   3  <span class=\"if\">else</span>\n   4     real <- real * 10 + tmp\n   5     <span class=\"if\">if ([  1  ])</span>\n   6        cnt <- cnt * 10\n   7     <span class=\"if\">endif</span>\n   8  <span class=\"if\">endif</span>",
+    "example": "218.05 を処理するとき、整数部と小数部のどちらの桁を処理している間だけ cnt が更新されるべきか考えてみましょう。",
+    "code": "01  実数型: cnt ← 1.0\n02  整数型: tmp\n03  <span class=\"if\">if (tmp が -1 と等しい)</span>\n04     cnt ← 0.1\n05  <span class=\"if\">else</span>\n06     real ← real * 10 + tmp\n07     <span class=\"if\">if ([  1  ])</span>\n08        cnt ← cnt * 10\n09     <span class=\"if\">endif</span>\n10  <span class=\"if\">endif</span>",
     "choices": [
       "cnt < 1",
       "cnt >= 1",
       "tmp > 0",
       "i == num"
     ],
-    "specific_explanation": "1. 排他性チェック\n   小数点を通過する前は <span class=\"italic\">cnt</span> は 1 ですが、通過時に 0.1 に書き換わります。\n\n2. 優先順位の確認\n   「<span class=\"italic\">cnt</span> が 1 より小さい」という条件が真であれば、それは既に小数点を通過した後の数字であることを意味します。\n   <div class=\"important\">if (cnt < 1)</div>"
+    "specific_explanation": "1. 優先順位の確認\n   小数点を通過する前は cnt は 1.0 ですが、通過時に 0.1 に書き換わります。\n\n2. 排他性チェック\n   「cnt が 1 より小さい」という条件が真であれば、既に小数点を通過した後の数字であることを意味します。\n   <div class=\"important\">if (cnt < 1)</div>"
   },
   // 28問目
   {
@@ -1903,47 +1903,47 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "約数を探すループの範囲を指定します。問題文にある「約数は num を除いて全て num ÷ 2 以下である」という性質を利用する場合、空欄 [ a ] に入る適切な条件を選んでください。",
-    "example": "num = 12 のとき：f が 6 を超えるまでループを繰り返す",
-    "code": "   1  calcMeasure(整数型: num)\n   2  measure <- {}\n   3  f <- 1\n   4  <span class=\"while\">while ([  a  ])</span>\n   5     /* 約数の判定と追加処理 */\n   6     f <- f + 1\n   7  <span class=\"while\">endwhile</span>\n   8  measure の末尾に num の値を追加する",
+    "example": "num = 12 のとき、f をいくつまで調べればすべての約数が見つかるか確認してみましょう。",
+    "code": "01  calcMeasure(整数型: num)\n02  整数型の配列: measure ← {}\n03  整数型: f ← 1\n04  <span class=\"while\">while ([  a  ])</span>\n05     /* 約数の判定と追加処理 */\n06     f ← f + 1\n07  <span class=\"while\">endwhile</span>\n08  measure の末尾に num の値を追加する",
     "choices": [
-      "(f * 2) が num 以下",
-      "(f * 2) が num より大きい",
+      "(f × 2) が num 以下",
+      "(f × 2) が num より大きい",
       "f が num 以下",
       "f が num と等しくない"
     ],
-    "specific_explanation": "1. 変数の変化\n   ループ内で <span class=\"italic\">f</span> は 1 ずつ増えていきます。約数の候補を効率的に探すため、<span class=\"italic\">num ÷ 2</span> （つまり <span class=\"italic\">f * 2 <= num</span>）の範囲まで調査を続けます。\n\n2. 異常系の考慮\n   この条件により、無駄な計算（例えば 12 の約数探しで 7～11 を調べること）を省きつつ、正しくループを終了させることができます。\n   <div class=\"important\">while ((f * 2) <= num)</div>"
+    "specific_explanation": "1. 変数の変化\n   ループ内で f は 1 ずつ増えていきます。約数の候補を効率的に探すため、num ÷ 2（つまり f × 2 ≤ num）の範囲まで調査を続けます。\n\n2. 異常系の考慮\n   この条件により、無駄な計算（例えば 12 の約数探しで 7〜11 を調べること）を省きつつ、正しくループを終了させることができます。\n   <div class=\"important\">while (f × 2 ≤ num)</div>"
   },
   {
     "id": 128,
     "category": "制御構文",
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
-    "text": "while文の中で、次の約数候補を調べるための処理として、空欄 [  1  ] に入る適切な式を選んでください。",
-    "example": "f = 1 の処理が終わったら、次は f = 2 を調べる",
-    "code": "   1  f <- 1\n   2  <span class=\"while\">while (条件式)</span>\n   3     <span class=\"if\">if (num mod f が 0 と等しい)</span>\n   4        measure の末尾に f を追加\n   5     <span class=\"if\">endif</span>\n   6     [  1  ]\n   7  <span class=\"while\">endwhile</span>",
+    "text": "while 文の中で、次の約数候補を調べるための処理として、空欄 [  1  ] に入る適切な式を選んでください。",
+    "example": "f = 1 の処理が終わったら次は f = 2 を調べます。ループが終了条件に向かって確実に進むにはどう更新すればよいでしょうか。",
+    "code": "01  整数型: f ← 1\n02  <span class=\"while\">while (条件式)</span>\n03     <span class=\"if\">if (num mod f が 0 と等しい)</span>\n04        measure の末尾に f を追加\n05     <span class=\"if\">endif</span>\n06     [  1  ]\n07  <span class=\"while\">endwhile</span>",
     "choices": [
-      "f <- f + 1",
-      "f <- f * 2",
-      "f <- num ÷ 2",
-      "f <- f + num"
+      "f ← f + 1",
+      "f ← f × 2",
+      "f ← num ÷ 2",
+      "f ← f + num"
     ],
-    "specific_explanation": "1. 変数の変化\n   while文は、ループ内で条件に使っている変数が必ず「終了」に向かって変化しなければなりません。\n\n2. 異常系の考慮\n   <span class=\"italic\">f</span> を 1 ずつ増やしていくことで、すべての整数を漏れなくチェックし、最終的に継続条件（<span class=\"italic\">f * 2 <= num</span>）を満たさなくなる地点まで到達させます。\n   <div class=\"important\">f <- f + 1</div>"
+    "specific_explanation": "1. 変数の変化\n   while 文は、ループ内で条件に使っている変数が必ず「終了」に向かって変化しなければなりません。\n\n2. 異常系の考慮\n   f を 1 ずつ増やすことで、すべての整数を漏れなくチェックし、最終的に継続条件（f × 2 ≤ num）を満たさなくなる地点まで到達させます。\n   <div class=\"important\">f ← f + 1</div>"
   },
   {
     "id": 129,
     "category": "制御構文",
     "theme": "while文",
     "subtheme": "フラグによる終了判定",
-    "text": "while文の開始前に変数を準備する処理です。1番目の約数である「1」から調べ始めるための初期化として、空欄 [  1  ] に入る値を選んでください。",
-    "example": "f = 0 から始めると、0での割り算（エラー）が発生する可能性がある",
-    "code": "   1  calcMeasure(整数型: num)\n   2  measure <- {}\n   3  f <- [  1  ]\n   4  <span class=\"while\">while ((f * 2) <= num)</span>\n   5     /* 判定処理 */\n   6  <span class=\"while\">endwhile</span>",
+    "text": "while 文の開始前に変数を準備する処理です。1番目の約数である「1」から調べ始めるための初期化として、空欄 [  1  ] に入る値を選んでください。",
+    "example": "f = 0 から始めると最初のループで 0 除算が発生します。最小の正の約数から調べ始めるには何を設定すればよいでしょうか。",
+    "code": "01  calcMeasure(整数型: num)\n02  整数型の配列: measure ← {}\n03  整数型: f ← [  1  ]\n04  <span class=\"while\">while (f × 2 ≤ num)</span>\n05     /* 判定処理 */\n06  <span class=\"while\">endwhile</span>",
     "choices": [
       "1",
       "0",
       "num",
       "num ÷ 2"
     ],
-    "specific_explanation": "1. フラグの初期化\n   while文を制御する変数 <span class=\"italic\">f</span> は、ループの外であらかじめ定義しておく必要があります。\n\n2. 変数の変化\n   最小の正の約数は必ず「1」であるため、1 から調査を開始するのが適切です。\n   <div class=\"important\">f <- 1</div>"
+    "specific_explanation": "1. フラグの初期化\n   while 文を制御する変数 f は、ループの外であらかじめ定義しておく必要があります。\n\n2. 変数の変化\n   最小の正の約数は必ず「1」であるため、1 から調査を開始するのが適切です。\n   <div class=\"important\">f ← 1</div>"
   },
   {
     "id": 130,
@@ -2000,15 +2000,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "フラグによる終了判定",
     "text": "変数 flg を使って素数かどうかを判定するロジックです。割り切れる数（約数）が見つかった際、ループを抜けるためのフラグ操作として適切なものを選んでください。",
-    "example": "i = 9, j = 3 のとき：9 mod 3 は 0 なので素数ではないと判定する",
-    "code": "   1  flg <- 1\n   2  j <- 3\n   3  <span class=\"while\">while ((flg が 1 と等しい) and (j が (i ÷ 2) より小さい))</span>\n   4     <span class=\"if\">if (i mod j が 0 と等しい)</span>\n   5        [  1  ]\n   6     <span class=\"if\">endif</span>\n   7     j <- j + 2\n   8  <span class=\"while\">endwhile</span>",
+    "example": "i = 9, j = 3 のとき 9 mod 3 = 0 なので素数ではないと判定します。この時点でループを即座に抜けるには flg をどう更新すればよいでしょうか。",
+    "code": "01  整数型: i, j\n02  論理型: flg\n03  flg ← 1\n04  j ← 3\n05  <span class=\"while\">while ((flg が 1 と等しい) and (j が (i ÷ 2) より小さい))</span>\n06     <span class=\"if\">if (i mod j が 0 と等しい)</span>\n07        [  1  ]\n08     <span class=\"if\">endif</span>\n09     j ← j + 2\n10  <span class=\"while\">endwhile</span>",
     "choices": [
-      "flg <- 0",
-      "flg <- 1",
-      "flg <- i",
-      "flg <- j"
+      "flg ← 0",
+      "flg ← 1",
+      "flg ← i",
+      "flg ← j"
     ],
-    "specific_explanation": "1. フラグの初期化\n   ループ開始前に <span class=\"italic\">flg = 1</span>（素数であると仮定）に設定します。\n\n2. 状態の更新\n   途中で割り切れる数が見つかった場合、それは素数ではないため <span class=\"italic\">flg = 0</span> に書き換えます。これにより while 文の継続条件が偽となり、無駄な計算をせずにループを終了できます。\n   <div class=\"important\">flg <- 0</div>"
+    "specific_explanation": "1. フラグの初期化\n   ループ開始前に flg = 1（素数であると仮定）に設定します。\n\n2. 状態の更新\n   途中で割り切れる数が見つかった場合、それは素数ではないため flg = 0 に書き換えます。これにより while 文の継続条件が偽となり、無駄な計算をせずにループを終了できます。\n   <div class=\"important\">flg ← 0</div>"
   },
   {
     "id": 134,
@@ -2016,15 +2016,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "内側の while 文で、調査対象の数 i を割るための変数 j の範囲を制限します。効率的に判定を行うための空欄 [ a ] に入る条件を選んでください。",
-    "example": "i = 25 のとき：j が 12.5（25 ÷ 2）を超えるまで調べれば十分である",
-    "code": "   1  flg <- 1\n   2  j <- 3\n   3  <span class=\"while\">while ((flg が 1 と等しい) and ([  a  ]))</span>\n   4     <span class=\"if\">if (i mod j が 0 と等しい)</span>\n   5        flg <- 0\n   6     <span class=\"if\">endif</span>\n   7     j <- j + 2\n   8  <span class=\"while\">endwhile</span>",
+    "example": "i = 25 のとき、j が 12 を超えてから先を調べる必要があるかどうか考えてみましょう。",
+    "code": "01  整数型: i, j\n02  論理型: flg ← 1\n03  j ← 3\n04  <span class=\"while\">while ((flg が 1 と等しい) and ([  a  ]))</span>\n05     <span class=\"if\">if (i mod j が 0 と等しい)</span>\n06        flg ← 0\n07     <span class=\"if\">endif</span>\n08     j ← j + 2\n09  <span class=\"while\">endwhile</span>",
     "choices": [
       "j が (i ÷ 2) より小さい",
       "j が i と等しい",
       "j が num より大きい",
       "j が 0 と等しくない"
     ],
-    "specific_explanation": "1. 継続条件の更新（無限ループ回避）\n   <span class=\"italic\">j</span> を無限に増やすのではなく、判定に必要な最小限の範囲で止める必要があります。\n\n2. 変数の変化\n   ある数 <span class=\"italic\">i</span> の約数は（自分自身を除けば）必ず <span class=\"italic\">i ÷ 2</span> 以下に存在するため、これを超える範囲を調べる必要はありません。\n   <div class=\"important\">j が (i ÷ 2) より小さい</div>"
+    "specific_explanation": "1. 継続条件の更新（無限ループ回避）\n   j を無限に増やすのではなく、判定に必要な最小限の範囲で止める必要があります。\n\n2. 変数の変化\n   ある数 i の約数は（自分自身を除けば）必ず i ÷ 2 以下に存在するため、これを超える範囲を調べる必要はありません。\n   <div class=\"important\">j が (i ÷ 2) より小さい</div>"
   },
   {
     "id": 135,
@@ -2032,15 +2032,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "フラグによる終了判定",
     "text": "while 文を終了した後、最終的にその数 i が素数だった場合のみ配列 prime に追加します。空欄 [  1  ] に入る条件式を選んでください。",
-    "example": "一度も割り切れず flg が 1 のまま残った場合、i は素数である",
-    "code": "   1  /* while 文による判定終了後 */\n   2  <span class=\"if\">if ([  1  ])</span>\n   3     prime の末尾に i の値を追加する\n   4  <span class=\"if\">endif</span>",
+    "example": "一度も割り切れなかった場合、ループ終了時の flg の値はどうなっているでしょうか。",
+    "code": "01  整数型の配列: prime ← {}\n02  /* while 文による判定終了後 */\n03  <span class=\"if\">if ([  1  ])</span>\n04     prime の末尾に i の値を追加する\n05  <span class=\"if\">endif</span>",
     "choices": [
       "flg が 1 と等しい",
       "flg が 0 と等しい",
       "i が j と等しい",
       "i mod 2 が 0 と等しい"
     ],
-    "specific_explanation": "1. 状態の更新\n   ループ内で一度も約数が見つからなければ、<span class=\"italic\">flg</span> は初期値の 1 のまま保持されます。\n\n2. 異常系の考慮\n   逆に <span class=\"italic\">flg</span> が 0 になっている場合は「合成数（素数ではない）」と判断されたことを意味するため、追加処理は行いません。\n   <div class=\"important\">if (flg が 1 と等しい)</div>"
+    "specific_explanation": "1. 状態の更新\n   ループ内で一度も約数が見つからなければ、flg は初期値の 1 のまま保持されます。\n\n2. 異常系の考慮\n   flg が 0 になっている場合は「合成数（素数ではない）」と判断されたことを意味するため、追加処理は行いません。\n   <div class=\"important\">if (flg が 1 と等しい)</div>"
   },
   {
     "id": 136,
@@ -2097,15 +2097,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "フラグによる終了判定",
     "text": "フラグ変数 flg を用いて、最大公約数が見つかるまで処理を繰り返すループを構成します。ループの開始条件と、flg の初期化の組み合わせとして正しいものを選んでください。ここで、num1 と num2 は最大公約数を求める対象の整数です。",
-    "example": "flg が true になった瞬間にループを抜ける設計にする",
-    "code": "   1  gcd(整数型: num1, 整数型: num2)\n   2  論理型: flg\n   3  [  a  ]\n   4  <span class=\"while\">while ([  b  ])</span>\n   5     /* 数値の比較と減算処理 */\n   6  <span class=\"while\">endwhile</span>",
+    "example": "flg が true になった瞬間にループを抜ける設計にするとき、ループ開始前の flg はどちらであるべきか考えてみましょう。",
+    "code": "01  gcd(整数型: num1, 整数型: num2)\n02  論理型: flg\n03  [  a  ]\n04  <span class=\"while\">while ([  b  ])</span>\n05     /* 数値の比較と減算処理 */\n06  <span class=\"while\">endwhile</span>",
     "choices": [
-      "a: flg <- false\nb: flg が true と等しくない",
-      "a: flg <- true\nb: flg が true と等しい",
-      "a: flg <- false\nb: flg が false と等しくない",
-      "a: flg <- true\nb: flg が false と等しい"
+      "a: flg ← false\nb: flg が true と等しくない",
+      "a: flg ← true\nb: flg が true と等しい",
+      "a: flg ← false\nb: flg が false と等しくない",
+      "a: flg ← true\nb: flg が false と等しい"
     ],
-    "specific_explanation": "1. フラグの初期化\n   ループに入る前はまだ計算が終わっていないため、<span class=\"italic\">flg</span> を <span class=\"italic\">false</span>（偽）で初期化します。\n\n2. フラグによる終了判定\n   「計算が完了（true）していない間」繰り返す必要があるため、継続条件は <span class=\"italic\">flg != true</span> となります。\n   <div class=\"important\">flg <- false\nwhile (flg が true と等しくない)</div>"
+    "specific_explanation": "1. フラグの初期化\n   ループに入る前はまだ計算が終わっていないため、flg を false（偽）で初期化します。\n\n2. フラグによる終了判定\n   「計算が完了（true）していない間」繰り返す必要があるため、継続条件は flg ≠ true となります。\n   <div class=\"important\">flg ← false\nwhile (flg が true と等しくない)</div>"
   },
   {
     "id": 140,
@@ -2113,10 +2113,10 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "2つの整数の最大公約数を求めるプログラムです。num1 と num2 の値を比較して大きい方から小さい方を引き、両者が等しくなった時点で計算を終了させます。空欄 [  1  ] に入る適切な処理を選んでください。",
-    "example": "num1 = 12, num2 = 8 のとき：(12-8)で num1=4, num2=8 → (8-4)で num1=4, num2=4 となり終了",
-    "code": "01  getGCD(整数型: num1, 整数型: num2)\n02  論理型: flg = false\n03  <span class=\"while\">while (flg == false)</span>\n04     <span class=\"if\">if (num1 == num2)</span>\n05        [  1  ]\n06     <span class=\"if\">elseif (num1 > num2)</span>\n07        num1 = num1 - num2\n08     <span class=\"if\">else</span>\n09        num2 = num2 - num1\n10     <span class=\"if\">endif</span>\n11  <span class=\"while\">endwhile</span>\n12  return num1",
-    "choices": ["flg = true", "flg = false", "num1 = 0", "num2 = num1"],
-    "specific_explanation": "1. 変数の変化\n   while文の継続条件が「flg が false である間」となっています。num1 と num2 が等しくなり計算が完了したとき、ループを止めるためには flg の値を true に変更する必要があります。\n\n2. 異常系の考慮\n   このフラグ更新を忘れると、数値が一致した後も永遠にループを繰り返す「無限ループ」に陥ってしまいます。条件成立時に終了の合図を送ることが重要です。\n   <div class=\"important\">flg = true</div>"
+    "example": "num1 = 12, num2 = 8 のとき、どのように変化して終了に至るか手でたどってみましょう。終了判定には flg をどう使いますか。",
+    "code": "01  getGCD(整数型: num1, 整数型: num2)\n02  論理型: flg ← false\n03  <span class=\"while\">while (flg = false)</span>\n04     <span class=\"if\">if (num1 = num2)</span>\n05        [  1  ]\n06     <span class=\"if\">elseif (num1 > num2)</span>\n07        num1 ← num1 - num2\n08     <span class=\"if\">else</span>\n09        num2 ← num2 - num1\n10     <span class=\"if\">endif</span>\n11  <span class=\"while\">endwhile</span>\n12  return num1",
+    "choices": ["flg ← true", "flg ← false", "num1 ← 0", "num2 ← num1"],
+    "specific_explanation": "1. 変数の変化\n   while 文の継続条件が「flg = false である間」となっています。num1 と num2 が等しくなり計算が完了したとき、ループを止めるために flg を true に変更します。\n\n2. 異常系の考慮\n   このフラグ更新を忘れると、数値が一致した後も永遠にループを繰り返す「無限ループ」に陥ります。条件成立時に終了の合図を送ることが重要です。\n   <div class=\"important\">flg ← true</div>"
   },
   {
     "id": 141,
@@ -2124,15 +2124,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "関数 gcd(num1, num2) を呼び出した場合、gcd(8, 2) の実行において while 文の中の処理は合計で何回繰り返されるか、正しいものを選んでください。ここで、num1 と num2 は最大公約数を求める対象の整数です。",
-    "example": "num1=8, num2=2 → num1=6, num2=2 → ... と変化を追う",
-    "code": "   1  /* num1=8, num2=2 で開始 */\n   2  <span class=\"while\">while (flg が true と等しくない)</span>\n   3     /* 1回目: 8 > 2 なので num1 = 6 */\n   4     /* 2回目: 6 > 2 なので num1 = 4 */\n   5     /* 3回目: 4 > 2 なので num1 = 2 */\n   6     /* 4回目: 2 == 2 なので flg = true */\n   7  <span class=\"while\">endwhile</span>",
+    "example": "num1=8, num2=2 から出発して、num1 と num2 の変化を 1 ステップずつ手でたどりながら回数を数えてみましょう。",
+    "code": "01  /* num1=8, num2=2 で開始 */\n02  <span class=\"while\">while (flg が true と等しくない)</span>\n03     /* 1回目: 8 > 2 なので num1 ← 6 */\n04     /* 2回目: 6 > 2 なので num1 ← 4 */\n05     /* 3回目: 4 > 2 なので num1 ← 2 */\n06     /* 4回目: 2 = 2 なので flg ← true */\n07  <span class=\"while\">endwhile</span>",
     "choices": [
       "4回",
       "3回",
       "5回",
       "2回"
     ],
-    "specific_explanation": "1. 変数の変化\n   1回目(8,2)→(6,2)、2回目(6,2)→(4,2)、3回目(4,2)→(2,2) と減算が続きます。\n\n2. 継続条件の更新（無限ループ回避）\n   4回目で <span class=\"italic\">num1 == num2</span> が成立し、フラグが更新されて終了します。合計4回の繰り返しが発生します。\n   <div class=\"important\">8→6→4→2 の減算3回 + 一致判定1回 = 4回</div>"
+    "specific_explanation": "1. 変数の変化\n   1回目(8,2)→(6,2)、2回目(6,2)→(4,2)、3回目(4,2)→(2,2) と減算が続きます。\n\n2. 継続条件の更新（無限ループ回避）\n   4回目で num1 = num2 が成立し、フラグが更新されて終了します。合計 4 回の繰り返しが発生します。\n   <div class=\"important\">8→6→4→2 の減算3回 + 一致判定1回 = 4回</div>"
   },
   {
     "id": 142,
@@ -2140,31 +2140,31 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "多分岐の論理",
     "text": "最大公約数を求めるプログラムにおいて、num1 が num2 よりも大きいとき、大きい方の数値から小さい方を引いて更新します。空欄 [ a ] に入る適切な処理を選んでください。",
-    "example": "num1 = 10, num2 = 4 のとき：num1 を 6 に更新する",
-    "code": "   1  <span class=\"if\">if (num1 が num2 と等しい)</span>\n   2     flg <- true\n   3  <span class=\"if\">elseif (num1 > num2)</span>\n   4     [  a  ]\n   5  <span class=\"if\">else</span>\n   6     num2 <- num2 - num1\n   7  <span class=\"if\">endif</span>",
+    "example": "num1 = 10, num2 = 4 のとき、大きい方から小さい方を引くとどうなるか確認してみましょう。",
+    "code": "01  整数型: num1, num2\n02  論理型: flg ← false\n03  <span class=\"if\">if (num1 が num2 と等しい)</span>\n04     flg ← true\n05  <span class=\"if\">elseif (num1 > num2)</span>\n06     [  a  ]\n07  <span class=\"if\">else</span>\n08     num2 ← num2 - num1\n09  <span class=\"if\">endif</span>",
     "choices": [
-      "num1 <- num1 - num2",
-      "num1 <- num2 - num1",
-      "num1 <- num1 ÷ num2",
-      "num1 <- num2"
+      "num1 ← num1 - num2",
+      "num1 ← num2 - num1",
+      "num1 ← num1 ÷ num2",
+      "num1 ← num2"
     ],
-    "specific_explanation": "1. 優先順位の確認\n   ユークリッドの互除法の減算による実装では、「大きい方から小さい方を引く」操作を繰り返します。\n\n2. 排他性チェック\n   <span class=\"italic\">elseif</span> の条件が <span class=\"italic\">num1 > num2</span> であるため、ここでは <span class=\"italic\">num1</span> の値を更新するのが適切です。\n   <div class=\"important\">num1 <- num1 - num2</div>"
+    "specific_explanation": "1. 優先順位の確認\n   ユークリッドの互除法（減算版）では、「大きい方から小さい方を引く」操作を繰り返します。\n\n2. 排他性チェック\n   elseif の条件が num1 > num2 であるため、このブロックでは num1 の値を更新するのが適切です。\n   <div class=\"important\">num1 ← num1 - num2</div>"
   },
   {
     "id": 143,
     "category": "制御構文",
     "theme": "if文",
-    "subtheme": "排他性チェック",
+    "subtheme": "多分岐の論理",
     "text": "最大公約数を求めるプログラムの if-elseif-else 文において、num2 の方が大きい場合に実行される [  1  ] の処理として適切なものを選んでください。ここで、num1 と num2 は最大公約数を求める対象の整数です。",
-    "example": "等しくなく、かつ num1 の方が大きくもない場合にここへ到達する",
-    "code": "   1  <span class=\"if\">if (num1 が num2 と等しい)</span>\n   2     flg <- true\n   3  <span class=\"if\">elseif (num1 が num2 より大きい)</span>\n   4     num1 <- num1 - num2\n   5  <span class=\"if\">else</span>\n   6     [  1  ]\n   7  <span class=\"if\">endif</span>",
+    "example": "等しくなく、かつ num1 の方が大きくもない場合にここへ到達します。その時点での num1 と num2 の大小関係を考えてみましょう。",
+    "code": "01  整数型: num1, num2\n02  論理型: flg ← false\n03  <span class=\"if\">if (num1 が num2 と等しい)</span>\n04     flg ← true\n05  <span class=\"if\">elseif (num1 が num2 より大きい)</span>\n06     num1 ← num1 - num2\n07  <span class=\"if\">else</span>\n08     [  1  ]\n09  <span class=\"if\">endif</span>",
     "choices": [
-      "num2 <- num2 - num1",
-      "num2 <- num1 - num2",
-      "num2 <- num1",
-      "flg <- true"
+      "num2 ← num2 - num1",
+      "num2 ← num1 - num2",
+      "num2 ← num1",
+      "flg ← true"
     ],
-    "specific_explanation": "1. 排他性チェック\n   「等しい」でも「num1が大きい」でもない場合、必然的に「num2が大きい」状態となります。\n\n2. 多分岐の論理\n   その場合は、大きい方の <span class=\"italic\">num2</span> から <span class=\"italic\">num1</span> を引き、値を更新します。\n   <div class=\"important\">num2 <- num2 - num1</div>"
+    "specific_explanation": "1. 優先順位の確認\n   if と elseif の条件を通過しなかった場合、残りの可能性は「num2 が大きい」の一択に絞られます。\n\n2. 排他性チェック\n   その場合は大きい方の num2 から num1 を引き、値を更新します。elseif と対称な処理になっています。\n   <div class=\"important\">num2 ← num2 - num1</div>"
   },
   {
     "id": 144,
@@ -2172,15 +2172,15 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "多分岐の論理",
     "text": "最大公約数を求める関数 gcd(num1, num2) のループ終了後、最終的な最大公約数を返します。関数 gcd が返す戻り値として適切なものを選んでください。ここで、num1 と num2 は最大公約数を求める対象の整数です。",
-    "example": "最終的に num1 と num2 は等しくなっているため、どちらを返してもよい",
-    "code": "   1  <span class=\"while\">while (flg が true と等しくない)</span>\n   2     /* 数値の減算・更新処理 */\n   3  <span class=\"while\">endwhile</span>\n   4  return [  1  ]",
+    "example": "ループを抜けた時点で num1 と num2 はどのような関係になっているか確認した上で、返すべき値を考えてみましょう。",
+    "code": "01  整数型: num1, num2\n02  論理型: flg ← false\n03  <span class=\"while\">while (flg が true と等しくない)</span>\n04     /* 数値の減算・更新処理 */\n05  <span class=\"while\">endwhile</span>\n06  return [  1  ]",
     "choices": [
       "num1",
       "flg",
       "num1 - num2",
       "0"
     ],
-    "specific_explanation": "1. 優先順位の確認\n   （応用）アルゴリズムが終了するのは <span class=\"italic\">num1 == num2</span> が成立したときです。その共通の値が最大公約数となります。\n\n2. 多分岐の論理\n   引数として受け取った <span class=\"italic\">num1</span> を加工し続けてきましたが、最終的な計算結果を戻り値として呼び出し元に返します。\n   <div class=\"important\">return num1</div>"
+    "specific_explanation": "1. 優先順位の確認\n   ループを抜けたのは num1 = num2 が成立したときです。その共通の値が最大公約数となります。\n\n2. 排他性チェック\n   num1 と num2 は等しいためどちらを返しても結果は同じですが、引数として受け取り加工してきた num1 を返すのが自然です。\n   <div class=\"important\">return num1</div>"
   },
   // 31問目
   {
@@ -2334,15 +2334,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "2つの配列（要素数 numA, numB）をすべてマージし終わるまでループを継続します。空欄 [  1  ] に入る条件式を選んでください。",
-    "example": "numA=4, numB=5 のとき：合計9個の要素を詰め終わるまで繰り返す",
-    "code": "   1  idxC <- 1\n   2  <span class=\"while\">while ([  1  ])</span>\n   3     /* 比較とマージ処理 */\n   4     idxC <- idxC + 1\n   5  <span class=\"while\">endwhile</span>",
+    "example": "numA=4, numB=5 のとき、マージ後の配列には合計何個の要素が入りますか。idxC はいくつまで進むべきでしょうか。",
+    "code": "01  整数型: numA, numB, idxC ← 1\n02  <span class=\"while\">while ([  1  ])</span>\n03     /* 比較とマージ処理 */\n04     idxC ← idxC + 1\n05  <span class=\"while\">endwhile</span>",
     "choices": [
-      "idxC <= (numA + numB)",
+      "idxC ≤ (numA + numB)",
       "idxC < (numA + numB)",
-      "idxC <= numA",
-      "idxC <= numB"
+      "idxC ≤ numA",
+      "idxC ≤ numB"
     ],
-    "specific_explanation": "1. 変数の変化\n   ループ内で <span class=\"italic\">idxC</span> は 1 ずつ増えていきます。マージ後の配列の総要素数は、元の2つの配列の要素数の合計（<span class=\"italic\">numA + numB</span>）となります。\n\n2. 継続条件の更新（無限ループ回避）\n   <span class=\"italic\">idxC</span> がこの合計値に達するまで処理を続ける必要があります。\n   <div class=\"important\">idxC <= (numA + numB)</div>"
+    "specific_explanation": "1. 変数の変化\n   ループ内で idxC は 1 ずつ増えていきます。マージ後の配列の総要素数は、元の 2 つの配列の要素数の合計（numA + numB）となります。\n\n2. 継続条件の更新（無限ループ回避）\n   idxC がこの合計値に達するまで処理を続ける必要があります。\n   <div class=\"important\">idxC ≤ (numA + numB)</div>"
   },
   {
     "id": 155,
@@ -2350,15 +2350,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "異常系の考慮",
     "text": "片方の配列を使い切った後、もう片方の配列に残っている要素をそのままコピーする処理です。空欄 [ b ] に入る、配列Aに残りがあるかを確認する条件式を選んでください。",
-    "example": "arrayB を使い切った（idxB > numB）後、arrayA の残りを処理する場面",
-    "code": "   1  <span class=\"while\">while (idxC <= (numA + numB))</span>\n   2     <span class=\"if\">if ((idxA <= numA) and (idxB <= numB))</span>\n   3        /* 比較処理 */\n   4     <span class=\"if\">elseif ([  b  ])</span>\n   5        arrayC[idxC] <- arrayA[idxA]\n   6        idxA <- idxA + 1\n   7     <span class=\"if\">else</span>\n   8        arrayC[idxC] <- arrayB[idxB]\n   9        idxB <- idxB + 1\n  10     <span class=\"if\">endif</span>\n  11     idxC <- idxC + 1\n  12  <span class=\"while\">endwhile</span>",
+    "example": "arrayB を使い切った（idxB > numB）後、arrayA の残りを処理する場面です。その条件式が elseif に来るとき、何を確認すればよいか考えてみましょう。",
+    "code": "01  <span class=\"while\">while (idxC ≤ (numA + numB))</span>\n02     <span class=\"if\">if ((idxA ≤ numA) and (idxB ≤ numB))</span>\n03        /* 比較処理 */\n04     <span class=\"if\">elseif ([  b  ])</span>\n05        arrayC[idxC] ← arrayA[idxA]\n06        idxA ← idxA + 1\n07     <span class=\"if\">else</span>\n08        arrayC[idxC] ← arrayB[idxB]\n09        idxB ← idxB + 1\n10     <span class=\"if\">endif</span>\n11     idxC ← idxC + 1\n12  <span class=\"while\">endwhile</span>",
     "choices": [
-      "idxA <= numA",
+      "idxA ≤ numA",
       "idxA > numA",
-      "idxB <= numB",
-      "idxA == idxB"
+      "idxB ≤ numB",
+      "idxA = idxB"
     ],
-    "specific_explanation": "1. 異常系の考慮\n   2行目の <span class=\"if\">if</span> で「両方に残りがある場合」を処理しているため、4行目の <span class=\"if\">elseif</span> に到達するのは「どちらかが空」になったときです。\n\n2. 変数の変化\n   ここで配列Aから値を取り出すためには、Aにまだ要素が残っている（現在の添え字が要素数以下である）ことを確認しなければなりません。\n   <div class=\"important\">idxA <= numA</div>"
+    "specific_explanation": "1. 異常系の考慮\n   2行目の if で「両方に残りがある場合」を処理しているため、4行目の elseif に到達するのは「どちらかが空」になったときです。\n\n2. 変数の変化\n   ここで配列Aから値を取り出すためには、Aにまだ要素が残っている（現在の添え字が要素数以下）ことを確認しなければなりません。\n   <div class=\"important\">idxA ≤ numA</div>"
   },
   {
     "id": 156,
@@ -2366,15 +2366,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "マージプログラム全体の制御構造として適切な組み合わせを選んでください。",
-    "example": "ループで全体を回し、中の if 文で「両方あり」「Aのみあり」「Bのみあり」を切り分ける",
-    "code": "   1  <span class=\"while\">while ([  a  ])</span>\n   2     <span class=\"if\">if (両方の配列に要素あり)</span>\n   3        /* 比較処理 */\n   4     <span class=\"if\">elseif ([  b  ])</span>\n   5        /* Aの残りをコピー */\n   6     <span class=\"if\">else</span>\n   7        /* Bの残りをコピー */\n   8     <span class=\"if\">endif</span>\n   9  <span class=\"while\">endwhile</span>",
+    "example": "外側の while 条件は「全体の処理が終わるまで」、内側の elseif 条件は「配列 A の残りがある場合」に対応します。それぞれ何を見ればよいか考えてみましょう。",
+    "code": "01  整数型: idxC, idxA, idxB\n02  <span class=\"while\">while ([  a  ])</span>\n03     <span class=\"if\">if (両方の配列に要素あり)</span>\n04        /* 比較処理 */\n05     <span class=\"if\">elseif ([  b  ])</span>\n06        /* A の残りをコピー */\n07     <span class=\"if\">else</span>\n08        /* B の残りをコピー */\n09     <span class=\"if\">endif</span>\n10  <span class=\"while\">endwhile</span>",
     "choices": [
-      "a: idxC <= (numA + numB)\nb: idxA <= numA",
+      "a: idxC ≤ (numA + numB)\nb: idxA ≤ numA",
       "a: idxC < (numA + numB)\nb: idxA < numA",
-      "a: idxA <= numA\nb: idxC <= (numA + numB)",
-      "a: idxB <= numB\nb: idxA <= numA"
+      "a: idxA ≤ numA\nb: idxC ≤ (numA + numB)",
+      "a: idxB ≤ numB\nb: idxA ≤ numA"
     ],
-    "specific_explanation": "1. 継続条件の更新（無限ループ回避）\n   外側の <span class=\"while\">while</span> 文は、全要素数分だけ繰り返すよう <span class=\"italic\">idxC</span> で制御します。\n\n2. 異常系の考慮\n   内側の分岐では、インデックスが範囲内（<span class=\"italic\"><= 要素数</span>）にあるかどうかで、取り出すべき配列を決定します。\n   <div class=\"important\">a: idxC <= (numA + numB)\nb: idxA <= numA</div>"
+    "specific_explanation": "1. 継続条件の更新（無限ループ回避）\n   外側の while 文は、全要素数分だけ繰り返すよう idxC で制御します。\n\n2. 異常系の考慮\n   内側の分岐では、インデックスが範囲内（≤ 要素数）にあるかどうかで、取り出すべき配列を決定します。\n   <div class=\"important\">a: idxC ≤ (numA + numB)\nb: idxA ≤ numA</div>"
   },
   // 33問目
   {
@@ -2416,15 +2416,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "探索中に、チェックする添え字を次に進める処理です。空欄 [  1  ] に入る適切な式を選んでください。",
-    "example": "i = 1 のチェックが終わったら、次は i = 2 を調べます。",
-    "code": "   1  i <- 1\n   2  <span class=\"while\">while (array[i] が num と等しくない)</span>\n   3     [  1  ]\n   4  <span class=\"while\">endwhile</span>",
+    "example": "i = 1 のチェックが終わったら次は i = 2 を調べます。更新しないとどうなるか考えてみましょう。",
+    "code": "01  整数型の配列: array\n02  整数型: i, num\n03  i ← 1\n04  <span class=\"while\">while (array[i] が num と等しくない)</span>\n05     [  1  ]\n06  <span class=\"while\">endwhile</span>",
     "choices": [
-      "i <- i + 1",
-      "i <- i - 1",
-      "i <- n + 1",
-      "i <- num"
+      "i ← i + 1",
+      "i ← i - 1",
+      "i ← n + 1",
+      "i ← num"
     ],
-    "specific_explanation": "1. 変数の変化\n   <span class=\"italic\">while</span> ループ内で、条件式に使われている変数 <span class=\"italic\">i</span> を更新しないと、同じ場所を調べ続けて無限ループになってしまいます。\n\n2. 継続条件の更新\n   1つずつ順番に後ろの要素を調べるため、インデックスを 1 加算します。\n   <div class=\"important\">i <- i + 1</div>"
+    "specific_explanation": "1. 変数の変化\n   while ループ内で条件式に使われている変数 i を更新しないと、同じ場所を調べ続けて無限ループになってしまいます。\n\n2. 継続条件の更新（無限ループ回避）\n   1 つずつ順番に後ろの要素を調べるため、インデックスを 1 加算します。\n   <div class=\"important\">i ← i + 1</div>"
   },
   {
     "id": 161,
@@ -2432,15 +2432,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "異常系の考慮",
     "text": "番兵法を用いることで、通常の線形探索と比較して簡略化できる部分はどこか、正しい組み合わせを選んでください。",
-    "example": "通常の探索：(i <= n) and (array[i] != num)\n番兵法：(array[i] != num)",
-    "code": "   1  <span class=\"while\">while (array[i] が num と等しくない)</span>\n   2     i <- i + 1\n   3  <span class=\"while\">endwhile</span>",
+    "example": "通常の探索では継続条件が 2 つ必要でしたが、番兵法ではどちらが不要になるか考えてみましょう。",
+    "code": "01  整数型の配列: array\n02  整数型: i ← 1\n03  <span class=\"while\">while (array[i] が num と等しくない)</span>\n04     i ← i + 1\n05  <span class=\"while\">endwhile</span>",
     "choices": [
       "継続条件から「i が n 以下であるか」の判定を削除できる",
       "継続条件から「array[i] が num と等しいか」の判定を削除できる",
-      "初期化処理から「i <- 1」を削除できる",
+      "初期化処理から「i ← 1」を削除できる",
       "終了後の if 文を削除できる"
     ],
-    "specific_explanation": "1. 異常系の考慮\n   通常の線形探索では、値が見つからない場合にインデックスが配列の範囲を超えないようガード条件（<span class=\"italic\">i <= n</span>）が必要です。\n\n2. 変数の変化\n   番兵を置くことで「必ず見つかる」ことが保証されるため、範囲チェックを省略しても安全にループが終了します。\n   <div class=\"important\">indexの境界判定を省略できる</div>"
+    "specific_explanation": "1. 異常系の考慮\n   通常の線形探索では、値が見つからない場合にインデックスが配列の範囲を超えないようガード条件（i ≤ n）が必要です。\n\n2. 変数の変化\n   番兵を置くことで「必ず見つかる」ことが保証されるため、範囲チェックを省略しても安全にループが終了します。\n   <div class=\"important\">インデックスの境界判定を省略できる</div>"
   },
   {
     "id": 162,
@@ -2448,15 +2448,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "探索を開始するインデックス i の初期値と、ループ内で次の要素へ進む処理の組み合わせとして適切なものを選んでください。",
-    "example": "配列の 1 番目から順に最後まで辿ります。",
-    "code": "   1  [  a  ]\n   2  <span class=\"while\">while (array[i] が num と等しくない)</span>\n   3     [  b  ]\n   4  <span class=\"while\">endwhile</span>",
+    "example": "配列の 1 番目から順に最後まで辿ります。番兵の位置まで確実に到達するにはどんな初期値と更新式が必要でしょうか。",
+    "code": "01  整数型の配列: array\n02  整数型: i, num\n03  [  a  ]\n04  <span class=\"while\">while (array[i] が num と等しくない)</span>\n05     [  b  ]\n06  <span class=\"while\">endwhile</span>",
     "choices": [
-      "a: i <- 1\nb: i <- i + 1",
-      "a: i <- 0\nb: i <- i + 1",
-      "a: i <- 1\nb: i <- n + 1",
-      "a: i <- n\nb: i <- i - 1"
+      "a: i ← 1\nb: i ← i + 1",
+      "a: i ← 0\nb: i ← i + 1",
+      "a: i ← 1\nb: i ← n + 1",
+      "a: i ← n\nb: i ← i - 1"
     ],
-    "specific_explanation": "1. 変数の変化\n   探索は配列の先頭インデックス（本問題の仕様では 1）から開始します。\n\n2. 継続条件の更新\n   ループが回るたびにインデックスを 1 増やすことで、末尾にある番兵に向かって確実に変数が変化していきます。\n   <div class=\"important\">a: i <- 1\nb: i <- i + 1</div>"
+    "specific_explanation": "1. 変数の変化\n   探索は配列の先頭インデックス（本問題の仕様では 1）から開始します。\n\n2. 継続条件の更新（無限ループ回避）\n   ループが回るたびにインデックスを 1 増やすことで、末尾にある番兵に向かって確実に変数が変化していきます。\n   <div class=\"important\">a: i ← 1\nb: i ← i + 1</div>"
   },
   // 34問目
   {
@@ -2648,10 +2648,10 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "境界値の判定",
     "text": "年齢が「9歳以下」であることを判定する適切な条件式を選んでください。この条件は「9歳を含む」必要があります。",
-    "example": "age = 9 のとき 判定結果: 真(true)",
-    "code": "1  <span class=\"if\">if ([  1  ])</span>\n2     ret ← 300\n3  <span class=\"if\">endif</span>",
+    "example": "age = 9 のとき、条件式の結果が true になる演算子はどれかを確認してみましょう。",
+    "code": "01  整数型: age, ret\n02  <span class=\"if\">if ([  1  ])</span>\n03     ret ← 300\n04  <span class=\"if\">endif</span>",
     "choices": ["age ≤ 9", "age < 9", "age < 10", "age ≤ 10"],
-    "specific_explanation": "1. 境界の特定\n   基準となる数値は「9」歳です。\n\n2. 含むか含まないか\n   「以下」は、その数値自体を「含みます」。\n   9歳ちょうどの場合も条件を満たす必要があるため、「以下（≤）」が適切です。\n   <div class=\"important\">if (age ≤ 9)</div>"
+    "specific_explanation": "1. 境界の特定\n   基準となる数値は「9」歳です。\n\n2. 含むか含まないか\n   「以下」はその数値自体を含みます。9歳ちょうども条件を満たす必要があるため、「以下（≤）」が適切です。\n   <div class=\"important\">if (age ≤ 9)</div>"
   },
   {
     "id": 176,
@@ -2680,7 +2680,7 @@ const short_questions = [
     ],
     "specific_explanation": "1. 退避用変数の利用\n   値を上書きすると元の値が消えてしまうため、最初に array[left] の値を一時変数 tmp に保存しておきます。\n\n2. 三段階の代入\n   まず、空いた array[left] に array[right] の値をコピーします。最後に、保存しておいた tmp の値を array[right] に戻すことで入れ替えが完了します。\n   <div class=\"important\">array[left] ← array[right]\narray[right] ← tmp</div>"
   },
-{
+  {
     "id": 178,
     "category": "制御構文",
     "theme": "for文",
@@ -2702,12 +2702,12 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "境界値の判定",
     "text": "年齢(age)に応じて入場料(ret)を決定するプログラムです。「4歳から9歳までは300円」という条件を正しく判定するための空欄 [  1  ] に入る条件式を選んでください。なお、0〜3歳(100円)の判定は既に済んでいるものとします。",
-    "example": "age = 9 のとき 戻り値: 300",
-    "code": "01 fee(整数型: age)\n02   整数型: ret\n03   <span class=\"if\">if (age ≤ 3)</span>\n04      ret ← 100\n05   <span class=\"elseif\">elseif ([  1  ])</span>\n06      ret ← 300\n07   <span class=\"else\">else</span>\n08      ret ← 500\n09   <span class=\"if\">endif</span>\n10   return ret",
+    "example": "age = 9 のとき、3歳以下の条件は既に除外されています。9歳が 300円 になるには、どのような上限値を指定すればよいでしょうか。",
+    "code": "01  fee(整数型: age)\n02  整数型: ret\n03  <span class=\"if\">if (age ≤ 3)</span>\n04     ret ← 100\n05  <span class=\"if\">elseif ([  1  ])</span>\n06     ret ← 300\n07  <span class=\"if\">else</span>\n08     ret ← 500\n09  <span class=\"if\">endif</span>\n10  return ret",
     "choices": ["age ≤ 9", "age < 9", "age ≥ 4", "age < 10"],
-    "specific_explanation": "1. 境界の特定\n   基準となる数値は「9歳」です。問題文の「9歳まで」という表現から、9を境界として特定します。\n\n2. 含むか含まないか\n   「9歳まで」は9歳を含みます。既に3歳以下の判定が済んでいるため、ここでは上限である「9以下（≤ 9）」を判定すれば自動的に4〜9歳の範囲が定まります。\n   <div class=\"important\">elseif (age ≤ 9)</div>"
+    "specific_explanation": "1. 境界の特定\n   基準となる数値は「9歳」です。問題文の「9歳まで」という表現から、9を境界として特定します。\n\n2. 含むか含まないか\n   「9歳まで」は9歳を含みます。既に3歳以下の判定が済んでいるため、ここでは上限の「9以下（≤ 9）」を判定すれば、自動的に4〜9歳の範囲が定まります。\n   <div class=\"important\">elseif (age ≤ 9)</div>"
   },
-{
+  {
     "id": 180,
     "category": "制御構文",
     "theme": "for文",
@@ -2729,10 +2729,10 @@ const short_questions = [
     "theme": "再帰関数",
     "subtheme": "ベースケース（終了条件）",
     "text": "非負の整数 m の階乗を再帰的に計算する関数 Fact です。再帰呼び出しを終了し、値を確定させるための「ベースケース」となる空欄 [  b  ] の条件を選んでください。",
-    "example": "0! = 1 と定義されています。",
-    "code": "01 Fact(整数型: m)\n02   <span class=\"if\">if (m > 0)</span>\n03      return m × Fact(m - 1)\n04   <span class=\"elseif\">elseif ([    b    ])</span>\n05      return 1\n06   <span class=\"else\">else</span>\n07      return -1\n08   <span class=\"if\">endif</span>",
+    "example": "0! = 1 と定義されています。再帰が止まるべき最小の入力値は何か考えてみましょう。",
+    "code": "01  Fact(整数型: m)\n02  <span class=\"if\">if (m > 0)</span>\n03     return m × Fact(m - 1)\n04  <span class=\"if\">elseif ([    b    ])</span>\n05     return 1\n06  <span class=\"if\">else</span>\n07     return -1\n08  <span class=\"if\">endif</span>",
     "choices": ["m が 0 と等しい", "m が 1 と等しい", "m が 0 より小さい", "m が 1 以下"],
-    "specific_explanation": "1. 最小単位の特定\n   階乗において、これ以上分解できない最小の計算単位は 0! です。\n\n2. 戻り値の確定\n   引数が 0 に達したときに、再帰を止めて具体的な数値「1」を返す必要があります。この停止条件がプログラムの無限ループを防ぎます。\n   <div class=\"important\">elseif (m が 0 と等しい)</div>"
+    "specific_explanation": "1. 最小単位の特定\n   階乗においてこれ以上分解できない最小の計算単位は 0! です。m が 0 に達したとき、再帰を止める必要があります。\n\n2. 戻り値の確定\n   引数が 0 のときに具体的な数値「1」を返すことで、無限ループを防ぎつつ正しい計算結果を確定させます。\n   <div class=\"important\">elseif (m = 0)</div>"
   },
   {
     "id": 182,
@@ -2750,11 +2750,11 @@ const short_questions = [
     "category": "制御構文",
     "theme": "再帰関数",
     "subtheme": "再帰的処理",
-    "text": "階乗の定義 n! = n times (n-1)! を、関数 Fact の中で再帰的に実装したいと考えています。空欄 [  a  ] に入る適切な式を選んでください。",
-    "example": "Fact(3) が 3 × Fact(2) を呼び出すようにする",
-    "code": "01 Fact(整数型: m)\n02   <span class=\"if\">if (m > 0)</span>\n03      return [    a    ]\n04   <span class=\"elseif\">elseif (m = 0)</span>\n05      return 1\n06   <span class=\"if\">endif</span>",
+    "text": "階乗の定義 n! = n × (n-1)! を、関数 Fact の中で再帰的に実装したいと考えています。空欄 [  a  ] に入る適切な式を選んでください。",
+    "example": "Fact(3) の中で Fact(2) が呼ばれるとすると、その間にどんな掛け算が行われるか考えてみましょう。",
+    "code": "01  Fact(整数型: m)\n02  <span class=\"if\">if (m > 0)</span>\n03     return [    a    ]\n04  <span class=\"if\">elseif (m = 0)</span>\n05     return 1\n06  <span class=\"if\">endif</span>",
     "choices": ["m × Fact(m - 1)", "(m - 1) × Fact(m)", "m × (m - 1)", "Fact(m - 1)"],
-    "specific_explanation": "1. 一回り小さい形への変換\n   階乗の計算を「自分自身の値 ×（自分より1小さい階乗）」という形に分解します。\n\n2. 再帰呼び出し\n   関数の中で引数を1つ減らして自分自身（Fact）を呼び出すことで、ドミノ倒しのように計算が連鎖します。\n   <div class=\"important\">return m × Fact(m - 1)</div>"
+    "specific_explanation": "1. 一回り小さい形への変換\n   階乗の計算を「自分自身の値 × 自分より 1 小さい階乗」という形に分解します。\n\n2. 再帰呼び出し\n   引数を 1 つ減らして自分自身（Fact）を呼び出すことで、ドミノ倒しのように計算が連鎖します。\n   <div class=\"important\">return m × Fact(m - 1)</div>"
   },
   {
     "id": 184,
@@ -2762,10 +2762,10 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "多分岐の論理",
     "text": "入場料の判定において、空欄に入る最も適切な条件式を選んでください。なお、プログラムは上から順に判定されます。",
-    "example": "3歳以下は100円、4〜9歳は300円、10歳以上は500円です。",
-    "code": "1  <span class=\"if\">if (age ≤ 3)</span>\n2     ret ← 100\n3  <span class=\"if\">elseif ([      ])</span>\n4     ret ← 300\n5  <span class=\"else\">else</span>\n6     ret ← 500\n7  <span class=\"if\">endif</span>",
+    "example": "elseif に到達した時点で age が 4 以上であることは確定しています。あとは何を判定すれば「4〜9歳」の範囲が定まるか考えてみましょう。",
+    "code": "01  整数型: age, ret\n02  <span class=\"if\">if (age ≤ 3)</span>\n03     ret ← 100\n04  <span class=\"if\">elseif ([      ])</span>\n05     ret ← 300\n06  <span class=\"if\">else</span>\n07     ret ← 500\n08  <span class=\"if\">endif</span>",
     "choices": ["age ≤ 9", "age < 9", "age ≥ 4", "(age ≥ 4) and (age ≤ 9)"],
-    "specific_explanation": "1. 優先順位の確認\n   if で「3歳以下」が既に除外されています。つまり elseif に到達した時点で age は自動的に 4 以上であることが確定しています。\n\n2. 排他性チェック\n   したがって、ここでは上限の「9歳以下か」だけを判定すれば、自動的に「4〜9歳」の範囲を特定できます。\n   <div class=\"important\">elseif (age ≤ 9)</div>"
+    "specific_explanation": "1. 優先順位の確認\n   if で「3歳以下」が既に除外されているため、elseif に到達した時点で age は自動的に 4 以上であることが確定しています。\n\n2. 排他性チェック\n   したがって、上限の「9歳以下か」だけを判定すれば、自動的に「4〜9歳」の範囲を特定できます。\n   <div class=\"important\">elseif (age ≤ 9)</div>"
   },
   {
     "id": 185,
@@ -2773,15 +2773,15 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "多分岐の論理",
     "text": "入場料判定プログラムにおいて、10歳以上の客が来た場合に 500円が代入される仕組みとして正しい説明を選んでください。",
-    "example": "age = 15 のとき、どの if/elseif 条件も満たさない",
-    "code": "1  <span class=\"if\">if (age ≤ 3)</span> ...\n3  <span class=\"if\">elseif (age ≤ 9)</span> ...\n5  <span class=\"if\">else</span>\n6     ret ← 500",
+    "example": "age = 15 のとき、if と elseif の条件をひとつずつ確認してみましょう。",
+    "code": "01  整数型: age, ret\n02  <span class=\"if\">if (age ≤ 3)</span>\n03     ret ← 100\n04  <span class=\"if\">elseif (age ≤ 9)</span>\n05     ret ← 300\n06  <span class=\"if\">else</span>\n07     ret ← 500\n08  <span class=\"if\">endif</span>",
     "choices": [
       "全ての条件（3歳以下、9歳以下）に当てはまらない場合、else句が実行される",
       "age が 10 以上になると自動的に else の数値が加算される",
       "else は「それ以外」ではなく「最大値」を指定する命令だから",
       "elseif の条件が偽のとき、必ず else の中身が実行されるから"
     ],
-    "specific_explanation": "1. 排他性チェック\n   多分岐構造では、上の条件から順に判定され、どれにも当てはまらなかった（全ての条件式が偽になった）場合にのみ else ブロックが実行されます。\n\n2. 優先順位の確認\n   「3歳以下ではない」かつ「9歳以下ではない」＝「10歳以上」という論理構造になっています。\n   <div class=\"important\">条件を外れた「残り全て」を else で処理する</div>"
+    "specific_explanation": "1. 排他性チェック\n   多分岐構造では、上の条件から順に判定され、どれにも当てはまらなかった場合にのみ else ブロックが実行されます。\n\n2. 優先順位の確認\n   「3歳以下ではない」かつ「9歳以下ではない」という 2 条件の否定が重なった結果として「10歳以上」が確定し、else が実行されます。\n   <div class=\"important\">条件を外れた「残り全て」を else で処理する</div>"
   },
   {
     "id": 186,
@@ -2789,15 +2789,15 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "多分岐の論理",
     "text": "多分岐（elseif）において、年齢 10歳以上の料金（500円）が正しく適用される理由として適切なものはどれですか。",
-    "example": "age = 10 のとき、最初の2つの条件が偽（false）になる",
-    "code": "1  <span class=\"if\">if (age ≤ 3)</span>\n2     ret ← 100\n3  <span class=\"if\">elseif (age ≤ 9)</span>\n4     ret ← 300\n5  <span class=\"if\">else</span>\n6     ret ← 500\n7  <span class=\"if\">endif</span>",
+    "example": "age = 10 のとき、最初の 2 つの条件が偽（false）になることを順番に確かめてみましょう。",
+    "code": "01  整数型: age, ret\n02  <span class=\"if\">if (age ≤ 3)</span>\n03     ret ← 100\n04  <span class=\"if\">elseif (age ≤ 9)</span>\n05     ret ← 300\n06  <span class=\"if\">else</span>\n07     ret ← 500\n08  <span class=\"if\">endif</span>",
     "choices": [
       "前の条件（3歳以下、9歳以下）のいずれにも該当しないため",
       "else句は常に「10以上」を意味する予約語だから",
       "プログラムの最後で必ず500が加算されるから",
       "10以上の数値が入力されたときにエラーを防ぐため"
     ],
-    "specific_explanation": "1. 排他性チェック\n   多分岐構造では、ある条件に入ったときは、他の条件は無視されます。逆に言えば、else に到達するのは「前のすべての条件が偽」だった場合のみです。\n\n2. 優先順位の確認\n   「3歳以下」でも「9歳以下」でもない（つまり10歳以上である）場合にのみ、else の処理が実行されます。\n   <div class=\"important\">どの条件式も真にならないとき、else 句が実行される</div>"
+    "specific_explanation": "1. 排他性チェック\n   多分岐構造では、ある条件に入ったとき他の条件は無視されます。逆に言えば、else に到達するのは「前のすべての条件が偽」だった場合のみです。\n\n2. 優先順位の確認\n   「3歳以下」でも「9歳以下」でもない（つまり10歳以上である）場合にのみ、else の処理が実行されます。\n   <div class=\"important\">どの条件式も真にならないとき、else 句が実行される</div>"
   },
   {
     "id": 187,
@@ -2805,8 +2805,8 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "複合条件",
     "text": "空欄 [  ] に「4歳から9歳まで」を厳密に指定する条件を入れる場合、適切な式はどれですか。なお、前の if 文は存在しないものと仮定します。",
-    "example": "age = 4 または 9 のときに真(true)となる式",
-    "code": "1  <span class=\"if\">if ([      ])</span>\n2     ret ← 300\n3  <span class=\"if\">endif</span>",
+    "example": "age = 4 のときも age = 9 のときも真になるためには、2 つの条件をどう組み合わせればよいか考えてみましょう。",
+    "code": "01  整数型: age, ret\n02  <span class=\"if\">if ([      ])</span>\n03     ret ← 300\n04  <span class=\"if\">endif</span>",
     "choices": [
       "(age ≥ 4) and (age ≤ 9)",
       "(age > 3) or (age < 10)",
@@ -2820,11 +2820,11 @@ const short_questions = [
     "category": "制御構文",
     "theme": "if文",
     "subtheme": "多分岐の論理",
-    "text": "もしプログラムの1行目と3行目を入れ替えて、最初に age ≤ 9 を判定した場合、3歳の子供の料金はどうなりますか。",
-    "example": "判定順序：(1) age ≤ 9 → (2) age ≤ 3",
-    "code": "1  <span class=\"if\">if (age ≤ 3)</span>\n2     ret ← 300\n3  <span class=\"if\">elseif (age ≤ 9)</span>\n4     ret ← 100\n...",
+    "text": "もし if と elseif の条件式を入れ替えて、最初に age ≤ 9 を判定するよう変更した場合、3歳の子供の料金はどうなりますか。",
+    "example": "判定順序：(1) age ≤ 9 → (2) age ≤ 3 の順で進みます。age = 3 はどちらの条件を最初に満たすか考えてみましょう。",
+    "code": "01  整数型: age, ret\n02  <span class=\"if\">if (age ≤ 9)</span>\n03     ret ← 300\n04  <span class=\"if\">elseif (age ≤ 3)</span>\n05     ret ← 100\n06  <span class=\"if\">else</span>\n07     ret ← 500\n08  <span class=\"if\">endif</span>",
     "choices": ["300円になる", "100円になる", "エラーになる", "400円になる"],
-    "specific_explanation": "1. 優先順位の確認\n   if 文は上から順に判定され、最初に真（true）になったブロックだけが実行されます。\n\n2. 排他性チェック\n   3歳は age ≤ 9 を満たしてしまうため、本来の100円の処理に到達する前に300円の処理が確定してしまいます。より「狭い条件」や「特殊なケース」を先に書くのが鉄則です。\n   <div class=\"important\">条件式は、より厳しい条件を先に書く必要がある</div>"
+    "specific_explanation": "1. 優先順位の確認\n   if 文は上から順に判定され、最初に真になったブロックだけが実行されます。\n\n2. 排他性チェック\n   3歳は age ≤ 9 を満たしてしまうため、本来の 100円の処理に到達する前に 300円が確定してしまいます。より「狭い条件」や「特殊なケース」を先に書くのが鉄則です。\n   <div class=\"important\">条件式は、より厳しい条件を先に書く必要がある</div>"
   },
   {
     "id": 189,
@@ -2832,10 +2832,10 @@ const short_questions = [
     "theme": "if文",
     "subtheme": "境界値の判定",
     "text": "「10歳以上は500円」というルールを if 文で直接書く場合、適切な比較演算子を選んでください。",
-    "example": "age = 10 のとき 真(true)",
-    "code": "1  <span class=\"if\">if (age [  1  ] 10)</span>\n2     ret ← 500\n3  <span class=\"if\">endif</span>",
+    "example": "age = 10 のとき条件が真(true)になり、age = 9 のとき偽(false)になる演算子はどれかを確認してみましょう。",
+    "code": "01  整数型: age, ret\n02  <span class=\"if\">if (age [  1  ] 10)</span>\n03     ret ← 500\n04  <span class=\"if\">endif</span>",
     "choices": ["≥", ">", "=", "≤"],
-    "specific_explanation": "1. 境界の特定\n   基準となる数値は「10」です。\n\n2. 含むか含まないか\n   「以上」はその数値自体を「含みます」。10歳も500円の対象であるため、10を含んでそれより大きい「≥」が適切です。\n   <div class=\"important\">if (age ≥ 10)</div>"
+    "specific_explanation": "1. 境界の特定\n   基準となる数値は「10」です。\n\n2. 含むか含まないか\n   「以上」はその数値自体を含みます。10歳も 500円の対象であるため、10 を含む「≥」が適切です。\n   <div class=\"important\">if (age ≥ 10)</div>"
   },
   {
     "id": 190,
@@ -2864,11 +2864,11 @@ const short_questions = [
     "category": "制御構文",
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
-    "text": "このプログラムのループが終了する条件として「不適切なもの」はどれですか。※while文の継続条件から逆算してください。",
-    "example": "配列の末尾まで処理が終わったとき、または…？",
-    "code": "5  <span class=\"while\">while ((ret ≠ -1) and (i ≤ m))</span>",
+    "text": "このプログラムのループが終了する条件として「不適切なもの」はどれですか。※ while 文の継続条件から逆算してください。",
+    "example": "継続条件が and でつながれているとき、ループが終了するのはどんな場合か考えてみましょう。また、ret が 0 になることは終了条件になりますか。",
+    "code": "01  整数型: ret, i, m\n02  <span class=\"while\">while ((ret ≠ -1) and (i ≤ m))</span>\n03     /* 処理 */\n04  <span class=\"while\">endwhile</span>",
     "choices": ["ret が 0 になったとき", "ret が -1 になったとき", "i が m を超えたとき", "エラーが発生したとき"],
-    "specific_explanation": "1. 異常系の考慮\n   このwhile文は and 条件であるため、どちらか一方が偽（false）になった時点で終了します。\n\n2. 変数の変化\n   ret ≠ -1 が継続条件なので、逆の ret = -1（エラー発生時）が終了条件となります。また i ≤ m が継続条件なので、i > m（走査完了）も終了条件です。\n   「ret が 0」は有効な数値計算の途中経過であり、終了条件ではありません。\n   <div class=\"important\">終了条件：(ret = -1) or (i > m)</div>"
+    "specific_explanation": "1. 異常系の考慮\n   この while 文は and 条件であるため、どちらか一方が偽になった時点で終了します。\n\n2. 変数の変化\n   ret ≠ -1 が継続条件なので、その逆の ret = -1（エラー発生時）が終了条件です。また i ≤ m が継続条件なので、i > m（走査完了）も終了条件です。「ret が 0」は有効な計算途中の値であり、終了条件ではありません。\n   <div class=\"important\">終了条件：(ret = -1) or (i > m)</div>"
   },
   {
     "id": 193,
@@ -2881,7 +2881,7 @@ const short_questions = [
     "choices": ["ret", "i", "m", "n"],
     "specific_explanation": "1. 初期状態の設定\n   ret は計算結果を保持する変数ですが、同時に「エラー未発生」を示すフラグとしても機能しています。\n\n2. 状態の更新\n   一度 ret に -1 が代入されると、while文の継続条件である ret ≠ -1 が満たされなくなり、残りの処理をスキップして終了します。\n   <div class=\"important\">ret ≠ -1 をチェックすることで計算継続を判断している</div>"
   },
-{
+  {
     "id": 194,
     "category": "制御構文",
     "theme": "for文",
@@ -2895,57 +2895,57 @@ const short_questions = [
   {
     "id": 195,
     "category": "制御構文",
-    "text": "気温が35度以上のときに「警告」を返す関数です。空欄に入る適切な比較演算子を選択してください。",
-    "example": "temp = 35 のとき 戻り値: \"警告\"",
-    "code": "1  checkHeat(整数型: temp)\n2  <span class=\"if\">if (temp [  1  ] 35)</span>\n3     return \"警告\"\n4  <span class=\"if\">else</span>\n5     return \"安全\"",
-    "choices": [">=", ">", "<=", "<"],
     "theme": "if文",
     "subtheme": "境界値の判定",
-    "specific_explanation": "1. 境界の特定\n   基準となる数値は「35」度です。\n\n2. 含むか含まないか\n   問題文に「35度以上」とあり、例でも35の時に警告が出るため、35を「含みます」。\n   したがって、以上の意味を持つ「>=」が正解です。\n   <div class=\"important\">if (temp >= 35)</div>"
+    "text": "気温が35度以上のときに「警告」を返す関数です。空欄に入る適切な比較演算子を選択してください。",
+    "example": "temp = 35 のとき「警告」が返るということは、35 自体を条件に含める必要があります。どの演算子が 35 を含みますか。",
+    "code": "01  checkHeat(整数型: temp)\n02  <span class=\"if\">if (temp [  1  ] 35)</span>\n03     return \"警告\"\n04  <span class=\"if\">else</span>\n05     return \"安全\"\n06  <span class=\"if\">endif</span>",
+    "choices": [">=", ">", "<=", "<"],
+    "specific_explanation": "1. 境界の特定\n   基準となる数値は「35」度です。\n\n2. 含むか含まないか\n   問題文に「35度以上」とあり、35 そのものも警告対象です。「以上」を意味する ">=" が正解です。\n   <div class=\"important\">if (temp >= 35)</div>"
   },
   {
     "id": 196,
     "category": "制御構文",
-    "text": "12歳未満（12歳を含まない）の場合に子供料金を適用する判定式です。空欄を埋めてください。",
-    "example": "age = 12 のとき 戻り値: \"大人料金\"",
-    "code": "1  checkFare(整数型: age)\n2  <span class=\"if\">if (age [  1  ] 12)</span>\n3     return \"子供料金\"\n4  <span class=\"if\">else</span>\n5     return \"大人料金\"",
-    "choices": ["<", "<=", ">", ">="],
     "theme": "if文",
     "subtheme": "境界値の判定",
-    "specific_explanation": "1. 境界の特定\n   基準となる数値は「12」歳です。\n\n2. 含むか含まないか\n   「未満」は、その数値自体を「含みません」。\n   12歳は大人料金になる必要があるため、12より小さいことを示す「<」を選びます。\n   <div class=\"important\">if (age < 12)</div>"
+    "text": "12歳未満（12歳を含まない）の場合に子供料金を適用する判定式です。空欄を埋めてください。",
+    "example": "age = 12 のとき「大人料金」が返るとすると、12 は条件を満たしません。12 を含まない比較演算子はどれでしょうか。",
+    "code": "01  checkFare(整数型: age)\n02  <span class=\"if\">if (age [  1  ] 12)</span>\n03     return \"子供料金\"\n04  <span class=\"if\">else</span>\n05     return \"大人料金\"\n06  <span class=\"if\">endif</span>",
+    "choices": ["<", "<=", ">", ">="],
+    "specific_explanation": "1. 境界の特定\n   基準となる数値は「12」歳です。\n\n2. 含むか含まないか\n   「未満」はその数値自体を含みません。12歳は大人料金になるため、12 より小さいことを示す「<」を選びます。\n   <div class=\"important\">if (age < 12)</div>"
   },
   {
     "id": 197,
     "category": "制御構文",
-    "text": "在庫数が10個以下になった場合に「発注」を出すプログラムです。空欄に入る演算子を選んでください。",
-    "example": "stock = 10 のとき 戻り値: \"発注\"",
-    "code": "1  checkStock(整数型: stock)\n2  <span class=\"if\">if (stock [  1  ] 10)</span>\n3     return \"発注\"\n4  <span class=\"if\">else</span>\n5     return \"待機\"",
-    "choices": ["<=", "<", ">=", ">"],
     "theme": "if文",
     "subtheme": "境界値の判定",
-    "specific_explanation": "1. 境界の特定\n   基準となる数値は「10」個です。\n\n2. 含むか含まないか\n   「以下」は、その数値自体を「含みます」。\n   10個ちょうどでも発注が必要なため、10を含んでそれより小さい「<=」が適切です。\n   <div class=\"important\">if (stock <= 10)</div>"
+    "text": "在庫数が10個以下になった場合に「発注」を出すプログラムです。空欄に入る演算子を選んでください。",
+    "example": "stock = 10 のとき「発注」が返るということは、10 そのものも条件を満たすはずです。どの演算子が 10 を含みますか。",
+    "code": "01  checkStock(整数型: stock)\n02  <span class=\"if\">if (stock [  1  ] 10)</span>\n03     return \"発注\"\n04  <span class=\"if\">else</span>\n05     return \"待機\"\n06  <span class=\"if\">endif</span>",
+    "choices": ["<=", "<", ">=", ">"],
+    "specific_explanation": "1. 境界の特定\n   基準となる数値は「10」個です。\n\n2. 含むか含まないか\n   「以下」はその数値自体を含みます。10個ちょうどでも発注が必要なため、10 を含む「<=」が適切です。\n   <div class=\"important\">if (stock <= 10)</div>"
   },
   {
     "id": 198,
     "category": "制御構文",
-    "text": "配列の添え字 i が、要素数 10 の配列 a（1〜10番）の範囲内にあるかを確認します。",
-    "example": "i = 10 のとき 戻り値: true",
-    "code": "1  isSafeIndex(整数型: i)\n2  <span class=\"if\">if (i >= 1 and i [  1  ] 10)</span>\n3     return true\n4  <span class=\"if\">else</span>\n5     return false",
-    "choices": ["<=", "<", "==", ">="],
     "theme": "if文",
     "subtheme": "境界値の判定",
-    "specific_explanation": "1. 境界の特定\n   配列の終わりの番号である「10」が基準です。\n\n2. 含むか含まないか\n   10番目の要素は存在するため、10を「含めて」判定する必要があります。\n   範囲内（10以下）を示す「<=」が正解となります。\n   <div class=\"important\">if (i >= 1 and i <= 10)</div>"
+    "text": "配列の添え字 i が、要素数 10 の配列 a（1〜10番）の範囲内にあるかを確認します。",
+    "example": "i = 10 のとき true が返るとすると、10 は範囲内と判断されます。10 を含む比較演算子はどれかを考えてみましょう。",
+    "code": "01  isSafeIndex(整数型: i)\n02  <span class=\"if\">if (i >= 1 and i [  1  ] 10)</span>\n03     return true\n04  <span class=\"if\">else</span>\n05     return false\n06  <span class=\"if\">endif</span>",
+    "choices": ["<=", "<", "==", ">="],
+    "specific_explanation": "1. 境界の特定\n   配列の末尾の番号である「10」が上限の基準です。\n\n2. 含むか含まないか\n   10番目の要素は存在するため、10 を含めて判定する必要があります。範囲内（10以下）を示す「<=」が正解です。\n   <div class=\"important\">if (i >= 1 and i <= 10)</div>"
   },
   {
     "id": 199,
     "category": "制御構文",
-    "text": "テストの点が90点より大きい場合にのみ、評価を「秀」とします。適切なものを選んでください。",
-    "example": "score = 90 のとき 戻り値: \"優\"",
-    "code": "1  getGrade(整数型: score)\n2  <span class=\"if\">if (score [  1  ] 90)</span>\n3     return \"秀\"\n4  <span class=\"if\">else</span>\n5     return \"優\"",
-    "choices": [">", ">=", "<", "<="],
     "theme": "if文",
     "subtheme": "境界値の判定",
-    "specific_explanation": "1. 境界の特定\n   基準となる数値は「90」点です。\n\n2. 含むか含まないか\n   「〜より大きい（超える）」は、その数値自体を「含みません」。\n   90点ちょうどでは「秀」にならないため、90を含まない「>」を使用します。\n   <div class=\"important\">if (score > 90)</div>"
+    "text": "テストの点が90点より大きい場合にのみ、評価を「秀」とします。適切なものを選んでください。",
+    "example": "score = 90 のときどうなるか考えてみましょう。",
+    "code": "01  getGrade(整数型: score)\n02  <span class=\"if\">if (score [  1  ] 90)</span>\n03     return \"秀\"\n04  <span class=\"if\">else</span>\n05     return \"優\"\n06  <span class=\"if\">endif</span>",
+    "choices": [">", ">=", "<", "<="],
+    "specific_explanation": "1. 境界の特定\n   基準となる数値は「90」点です。\n\n2. 含むか含まないか\n   「より大きい（超える）」はその数値自体を含みません。90点ちょうどでは「秀」にならないため、90 を含まない「>」を使用します。\n   <div class=\"important\">if (score > 90)</div>"
   },
   {
     "id": 200,
@@ -2953,10 +2953,10 @@ const short_questions = [
     "theme": "再帰関数",
     "subtheme": "再帰的処理",
     "text": "1から引数で指定された正の整数 n までの合計値を再帰的に計算して返す関数 sum を作成した。空欄 [  a  ] に入れるべき適切な式を答えなさい。",
-    "example": "sum(3) → 6 (3 + 2 + 1)\nsum(10) → 55",
-    "code": "1  整数型: sum(整数型: n)\n2    <span class=\"if\">if (n == 1)</span>\n3       return 1\n4    <span class=\"if\">else</span>\n5       return [  a  ]",
+    "example": "sum(5) の中に「sum(4) と同じ形の計算」が含まれているか、具体的な数値で確認してみましょう。",
+    "code": "01  整数型: sum(整数型: n)\n02  <span class=\"if\">if (n = 1)</span>\n03     return 1\n04  <span class=\"if\">else</span>\n05     return [  a  ]\n06  <span class=\"if\">endif</span>",
     "choices": ["n + sum(n - 1)", "n + sum(n + 1)", "sum(n - 1)", "n + (n - 1)"],
-    "specific_explanation": "1. ループを止める（ベースケース）\n合計の最小単位は n = 1 のときです。1 までの合計は 1 なので、そのまま 1 を返して再帰を終了させます。\n<div class=\"important\">if (n == 1) return 1</div>\n\n2. 同じ処理を探す（再帰的処理）\n大きな計算の中に、一回り小さい「同じ形の塊」を見つけます。具体的に sum(5) の動きを見てみましょう。\n・sum(5) = 5 + (4 + 3 + 2 + 1)\n・sum(4) = (4 + 3 + 2 + 1)\nつまり、sum(5) は「5 + sum(4)」と書き換えることができます。これを一般化（nに置き換え）すると、次の式になります。\n<div class=\"important\">sum(n) = n + sum(n - 1)</div>"
+    "specific_explanation": "1. 最小単位の特定\n   合計の最小単位は n = 1 のときです。1 までの合計は 1 なので、そのまま 1 を返して再帰を終了させます。\n\n2. 一回り小さい形への変換\n   sum(n) の中に「一回り小さい sum(n - 1)」を見つけます。sum(5) = 5 + sum(4) と書き換えられるため、これを一般化すると次の式になります。\n   <div class=\"important\">sum(n) = n + sum(n - 1)</div>"
   },
   {
     "id": 201,
@@ -2964,10 +2964,10 @@ const short_questions = [
     "theme": "再帰関数",
     "subtheme": "再帰的処理",
     "text": "フィボナッチ数列の第 n 項の値を求める関数 fib(n) を作成した。空欄 [  a  ] に入れるべき適切な式を答えなさい。なお、数列は 0, 1, 1, 2, 3, 5... とする。",
-    "example": "fib(3) → 2 (1 + 1)\nfib(5) → 5 (2 + 3)",
-    "code": "1  整数型: fib(整数型: n)\n2    <span class=\"if\">if (n == 0)</span>\n3       return 0\n4    <span class=\"if\">elseif (n == 1)</span>\n5       return 1\n6    <span class=\"if\">else</span>\n7       return [  a  ]",
-    "choices": ["fib(n - 1) + fib(n - 2)", "fib(n - 1) + n", "fib(n - 2) + (n - 1)", "fib(n - 1) * 2"],
-    "specific_explanation": "1. ループを止める（ベースケース）\nフィボナッチ数列の定義では、最初の2つの項が決まっています。n = 0 のときは 0、n = 1 のときは 1 を返すことで再帰を終了させます。\n<div class=\"important\">if (n == 0) return 0 / if (n == 1) return 1</div>\n\n2. 同じ処理を探す（再帰的処理）\n「前の2つの項を足す」というルールを式にします。第 n 項を求めるには、1つ前の「第 n-1 項」と、2つ前の「第 n-2 項」の結果が必要です。これを一般化すると、自分自身を2回呼び出す次の式になります。\n<div class=\"important\">fib(n) = fib(n - 1) + fib(n - 2)</div>"
+    "example": "fib(4) を求めるには、直前の 2 項である fib(3) と fib(2) の結果が必要です。この規則を式にしてみましょう。",
+    "code": "01  整数型: fib(整数型: n)\n02  <span class=\"if\">if (n = 0)</span>\n03     return 0\n04  <span class=\"if\">elseif (n = 1)</span>\n05     return 1\n06  <span class=\"if\">else</span>\n07     return [  a  ]\n08  <span class=\"if\">endif</span>",
+    "choices": ["fib(n - 1) + fib(n - 2)", "fib(n - 1) + n", "fib(n - 2) + (n - 1)", "fib(n - 1) × 2"],
+    "specific_explanation": "1. 最小単位の特定\n   フィボナッチ数列では最初の 2 項が固定されています。n = 0 のときは 0、n = 1 のときは 1 を返して再帰を終了させます。\n\n2. 一回り小さい形への変換\n   第 n 項は「1 つ前の項 + 2 つ前の項」というルールで決まります。自分自身を 2 回呼び出すことでこの規則を表現します。\n   <div class=\"important\">fib(n) = fib(n - 1) + fib(n - 2)</div>"
   },
   {
     "id": 202,
@@ -2975,10 +2975,10 @@ const short_questions = [
     "theme": "再帰関数",
     "subtheme": "再帰的処理",
     "text": "与えられた正の整数 n の各桁の数字をすべて足した合計を再帰的に計算して返す関数 digitSum(n) を作成した。空欄 [  a  ] に入れる適切な式を答えなさい。",
-    "example": "digitSum(123) → 6 (1 + 2 + 3)\ndigitSum(405) → 9 (4 + 0 + 5)",
-    "code": "1  整数型: digitSum(整数型: n)\n2    <span class=\"if\">if (n < 10)</span>\n3       return n\n4    <span class=\"if\">else</span>\n5       return [  a  ]",
-    "choices": ["digitSum(n / 10) + (n % 10)", "digitSum(n - 1) + n", "digitSum(n / 10) + 1", "digitSum(n % 10) + 10"],
-    "specific_explanation": "1. ループを止める（ベースケース）\nn が 10 未満（1桁）になったら、それ以上分解できないため、その数値自体を返して終了します。\n<div class=\"important\">if (n < 10) return n</div>\n\n2. 同じ処理を探す（再帰적処理）\n数値を「末尾の1桁」と「それ以外の桁」に切り分けます。例えば 123 の場合、10で割った余りの 3 と、10で割った商の 12 に分けられます。これを一般化すると、次の式になります。\n<div class=\"important\">digitSum(n) = digitSum(n / 10) + (n % 10)</div>"
+    "example": "digitSum(123) を求めるとき、123 を「末尾の 1 桁」と「残りの桁」に分けてみましょう。",
+    "code": "01  整数型: digitSum(整数型: n)\n02  <span class=\"if\">if (n < 10)</span>\n03     return n\n04  <span class=\"if\">else</span>\n05     return [  a  ]\n06  <span class=\"if\">endif</span>",
+    "choices": ["digitSum(n ÷ 10) + (n mod 10)", "digitSum(n - 1) + n", "digitSum(n ÷ 10) + 1", "digitSum(n mod 10) + 10"],
+    "specific_explanation": "1. 最小単位の特定\n   n が 10 未満（1桁）になったら、それ以上分解できないため、その数値自体を返して終了します。\n\n2. 一回り小さい形への変換\n   数値を「末尾の 1 桁（n mod 10）」と「残りの桁（n ÷ 10）」に分けます。例えば 123 は 3 と 12 に分けられ、12 に対して同じ処理を呼び出すことで連鎖させます。\n   <div class=\"important\">digitSum(n) = digitSum(n ÷ 10) + (n mod 10)</div>"
   },
   {
     "id": 203,
@@ -2986,10 +2986,10 @@ const short_questions = [
     "theme": "再帰関数",
     "subtheme": "再帰的処理",
     "text": "正の整数 n の階乗（n! = n × (n-1) × ... × 1）を再帰的に計算して返す関数 fact(n) を作成した。空欄 [  a  ] に入れるべき適切な式を答えなさい。",
-    "example": "fact(3) → 6 (3 × 2 × 1)\nfact(5) → 120",
-    "code": "1  整数型: fact(整数型: n)\n2    <span class=\"if\">if (n == 1)</span>\n3       return 1\n4    <span class=\"if\">else</span>\n5       return [  a  ]",
-    "choices": ["n * fact(n - 1)", "n + fact(n - 1)", "fact(n - 1)", "n * (n - 1)"],
-    "specific_explanation": "1. ループを止める（ベースケース）\n最小のケースは n = 1 です。1! は 1 なので、1 を返して終了します。\n<div class=\"important\">if (n == 1) return 1</div>\n\n2. 同じ処理を探す（再帰的処理）\n5! を分解すると「5 × (4 × 3 × 2 × 1)」ですが、カッコ内は 4! そのものです。つまり、fact(5) = 5 * fact(4) と定義できます。これを一般化すると、次の式になります。\n<div class=\"important\">fact(n) = n * fact(n - 1)</div>"
+    "example": "fact(5) の中に「fact(4) と同じ形の計算」が含まれているか、具体的な数値で確認してみましょう。",
+    "code": "01  整数型: fact(整数型: n)\n02  <span class=\"if\">if (n = 1)</span>\n03     return 1\n04  <span class=\"if\">else</span>\n05     return [  a  ]\n06  <span class=\"if\">endif</span>",
+    "choices": ["n × fact(n - 1)", "n + fact(n - 1)", "fact(n - 1)", "n × (n - 1)"],
+    "specific_explanation": "1. 最小単位の特定\n   最小のケースは n = 1 です。1! = 1 なので、1 を返して再帰を終了させます。\n\n2. 一回り小さい形への変換\n   5! を分解すると「5 × 4!」になります。つまり fact(n) は「n × fact(n - 1)」と定義できます。\n   <div class=\"important\">fact(n) = n × fact(n - 1)</div>"
   },
   {
     "id": 204,
@@ -2997,10 +2997,10 @@ const short_questions = [
     "theme": "再帰関数",
     "subtheme": "再帰的処理",
     "text": "x の n 乗（x^n）を再帰的に計算して返す関数 pow(x, n) を作成した。空欄 [  a  ] に入れるべき適切な式を答えなさい。",
-    "example": "pow(2, 3) → 8 (2 × 2 × 2)\npow(3, 4) → 81",
-    "code": "1  整数型: pow(整数型: x, 整数型: n)\n2    <span class=\"if\">if (n == 0)</span>\n3       return 1\n4    <span class=\"if\">else</span>\n5       return [  a  ]",
-    "choices": ["x * pow(x, n - 1)", "x * pow(x - 1, n)", "x + pow(x, n - 1)", "pow(x, n - 1)"],
-    "specific_explanation": "1. ループを止める（ベースケース）\nどんな数も 0 乗すると 1 になるため、n = 0 を終了条件として 1 を返します。\n<div class=\"important\">if (n == 0) return 1</div>\n\n2. 同じ処理を探す（再帰的処理）\n2^3 は「2 × (2^2)」と分解できます。つまり、pow(x, n) を計算するには、x に「x を n-1 回かけたもの」を掛ければよいことになります。これを一般化すると、次の式になります。\n<div class=\"important\">pow(x, n) = x * pow(x, n - 1)</div>"
+    "example": "pow(2, 3) の中に「pow(2, 2) と同じ形の計算」が含まれているか、具体的な数値で確認してみましょう。",
+    "code": "01  整数型: pow(整数型: x, 整数型: n)\n02  <span class=\"if\">if (n = 0)</span>\n03     return 1\n04  <span class=\"if\">else</span>\n05     return [  a  ]\n06  <span class=\"if\">endif</span>",
+    "choices": ["x × pow(x, n - 1)", "x × pow(x - 1, n)", "x + pow(x, n - 1)", "pow(x, n - 1)"],
+    "specific_explanation": "1. 最小単位の特定\n   どんな数も 0 乗すると 1 になるため、n = 0 を終了条件として 1 を返します。\n\n2. 一回り小さい形への変換\n   x^3 は「x × x^2」と分解できます。つまり pow(x, n) は「x × pow(x, n - 1)」と定義できます。\n   <div class=\"important\">pow(x, n) = x × pow(x, n - 1)</div>"
   },
   {
     "id": 205,
@@ -3008,14 +3008,14 @@ const short_questions = [
     "theme": "再帰関数",
     "subtheme": "再帰的処理",
     "text": "2つの正の整数 a と b の最大公約数を求める関数 gcd(a, b) を作成した。空欄 [  a  ] に入れるべき適切な式を答えなさい。なお、a ≧ b とする。",
-    "example": "gcd(12, 8) → 4\ngcd(21, 14) → 7",
-    "code": "1  整数型: gcd(整数型: a, 整数型: b)\n2    <span class=\"if\">if (b == 0)</span>\n3       return a\n4    <span class=\"if\">else</span>\n5       return [  a  ]",
-    "choices": ["gcd(b, a % b)", "gcd(a % b, b)", "gcd(a - b, b)", "a % b"],
-    "specific_explanation": "1. ループを止める（ベースケース）\nユークリッドの互除法では、割る数（b）が 0 になったときの割られる数（a）が最大公約数となります。\n<div class=\"important\">if (b == 0) return a</div>\n\n2. 同じ処理を探す（再帰的処理）\n「a と b の最大公約数」は、「b と (a を b で割った余り)」の最大公約数と等しいという性質を利用します。この「b を第一引数に、余りを第二引数にする」処理を一般化すると、次の式になります。\n<div class=\"important\">gcd(a, b) = gcd(b, a % b)</div>"
+    "example": "gcd(12, 8) のとき、12 mod 8 = 4 です。次に gcd(8, 4) を計算するとどうなるか追ってみましょう。",
+    "code": "01  整数型: gcd(整数型: a, 整数型: b)\n02  <span class=\"if\">if (b = 0)</span>\n03     return a\n04  <span class=\"if\">else</span>\n05     return [  a  ]\n06  <span class=\"if\">endif</span>",
+    "choices": ["gcd(b, a mod b)", "gcd(a mod b, b)", "gcd(a - b, b)", "a mod b"],
+    "specific_explanation": "1. 最小単位の特定\n   ユークリッドの互除法では、割る数（b）が 0 になったときの割られる数（a）が最大公約数となります。\n\n2. 一回り小さい形への変換\n   「a と b の最大公約数」は「b と (a mod b) の最大公約数」と等しい性質を利用します。b を第一引数に、余りを第二引数にすることで問題を縮小していきます。\n   <div class=\"important\">gcd(a, b) = gcd(b, a mod b)</div>"
   },
 
   // for文
-{
+  {
     "id": 206,
     "category": "制御構文",
     "theme": "for文",
@@ -3048,7 +3048,7 @@ const short_questions = [
     "choices": ["2", "1", "3", "i + 2"],
     "specific_explanation": "1. 規則性の発見\n奇数は 1, 3, 5... と、前の数に 2 を足した数値になります。増分を 2 に設定することで、偶数を飛ばして奇数のみを順番に処理できます。\n\n\n2. ずれの調整\n増分を 1 にして if 文で判定するよりも、増分そのものを 2 にする方がループ回数が半分になり効率的です。\n\n<div class=\"important\">2 ずつ増やすことで、1, 3, 5... と奇数のみを抽出できます</div>"
   },
-{
+  {
     "id": 209,
     "category": "制御構文",
     "theme": "for文",
@@ -3666,46 +3666,46 @@ const short_questions = [
     "subtheme": "フラグによる終了判定",
     "text": "配列 data から目的の値 target を探すプログラムです。目的の値が見つかるか、配列の最後まで調べ終わるまでループを続けるためのフラグ変数 found の初期値 [  a  ] を選んでください。",
     "example": "まだ何も調べていない開始時点では、「見つかった」という状態でしょうか、それとも「まだ見つかっていない」状態でしょうか。",
-    "code": "1  search(整数型の配列: data, 整数型: n, 整数型: target)\n2  論理型: found ← [  a  ]\n3  整数型: i ← 1\n4  <span class=\"while\">while (found == false and i ≤ n)</span>\n5     <span class=\"if\">if (data[i] == target)</span>\n6        found ← true\n7     <span class=\"endif\">endif</span>\n8     i ← i + 1\n9  <span class=\"endwhile\">endwhile</span>\n10 return found",
+    "code": "01  search(整数型の配列: data, 整数型: n, 整数型: target)\n02  論理型: found ← [  a  ]\n03  整数型: i ← 1\n04  <span class=\"while\">while (found = false and i ≤ n)</span>\n05     <span class=\"if\">if (data[i] = target)</span>\n06        found ← true\n07     <span class=\"if\">endif</span>\n08     i ← i + 1\n09  <span class=\"while\">endwhile</span>\n10  return found",
     "choices": [
       "false",
       "true",
       "0",
       "1"
     ],
-    "specific_explanation": "1. フラグの初期化\n   while文の条件式に使用する `found` は、ループ開始前に適切な状態にしておく必要があります。\n\n2. 変数の変化\n   探す前は「まだ見つかっていない」ため、初期値は <span class=\"italic\">false</span> とし、見つかった時点で <span class=\"italic\">true</span> に更新してループを抜けます。\n   <div class=\"important\">found ← false で初期化する</div>"
+    "specific_explanation": "1. フラグの初期化\n   while 文の条件式に使用する found は、ループ開始前に適切な状態にしておく必要があります。\n\n2. 変数の変化\n   探す前は「まだ見つかっていない」ため、初期値は false とし、見つかった時点で true に更新してループを抜けます。\n   <div class=\"important\">found ← false で初期化する</div>"
   },
   {
     "id": 261,
     "category": "制御構文",
     "theme": "while文",
     "subtheme": "フラグによる終了判定",
-    "text": "入力された数値 num が 0 になるまで合計を加算し続けるプログラムです。空欄 [  a  ] に入る処理を選んでください。ここで、readInput()とは、入力した値を受け取る関数です",
-    "example": "最初に while文の条件式 `num ≠ 0` が評価されるとき、num の中にどんな値が入っていればループの中に入ることができるでしょうか。",
-    "code": "1  sumInput()\n2  整数型: sum ← 0, num\n3  [      a      ]\n4  <span class=\"while\">while (num ≠ 0)</span>\n5     sum ← sum + num\n6     num ← readInput()  // 外部から数値を読み込む\n7  <span class=\"endwhile\">endwhile</span>\n8  return sum",
+    "text": "入力された数値 num が 0 になるまで合計を加算し続けるプログラムです。空欄 [  a  ] に入る処理を選んでください。ここで、readInput() とは、入力した値を受け取る関数です。",
+    "example": "while 文の条件式 num ≠ 0 が最初に評価されるとき、num の中にどんな値が入っていればループに入れますか。",
+    "code": "01  sumInput()\n02  整数型: sum ← 0, num\n03  [      a      ]\n04  <span class=\"while\">while (num ≠ 0)</span>\n05     sum ← sum + num\n06     num ← readInput()  /* 外部から数値を読み込む */\n07  <span class=\"while\">endwhile</span>\n08  return sum",
     "choices": [
       "num ← readInput()",
       "num ← 0",
       "num ← sum",
       "sum ← num"
     ],
-    "specific_explanation": "1. フラグの初期化\n   while文は最初に条件判定を行うため、判定に使われる変数（ここでは num）に意味のある初期値を入れておく必要があります。\n\n2. 変数の変化\n   最初に一度読み込んでおくことで、<span class=\"italic\">num ≠ 0</span> の判定が正しく機能し、0が入力されたら即座に終了するようになります。\n   <div class=\"important\">ループに入る前に最初のデータを読み込む</div>"
+    "specific_explanation": "1. フラグの初期化\n   while 文は最初に条件判定を行うため、判定に使われる変数（ここでは num）に意味のある初期値を入れておく必要があります。\n\n2. 変数の変化\n   最初に一度読み込んでおくことで、num ≠ 0 の判定が正しく機能し、0 が入力されたら即座に終了するようになります。\n   <div class=\"important\">ループに入る前に最初のデータを読み込む</div>"
   },
   {
     "id": 262,
     "category": "制御構文",
     "theme": "while文",
     "subtheme": "フラグによる終了判定",
-    "text": "パスワードの入力チェックを行うプログラムです。この while文を終了して次の処理へ進むための「終了条件」を論理式で表したものを選んでください。（※コード中の継続条件の逆を考えます）",
-    "example": "while文の継続条件は「isCorrect が false である」かつ「count が 3 未満である」ことです。これが満たされなくなる（偽になる）状況を考えましょう。",
-    "code": "1  checkPassword(文字列型: correctPass)\n2  論理型: isCorrect ← false\n3  整数型: count ← 0\n4  <span class=\"while\">while (isCorrect == false and count < 3)</span>\n5     入力パスワード ← readInput()\n6     <span class=\"if\">if (入力パスワード == correctPass)</span>\n7        isCorrect ← true\n8     <span class=\"else\">else</span>\n9        count ← count + 1\n10    <span class=\"endif\">endif</span>\n11 <span class=\"endwhile\">endwhile</span>\n12 return isCorrect",
+    "text": "パスワードの入力チェックを行うプログラムです。この while 文を終了して次の処理へ進むための「終了条件」を論理式で表したものを選んでください。（※ コード中の継続条件の逆を考えます）",
+    "example": "while 文の継続条件が「isCorrect = false かつ count < 3」のとき、これが偽になる状況を考えてみましょう。",
+    "code": "01  checkPassword(文字列型: correctPass)\n02  論理型: isCorrect ← false\n03  整数型: count ← 0\n04  <span class=\"while\">while (isCorrect = false and count < 3)</span>\n05     入力パスワード ← readInput()\n06     <span class=\"if\">if (入力パスワード = correctPass)</span>\n07        isCorrect ← true\n08     <span class=\"if\">else</span>\n09        count ← count + 1\n10     <span class=\"if\">endif</span>\n11  <span class=\"while\">endwhile</span>\n12  return isCorrect",
     "choices": [
-      "isCorrect == true or count ≥ 3",
-      "isCorrect == true and count ≥ 3",
-      "isCorrect == false or count < 3",
-      "isCorrect == false and count < 3"
+      "isCorrect = true or count ≥ 3",
+      "isCorrect = true and count ≥ 3",
+      "isCorrect = false or count < 3",
+      "isCorrect = false and count < 3"
     ],
-    "specific_explanation": "1. フラグの初期化\n   ループ前には <span class=\"italic\">isCorrect ← false</span>、<span class=\"italic\">count ← 0</span> と初期化されています。\n\n2. 異常系の考慮\n   継続条件の否定（ド・モルガンの法則）が終了条件となります。パスワードが一致した（<span class=\"italic\">true</span>）、または制限回数に達した（<span class=\"italic\">≥ 3</span>）のどちらか一方でループを抜けます。\n   <div class=\"important\">終了条件：(isCorrect == true) or (count ≥ 3)</div>"
+    "specific_explanation": "1. フラグの初期化\n   ループ前には isCorrect ← false、count ← 0 と初期化されています。\n\n2. 異常系の考慮\n   継続条件の否定（ド・モルガンの法則）が終了条件となります。パスワードが一致した（true）、または制限回数に達した（≥ 3）のどちらか一方でループを抜けます。\n   <div class=\"important\">終了条件：(isCorrect = true) or (count ≥ 3)</div>"
   },
   {
     "id": 263,
@@ -3713,15 +3713,15 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "フラグによる終了判定",
     "text": "データ通信プログラムで、データを受信するまで待機する処理です。変数 status が \"READY\" になるまで待つループを構築したい場合、空欄 [  a  ] に入る適切な条件式を選んでください。",
-    "example": "どんな条件の時にずっと待ち続けるのか、ということを考えて条件式に当てはめてみましょう。",
-    "code": "1  waitConnection()\n2  文字列型: status ← \"WAITING\"\n3  <span class=\"while\">while ([      a      ])</span>\n4     status ← checkStatus()\n5     sleep(1)  // 1秒待機\n6  <span class=\"endwhile\">endwhile</span>\n7  return",
+    "example": "「READY になるまで待ち続ける」とは、「READY ではない間ループを続ける」という意味になります。これを条件式に当てはめてみましょう。",
+    "code": "01  waitConnection()\n02  文字列型: status ← \"WAITING\"\n03  <span class=\"while\">while ([      a      ])</span>\n04     status ← checkStatus()\n05     sleep(1)  /* 1秒待機 */\n06  <span class=\"while\">endwhile</span>\n07  return",
     "choices": [
       "status ≠ \"READY\"",
-      "status == \"READY\"",
-      "status == \"WAITING\"",
+      "status = \"READY\"",
+      "status = \"WAITING\"",
       "status ≠ \"WAITING\""
     ],
-    "specific_explanation": "1. フラグの初期化\n   初期状態のフラグは <span class=\"italic\">\"WAITING\"</span> であり、ループ内の <span class=\"italic\">checkStatus()</span> が新しい状態を返して上書きします。\n\n2. 継続条件の更新（無限ループ回避）\n   「READYになるまで繰り返す」とは、「READYではない間ループを継続する」という意味になります。フラグが <span class=\"italic\">\"READY\"</span> に更新された時点でループを抜けます。\n   <div class=\"important\">while (status ≠ \"READY\")</div>"
+    "specific_explanation": "1. フラグの初期化\n   初期状態のフラグは \"WAITING\" であり、ループ内の checkStatus() が新しい状態を返して上書きします。\n\n2. 継続条件の更新（無限ループ回避）\n   「READY になるまで繰り返す」とは「READY ではない間ループを継続する」という意味です。フラグが \"READY\" に更新された時点でループを抜けます。\n   <div class=\"important\">while (status ≠ \"READY\")</div>"
   },
   {
     "id": 264,
@@ -3729,14 +3729,14 @@ const short_questions = [
     "theme": "while文",
     "subtheme": "継続条件の更新（無限ループ回避）",
     "text": "配列 data に含まれる正の数だけを順番に処理し、0または負の数（終端記号）が現れた時点で処理を即座に打ち切るプログラムです。空欄 [  a  ] に入る適切な継続条件を選んでください。",
-    "example": "配列から取り出した data[i] の値が、どのような条件を満たす場合に「まだ処理を続けてよい」と判断できるか考えます。",
-    "code": "1  processPositiveData(整数型の配列: data)\n2  整数型: i ← 1\n3  <span class=\"while\">while ([      a      ])</span>\n4     // 正の数に対する処理\n5     i ← i + 1\n6  <span class=\"endwhile\">endwhile</span>\n7  return i - 1",
+    "example": "data[i] がどのような値のとき「まだ処理を続けてよい」と判断できるか考えてみましょう。0 が来たらどうしたいですか。",
+    "code": "01  processPositiveData(整数型の配列: data)\n02  整数型: i ← 1\n03  <span class=\"while\">while ([      a      ])</span>\n04     /* 正の数に対する処理 */\n05     i ← i + 1\n06  <span class=\"while\">endwhile</span>\n07  return i - 1",
     "choices": [
       "data[i] > 0",
       "data[i] < 0",
-      "data[i] == 0",
+      "data[i] = 0",
       "data[i] ≠ 0"
     ],
-    "specific_explanation": "1. 変数の変化\n   正の数である間は処理を続行したいため、現在の要素 data[i] が 0 より大きいことが継続条件となります。条件を満たさなくなった時点でループは終了します。\n\n2. 異常系の考慮\n   この配列では、0以下の数が終端を示す「番兵（センチネル）」または終了フラグのような役割を果たしています。\n   <div class=\"important\">while (data[i] > 0)</div>"
+    "specific_explanation": "1. 変数の変化\n   正の数である間は処理を続行したいため、現在の要素 data[i] が 0 より大きいことが継続条件となります。条件を満たさなくなった時点でループは終了します。\n\n2. 異常系の考慮\n   この配列では、0 以下の数が終端を示す番兵（センチネル）のような役割を果たしています。\n   <div class=\"important\">while (data[i] > 0)</div>"
   }
 ]
