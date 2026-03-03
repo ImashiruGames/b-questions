@@ -39,7 +39,7 @@
                     </div>
                     <p>カテゴリーごとの問題消化率</p>
                 </div>
-                
+
                 <div class="analysis_section theme-section">
                     <div class="category-selector">
                         <div class="flex_center">
@@ -104,9 +104,10 @@
     <script src="../js/makeHeader.js"></script>
     <script src="../js/makeFooter.js"></script>
     <script src="../js/makeUser_info_bar.js"></script>
-
     <script src="../js/analysisComment.js"></script>
     <script src="../short_questions/questions.js"></script>
+    <script src="../js/achievements_data.js"></script>
+    <script src="../js/achievement_checker.js"></script>
     <script src="../js/user_manager.js"></script>
     <script src="../js/analysis.js"></script>
 
@@ -117,6 +118,12 @@
         var globalProcessedData = null;
 
         document.addEventListener('DOMContentLoaded', function () {
+            if(typeof UserManager !== 'undefined') {
+                userManager.Unit()
+            }
+            if(typeof AchievementChecker !== 'undefined'){
+                AchievementChecker.tryUnlock("fn_analysis");
+            }
             // --- 1. ログアウトボタンの処理 ---
             var logoutBtn = document.getElementById('logout_btn');
             if (logoutBtn) {

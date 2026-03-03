@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (typeof UserManager !== 'undefined') {
         UserManager.init();
     }
+    console.log(AchievementChecker);
+    if (typeof AchievementChecker !== 'undefined') {
+        console.log("あああ");
+        AchievementChecker.tryUnlock("fn_encyclopedia");
+    }
 
     const container = document.getElementById('encyclopedia-container');
     const currentUser = UserManager.currentUser;
@@ -120,14 +125,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 // カードの生成（ここは以前のまま）
+                // (前略: 成績によるクラス分け（金・緑・赤）の処理の下から)
+
+                // 💡【追加】お気に入り状態の判定
+                let isFav = false;
+                if (typeof UserManager !== 'undefined') {
+                    isFav = UserManager.isFavorite(q);
+                }
+                let favIcon = isFav ? "★" : "☆";
+                let favClassStr = isFav ? " card-favorite" : ""; // フィルター用にクラスを付与
+
+                // カードの生成
                 const card = document.createElement('div');
-                card.className = `encyclo-card ${cardClass}`;
-                // 💡【追加】後でフィルター機能に使うためのデータ属性を埋め込んでおく
+                // 💡【変更】お気に入りクラスも連結する
+                card.className = `encyclo-card ${cardClass}${favClassStr}`;
                 card.setAttribute('data-status', cardClass);
+
+                // 💡【変更】カードヘッダーの右側に星ボタン（encyclo-fav-btn）を追加
                 card.innerHTML = `
-                    <div class="card-header">
-                        <span class="q-id">Q${q.id}</span>
-                        <span class="badge ${cardClass}">${badgeText}</span>
+                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <span class="q-id">Q${q.id}</span>
+                            <span class="badge ${cardClass}">${badgeText}</span>
+                        </div>
+                        <button class="encyclo-fav-btn" style="background: none; border: none; cursor: pointer; font-size: 1.3rem; color: #333; padding: 0 5px;">${favIcon}</button>
                     </div>
                     <div class="card-stats">
                         <span style="color:#2e7d32;">⭕ ${stat.correct}</span> / 
@@ -135,6 +156,28 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                     <div class="card-desc">${q.subtheme}</div>
                 `;
+
+                // 💡【追加】お気に入りボタンを押した時の専用イベント
+                const favBtn = card.querySelector('.encyclo-fav-btn');
+                favBtn.addEventListener('click', function (event) {
+                    event.stopPropagation();
+
+                    if (typeof UserManager !== 'undefined') {
+                        let currentIsFav = UserManager.toggleFavorite(q);
+                        this.innerText = currentIsFav ? "★" : "☆";
+
+                        // フィルター用にクラスを付け外しする
+                        if (currentIsFav) {
+                            card.classList.add('card-favorite');
+                        } else {
+                            card.classList.remove('card-favorite');
+                        }
+
+                        if (typeof AchievementChecker !== 'undefined') {
+                            AchievementChecker.checkInstant();
+                        }
+                    }
+                });
 
                 // （中略：モーダルを開くイベント部分は全く同じなのでそのまま残してください）
                 card.addEventListener('click', function () {
@@ -145,12 +188,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     // 1. タイトルの設定
                     title.innerText = `Q${q.id}：${q.subtheme}`;
 
+                    let formattedExplanation = q.specific_explanation.replace(/^(\d+\..+)$/gm, '<span class="explanation-header">$1</span>');
                     // 2. モーダルの中身（HTML）をストイックに組み立てる
                     // ※長文でも読めるように max-height と overflow-y を設定
                     let html = `
-                        <div class="modal-scroll-area">
-                            <div id="problem_side" style="border: none; padding: 0; width: 100%; margin-bottom: 30px;">
-                                <pre class="question-text">${q.text}</pre>
+                        <div class="encyclo-modal-detail">
+                            <pre class="question-text">${q.text}</pre>
                     `;
 
                     // 例（example）があれば追加
@@ -164,18 +207,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     // コードブロックと解説の追加
                     html += `
-                                <div class="code_container">
-                                    <div id="code_display" style="text-align:left">${q.code}</div>
+                            <div class="code_container">
+                                <pre id="code-display">${q.code}</pre>
                                 </div>
-                            </div>
                             
-                            <div id="answer_side" style="width: 100%;">
-                                <div class="explanation-content" style="margin-bottom: 0;">
-                                    <h3 class="explanation-title">解説</h3>
-                                    <div class="specific-box">
-                                        ${q.specific_explanation}
-                                    </div>
-                                </div>
+                            <div class="explanation-content">
+                                <h3 class="explanation-title">解説</h3>
+                                <div class="specific-box">${formattedExplanation}</div>
                             </div>
                         </div>
                     `;

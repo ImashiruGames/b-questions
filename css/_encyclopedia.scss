@@ -101,3 +101,92 @@ $color-border: #333;
         flex-grow: 1;
     }
 }
+
+/* ==========================================
+   図鑑モーダル内の詳細表示用スタイル
+   ========================================== */
+.encyclo-modal-detail {
+    text-align: left;
+
+    .question-text {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        letter-spacing: 0.05em;
+        white-space: pre-wrap; /* ★これが適切に改行させる鍵 */
+        font-family: inherit;
+        color: #222;
+        margin-bottom: 20px;
+        border: 2px solid #333;
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .question-example {
+        position: relative;
+        background-color: #f4f4f4;
+        border: 1px solid #333;
+        padding: 25px 15px 15px 15px;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        
+        &::before {
+            content: "例";
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            color: #fff;
+            padding: 2px 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+    }
+
+    .code_container {
+        background-color: #1e1e1e;
+        color: #d4d4d4;
+        padding: 20px;
+        border: 1px solid #333;
+        font-family: Consolas, 'Courier New', monospace;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        overflow-x: auto;
+        margin-bottom: 30px;
+    }
+
+    .explanation-content {
+        border: 2px solid #333;
+        background-color: #fff;
+        padding: 20px;
+
+        .explanation-title {
+            font-size: 1.2rem;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 15px;
+            display: inline-block;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+
+        .specific-box {
+            line-height: 1.8;
+            color: #222;
+            font-size: 1rem;
+            white-space: pre-wrap; /* ★解説文の改行を有効にする */
+
+            .explanation-header {
+                display: block;
+                font-size: 1.1rem;
+                font-weight: bold;
+                color: #222;
+                margin-top: 25px;
+                margin-bottom: 10px;
+                border-bottom: 2px solid #333;
+                padding-bottom: 5px;
+            }
+        }
+    }
+}

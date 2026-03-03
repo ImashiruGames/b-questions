@@ -1346,6 +1346,44 @@ input[type=checkbox]:checked::after {
   font-family: monospace;
 }
 
+/* ==========================================
+   アチーブメント獲得通知（トーストUI）
+   ========================================== */
+#achievement_toast_container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none; /* クリックを邪魔しない */
+}
+
+.achievement-toast {
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 0;
+  padding: 15px 20px;
+  font-family: monospace;
+  font-size: 0.95rem;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+  transform: translateX(120%);
+  transition: transform 0.2s linear;
+}
+
+.achievement-toast.show {
+  transform: translateX(0);
+}
+
+.toast-title {
+  color: #FFD700;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
 /* _analysis.scss : 学習分析画面専用のスタイル（道場スタイル最適化） */
 .analysis_section {
   box-sizing: border-box;
@@ -1587,4 +1625,85 @@ input[type=checkbox]:checked::after {
   color: #444;
   font-weight: bold;
   flex-grow: 1;
+}
+
+/* ==========================================
+   図鑑モーダル内の詳細表示用スタイル
+   ========================================== */
+.encyclo-modal-detail {
+  text-align: left;
+}
+.encyclo-modal-detail .question-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+  white-space: pre-wrap; /* ★これが適切に改行させる鍵 */
+  font-family: inherit;
+  color: #222;
+  margin-bottom: 20px;
+  border: 2px solid #333;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+.encyclo-modal-detail .question-example {
+  position: relative;
+  background-color: #f4f4f4;
+  border: 1px solid #333;
+  padding: 25px 15px 15px 15px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.encyclo-modal-detail .question-example::before {
+  content: "例";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  color: #fff;
+  padding: 2px 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+.encyclo-modal-detail .code_container {
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  padding: 20px;
+  border: 1px solid #333;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  margin-bottom: 30px;
+}
+.encyclo-modal-detail .explanation-content {
+  border: 2px solid #333;
+  background-color: #fff;
+  padding: 20px;
+}
+.encyclo-modal-detail .explanation-content .explanation-title {
+  font-size: 1.2rem;
+  background-color: #333;
+  color: #fff;
+  padding: 5px 15px;
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 20px;
+  border: 1px solid #333;
+}
+.encyclo-modal-detail .explanation-content .specific-box {
+  line-height: 1.8;
+  color: #222;
+  font-size: 1rem;
+  white-space: pre-wrap; /* ★解説文の改行を有効にする */
+}
+.encyclo-modal-detail .explanation-content .specific-box .explanation-header {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #222;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #333;
+  padding-bottom: 5px;
 }/*# sourceMappingURL=style.css.map */

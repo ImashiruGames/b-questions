@@ -40,5 +40,8 @@ var achievementsMaster = [
     { id: "fn_flt_new", category: "function", title: "未知との遭遇", condition: "「new!のみ表示」フィルターを使って演習をクリアする" },
     { id: "fn_flt_fav", category: "function", title: "こだわりのコレクション", condition: "「お気に入りのみ表示」フィルターを使って演習をクリアする" },
     { id: "fn_focus", category: "function", title: "一点集中", condition: "1つのサブテーマのみにチェックを入れて演習をクリアする" },
-    { id: "fn_scatter", category: "function", title: "好奇心分散", condition: "3つ以上の異なるカテゴリーにチェックを入れて演習をクリアする" }
+    { id: "fn_scatter", category: "function", title: "好奇心分散", condition: "3つ以上の異なるカテゴリーにチェックを入れて演習をクリアする" },
+
+    { id: "fn_encyclopedia", category: "function", title: "知識の書庫", condition: "初めてプログラミング図鑑＆復習録を開く", secret: true },
+    { id: "fn_analysis", category:"function", title: "分析ラボ", condition: "初めて分析ページを開く", secret: false}
 ];
