@@ -112,6 +112,9 @@
 
         for (let i = 0; i < short_questions.length; i++) {
             let q = short_questions[i];
+
+            if (!q) continue;
+            
             if (q.category === category && q.theme === theme && q.subtheme === subtheme) {
                 totalCount++;
                 let qId = UserManager.generateId(q);
