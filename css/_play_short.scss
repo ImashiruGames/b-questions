@@ -324,17 +324,17 @@ $color-primary: #0056b3;
                 padding-bottom: 5px;
             }
 
-            .important {
-                display: block;
-                background-color: #fff5f5; 
-                border: 1px solid $color-incorrect; 
-                color: $color-incorrect;
-                padding: 12px 15px;
-                margin: 15px 0;
-                font-family: Consolas, 'Courier New', monospace;
-                font-weight: bold;
-                font-size: 1.05rem;
-            }
+        }
+        .important {
+            display: block;
+            background-color: #fff5f5; 
+            border: 1px solid $color-incorrect; 
+            color: $color-incorrect;
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-family: Consolas, 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.05rem;
         }
     }
 

@@ -373,12 +373,10 @@ function loadQuestion(index) {
         instructionElement.classList.remove('msg-success', 'msg-danger');
     }
 
-    window.scrollTo(0, document.getElementById("Q_num").getBoundingClientRect().top)
-    console.log(document.getElementById("Q_num").getBoundingClientRect().top)
-
+    
     let q = activeQuestions[index];
     let subthemeSteps = [];
-
+    
     if (categories[q.category] && categories[q.category][q.theme]) {
         subthemeSteps = categories[q.category][q.theme][q.subtheme];
     }
@@ -395,32 +393,33 @@ function loadQuestion(index) {
     document.getElementById('code_display').innerHTML = q.code;
     document.getElementById('counter').innerText = String(currentIndex + 1) + "/" + String(activeQuestions.length);
     document.getElementById('theme_template').innerHTML = '<strong>【テーマ】</strong> ' + q.category + '：' + q.theme;
-
+    
     let common_logic_html = '<p id="common_title">' + q.subtheme + '</p>';
     for (let i = 0; i < subthemeSteps.length; i++) {
         let step = subthemeSteps[i];
         common_logic_html += '<div class="step_item">' +
-            '<div class="step-title">' + (i + 1) + '. ' + step[0] + '</div>' +
-            '<div class="step-desc">' + step[1] + '</div>' +
-            '</div>';
+        '<div class="step-title">' + (i + 1) + '. ' + step[0] + '</div>' +
+        '<div class="step-desc">' + step[1] + '</div>' +
+        '</div>';
     }
     document.getElementById('common_logic').innerHTML = common_logic_html;
-
+    
+    console.log(q.specific_explanation);
     let rawExplanation = q.specific_explanation;
     let formattedExplanation = rawExplanation.replace(/^(\d+\..+)$/gm, '<span class="explanation-header">$1</span>');
     document.getElementById('specific_explanation').innerHTML = formattedExplanation;
-
+    
     let correctAnswer = q.choices[0];
     let displayChoices = shuffleArray(q.choices);
     let choiceContainer = document.querySelector('.choice_container');
     choiceContainer.innerHTML = '';
-
+    
     for (let i = 0; i < displayChoices.length; i++) {
         let choiceText = displayChoices[i];
         let btn = document.createElement('button');
         btn.className = 'choice_btn';
         btn.innerText = choiceText;
-
+        
         btn.onclick = function () {
             if (isAnswered) return;
             let isCorrect = (choiceText === correctAnswer);
@@ -442,24 +441,24 @@ function loadQuestion(index) {
     } else if (s.incorrect > 0) {
         HistoryHTML = `<span class="history-badge">❌${s.incorrect} ⭕${s.correct}</span>`; // 少し見やすく記号を追加
     }
-
+    
     let favText = "☆ お気に入りに追加";
     let favClass = "fav-btn fav-unregistered";
     if (typeof UserManager !== 'undefined' && UserManager.isFavorite(q)) {
         favText = "★ お気に入り解除";
         favClass = "fav-btn fav-registered";
     }
-
+    
     document.getElementById('Q_num').innerHTML = `
-        <div style="display: flex; align-items: center;">
+    <div style="display: flex; align-items: center;">
             <span>Q${index + 1}</span>
             ${HistoryHTML}
-        </div>
-        <button id="favorite_btn" class="${favClass}">${favText}</button>
-    `;
-
-    let favBtn = document.getElementById('favorite_btn');
-    if (favBtn) {
+            </div>
+            <button id="favorite_btn" class="${favClass}">${favText}</button>
+            `;
+            
+            let favBtn = document.getElementById('favorite_btn');
+            if (favBtn) {
         favBtn.onclick = function () {
             if (typeof UserManager !== 'undefined') {
                 let isFav = UserManager.toggleFavorite(q);
@@ -473,6 +472,9 @@ function loadQuestion(index) {
             }
         };
     }
+    
+    window.scrollTo(0, document.getElementById("Q_num").getBoundingClientRect().top)
+    console.log(document.getElementById("Q_num").getBoundingClientRect().top)
 }
 
 // [現役] 正誤判定

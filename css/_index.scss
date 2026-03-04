@@ -20,7 +20,6 @@
 #category-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
 }
 
 /* タブレット向け（2カラム） */
@@ -376,7 +375,6 @@ input[type="checkbox"]:checked::after {
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
     /* ぼかさないソリッドな影 */
 
-    /* ふわっと浮くアニメーションNGのため、直線的に右からスライドイン */
     transform: translateX(120%);
     transition: transform 0.2s linear;
 }

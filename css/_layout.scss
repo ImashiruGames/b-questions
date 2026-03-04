@@ -4,7 +4,11 @@ body {
     width: 100vw;
     overflow-x: hidden;
     font-family: sans-serif;
-    background-color: #f4f4f4; // 青みを抜き、ストイックなグレーに統一
+    background-image:
+radial-gradient(circle at center, #EAE8EC 10%, transparent 10%),
+radial-gradient(circle at center, transparent 10%, #EAE8EC 10%);
+background-size: 2px 2px, 2px 2px;
+background-position: 0 0, 1px 1px;
     color: #222;
     overscroll-behavior: none;
     user-select: none;

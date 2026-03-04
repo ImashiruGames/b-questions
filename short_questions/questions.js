@@ -5,7 +5,7 @@ const short_questions = [
     "id": 1,
     "category": "データ構造",
     "theme": "配列",
-    "subtheme": "要素の入れ替え（スワップ）",
+    "subtheme": "要素のスワップ処理",
     "text": "次のプログラムは、配列 array の left 番目の要素と right 番目の要素を入れ替える（スワップする）処理の一部です。空欄 [ b ] に入る最も適切な字句を選んでください。ここで、tmp は一時的な値を保持するための変数です。",
     "example": "array[right] を array[left] で上書きする前に、元の値を退避させる必要があります。",
     "code": "1  整数型の配列: array\n2  整数型: tmp, left, right\n3  tmp ← array[right]\n4  array[right] ← array[left]\n5  [      b      ] ← tmp", "choices": ["array[left]", "array[right]", "tmp", "array[1]"],
@@ -76,7 +76,7 @@ const short_questions = [
     "id": 6,
     "category": "制御構文",
     "theme": "再帰関数",
-    "subtheme": "ベースケース（終了条件）",
+    "subtheme": "ベースケース",
     "text": "階乗を計算する再帰関数 Fact(m) において、計算を停止して値を確定させる「ベースケース」として最も適切な条件（空欄 [  b  ]）を選んでください。なお、数学的に 0! = 1 と定義されています。",
     "example": "m = 1 のとき、処理は 1 × Fact(0) を呼び出します。この Fact(0) が正しく 1 を返す必要があります。",
     "code": "01  整数型: m\n02  Fact(整数型: m)\n03  <span class=\"if\">if (m > 0)</span>\n04     return m × Fact(m - 1)\n05  <span class=\"if\">elseif ([      b      ])</span>\n06     return 1",
@@ -94,7 +94,7 @@ const short_questions = [
     "id": 7,
     "category": "データ構造",
     "theme": "配列",
-    "subtheme": "要素の入れ替え（スワップ）",
+    "subtheme": "要素のスワップ処理",
     "text": "配列 array の要素 array[i] と array[j] の値を入れ替える際、一方が消えないようにするための正しい手順を選んでください。空欄 [  b  ] に入る適切な式はどれですか。ここで、tmp は一時的な値を保持するための変数です。",
     "example": "array[i] = 10, array[j] = 20 のとき、最終的に array[i] = 20, array[j] = 10 にしたい。",
     "code": "01  整数型の配列: array\n02  整数型: tmp, i, j\n03  tmp ← array[i]\n04  array[i] ← array[j]\n05  [      b      ] ← tmp",
@@ -161,17 +161,17 @@ const short_questions = [
     "id": 12,
     "category": "制御構文",
     "theme": "再帰関数",
-    "subtheme": "ベースケース（終了条件）",
+    "subtheme": "ベースケース",
     "text": "再帰関数において、自分自身を呼び出すのを停止して具体的な値を返し、計算を確定させる役割を持つ部分の名称として、最も適切なものを選んでください。",
     "example": "Fact(3) は内部で 3 × Fact(2) を呼び出しますが、この連鎖が無限に続かないようにするための「ストッパー」となる役割のことです。",
     "code": "   01  整数型: m\n   02  Fact(整数型: m)\n   03  <span class=\"if\">if (m > 0)</span>\n   04     return m × Fact(m - 1)\n   05  <span class=\"if\">elseif (m = 0)</span>\n   06     return 1\n   07  <span class=\"if\">endif</span>",
     "choices": [
-      "ベースケース（終了条件）",
+      "ベースケース",
       "再帰ステップ",
       "無限ループ",
       "例外処理"
     ],
-    "specific_explanation": "1. 最小単位の特定\n   再帰処理において、これ以上問題を分割できない最小の状態（例：m = 0）を「ベースケース」と呼びます。\n\n2. 戻り値の確定\n   ベースケースに到達した際に具体的な数値（この例では 1）を返すことで、それまで積み上がっていた計算の連鎖が逆順に解決され、最終的な解が導き出されます。もしこれが存在しないと、処理は無限に自分自身を呼び出し続け、エラーとなってしまいます。\n   <div class=\"important\">ベースケース（終了条件）</div>"
+    "specific_explanation": "1. 最小単位の特定\n   再帰処理において、これ以上問題を分割できない最小の状態（例：m = 0）を「ベースケース」と呼びます。\n\n2. 戻り値の確定\n   ベースケースに到達した際に具体的な数値（この例では 1）を返すことで、それまで積み上がっていた計算の連鎖が逆順に解決され、最終的な解が導き出されます。もしこれが存在しないと、処理は無限に自分自身を呼び出し続け、エラーとなってしまいます。\n   <div class=\"important\">ベースケース</div>"
   },
   // 3問目
   // --- テーマ1：配列操作と累積計算の基本 ---
@@ -195,7 +195,7 @@ const short_questions = [
     "id": 14,
     "category": "データ構造",
     "theme": "配列",
-    "subtheme": "要素の入れ替え（スワップ）",
+    "subtheme": "要素のスワップ処理",
     "text": "配列 array の要素を逆順に並べ替える処理の一部です。左側の要素 array[left] と右側の要素 array[right] を入れ替える際、空欄 [  b  ] に入る適切な字句を選んでください。ここで、tmp は一時的な値を保持するための変数です。",
     "example": "array[left] = 10, array[right] = 20 のとき、tmp を使って値を回し、最終的に array[left] = 20, array[right] = 10 にします。",
     "code": "   01  整数型の配列: array\n   02  整数型: tmp, left, right\n   03  tmp ← array[right]\n   04  array[right] ← array[left]\n   05  [      b      ] ← tmp",
@@ -240,7 +240,7 @@ const short_questions = [
     "id": 17,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "n進数変換で ret が -1（エラー）になった瞬間に中断する条件を選べ。i は現位置、m は総桁数とする。",
     "example": "m = 3 のとき、i = 2 で ret = -1 ならば、3 桁目の処理を待たずにループを抜ける。",
     "code": "   01  整数型: i, m, ret\n   02  i ← 1\n   03  <span class=\"while\">while ((ret ≠ -1) [  1  ] (i ≤ m))</span>\n   04     // 処理と i の更新\n   05  <span class=\"while\">endwhile</span>",
@@ -270,7 +270,7 @@ const short_questions = [
     "id": 19,
     "category": "制御構文",
     "theme": "再帰関数",
-    "subtheme": "ベースケース（終了条件）",
+    "subtheme": "ベースケース",
     "text": "階乗 Fact(m) のベースケース（空欄 b）を選べ。0! = 1 と定義する。",
     "example": "m = 0 のとき Fact(0) が 1 を返せば、再帰の連鎖が止まり計算が確定する。",
     "code": "   01  整数型: m\n   02  Fact(整数型: m)\n   03  <span class=\"if\">if (m > 0)</span>\n   04     return m × Fact(m - 1)\n   05  <span class=\"if\">elseif ([    b    ])</span>\n   06     return 1\n   07  <span class=\"if\">else</span>\n   08     return -1\n   09  <span class=\"if\">endif</span>",
@@ -286,7 +286,7 @@ const short_questions = [
     "id": 20,
     "category": "制御構文",
     "theme": "再帰関数",
-    "subtheme": "ベースケース（終了条件）",
+    "subtheme": "ベースケース",
     "text": "Fact(m) において、再帰継続の条件（3行目）を m > 1 に、停止条件（5行目）を m = 1 に変更した場合、m が 1 以上の範囲で正しく動作するか。",
     "example": "m = 2 のとき、2 × Fact(1) という呼び出しが発生します。Fact(1) が elseif に到達できるかどうか確認してみましょう。",
     "code": "01  整数型: m\n02  Fact(整数型: m)\n03  <span class=\"if\">if (m > 1)</span>\n04     return m × Fact(m - 1)\n05  <span class=\"if\">elseif (m = 1)</span>\n06     return 1\n07  <span class=\"if\">endif</span>",
@@ -368,7 +368,7 @@ const short_questions = [
     "id": 25,
     "category": "データ構造",
     "theme": "配列",
-    "subtheme": "最大値・最小値の探索",
+    "subtheme": "最大・最小の探索",
     "text": "8ビットの配列 bin1 と bin2 を走査し、ビットごとの計算結果を配列 retBin に格納する際、ループ変数 i の範囲として適切なものを選んでください。なお、配列の添え字は 1 から始まるとします。",
     "example": "8ビット配列の全要素を処理するため、添え字が1から8までループする必要がある。",
     "code": "1  <span class=\"for\">for (i を [  開始  ] から [  終了  ] まで 1 ずつ増やす)<\/span>\n2     // ビットごとの計算処理",
@@ -384,12 +384,12 @@ const short_questions = [
     "id": 26,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "ビット列の処理を行うこのプログラムを for 文ではなく while 文で書き換える場合、ループ変数 i の更新処理としてループ内で忘れてはいけない処理はどれですか。",
     "example": "while (i ≤ 8) の条件がいつか偽(false)になるためには、ループ内で i をどう変化させる必要があるか考えてみましょう。",
     "code": "01  整数型: i\n02  i ← 1\n03  <span class=\"while\">while (i ≤ 8)</span>\n04     /* 計算処理 */\n05     [      ?      ]\n06  <span class=\"while\">endwhile</span>",
     "choices": ["i ← i + 1", "i ← 0", "i ← i - 1", "return retBin"],
-    "specific_explanation": "1. 変数の変化\n   while 文では、ループ内で条件に使っている変数（ここでは i）を更新しないと、条件がいつまでも真のままになり無限ループに陥ります。\n\n2. 継続条件の更新（無限ループ回避）\n   for 文が自動で行ってくれる「カウントアップ」を手動で記述する必要があります。\n   <div class=\"important\">i ← i + 1</div>"
+    "specific_explanation": "1. 変数の変化\n   while 文では、ループ内で条件に使っている変数（ここでは i）を更新しないと、条件がいつまでも真のままになり無限ループに陥ります。\n\n2. 無限ループ回避\n   for 文が自動で行ってくれる「カウントアップ」を手動で記述する必要があります。\n   <div class=\"important\">i ← i + 1</div>"
   },
   // 6問目
   // --- テーマ1：論理シフトの仕組みと範囲判定 ---
@@ -431,7 +431,7 @@ const short_questions = [
     "example": "while (i ≥ 1) の条件がいつか偽(false)になるためには、i をどちらの方向へ変化させる必要があるか考えてみましょう。",
     "code": "01  整数型の配列: bin\n02  整数型: i, n\n03  i ← binの要素数 - n\n04  <span class=\"while\">while (i ≥ 1)</span>\n05     bin[i + n] ← bin[i]\n06     [      ?      ]\n07  <span class=\"while\">endwhile</span>",
     "choices": ["i ← i - 1", "i ← i + 1", "i ← 0", "i ← binの要素数"],
-    "specific_explanation": "1. 継続条件の更新（無限ループ回避）\n   このループは「1 まで減らす」処理であるため、ループのたびに変数 i を 1 ずつ小さくする必要があります。\n\n2. 変数の変化\n   i を減らさないと条件 i ≥ 1 が常に真のままとなり、プログラムが停止しなくなります。\n   <div class=\"important\">i ← i - 1</div>"
+    "specific_explanation": "1. 無限ループ回避\n   このループは「1 まで減らす」処理であるため、ループのたびに変数 i を 1 ずつ小さくする必要があります。\n\n2. 変数の変化\n   i を減らさないと条件 i ≥ 1 が常に真のままとなり、プログラムが停止しなくなります。\n   <div class=\"important\">i ← i - 1</div>"
   },
   // 7問目
   // --- テーマ1：剰余演算とループの継続条件 ---
@@ -439,12 +439,12 @@ const short_questions = [
     "id": 30,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "変数 num の値を 2 ずつ減らしながら加算を繰り返す while 文において、正しく合計値 sum を出し切るための「継続条件（空欄 a）」を選んでください。",
     "example": "num = 7 のとき、7, 5, 3, 1 の順に加算され、num が -1 になった時点でループを終了させたいとすると、継続条件はどう書けばよいでしょうか。",
     "code": "01  整数型: num, sum ← 0\n02  <span class=\"while\">while ([      a      ])</span>\n03     sum ← sum + num\n04     num ← num - 2\n05  <span class=\"while\">endwhile</span>",
     "choices": ["num ≥ 1", "num > 1", "num mod 2 = 0", "num ≠ 0"],
-    "specific_explanation": "1. 変数の変化\n   num は 2 ずつ減っていくため、最後は 1（奇数の場合）または 2（偶数の場合）になります。\n\n2. 継続条件の更新（無限ループ回避）\n   数値が 1 以上の間は加算を続け、0 以下になったら終了するよう num ≥ 1 と設定するのが適切です。\n   <div class=\"important\">while (num ≥ 1)</div>"
+    "specific_explanation": "1. 変数の変化\n   num は 2 ずつ減っていくため、最後は 1（奇数の場合）または 2（偶数の場合）になります。\n\n2. 無限ループ回避\n   数値が 1 以上の間は加算を続け、0 以下になったら終了するよう num ≥ 1 と設定するのが適切です。\n   <div class=\"important\">while (num ≥ 1)</div>"
   },
   {
     "id": 31,
@@ -590,12 +590,12 @@ const short_questions = [
     "id": 41,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "中間の月（丸ごと1ヶ月ある月）を全て足し合わせるループにおいて、終了条件として適切なものを選んでください。ここで、i はループ変数、to.month は終了月を表します。",
     "example": "1月から4月の計算なら、ループで足すのは何月と何月だけか考えてみましょう。to.month 自体はループ内で処理すべきでしょうか。",
     "code": "01  整数型: i\n02  i ← from.month + 1\n03  <span class=\"while\">while ([      1      ])</span>\n04     days ← days + mDay[i]\n05     i ← i + 1\n06  <span class=\"while\">endwhile</span>\n07  days ← days + to.day",
     "choices": ["i < to.month", "i ≤ to.month", "i < 12", "i ≠ to.month"],
-    "specific_explanation": "1. 変数の変化\n   終了月（to.month）は丸ごと1ヶ月ではなく特定の日（to.day）までを足す必要があります。\n\n2. 継続条件の更新（無限ループ回避）\n   そのためループでは終了月の「手前（未満）」で処理を止め、終了月の計算はループの外で行うのが日付計算の定石です。\n   <div class=\"important\">while (i < to.month)</div>"
+    "specific_explanation": "1. 変数の変化\n   終了月（to.month）は丸ごと1ヶ月ではなく特定の日（to.day）までを足す必要があります。\n\n2. 無限ループ回避\n   そのためループでは終了月の「手前（未満）」で処理を止め、終了月の計算はループの外で行うのが日付計算の定石です。\n   <div class=\"important\">while (i < to.month)</div>"
   },
   {
     "id": 42,
@@ -681,7 +681,7 @@ const short_questions = [
     "id": 48,
     "category": "データ構造",
     "theme": "配列",
-    "subtheme": "要素の入れ替え（スワップ）",
+    "subtheme": "要素のスワップ処理",
     "text": "釣銭として貨幣を払い出した後、その金種の在庫数を減らす正しい処理を選んでください。ここで、stock[i] は在庫数、cnt は払い出し枚数を表します。",
     "example": "10円玉を 4枚 払い出したとき、10円玉の在庫を 4 減らします。",
     "code": "1  // 払い出し枚数 cnt 確定後\n2  stock[i] ← [      1      ]",
@@ -1151,7 +1151,7 @@ const short_questions = [
     "id": 80,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "与えられた整数 n を素因数分解し、n が 1 になるまで繰り返すプログラムです。n = 7（素数）の場合、while 文の条件式が「最後に判定（ループ終了の判定）」される際の i と n の値の組み合わせを選んでください。",
     "example": "n = 7 のとき、i = 2 から始めて順に割り切れるか試していくと、どの i で初めて割り切れますか。その直後に n はいくつになりますか。",
     "code": "01  primeNum(整数型: n)\n02  整数型: i ← 2\n03  <span class=\"while\">while (i ≤ n)</span>\n04     <span class=\"if\">if (n mod i = 0)</span>\n05        n ← n ÷ i\n06     <span class=\"if\">else</span>\n07        i ← i + 1\n08     <span class=\"if\">endif</span>\n09  <span class=\"while\">endwhile</span>",
@@ -1162,7 +1162,7 @@ const short_questions = [
     "id": 81,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "素因数分解のプログラムにおいて、変数 i（割る数）を増やす処理が else 側（割り切れなかった時）にのみ記述されている理由として、最も適切なものを選んでください。",
     "example": "n = 12 のとき、i = 2 で割り切れた直後、i をすぐ 3 に増やしてしまうと何が起きるか考えてみましょう。",
     "code": "01  整数型: i ← 2\n02  <span class=\"while\">while (i ≤ n)</span>\n03     <span class=\"if\">if (n mod i = 0)</span>\n04        n ← n ÷ i\n05     <span class=\"if\">else</span>\n06        i ← i + 1\n07     <span class=\"if\">endif</span>\n08  <span class=\"while\">endwhile</span>",
@@ -1178,7 +1178,7 @@ const short_questions = [
     "id": 82,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "n = 4 のとき、この素因数分解プログラムが終了するまでの「i と n」の推移を正しく追っているものはどれですか。",
     "example": "初期状態：n = 4, i = 2 から出発して、それぞれの変化を 1 ステップずつ手でたどってみましょう。",
     "code": "01  整数型: i ← 2\n02  <span class=\"while\">while (i ≤ n)</span>\n03     <span class=\"if\">if (n mod i = 0)</span>\n04        n ← n ÷ i\n05     <span class=\"if\">else</span>\n06        i ← i + 1\n07     <span class=\"if\">endif</span>\n08  <span class=\"while\">endwhile</span>",
@@ -1901,7 +1901,7 @@ const short_questions = [
     "id": 127,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "約数を探すループの範囲を指定します。問題文にある「約数は num を除いて全て num ÷ 2 以下である」という性質を利用する場合、空欄 [ a ] に入る適切な条件を選んでください。",
     "example": "num = 12 のとき、f をいくつまで調べればすべての約数が見つかるか確認してみましょう。",
     "code": "01  calcMeasure(整数型: num)\n02  整数型の配列: measure ← {}\n03  整数型: f ← 1\n04  <span class=\"while\">while ([  a  ])</span>\n05     /* 約数の判定と追加処理 */\n06     f ← f + 1\n07  <span class=\"while\">endwhile</span>\n08  measure の末尾に num の値を追加する",
@@ -1917,7 +1917,7 @@ const short_questions = [
     "id": 128,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "while 文の中で、次の約数候補を調べるための処理として、空欄 [  1  ] に入る適切な式を選んでください。",
     "example": "f = 1 の処理が終わったら次は f = 2 を調べます。ループが終了条件に向かって確実に進むにはどう更新すればよいでしょうか。",
     "code": "01  整数型: f ← 1\n02  <span class=\"while\">while (条件式)</span>\n03     <span class=\"if\">if (num mod f が 0 と等しい)</span>\n04        measure の末尾に f を追加\n05     <span class=\"if\">endif</span>\n06     [  1  ]\n07  <span class=\"while\">endwhile</span>",
@@ -2014,7 +2014,7 @@ const short_questions = [
     "id": 134,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "内側の while 文で、調査対象の数 i を割るための変数 j の範囲を制限します。効率的に判定を行うための空欄 [ a ] に入る条件を選んでください。",
     "example": "i = 25 のとき、j が 12 を超えてから先を調べる必要があるかどうか考えてみましょう。",
     "code": "01  整数型: i, j\n02  論理型: flg ← 1\n03  j ← 3\n04  <span class=\"while\">while ((flg が 1 と等しい) and ([  a  ]))</span>\n05     <span class=\"if\">if (i mod j が 0 と等しい)</span>\n06        flg ← 0\n07     <span class=\"if\">endif</span>\n08     j ← j + 2\n09  <span class=\"while\">endwhile</span>",
@@ -2024,7 +2024,7 @@ const short_questions = [
       "j が num より大きい",
       "j が 0 と等しくない"
     ],
-    "specific_explanation": "1. 継続条件の更新（無限ループ回避）\n   j を無限に増やすのではなく、判定に必要な最小限の範囲で止める必要があります。\n\n2. 変数の変化\n   ある数 i の約数は（自分自身を除けば）必ず i ÷ 2 以下に存在するため、これを超える範囲を調べる必要はありません。\n   <div class=\"important\">j が (i ÷ 2) より小さい</div>"
+    "specific_explanation": "1. 無限ループ回避\n   j を無限に増やすのではなく、判定に必要な最小限の範囲で止める必要があります。\n\n2. 変数の変化\n   ある数 i の約数は（自分自身を除けば）必ず i ÷ 2 以下に存在するため、これを超える範囲を調べる必要はありません。\n   <div class=\"important\">j が (i ÷ 2) より小さい</div>"
   },
   {
     "id": 135,
@@ -2111,7 +2111,7 @@ const short_questions = [
     "id": 140,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "2つの整数の最大公約数を求めるプログラムです。num1 と num2 の値を比較して大きい方から小さい方を引き、両者が等しくなった時点で計算を終了させます。空欄 [  1  ] に入る適切な処理を選んでください。",
     "example": "num1 = 12, num2 = 8 のとき、どのように変化して終了に至るか手でたどってみましょう。終了判定には flg をどう使いますか。",
     "code": "01  getGCD(整数型: num1, 整数型: num2)\n02  論理型: flg ← false\n03  <span class=\"while\">while (flg = false)</span>\n04     <span class=\"if\">if (num1 = num2)</span>\n05        [  1  ]\n06     <span class=\"if\">elseif (num1 > num2)</span>\n07        num1 ← num1 - num2\n08     <span class=\"if\">else</span>\n09        num2 ← num2 - num1\n10     <span class=\"if\">endif</span>\n11  <span class=\"while\">endwhile</span>\n12  return num1",
@@ -2122,7 +2122,7 @@ const short_questions = [
     "id": 141,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "関数 gcd(num1, num2) を呼び出した場合、gcd(8, 2) の実行において while 文の中の処理は合計で何回繰り返されるか、正しいものを選んでください。ここで、num1 と num2 は最大公約数を求める対象の整数です。",
     "example": "num1=8, num2=2 から出発して、num1 と num2 の変化を 1 ステップずつ手でたどりながら回数を数えてみましょう。",
     "code": "01  /* num1=8, num2=2 で開始 */\n02  <span class=\"while\">while (flg が true と等しくない)</span>\n03     /* 1回目: 8 > 2 なので num1 ← 6 */\n04     /* 2回目: 6 > 2 なので num1 ← 4 */\n05     /* 3回目: 4 > 2 なので num1 ← 2 */\n06     /* 4回目: 2 = 2 なので flg ← true */\n07  <span class=\"while\">endwhile</span>",
@@ -2132,7 +2132,7 @@ const short_questions = [
       "5回",
       "2回"
     ],
-    "specific_explanation": "1. 変数の変化\n   1回目(8,2)→(6,2)、2回目(6,2)→(4,2)、3回目(4,2)→(2,2) と減算が続きます。\n\n2. 継続条件の更新（無限ループ回避）\n   4回目で num1 = num2 が成立し、フラグが更新されて終了します。合計 4 回の繰り返しが発生します。\n   <div class=\"important\">8→6→4→2 の減算3回 + 一致判定1回 = 4回</div>"
+    "specific_explanation": "1. 変数の変化\n   1回目(8,2)→(6,2)、2回目(6,2)→(4,2)、3回目(4,2)→(2,2) と減算が続きます。\n\n2. 無限ループ回避\n   4回目で num1 = num2 が成立し、フラグが更新されて終了します。合計 4 回の繰り返しが発生します。\n   <div class=\"important\">8→6→4→2 の減算3回 + 一致判定1回 = 4回</div>"
   },
   {
     "id": 142,
@@ -2332,7 +2332,7 @@ const short_questions = [
     "id": 154,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "2つの配列（要素数 numA, numB）をすべてマージし終わるまでループを継続します。空欄 [  1  ] に入る条件式を選んでください。",
     "example": "numA=4, numB=5 のとき、マージ後の配列には合計何個の要素が入りますか。idxC はいくつまで進むべきでしょうか。",
     "code": "01  整数型: numA, numB, idxC ← 1\n02  <span class=\"while\">while ([  1  ])</span>\n03     /* 比較とマージ処理 */\n04     idxC ← idxC + 1\n05  <span class=\"while\">endwhile</span>",
@@ -2342,7 +2342,7 @@ const short_questions = [
       "idxC ≤ numA",
       "idxC ≤ numB"
     ],
-    "specific_explanation": "1. 変数の変化\n   ループ内で idxC は 1 ずつ増えていきます。マージ後の配列の総要素数は、元の 2 つの配列の要素数の合計（numA + numB）となります。\n\n2. 継続条件の更新（無限ループ回避）\n   idxC がこの合計値に達するまで処理を続ける必要があります。\n   <div class=\"important\">idxC ≤ (numA + numB)</div>"
+    "specific_explanation": "1. 変数の変化\n   ループ内で idxC は 1 ずつ増えていきます。マージ後の配列の総要素数は、元の 2 つの配列の要素数の合計（numA + numB）となります。\n\n2. 無限ループ回避\n   idxC がこの合計値に達するまで処理を続ける必要があります。\n   <div class=\"important\">idxC ≤ (numA + numB)</div>"
   },
   {
     "id": 155,
@@ -2364,7 +2364,7 @@ const short_questions = [
     "id": 156,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "マージプログラム全体の制御構造として適切な組み合わせを選んでください。",
     "example": "外側の while 条件は「全体の処理が終わるまで」、内側の elseif 条件は「配列 A の残りがある場合」に対応します。それぞれ何を見ればよいか考えてみましょう。",
     "code": "01  整数型: idxC, idxA, idxB\n02  <span class=\"while\">while ([  a  ])</span>\n03     <span class=\"if\">if (両方の配列に要素あり)</span>\n04        /* 比較処理 */\n05     <span class=\"if\">elseif ([  b  ])</span>\n06        /* A の残りをコピー */\n07     <span class=\"if\">else</span>\n08        /* B の残りをコピー */\n09     <span class=\"if\">endif</span>\n10  <span class=\"while\">endwhile</span>",
@@ -2374,7 +2374,7 @@ const short_questions = [
       "a: idxA ≤ numA\nb: idxC ≤ (numA + numB)",
       "a: idxB ≤ numB\nb: idxA ≤ numA"
     ],
-    "specific_explanation": "1. 継続条件の更新（無限ループ回避）\n   外側の while 文は、全要素数分だけ繰り返すよう idxC で制御します。\n\n2. 異常系の考慮\n   内側の分岐では、インデックスが範囲内（≤ 要素数）にあるかどうかで、取り出すべき配列を決定します。\n   <div class=\"important\">a: idxC ≤ (numA + numB)\nb: idxA ≤ numA</div>"
+    "specific_explanation": "1. 無限ループ回避\n   外側の while 文は、全要素数分だけ繰り返すよう idxC で制御します。\n\n2. 異常系の考慮\n   内側の分岐では、インデックスが範囲内（≤ 要素数）にあるかどうかで、取り出すべき配列を決定します。\n   <div class=\"important\">a: idxC ≤ (numA + numB)\nb: idxA ≤ numA</div>"
   },
   // 33問目
   {
@@ -2414,7 +2414,7 @@ const short_questions = [
     "id": 160,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "探索中に、チェックする添え字を次に進める処理です。空欄 [  1  ] に入る適切な式を選んでください。",
     "example": "i = 1 のチェックが終わったら次は i = 2 を調べます。更新しないとどうなるか考えてみましょう。",
     "code": "01  整数型の配列: array\n02  整数型: i, num\n03  i ← 1\n04  <span class=\"while\">while (array[i] が num と等しくない)</span>\n05     [  1  ]\n06  <span class=\"while\">endwhile</span>",
@@ -2424,7 +2424,7 @@ const short_questions = [
       "i ← n + 1",
       "i ← num"
     ],
-    "specific_explanation": "1. 変数の変化\n   while ループ内で条件式に使われている変数 i を更新しないと、同じ場所を調べ続けて無限ループになってしまいます。\n\n2. 継続条件の更新（無限ループ回避）\n   1 つずつ順番に後ろの要素を調べるため、インデックスを 1 加算します。\n   <div class=\"important\">i ← i + 1</div>"
+    "specific_explanation": "1. 変数の変化\n   while ループ内で条件式に使われている変数 i を更新しないと、同じ場所を調べ続けて無限ループになってしまいます。\n\n2. 無限ループ回避\n   1 つずつ順番に後ろの要素を調べるため、インデックスを 1 加算します。\n   <div class=\"important\">i ← i + 1</div>"
   },
   {
     "id": 161,
@@ -2446,7 +2446,7 @@ const short_questions = [
     "id": 162,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "探索を開始するインデックス i の初期値と、ループ内で次の要素へ進む処理の組み合わせとして適切なものを選んでください。",
     "example": "配列の 1 番目から順に最後まで辿ります。番兵の位置まで確実に到達するにはどんな初期値と更新式が必要でしょうか。",
     "code": "01  整数型の配列: array\n02  整数型: i, num\n03  [  a  ]\n04  <span class=\"while\">while (array[i] が num と等しくない)</span>\n05     [  b  ]\n06  <span class=\"while\">endwhile</span>",
@@ -2456,7 +2456,7 @@ const short_questions = [
       "a: i ← 1\nb: i ← n + 1",
       "a: i ← n\nb: i ← i - 1"
     ],
-    "specific_explanation": "1. 変数の変化\n   探索は配列の先頭インデックス（本問題の仕様では 1）から開始します。\n\n2. 継続条件の更新（無限ループ回避）\n   ループが回るたびにインデックスを 1 増やすことで、末尾にある番兵に向かって確実に変数が変化していきます。\n   <div class=\"important\">a: i ← 1\nb: i ← i + 1</div>"
+    "specific_explanation": "1. 変数の変化\n   探索は配列の先頭インデックス（本問題の仕様では 1）から開始します。\n\n2. 無限ループ回避\n   ループが回るたびにインデックスを 1 増やすことで、末尾にある番兵に向かって確実に変数が変化していきます。\n   <div class=\"important\">a: i ← 1\nb: i ← i + 1</div>"
   },
   // 34問目
   {
@@ -2560,7 +2560,7 @@ const short_questions = [
     "id": 169,
     "category": "データ構造",
     "theme": "キュー",
-    "subtheme": "リングバッファ（円環構造）",
+    "subtheme": "円環構造",
     "text": "ハッシュテーブルを環状（リングバッファ）として扱い、末尾に達した添え字を先頭に戻す処理です。空欄 [ a ] に入る適切な条件式を選んでください。",
     "example": "配列の要素数 n = 5 のとき、i = 5 になった瞬間に i = 0 へ戻します。",
     "code": "   1  <span class=\"while\">while ((i が hash と等しくない) and (pos が -1 と等しい))</span>\n   2     <span class=\"if\">if ([  a  ])</span>\n   3        i <- 0\n   4     <span class=\"if\">endif</span>\n   5     <span class=\"if\">if (ht[i] が 未定義)</span>\n   6        pos <- i\n   7     <span class=\"if\">endif</span>\n   8     i <- i + 1\n   9  <span class=\"while\">endwhile</span>",
@@ -2576,7 +2576,7 @@ const short_questions = [
     "id": 170,
     "category": "データ構造",
     "theme": "キュー",
-    "subtheme": "リングバッファ（円環構造）",
+    "subtheme": "円環構造",
     "text": "固定長配列を用いたキューで、次にデータを格納する位置（Tail）を更新します。配列の末尾に達した際に先頭（0）に戻るための適切な処理はどれですか。なお、size は配列の要素数とします。",
     "example": "size = 5, Tail = 4 のとき → 実行後の Tail: 0",
     "code": "01  updateTail(整数型: Tail, 整数型: size)\n02  Tail = [  1  ]\n03  return Tail",
@@ -2587,7 +2587,7 @@ const short_questions = [
     "id": 171,
     "category": "データ構造",
     "theme": "キュー",
-    "subtheme": "リングバッファ（円環構造）",
+    "subtheme": "円環構造",
     "text": "リングバッファにおいて、キューが「空」であるか「満杯」であるかを判定するフラグの動きを考えます。データを一つ取り出す（Deq）際、空欄 [  a  ] に入れるべき処理はどれですか。",
     "example": "データを取り出した後、キューが空なら isFull フラグは必ず false になる",
     "code": "01  deq(整数型の配列: queue)\n02  <span class=\"if\">if (isEmpty == true)</span>\n03     return \"エラー：空です\"\n04  <span class=\"if\">endif</span>\n05  /* データ取り出し処理 */\n06  Head = (Head + 1) % size\n07  [  a  ]\n08  return value",
@@ -2609,7 +2609,7 @@ const short_questions = [
     "id": 173,
     "category": "データ構造",
     "theme": "キュー",
-    "subtheme": "リングバッファ（円環構造）",
+    "subtheme": "円環構造",
     "text": "探索インデックス i が、配列を一周して開始地点 hash に戻ったかどうかを判定するループ条件です。空欄 [  1  ] に入る条件式として適切なものを選んでください。",
     "example": "i が hash と同じ位置に来たら、全要素を調べ終えたのでループを抜ける",
     "code": "01  searchTable(整数型: hash)\n02  整数型: i = (hash + 1) % size\n03  <span class=\"while\">while ([  1  ])</span>\n04     /* 探索処理 */\n05     i = (i + 1) % size\n06  <span class=\"while\">endwhile</span>",
@@ -2668,7 +2668,7 @@ const short_questions = [
     "id": 177,
     "category": "データ構造",
     "theme": "配列",
-    "subtheme": "要素の入れ替え（スワップ）",
+    "subtheme": "要素のスワップ処理",
     "text": "配列 array の left 番目と right 番目の要素を入れ替える処理です。空欄 a, b に入る正しい組み合わせを選んでください。",
     "example": "array = [10, 20], left=0, right=1 のとき\n処理後: array = [20, 10]",
     "code": "1  swap(整数型[]: array, 整数型: left, 整数型: right)\n2    整数型: tmp\n3    tmp ← array[left]\n4    array[left] ← [  a  ]\n5    array[right] ← [  b  ]",
@@ -2727,7 +2727,7 @@ const short_questions = [
     "id": 181,
     "category": "制御構文",
     "theme": "再帰関数",
-    "subtheme": "ベースケース（終了条件）",
+    "subtheme": "ベースケース",
     "text": "非負の整数 m の階乗を再帰的に計算する関数 Fact です。再帰呼び出しを終了し、値を確定させるための「ベースケース」となる空欄 [  b  ] の条件を選んでください。",
     "example": "0! = 1 と定義されています。再帰が止まるべき最小の入力値は何か考えてみましょう。",
     "code": "01  Fact(整数型: m)\n02  <span class=\"if\">if (m > 0)</span>\n03     return m × Fact(m - 1)\n04  <span class=\"if\">elseif ([    b    ])</span>\n05     return 1\n06  <span class=\"if\">else</span>\n07     return -1\n08  <span class=\"if\">endif</span>",
@@ -2738,7 +2738,7 @@ const short_questions = [
     "id": 182,
     "category": "データ構造",
     "theme": "配列",
-    "subtheme": "要素の入れ替え（スワップ）",
+    "subtheme": "要素のスワップ処理",
     "text": "配列の2つの要素を入れ替える（スワップ）処理を正しく行うため、一時変数 tmp を利用した代入操作を完成させてください。空欄 [  b  ] に入る変数を選んでください。",
     "example": "array[left]の内容を消さないようにtmpへ退避させる",
     "code": "01 // array[left] と array[right] を入れ替える\n02 整数型: tmp\n03 tmp ← array[right]\n04 array[right] ← array[left]\n05 [    b    ] ← tmp",
@@ -2863,7 +2863,7 @@ const short_questions = [
     "id": 192,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "このプログラムのループが終了する条件として「不適切なもの」はどれですか。※ while 文の継続条件から逆算してください。",
     "example": "継続条件が and でつながれているとき、ループが終了するのはどんな場合か考えてみましょう。また、ret が 0 になることは終了条件になりますか。",
     "code": "01  整数型: ret, i, m\n02  <span class=\"while\">while ((ret ≠ -1) and (i ≤ m))</span>\n03     /* 処理 */\n04  <span class=\"while\">endwhile</span>",
@@ -2901,7 +2901,7 @@ const short_questions = [
     "example": "temp = 35 のとき「警告」が返るということは、35 自体を条件に含める必要があります。どの演算子が 35 を含みますか。",
     "code": "01  checkHeat(整数型: temp)\n02  <span class=\"if\">if (temp [  1  ] 35)</span>\n03     return \"警告\"\n04  <span class=\"if\">else</span>\n05     return \"安全\"\n06  <span class=\"if\">endif</span>",
     "choices": [">=", ">", "<=", "<"],
-    "specific_explanation": "1. 境界の特定\n   基準となる数値は「35」度です。\n\n2. 含むか含まないか\n   問題文に「35度以上」とあり、35 そのものも警告対象です。「以上」を意味する ">=" が正解です。\n   <div class=\"important\">if (temp >= 35)</div>"
+    "specific_explanation": "1. 境界の特定\n   基準となる数値は「35」度です。\n\n2. 含むか含まないか\n   問題文に「35度以上」とあり、35 そのものも警告対象です。「以上」を意味する 「>=」 が正解です。\n   <div class=\"important\">if (temp >= 35)</div>"
   },
   {
     "id": 196,
@@ -3162,7 +3162,7 @@ const short_questions = [
     "id": 219,
     "category": "データ構造",
     "theme": "配列",
-    "subtheme": "要素の入れ替え（スワップ）",
+    "subtheme": "要素のスワップ処理",
     "text": "配列 array の index 番目と index + 1 番目の要素を入れ替える処理です。空欄 [  a  ] に入る適切な式を選んでください。",
     "example": "array: [10, 20], index: 0 → 実行後: [20, 10]",
     "code": "01  swap(整数型の配列: array, 整数型: index)\n02  整数型: tmp\n03  tmp = array[index]\n04  array[index] = array[index + 1]\n05  [  a  ] = tmp",
@@ -3173,7 +3173,7 @@ const short_questions = [
     "id": 220,
     "category": "データ構造",
     "theme": "配列",
-    "subtheme": "要素の入れ替え（スワップ）",
+    "subtheme": "要素のスワップ処理",
     "text": "配列の先頭要素と末尾要素を入れ替えるプログラムです。空欄 [  a  ] および [  b  ] に入る組み合わせとして正しいものはどれか。なお、配列の要素数を n とします。",
     "example": "array: [1, 2, 3], n: 3 → 実行後: [3, 2, 1]",
     "code": "01  flipEnds(整数型の配列: array, 整数型: n)\n02  整数型: tmp\n03  tmp = [  a  ]\n04  array[0] = [  b  ]\n05  array[n - 1] = tmp",
@@ -3184,7 +3184,7 @@ const short_questions = [
     "id": 221,
     "category": "データ構造",
     "theme": "配列",
-    "subtheme": "要素の入れ替え（スワップ）",
+    "subtheme": "要素のスワップ処理",
     "text": "2つの変数 a, b の値を、退避用変数を使わずに加減算のみで入れ替えるロジックを考えます。空欄 [  a  ] に入る式はどれですか。",
     "example": "a=5, b=3 → (a=a+b) a=8, b=3 → (b=a-b) a=8, b=5 → (a=a-b) a=3, b=5",
     "code": "01  calcSwap(整数型: a, 整数型: b)\n02  a = a + b\n03  b = a - b\n04  a = [  a  ]\n05  return",
@@ -3195,7 +3195,7 @@ const short_questions = [
     "id": 222,
     "category": "データ構造",
     "theme": "配列",
-    "subtheme": "要素の入れ替え（スワップ）",
+    "subtheme": "要素のスワップ処理",
     "text": "配列の隣り合う要素を比較し、左側が大きい場合にのみ入れ替えを行う（昇順に近づける）処理です。空欄 [  a  ] に入る条件式を選んでください。",
     "example": "array: [5, 2] → 入れ替え発生 → [2, 5]",
     "code": "01  compareSwap(整数型の配列: array, 整数型: i)\n02  <span class=\"if\">if ([  a  ])</span>\n03     整数型: tmp = array[i]\n04     array[i] = array[i + 1]\n05     array[i + 1] = tmp\n06  <span class=\"if\">endif</span>",
@@ -3206,7 +3206,7 @@ const short_questions = [
     "id": 223,
     "category": "データ構造",
     "theme": "配列",
-    "subtheme": "要素の入れ替え（スワップ）",
+    "subtheme": "要素のスワップ処理",
     "text": "3つの変数 a, b, c の値を「a → b, b → c, c → a」のようにローテーションさせる処理です。空欄 [  a  ] に入る式を選んでください。",
     "example": "a:1, b:2, c:3 → 実行後: a:3, b:1, c:2",
     "code": "01  rotate(整数型: a, 整数型: b, 整数型: c)\n02  整数型: tmp\n03  tmp = c\n04  c = b\n05  b = a\n06  a = [  a  ]",
@@ -3473,7 +3473,7 @@ const short_questions = [
     "id": 245,
     "category": "データ構造",
     "theme": "スタック",
-    "subtheme": "スタックの空・満杯判定",
+    "subtheme": "スタックの閾値判定",
     "text": "スタックにデータを追加する前に、これ以上データが入らない状態（満杯）かどうかを判定したい。空欄 [  1  ] に入る適切な条件式を選んでください。",
     "example": "MAX_SIZE = 10 のとき、top = 10 ならこれ以上 Push できない",
     "code": "01  push(整数型: data)\n02  <span class=\"if\">if ([  1  ])</span>\n03     output \"エラー：オーバーフロー\"\n04  <span class=\"if\">else</span>\n05     top = top + 1\n06     stack[top] = data\n07  <span class=\"if\">endif</span>",
@@ -3484,7 +3484,7 @@ const short_questions = [
     "id": 246,
     "category": "データ構造",
     "theme": "スタック",
-    "subtheme": "スタックの空・満杯判定",
+    "subtheme": "スタックの閾値判定",
     "text": "スタックからデータを取り出す前に、データが一つも入っていない状態（空）かどうかを判定したい。空欄 [  1  ] に入る条件式を選んでください。",
     "example": "初期状態 top = 0 のとき、Pop を試みるとエラーになる",
     "code": "01  pop()\n02  <span class=\"if\">if ([  1  ])</span>\n03     output \"エラー：アンダーフロー\"\n04  <span class=\"if\">else</span>\n05     整数型: v = stack[top]\n06     top = top - 1\n07     return v\n08  <span class=\"if\">endif</span>",
@@ -3495,7 +3495,7 @@ const short_questions = [
     "id": 247,
     "category": "データ構造",
     "theme": "スタック",
-    "subtheme": "スタックの空・満杯判定",
+    "subtheme": "スタックの閾値判定",
     "text": "スタックが「満杯ではない」ときだけデータを追加する処理です。空欄 [  1  ] に入る継続条件として適切なものを選んでください。",
     "example": "MAX_SIZE = 5, top = 4 のときは追加可能だが、top = 5 では追加できない",
     "code": "01  safePush(整数型: data)\n02  <span class=\"if\">if ([  1  ])</span>\n03     top = top + 1\n04     stack[top] = data\n05  <span class=\"if\">endif</span>",
@@ -3506,7 +3506,7 @@ const short_questions = [
     "id": 248,
     "category": "データ構造",
     "theme": "スタック",
-    "subtheme": "スタックの空・満杯判定",
+    "subtheme": "スタックの閾値判定",
     "text": "スタックが「空ではない」ことを判定する関数 isNotEmpty を作成します。空欄に入る論理式を選んでください。",
     "example": "top = 1 なら 真（true）、top = 0 なら 偽（false）を返す",
     "code": "01  論理型: isNotEmpty()\n02  return [  1  ]",
@@ -3517,7 +3517,7 @@ const short_questions = [
     "id": 249,
     "category": "データ構造",
     "theme": "スタック",
-    "subtheme": "スタックの空・満杯判定",
+    "subtheme": "スタックの閾値判定",
     "text": "スタックが満杯のとき、それ以上 Push しようとするとエラーを返すロジックを考えます。空欄 [  1  ] に入る値を選んでください。",
     "example": "MAX_SIZE = 8, top = 8 のとき、エラー（-1）を返す",
     "code": "01  整数型: pushWithCheck(整数型: data)\n02  <span class=\"if\">if (top >= [  1  ])</span>\n03     return -1 // エラーコード\n04  <span class=\"if\">endif</span>\n05  top = top + 1\n06  stack[top] = data\n07  return 0 // 正常終了",
@@ -3583,7 +3583,7 @@ const short_questions = [
     "id": 255,
     "category": "データ構造",
     "theme": "多次元配列",
-    "subtheme": "行・列の走査（二重ループ）",
+    "subtheme": "行・列の走査",
     "text": "縦が row、横が col の要素を持つ2次元配列 matrix のすべての要素を 0 で初期化する処理です。内側のループの終了条件 [ a ] に入る適切な変数を選んでください。",
     "example": "外側のループ変数 i が「何行目か」を指しています。では、内側のループ変数 j は「1行の中で横に何回進むか」を表すことになります。",
     "code": "1  clearArray(整数型の2次元配列: matrix, 整数型: row, 整数型: col)\n2  <span class=\"for\">for (i を 1 から row まで 1 ずつ増やす)</span>\n3     <span class=\"for\">for (j を 1 から [  a  ] まで 1 ずつ増やす)</span>\n4        matrix[i, j] ← 0\n5     <span class=\"endfor\">endfor</span>\n6  <span class=\"endfor\">endfor</span>",
@@ -3599,7 +3599,7 @@ const short_questions = [
     "id": 256,
     "category": "データ構造",
     "theme": "多次元配列",
-    "subtheme": "行・列の走査（二重ループ）",
+    "subtheme": "行・列の走査",
     "text": "2次元配列 matrix から、指定した特定の列（targetCol）の値だけを縦に合計するプログラムです。空欄 [ a ] に入る、配列を正しく参照する式を選んでください。",
     "example": "targetCol が 3 のとき、合計したいのは matrix[1, 3]、matrix[2, 3]、matrix[3, 3]…というように、縦に並んだデータです。",
     "code": "1  sumColumn(整数型の2次元配列: matrix, 整数型: row, 整数型: targetCol)\n2  整数型: sum ← 0\n3  <span class=\"for\">for (i を 1 から row まで 1 ずつ増やす)</span>\n4     sum ← sum + [  a  ]\n5  <span class=\"endfor\">endfor</span>\n6  return sum",
@@ -3615,7 +3615,7 @@ const short_questions = [
     "id": 257,
     "category": "データ構造",
     "theme": "多次元配列",
-    "subtheme": "行・列の走査（二重ループ）",
+    "subtheme": "行・列の走査",
     "text": "2次元配列 matrix の中から、目的の値（target）を探し出し、見つかった場合はその位置を `{行, 列}` の形式で返すプログラムです。空欄 [ a ] に入る適切な戻り値を選んでください。",
     "example": "目的の値が見つかったとき、その値が存在している場所（座標）は、現在実行しているループの変数によって表されます。",
     "code": "1  findValue(整数型の2次元配列: matrix, 整数型: row, 整数型: col, 整数型: target)\n2  <span class=\"for\">for (i を 1 から row まで 1 ずつ増やす)</span>\n3     <span class=\"for\">for (j を 1 から col まで 1 ずつ増やす)</span>\n4        <span class=\"if\">if (matrix[i, j] == target)</span>\n5           return [  a  ]\n6        <span class=\"endif\">endif</span>\n7     <span class=\"endfor\">endfor</span>\n8  <span class=\"endfor\">endfor</span>\n9  return {-1, -1}",
@@ -3631,7 +3631,7 @@ const short_questions = [
     "id": 258,
     "category": "データ構造",
     "theme": "多次元配列",
-    "subtheme": "行・列の走査（二重ループ）",
+    "subtheme": "行・列の走査",
     "text": "縦横が同じ size の正方行列において、左上から右下へ向かう対角線上の要素だけを 1 に、それ以外を 0 にする（単位行列を作る）プログラムです。1 を代入するための条件式 [ a ] を選んでください。",
     "example": "左上から右下への対角線上にあるマス目の座標は、[1, 1]、[2, 2]、[3, 3] のように規則的に並んでいます。行（i）と列（j）の関係に注目しましょう。",
     "code": "1  createIdentity(整数型の2次元配列: matrix, 整数型: size)\n2  <span class=\"for\">for (i を 1 から size まで 1 ずつ増やす)</span>\n3     <span class=\"for\">for (j を 1 から size まで 1 ずつ増やす)</span>\n4        <span class=\"if\">if ([  a  ])</span>\n5           matrix[i, j] ← 1\n6        <span class=\"else\">else</span>\n7           matrix[i, j] ← 0\n8        <span class=\"endif\">endif</span>\n9     <span class=\"endfor\">endfor</span>\n10 <span class=\"endfor\">endfor</span>",
@@ -3647,7 +3647,7 @@ const short_questions = [
     "id": 259,
     "category": "データ構造",
     "theme": "多次元配列",
-    "subtheme": "行・列の走査（二重ループ）",
+    "subtheme": "行・列の走査",
     "text": "2次元配列 matrix から、指定した特定の行（targetRow）の値だけを横に合計するプログラムです。空欄 [ a ] に入る、配列を正しく参照する式を選んでください。",
     "example": "targetRow が 2 のとき、合計したいのは matrix[2, 1]、matrix[2, 2]、matrix[2, 3]…というように、横に並んだデータです。",
     "code": "1  sumRow(整数型の2次元配列: matrix, 整数型: col, 整数型: targetRow)\n2  整数型: sum ← 0\n3  <span class=\"for\">for (j を 1 から col まで 1 ずつ増やす)</span>\n4     sum ← sum + [  a  ]\n5  <span class=\"endfor\">endfor</span>\n6  return sum",
@@ -3721,13 +3721,13 @@ const short_questions = [
       "status = \"WAITING\"",
       "status ≠ \"WAITING\""
     ],
-    "specific_explanation": "1. フラグの初期化\n   初期状態のフラグは \"WAITING\" であり、ループ内の checkStatus() が新しい状態を返して上書きします。\n\n2. 継続条件の更新（無限ループ回避）\n   「READY になるまで繰り返す」とは「READY ではない間ループを継続する」という意味です。フラグが \"READY\" に更新された時点でループを抜けます。\n   <div class=\"important\">while (status ≠ \"READY\")</div>"
+    "specific_explanation": "1. フラグの初期化\n   初期状態のフラグは \"WAITING\" であり、ループ内の checkStatus() が新しい状態を返して上書きします。\n\n2. 無限ループ回避\n   「READY になるまで繰り返す」とは「READY ではない間ループを継続する」という意味です。フラグが \"READY\" に更新された時点でループを抜けます。\n   <div class=\"important\">while (status ≠ \"READY\")</div>"
   },
   {
     "id": 264,
     "category": "制御構文",
     "theme": "while文",
-    "subtheme": "継続条件の更新（無限ループ回避）",
+    "subtheme": "無限ループ回避",
     "text": "配列 data に含まれる正の数だけを順番に処理し、0または負の数（終端記号）が現れた時点で処理を即座に打ち切るプログラムです。空欄 [  a  ] に入る適切な継続条件を選んでください。",
     "example": "data[i] がどのような値のとき「まだ処理を続けてよい」と判断できるか考えてみましょう。0 が来たらどうしたいですか。",
     "code": "01  processPositiveData(整数型の配列: data)\n02  整数型: i ← 1\n03  <span class=\"while\">while ([      a      ])</span>\n04     /* 正の数に対する処理 */\n05     i ← i + 1\n06  <span class=\"while\">endwhile</span>\n07  return i - 1",

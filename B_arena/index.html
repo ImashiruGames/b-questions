@@ -114,7 +114,7 @@
             let q = short_questions[i];
 
             if (!q) continue;
-            
+
             if (q.category === category && q.theme === theme && q.subtheme === subtheme) {
                 totalCount++;
                 let qId = UserManager.generateId(q);
@@ -274,11 +274,12 @@
                 </div>
             `;
 
-            // ★追加：アコーディオン開閉イベント（テーマ）
+            // アコーディオン開閉イベント（テーマ）
             themeHeader.addEventListener("click", function (e) {
                 // チェックボックスやラベルを押した時は開閉しない（競合回避）
                 if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
                     if (e.target.tagName === 'SPAN' && e.target.parentElement.tagName === 'LABEL') return;
+                    console.log("開くよ")
                     themeContainer.classList.toggle("is-open");
                 }
             });

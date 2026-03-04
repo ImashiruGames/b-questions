@@ -4,7 +4,9 @@ body {
   width: 100vw;
   overflow-x: hidden;
   font-family: sans-serif;
-  background-color: #f4f4f4;
+  background-image: radial-gradient(circle at center, #EAE8EC 10%, transparent 10%), radial-gradient(circle at center, transparent 10%, #EAE8EC 10%);
+  background-size: 2px 2px, 2px 2px;
+  background-position: 0 0, 1px 1px;
   color: #222;
   overscroll-behavior: none;
   -webkit-user-select: none;
@@ -334,7 +336,6 @@ select {
 #category-container {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
 }
 
 /* タブレット向け（2カラム） */
@@ -689,7 +690,6 @@ input[type=checkbox]:checked::after {
   font-size: 0.95rem;
   box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
   /* ぼかさないソリッドな影 */
-  /* ふわっと浮くアニメーションNGのため、直線的に右からスライドイン */
   transform: translateX(120%);
   transition: transform 0.2s linear;
 }
@@ -996,7 +996,7 @@ input[type=checkbox]:checked::after {
   border-bottom: 2px solid #333;
   padding-bottom: 5px;
 }
-#answer_side .explanation-content .specific-box .important {
+#answer_side .explanation-content .important {
   display: block;
   background-color: #fff5f5;
   border: 1px solid #c62828;
@@ -1706,4 +1706,8 @@ input[type=checkbox]:checked::after {
   margin-bottom: 10px;
   border-bottom: 2px solid #333;
   padding-bottom: 5px;
+}
+
+.encyclo-fav-btn {
+  color: "yellow";
 }/*# sourceMappingURL=style.css.map */

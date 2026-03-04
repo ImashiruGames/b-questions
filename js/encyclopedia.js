@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let q = short_questions[i];
 
         if (!q) continue;
-        
+
         // ※万が一、templatesに無い新カテゴリの問題があった時のための安全策
         if (!groupedData[q.category]) groupedData[q.category] = {};
         if (!groupedData[q.category][q.theme]) groupedData[q.category][q.theme] = [];
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <span class="q-id">Q${q.id}</span>
                             <span class="badge ${cardClass}">${badgeText}</span>
                         </div>
-                        <button class="encyclo-fav-btn" style="background: none; border: none; cursor: pointer; font-size: 1.3rem; color: #333; padding: 0 5px;">${favIcon}</button>
+                        <button class="encyclo-fav-btn" style="background: none; border: none; cursor: pointer; font-size: 1.3rem; color:"yellow"; padding: 0 5px;">${favIcon}</button>
                     </div>
                     <div class="card-stats">
                         <span style="color:#2e7d32;">⭕ ${stat.correct}</span> / 
