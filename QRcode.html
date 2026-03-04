@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>QRコード量産 - ImashiruProject</title>
+    <style>
+        /* 1. 基本設定（余白リセットとフォント指定） */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e6f4fa; /* 確認用の薄い背景色 */
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+        }
+
+        /* 2. 印刷用設定（A4サイズ強制） */
+        @media print {
+            body { background-color: white; }
+            .no-print { display: none; }
+            @page {
+                size: A4;
+                margin: 0; /* ブラウザ側の余白を強制リセット */
+            }
+        }
+
+        /* 3. A4キャンバス（210mm x 297mm） */
+        .page {
+            width: 210mm;
+            height: 297mm; /* A4の高さ */
+            margin: 0 auto;
+            background: white;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 横4列 */
+            grid-template-rows: repeat(6, 1fr);    /* 縦6行 */
+            /* 外枠の左と上（カード側の右・下と合わせて格子を作る） */
+            border-top: 0.5px solid #999;
+            border-left: 0.5px solid #999;
+            box-sizing: border-box;
+        }
+
+        /* 4. 1枚のカード（丸角NG、一辺アクセントNGの完全な矩形） */
+        .qr-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            border-right: 0.5px solid #999;
+            border-bottom: 0.5px solid #999;
+            padding: 4mm 2mm; /* 上下左右の余白 */
+            box-sizing: border-box;
+            text-align: center;
+            overflow: hidden; /* はみ出し防止 */
+        }
+
+        /* 5. テキスト要素のスタイリング */
+        .header-text {
+            font-weight: bold;
+            font-size: 8.5pt;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .main-copy {
+            font-weight: bold;
+            font-size: 9.5pt;
+            color: #00a0e9; /* PDF基調色の水色 */
+            line-height: 1.2;
+            margin-bottom: 3px;
+        }
+
+        .sub-copy {
+            font-size: 7.5pt;
+            color: #555;
+            line-height: 1.2;
+            margin-bottom: auto; /* QRコードを下に押し下げる */
+        }
+
+        /* 6. QRコード画像 */
+        .qr-code {
+            width: 26mm; /* A4グリッドに収まる安全なサイズ */
+            height: 26mm;
+            display: block;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print" style="text-align:center; padding: 20px; background: #fff; border-bottom: 2px solid #ccc; margin-bottom: 20px;">
+        <h3>【ImashiruProject】 QRコード印刷プレビュー</h3>
+        <p>ブラウザの印刷機能（Ctrl+P / Cmd+P）を開き、<strong>「余白：なし」「倍率：100% または 規定」</strong>に設定してください。</p>
+        <button onclick="window.print()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">印刷する</button>
+    </div>
+
+    <div class="page" id="page-container"></div>
+
+    <script>
+        // 【思考ステップ分解】
+        // 1. 3パターンのテキストデータを配列で定義する
+        // 2. 24回ループを回す
+        // 3. ループ回数に応じて、8回ごとにパターンを切り替える
+        // 4. HTML要素を組み立ててコンテナに追加する
+
+        const patterns = [
+            {
+                main: "基本情報B問題、1問3分から。",
+                sub: "重い勉強は終わり。<br>ゲーム感覚で弱点克服！"
+            },
+            {
+                main: "- アルゴリズム道場 -",
+                sub: "自分の成長が見える！<br>最短で合格へ！"
+            },
+            {
+                main: "脱・基本情報の三日坊主。",
+                sub: "苦手な問題をちょっとだけ、<br>ササッと練習！"
+            }
+        ];
+
+        const container = document.getElementById('page-container');
+        let htmlContent = '';
+
+        // 24枚分のHTMLを生成
+        for (let i = 0; i < 24; i++) {
+            // iが0~7ならパターン0、8~15ならパターン1、16~23ならパターン2
+            const patternIndex = Math.floor(i / 8); 
+            const currentPattern = patterns[patternIndex];
+
+            htmlContent += `
+                <div class="qr-card">
+                    <div class="header-text">詳しくはIT1A14まで！</div>
+                    <div class="main-copy">${currentPattern.main}</div>
+                    <div class="sub-copy">${currentPattern.sub}</div>
+                    <img src="image_f60483.png" alt="QR" class="qr-code">
+                </div>
+            `;
+        }
+
+        // コンテナに一括挿入
+        container.innerHTML = htmlContent;
+    </script>
+
+</body>
+</html>
