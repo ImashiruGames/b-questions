@@ -123,15 +123,15 @@ input[type="checkbox"]:checked::after {
 
 .medal-tooltip-container {
     position: relative;
-    display: inline-block;
-    margin: 0 15px;
+    display: flex; /* アイコンと数字の高さを中央で揃える */
+    align-items: center;
+    margin: 0; /* 余白は親のgapに任せる */
 }
 
 /* 個数表示の文字スタイル */
 .medal-count {
     font-size: 1.2rem;
     font-weight: bold;
-    vertical-align: middle;
     margin-left: 5px;
     color: #333;
 }
@@ -152,6 +152,13 @@ input[type="checkbox"]:checked::after {
     white-space: nowrap;
     border: 1px solid #000;
     z-index: 100;
+    pointer-events: none;
+
+    white-space: normal;  /* 改行を許可 */
+    width: max-content;   /* テキストに合わせて広がる */
+    max-width: 220px;     /* 最大幅を制限して折り返させる */
+    text-align: left;     /* 複数行になった時のために左揃え */
+    line-height: 1.4;
 }
 
 .medal-tooltip-container:hover::after {
@@ -202,7 +209,12 @@ input[type="checkbox"]:checked::after {
     padding: 15px;
     border: 1px solid #333;
     background-color: #fafafa;
-    text-align: center;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
 
 /* ==========================================
@@ -280,9 +292,19 @@ input[type="checkbox"]:checked::after {
     color: white;
 }
 
-/* メダル集計エリア */
+/* メダル集計エリアのタイトル */
 .medal-total-title {
-    margin-right: 15px;
+    /* スマホ等で狭い時はタイトルだけで1行占有し、メダルは次の行にまとめる */
+    width: 100%; 
+    text-align: center;
+    margin-right: 0;
+}
+
+/* PC等の広い画面ではタイトルも横に並べる */
+@media (min-width: 600px) {
+    .medal-total-title {
+        width: auto; 
+    }
 }
 
 /* JS操作用の状態クラス */
