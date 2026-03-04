@@ -193,15 +193,31 @@ input[type="checkbox"]:checked::after {
 
 #start_exam_btn {
     font-family: monospace;
-    margin-top: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: 600;
+    margin-top: 10px; /* 立体感を持たせるため、少し上の余白を広げます */
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
     width: 100%;
     background-color: #FFD700;
+    color: #000;
     text-align: center;
-    border: none;
+    border: 1px solid #000; /* ストイックな太枠を追加 */
     cursor: pointer;
+    
+    /* ぼかしゼロの真っ黒な影で立体感を出す */
+    box-shadow: 0px 1px 0px #000;
+    /* ふわっとさせず、パキッと変化させるため transition は極端に短く */
+    transition: transform 0.05s linear, box-shadow 0.05s linear;
+    
+    &:hover {
+        background-color: #ffea75; /* ホバーで少しだけ明るくして「押せる」ことをアピール */
+    }
+    
+    &:active {
+        /* クリック時に右下にズレながら影が消える（＝押し込んだ表現） */
+        transform: translate(0px, 2px);
+        box-shadow: 0px 0px 0px #000;
+    }
 }
 
 #total_medals_area {

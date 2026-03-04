@@ -143,10 +143,13 @@ var AchievementChecker = {
     // 3. セッション判定（演習セットが終了した瞬間に呼ぶ）
     // --------------------------------------------------
     checkSessionEnd: function (sessionData) {
-        // sessionDataには { totalQuestions: 10, correctCount: 10, maxStreak: 10, filterUsed: "new", ... } 
-        // などの演習のプレイ内容が渡される想定です。
+        // sessionDataは { totalQuestions: 10, correctCount: 10, maxStreak: 10, filterUsed: "new", ... } 
+
 
         // --- プレイスタイル系 ---
+        if(sessionData.maxStreak >= 3) {
+            this.tryUnlock("ps_streak_3");
+        }
         if (sessionData.maxStreak >= 5) {
             this.tryUnlock("ps_streak_5");
         }

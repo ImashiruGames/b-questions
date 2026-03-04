@@ -26,6 +26,7 @@ var achievementsMaster = [
     { id: "tr_grandmaster", category: "trophy", title: "グランドマスター", condition: "全てのカテゴリーで金メダルを獲得する" },
 
     // ③ プレイスタイル系（精度・試行錯誤）
+    { id: "ps_streak_3", category: "playstyle", title: "好調なスタート", condition: "1回の演習で3問連続ストレート正解する" },
     { id: "ps_streak_5", category: "playstyle", title: "絶好調！", condition: "1回の演習で5問連続ストレート正解する" },
     { id: "ps_streak_10", category: "playstyle", title: "止まらない知的好奇心", condition: "1回の演習で10問連続ストレート正解する" },
     { id: "ps_perfect", category: "playstyle", title: "パーフェクトゲーム", condition: "10問以上の設定で演習を開始し、全問正解でクリアする" },
