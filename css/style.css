@@ -879,7 +879,7 @@ input[type=checkbox]:checked::after {
   margin: 0;
 }
 #problem_side .question-example::before {
-  content: "例";
+  content: "ヒント";
   position: absolute;
   top: 0;
   left: 0;

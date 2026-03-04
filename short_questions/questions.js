@@ -8,7 +8,13 @@ const short_questions = [
     "subtheme": "要素のスワップ処理",
     "text": "次のプログラムは、配列 array の left 番目の要素と right 番目の要素を入れ替える（スワップする）処理の一部です。空欄 [ b ] に入る最も適切な字句を選んでください。ここで、tmp は一時的な値を保持するための変数です。",
     "example": "array[right] を array[left] で上書きする前に、元の値を退避させる必要があります。",
-    "code": "1  整数型の配列: array\n2  整数型: tmp, left, right\n3  tmp ← array[right]\n4  array[right] ← array[left]\n5  [      b      ] ← tmp", "choices": ["array[left]", "array[right]", "tmp", "array[1]"],
+    "code": "01  整数型の配列: array\n02  整数型: tmp, left, right\n03  tmp ← array[right]\n04  array[right] ← array[left]\n05  [      b      ] ← tmp",
+    "choices": [
+      "array[left]",
+      "array[right]",
+      "tmp",
+      "array[1]"
+    ],
     "specific_explanation": "1. 退避用変数の利用\n   値を上書きすると元のデータが消えてしまうため、あらかじめ tmp（一時変数）に array[right] の値を保存しておきます。\n\n2. 三段階の代入\n   右側の要素を左側の値で上書きした後、最後に左側の要素へ、退避させておいた元の右側の値を戻します。\n   <div class=\"important\">array[left] ← tmp</div>"
   },
   {
@@ -18,7 +24,7 @@ const short_questions = [
     "subtheme": "範囲と終端判定",
     "text": "要素数 n の配列 array を逆順に並べ替えるプログラムにおいて、ループの終了条件を「n ÷ 2 の商」までとしている理由として最も適切なものはどれですか。",
     "example": "要素数が 5 のとき、2回（1番目と5番目、2番目と4番目）の入れ替えで完了します。",
-    "code": "1  reverse(整数型の配列: array)\n2  整数型: n, left\n3  n ← arrayの要素数\n4  <span class=\"for\">for (left を 1 から (n ÷ 2 の商) まで 1 ずつ増やす)</span>\n5     // 入れ替え処理（スワップ）を実行\n6  <span class=\"for\">endfor</span>",
+    "code": "01  reverse(整数型の配列: array)\n02  整数型: n, left\n03  n ← arrayの要素数\n04  <span class=\"for\">for (left を 1 から (n ÷ 2 の商) まで 1 ずつ増やす)</span>\n05     // 入れ替え処理（スワップ）を実行\n06  <span class=\"for\">endfor</span>",
     "choices": [
       "中央まで到達した時点で、全ての要素のペアが入れ替わっているから",
       "「n ÷ 2 の商」が、配列の最後の要素の添字を表しているから",
@@ -53,7 +59,12 @@ const short_questions = [
     "text": "年齢 age に応じた料金を判定するプログラムにおいて、「4歳から9歳までは300円」というルールを適用するための条件式を、空欄 [  ] に入れて完成させてください。",
     "example": "age = 9 のとき、戻り値が 300 になる必要があります。",
     "code": "01  整数型: age, ret\n02  <span class=\"if\">if (age ≤ 3)</span>\n03     ret ← 100\n04  <span class=\"if\">elseif ([      ])</span>\n05     ret ← 300",
-    "choices": ["age ≤ 9", "age < 9", "age < 10", "age ≥ 4"],
+    "choices": [
+      "age ≤ 9",
+      "age < 9",
+      "age < 10",
+      "age ≥ 4"
+    ],
     "specific_explanation": "1. 境界の特定\n   基準となる数値を確認します。今回の料金プランが切り替わる境界の上限値は「9」歳です。\n\n2. 含むか含まないか\n   以上以下、またはより大きい・未満かを見極めて演算子を決定します。「9歳まで」というルールは 9歳を「含む」ため、以下（≤）を選択するのが適切です。既に 2行目の条件によって「3歳以下」のケースは除外されているため、この elseif では 9歳以下（≤ 9）であることのみを判定すれば、自動的に「4歳以上かつ9歳以下」という範囲を正しくカバーできます。\n   <div class=\"important\">elseif (age ≤ 9)</div>"
   },
   {
@@ -63,7 +74,7 @@ const short_questions = [
     "subtheme": "多分岐の論理",
     "text": "料金計算のプログラムにおける多分岐（if-elseif-else）構造の判定優先順位について、正しい説明を選んでください。age は年齢、ret は料金を表す変数です。",
     "example": "3歳の子供に対して、100円の条件（age ≤ 3）と300円の条件（age ≤ 9）が共に真となりますが、実際には100円が適用されます。",
-    "code": "   01  整数型: age, ret\n   02  <span class=\"if\">if (age ≤ 3)</span>\n   03     ret ← 100\n   04  <span class=\"if\">elseif (age ≤ 9)</span>\n   05     ret ← 300",
+    "code": "01  整数型: age, ret\n02  <span class=\"if\">if (age ≤ 3)</span>\n03     ret ← 100\n04  <span class=\"if\">elseif (age ≤ 9)</span>\n05     ret ← 300",
     "choices": [
       "条件式を上から評価し、最初に「真」となったブロックだけが実行される",
       "より範囲の狭い条件式が自動的に優先される",
@@ -98,7 +109,12 @@ const short_questions = [
     "text": "配列 array の要素 array[i] と array[j] の値を入れ替える際、一方が消えないようにするための正しい手順を選んでください。空欄 [  b  ] に入る適切な式はどれですか。ここで、tmp は一時的な値を保持するための変数です。",
     "example": "array[i] = 10, array[j] = 20 のとき、最終的に array[i] = 20, array[j] = 10 にしたい。",
     "code": "01  整数型の配列: array\n02  整数型: tmp, i, j\n03  tmp ← array[i]\n04  array[i] ← array[j]\n05  [      b      ] ← tmp",
-    "choices": ["array[j]", "array[i]", "tmp", "array[0]"],
+    "choices": [
+      "array[j]",
+      "array[i]",
+      "tmp",
+      "array[0]"
+    ],
     "specific_explanation": "1. 退避用変数の利用\n   上書きで値が消えてしまわないよう、まず片方の値（array[i]）を一時変数 tmp に保存しておきます。\n\n2. 三段階の代入\n   次に array[i] に array[j] の値を代入して上書きします。この時点で元の array[i] は消えますが、tmp に残っているため安心です。最後に、空いた（上書き可能な状態の）array[j] へ退避していた tmp の値を戻します。\n   <div class=\"important\">array[j] ← tmp</div>"
   },
   {
@@ -108,8 +124,13 @@ const short_questions = [
     "subtheme": "範囲と終端判定",
     "text": "要素数 n の配列 array を逆順に並べ替えるとき、入れ替え処理を繰り返す回数として最も適切なものはどれですか。ここで、n は配列の要素数を表します。",
     "example": "n = 6 のとき、3回（1番目と6番目、2番目と5番目、3番目と4番目）入れ替えれば完了します。",
-    "code": "   01  整数型の配列: array\n   02  整数型: n, i\n   03  n ← arrayの要素数\n   04  <span class=\"for\">for (i を 1 から [   回数   ] まで 1 ずつ増やす)</span>\n   05     // 入れ替え処理（スワップ）を実行\n   06  <span class=\"for\">endfor</span>",
-    "choices": ["n ÷ 2 の商", "n", "n - 1", "n ÷ 2 の余り"],
+    "code": "01  整数型の配列: array\n02  整数型: n, i\n03  n ← arrayの要素数\n04  <span class=\"for\">for (i を 1 から [   回数   ] まで 1 ずつ増やす)</span>\n05     // 入れ替え処理（スワップ）を実行\n06  <span class=\"for\">endfor</span>",
+    "choices": [
+      "n ÷ 2 の商",
+      "n",
+      "n - 1",
+      "n ÷ 2 の余り"
+    ],
     "specific_explanation": "1. 開始と終了の数値\n   逆順の並べ替えは、配列の「端と端」をペアにして交換する作業です。1回の交換で2つの要素の位置が確定するため、全体の半分（n ÷ 2 の商）まで繰り返せば、すべての要素が正しく並び替わります。\n\n2. 繰り返し回数の性質\n   もし n 回（要素数分）繰り返してしまうと、一度入れ替わって逆順になった要素を再び入れ替えることになり、結果として元の順序に戻ってしまいます。そのため、中央で止める計算式が必要となります。\n   <div class=\"important\">n ÷ 2 の商</div>"
   },
   {
@@ -120,7 +141,12 @@ const short_questions = [
     "text": "添え字が 1 から始まる要素数 n の配列 array において、左側の添え字 i に対応する「右側のペアの添え字」を求める式（空欄 [  a  ]）を選んでください。",
     "example": "n = 10 のとき、i = 1 ならペアとなる右端は 10、i = 2 なら右端は 9 です。",
     "code": "01  整数型の配列: array\n02  整数型: n, i, right\n03  n ← arrayの要素数\n04  <span class=\"for\">for (i を 1 から (n ÷ 2 の商) まで 1 ずつ増やす)</span>\n05     right ← [      a      ]\n06     // array[i] と array[right] を入れ替える\n07  <span class=\"for\">endfor</span>",
-    "choices": ["n - i + 1", "n - i", "n - i - 1", "i + (n ÷ 2)"],
+    "choices": [
+      "n - i + 1",
+      "n - i",
+      "n - i - 1",
+      "i + (n ÷ 2)"
+    ],
     "specific_explanation": "1. 規則性の発見\n   ペアになる添え字の法則性を探ります。例にある通り、n = 10 のとき「1 と 10」「2 と 9」がペアになります。これらの合計値（i + right）に注目すると、どのペアも常に 11（つまり n + 1）になることがわかります。\n\n2. ずれの調整\n   「i + right = n + 1」という等式から、求めたい right について式を整理すると、right = n + 1 - i となります。添え字が 1 始まりの場合、単純な n - i では数値が 1 足りなくなるため、この「+1」が重要な調整役となります。\n   <div class=\"important\">right ← n - i + 1</div>"
   },
 
@@ -132,7 +158,7 @@ const short_questions = [
     "subtheme": "境界値の判定",
     "text": "年齢 age が「10歳以上18歳未満」という範囲に該当するかを正しく判定する複合条件式を選んでください。",
     "example": "age = 10 は対象、age = 18 は対象外です。",
-    "code": "   01  整数型: age\n   02  <span class=\"if\">if ([      条件式      ])</span>\n   03     return \"対象\"\n   04  <span class=\"if\">endif</span>",
+    "code": "01  整数型: age\n02  <span class=\"if\">if ([      条件式      ])</span>\n03     return \"対象\"\n04  <span class=\"if\">endif</span>",
     "choices": [
       "(age ≥ 10) and (age < 18)",
       "(age > 10) and (age < 18)",
@@ -148,7 +174,7 @@ const short_questions = [
     "subtheme": "多分岐の論理",
     "text": "多分岐処理（if-elseif-else）を用いて年齢 age に応じた料金 ret を計算するアルゴリズムです。3歳の子供（age = 3）の料金が確実に「100円」と判定されるために、条件式の記述順序として注意すべき点はどれですか。",
     "example": "3歳の子供（age = 3）のとき、100円の条件（≤ 3）と300円の条件（≤ 9）のどちらにも合致する可能性があることに注目しましょう。",
-    "code": "   01  整数型: age, ret\n   02  <span class=\"if\">if (age ≤ 3)</span>\n   03     ret ← 100\n   04  <span class=\"if\">elseif (age ≤ 9)</span>\n   05     ret ← 300\n   06  <span class=\"if\">else</span>\n   07     ret ← 500\n   08  <span class=\"if\">endif</span>",
+    "code": "01  整数型: age, ret\n02  <span class=\"if\">if (age ≤ 3)</span>\n03     ret ← 100\n04  <span class=\"if\">elseif (age ≤ 9)</span>\n05     ret ← 300\n06  <span class=\"if\">else</span>\n07     ret ← 500\n08  <span class=\"if\">endif</span>",
     "choices": [
       "より限定的な条件（範囲の狭い条件）を先に記述すること",
       "すべての条件式を and 演算子で結合して記述すること",
@@ -164,7 +190,7 @@ const short_questions = [
     "subtheme": "ベースケース",
     "text": "再帰関数において、自分自身を呼び出すのを停止して具体的な値を返し、計算を確定させる役割を持つ部分の名称として、最も適切なものを選んでください。",
     "example": "Fact(3) は内部で 3 × Fact(2) を呼び出しますが、この連鎖が無限に続かないようにするための「ストッパー」となる役割のことです。",
-    "code": "   01  整数型: m\n   02  Fact(整数型: m)\n   03  <span class=\"if\">if (m > 0)</span>\n   04     return m × Fact(m - 1)\n   05  <span class=\"if\">elseif (m = 0)</span>\n   06     return 1\n   07  <span class=\"if\">endif</span>",
+    "code": "01  整数型: m\n02  Fact(整数型: m)\n03  <span class=\"if\">if (m > 0)</span>\n04     return m × Fact(m - 1)\n05  <span class=\"if\">elseif (m = 0)</span>\n06     return 1\n07  <span class=\"if\">endif</span>",
     "choices": [
       "ベースケース",
       "再帰ステップ",
@@ -182,7 +208,7 @@ const short_questions = [
     "subtheme": "重み付けの累積",
     "text": "n進数の各桁が格納された配列 t を10進数に変換するプログラムです。上位桁から順に処理を行う場合、空欄 [  b  ] に入る累積計算の式を選んでください。ここで、m は配列の要素数、n は基数、ret は累積された10進数値を表します。",
     "example": "3進数「120」を変換する場合、上位桁から順に処理すると、累積値 ret は 1 → 5 → 15 と変化して最終的な値が確定します。",
-    "code": "   01  cardinal(整数型の配列: t, 整数型: m, 整数型: n)\n   02  整数型: i, ret\n   03  ret ← 0\n   04  <span class=\"for\">for (i を 1 から m まで 1 ずつ増やす)</span>\n   05     ret ← [      b      ]\n   06  <span class=\"for\">endfor</span>\n   07  return ret",
+    "code": "01  cardinal(整数型の配列: t, 整数型: m, 整数型: n)\n02  整数型: i, ret\n03  ret ← 0\n04  <span class=\"for\">for (i を 1 から m まで 1 ずつ増やす)</span>\n05     ret ← [      b      ]\n06  <span class=\"for\">endfor</span>\n07  return ret",
     "choices": [
       "ret * n + t[i]",
       "ret + t[i] * n",
@@ -198,7 +224,7 @@ const short_questions = [
     "subtheme": "要素のスワップ処理",
     "text": "配列 array の要素を逆順に並べ替える処理の一部です。左側の要素 array[left] と右側の要素 array[right] を入れ替える際、空欄 [  b  ] に入る適切な字句を選んでください。ここで、tmp は一時的な値を保持するための変数です。",
     "example": "array[left] = 10, array[right] = 20 のとき、tmp を使って値を回し、最終的に array[left] = 20, array[right] = 10 にします。",
-    "code": "   01  整数型の配列: array\n   02  整数型: tmp, left, right\n   03  tmp ← array[right]\n   04  array[right] ← array[left]\n   05  [      b      ] ← tmp",
+    "code": "01  整数型の配列: array\n02  整数型: tmp, left, right\n03  tmp ← array[right]\n04  array[right] ← array[left]\n05  [      b      ] ← tmp",
     "choices": [
       "array[left]",
       "array[right]",
@@ -214,7 +240,7 @@ const short_questions = [
     "subtheme": "ループ変数の計算利用",
     "text": "添え字が 1 から始まる要素数 n の配列 array において、左側の添え字 left とペアになる「右側の添え字」を求める式（空欄 [  a  ]）を選んでください。",
     "example": "n = 4 のとき：left = 1 なら右端は 4、left = 2 なら右端は 3 です。",
-    "code": "   01  整数型の配列: array\n   02  整数型: n, left, right\n   03  n ← arrayの要素数\n   04  <span class=\"for\">for (left を 1 から (n ÷ 2 の商) まで 1 ずつ増やす)</span>\n   05     right ← [      a      ]\n   06     // array[left] と array[right] を入れ替える\n   07  <span class=\"for\">endfor</span>",
+    "code": "01  整数型の配列: array\n02  整数型: n, left, right\n03  n ← arrayの要素数\n04  <span class=\"for\">for (left を 1 から (n ÷ 2 の商) まで 1 ずつ増やす)</span>\n05     right ← [      a      ]\n06     // array[left] と array[right] を入れ替える\n07  <span class=\"for\">endfor</span>",
     "choices": [
       "n - left + 1",
       "n - left",
@@ -232,8 +258,13 @@ const short_questions = [
     "subtheme": "各桁のバリデーション",
     "text": "n進数の計算において、配列 t の i 番目の要素 t[i] が基数 n 未満であることを確認し、正しければ計算を続行するプログラムです。空欄 [ a ] に入る適切な比較演算子を選んでください。",
     "example": "10進数の場合、各桁の数字は 0 から 9 の範囲（10未満）である必要があります。t[i] が 10 以上の場合は不適切な値としてエラー（-1）を返します。",
-    "code": "   01  整数型の配列: t\n   02  整数型: n, i, ret\n   03  <span class=\"if\">if (t[i] [  a  ] n)</span>\n   04     ret ← ret * n + t[i]\n   05  <span class=\"if\">else</span>\n   06     ret ← -1\n   07  <span class=\"if\">endif</span>",
-    "choices": ["<", "<=", ">=", ">"],
+    "code": "01  整数型の配列: t\n02  整数型: n, i, ret\n03  <span class=\"if\">if (t[i] [  a  ] n)</span>\n04     ret ← ret * n + t[i]\n05  <span class=\"if\">else</span>\n06     ret ← -1\n07  <span class=\"if\">endif</span>",
+    "choices": [
+      "<",
+      "<=",
+      ">=",
+      ">"
+    ],
     "specific_explanation": "1. 境界の特定\nn進法において、各桁に使用できる数字は 0 から「n - 1」までです。したがって、境界となる数値は 基数 n となります。\n\n2. 含むか含まないか\n問題のプログラムは if ブロックで正常な計算を行い、else ブロックでエラー処理（-1）を行っています。そのため、if の条件式には「t[i] が n より小さい（nを含まない）」ことを示す未満（<）を入れるのが正解です。\n<div class=\"important\">if (t[i] < n)</div>"
   },
   {
@@ -241,10 +272,15 @@ const short_questions = [
     "category": "制御構文",
     "theme": "while文",
     "subtheme": "無限ループ回避",
-    "text": "n進数変換で ret が -1（エラー）になった瞬間に中断する条件を選べ。i は現位置、m は総桁数とする。",
+    "text": "n進数変換プログラムで、エラー（ret = -1）が発生した場合、または全桁の処理が完了した場合にループを終了させます。空欄 [  1  ] に入る適切な論理演算子を選んでください。ここで、i は現在処理中の桁の位置、m は総桁数を表します。",
     "example": "m = 3 のとき、i = 2 で ret = -1 ならば、3 桁目の処理を待たずにループを抜ける。",
-    "code": "   01  整数型: i, m, ret\n   02  i ← 1\n   03  <span class=\"while\">while ((ret ≠ -1) [  1  ] (i ≤ m))</span>\n   04     // 処理と i の更新\n   05  <span class=\"while\">endwhile</span>",
-    "choices": ["and", "or", "xor", "not"],
+    "code": "01  整数型: i, m, ret\n02  i ← 1\n03  <span class=\"while\">while ((ret ≠ -1) [  1  ] (i ≤ m))</span>\n04     // 処理と i の更新\n05  <span class=\"while\">endwhile</span>",
+    "choices": [
+      "and",
+      "or",
+      "xor",
+      "not"
+    ],
     "specific_explanation": "1. 変数の変化\ni は m まで増加し、ret はエラー発生時に -1 へ更新される。\n\n2. 異常系の考慮\n「正常（ret ≠ -1）」かつ「未処理（i ≤ m）」の両方が満たされる間のみ反復するため、and を用いる。\n<div class=\"important\">while ((ret ≠ -1) and (i ≤ m))</div>"
   },
   {
@@ -252,9 +288,9 @@ const short_questions = [
     "category": "制御構文",
     "theme": "if文",
     "subtheme": "多分岐の論理",
-    "text": "年齢 age に応じて入場料 ret を決定する。6行目の else に到達するのはどのような条件か。",
+    "text": "年齢 age に応じて入場料 ret を決定する多分岐プログラムです。6行目の else ブロックが実行されるのは、どのような条件が満たされた場合ですか。",
     "example": "age = 10 の場合、10 ≤ 3 と 10 ≤ 9 が共に偽となり else へ進む。",
-    "code": "   01  整数型: age, ret\n   02  <span class=\"if\">if (age ≤ 3)</span>\n   03     ret ← 100\n   04  <span class=\"if\">elseif (age ≤ 9)</span>\n   05     ret ← 300\n   06  <span class=\"if\">else</span>\n   07     ret ← 500\n   08  <span class=\"if\">endif</span>",
+    "code": "01  整数型: age, ret\n02  <span class=\"if\">if (age ≤ 3)</span>\n03     ret ← 100\n04  <span class=\"if\">elseif (age ≤ 9)</span>\n05     ret ← 300\n06  <span class=\"if\">else</span>\n07     ret ← 500\n08  <span class=\"if\">endif</span>",
     "choices": [
       "前にある全ての条件（if と elseif）が「偽」と判定された場合",
       "いずれか一方の条件が「真」と判定された場合",
@@ -271,9 +307,9 @@ const short_questions = [
     "category": "制御構文",
     "theme": "再帰関数",
     "subtheme": "ベースケース",
-    "text": "階乗 Fact(m) のベースケース（空欄 b）を選べ。0! = 1 と定義する。",
+    "text": "階乗を計算する再帰関数 Fact(m) において、再帰の連鎖を止めるためのベースケース（空欄 [  b  ]）を選んでください。なお、0! = 1 と定義します。",
     "example": "m = 0 のとき Fact(0) が 1 を返せば、再帰の連鎖が止まり計算が確定する。",
-    "code": "   01  整数型: m\n   02  Fact(整数型: m)\n   03  <span class=\"if\">if (m > 0)</span>\n   04     return m × Fact(m - 1)\n   05  <span class=\"if\">elseif ([    b    ])</span>\n   06     return 1\n   07  <span class=\"if\">else</span>\n   08     return -1\n   09  <span class=\"if\">endif</span>",
+    "code": "01  整数型: m\n02  Fact(整数型: m)\n03  <span class=\"if\">if (m > 0)</span>\n04     return m × Fact(m - 1)\n05  <span class=\"if\">elseif ([    b    ])</span>\n06     return 1\n07  <span class=\"if\">else</span>\n08     return -1\n09  <span class=\"if\">endif</span>",
     "choices": [
       "m が 0 と等しい",
       "m が 1 と等しい",
@@ -282,7 +318,7 @@ const short_questions = [
     ],
     "specific_explanation": "1. 最小単位の特定\n階乗の定義における計算の終着点 0! = 1 をベースケースとする。\n\n2. 戻り値の確定\nm = 0 のときに再帰を停止し、具体的な値 1 を返すことで全体の計算を完結させる。\n<div class=\"important\">elseif (m が 0 と等しい)</div>"
   },
-{
+  {
     "id": 20,
     "category": "制御構文",
     "theme": "再帰関数",
@@ -324,7 +360,12 @@ const short_questions = [
     "text": "階乗を計算する再帰関数 Fact(m) において、Fact(3) を呼び出したとき、関数内部で Fact 関数は合計で何回呼び出されますか。※最初の呼び出し Fact(3) も含めます。",
     "example": "Fact(3) が Fact(2) を呼び出し、Fact(2) がさらに Fact(1) を呼び出す…という連鎖を手でたどってみましょう。どこで止まりますか。",
     "code": "Fact(3) = 3 × Fact(2)\nFact(2) = 2 × Fact(1)\nFact(1) = 1 × Fact(0)\nFact(0) = 1 （停止）",
-    "choices": ["4回", "3回", "2回", "5回"],
+    "choices": [
+      "4回",
+      "3回",
+      "2回",
+      "5回"
+    ],
     "specific_explanation": "1. 一回り小さい形への変換\n   m = 3, 2, 1 のあいだは if (m > 0) に入り、次の Fact を呼び出します。\n\n2. 最小単位の特定\n   m = 0 になったとき elseif (m = 0) に入り 1 を返して再帰が止まります。呼び出しは Fact(3), Fact(2), Fact(1), Fact(0) の計 4 回です。\n   <div class=\"important\">Fact(3), Fact(2), Fact(1), Fact(0) の計4回</div>"
   },
   {
@@ -352,15 +393,15 @@ const short_questions = [
     "theme": "論理演算",
     "subtheme": "真理値の組み合わせ",
     "text": "2つのビット bin1[i] と bin2[i] の排他的論理和（XOR）を計算するプログラムにおいて、空欄に入る最も適切な条件式を選んでください。ここで、retBin[i] は結果のビットを格納する配列です。",
-    "example": "入力: bin1[i]=0, bin2[i]=1 \u2192 出力: retBin[i]=1。入力: bin1[i]=1, bin2[i]=1 \u2192 出力: retBin[i]=0。",
-    "code": "1  <span class=\"if\">if ([      条件式      ])<\/span>\n2     retBin[i] \u2190 1\n3  <span class=\"else\">else<\/span>\n4     retBin[i] \u2190 0\n5  <span class=\"if\">endif<\/span>",
+    "example": "入力: bin1[i]=0, bin2[i]=1 → 出力: retBin[i]=1。入力: bin1[i]=1, bin2[i]=1 → 出力: retBin[i]=0。",
+    "code": "01  <span class=\"if\">if ([      条件式      ])</span>\n02     retBin[i] ← 1\n03  <span class=\"if\">else</span>\n04     retBin[i] ← 0\n05  <span class=\"if\">endif</span>",
     "choices": [
       "(bin1[i] + bin2[i]) が 1 と等しい",
-      "(bin1[i] \u00d7 bin2[i]) が 1 と等しい",
+      "(bin1[i] × bin2[i]) が 1 と等しい",
       "bin1[i] が bin2[i] と等しい",
       "(bin1[i] が 1 と等しい) and (bin2[i] が 1 と等しい)"
     ],
-    "specific_explanation": "1. AND\/OR\/XORの基本\n   XORは、2つの値が「異なるとき」に 1 になります。0と1のペアなら足して1になり、0と0なら0、1と1なら2（ビットとしては0）になる性質を利用します。\n\n2. 真理値の組み合わせ\n   「違う」ときだけ 1 になるというルールを、加算結果が 1 になるかどうかで判定しています。\n   <div class=\"important\">(bin1[i] + bin2[i]) = 1<\/div>"
+    "specific_explanation": "1. AND/OR/XORの基本\n   XORは、2つの値が「異なるとき」に 1 になります。0と1のペアなら足して1になり、0と0なら0、1と1なら2（ビットとしては0）になる性質を利用します。\n\n2. 真理値の組み合わせ\n   「違う」ときだけ 1 になるというルールを、加算結果が 1 になるかどうかで判定しています。\n   <div class=\"important\">(bin1[i] + bin2[i]) = 1</div>"
   },
 
   // --- テーマ2：配列によるビット列処理 ---
@@ -371,14 +412,14 @@ const short_questions = [
     "subtheme": "最大・最小の探索",
     "text": "8ビットの配列 bin1 と bin2 を走査し、ビットごとの計算結果を配列 retBin に格納する際、ループ変数 i の範囲として適切なものを選んでください。なお、配列の添え字は 1 から始まるとします。",
     "example": "8ビット配列の全要素を処理するため、添え字が1から8までループする必要がある。",
-    "code": "1  <span class=\"for\">for (i を [  開始  ] から [  終了  ] まで 1 ずつ増やす)<\/span>\n2     // ビットごとの計算処理",
+    "code": "01  整数型の配列: bin1, bin2, retBin\n02  整数型: i\n03  <span class=\"for\">for (i を [  開始  ] から [  終了  ] まで 1 ずつ増やす)</span>\n04     retBin[i] ← bin1[i] XOR bin2[i]  /* ビットごとの演算 */\n05  <span class=\"for\">endfor</span>",
     "choices": [
       "1 から 8 まで",
       "0 から 7 まで",
       "1 から 7 まで",
       "0 から 8 まで"
     ],
-    "specific_explanation": "1. 開始と終了の数値\n   画像の問題文に「配列の要素番号は 1 から始まる」とあり、ビット列が 8ビット であるため、1番目から 8番目までを処理する必要があります。\n\n2. 範囲と終端判定\n   添え字の開始が 1 か 0 かで終了条件が変わるため、問題文の前提を正確に読み取ることが重要です。\n   <div class=\"important\">for (i を 1 から 8 まで)<\/div>"
+    "specific_explanation": "1. 開始と終了の数値\n   画像の問題文に「配列の要素番号は 1 から始まる」とあり、ビット列が 8ビット であるため、1番目から 8番目までを処理する必要があります。\n\n2. 範囲と終端判定\n   添え字の開始が 1 か 0 かで終了条件が変わるため、問題文の前提を正確に読み取ることが重要です。\n   <div class=\"important\">for (i を 1 から 8 まで)</div>"
   },
   {
     "id": 26,
@@ -388,7 +429,12 @@ const short_questions = [
     "text": "ビット列の処理を行うこのプログラムを for 文ではなく while 文で書き換える場合、ループ変数 i の更新処理としてループ内で忘れてはいけない処理はどれですか。",
     "example": "while (i ≤ 8) の条件がいつか偽(false)になるためには、ループ内で i をどう変化させる必要があるか考えてみましょう。",
     "code": "01  整数型: i\n02  i ← 1\n03  <span class=\"while\">while (i ≤ 8)</span>\n04     /* 計算処理 */\n05     [      ?      ]\n06  <span class=\"while\">endwhile</span>",
-    "choices": ["i ← i + 1", "i ← 0", "i ← i - 1", "return retBin"],
+    "choices": [
+      "i ← i + 1",
+      "i ← 0",
+      "i ← i - 1",
+      "return retBin"
+    ],
     "specific_explanation": "1. 変数の変化\n   while 文では、ループ内で条件に使っている変数（ここでは i）を更新しないと、条件がいつまでも真のままになり無限ループに陥ります。\n\n2. 無限ループ回避\n   for 文が自動で行ってくれる「カウントアップ」を手動で記述する必要があります。\n   <div class=\"important\">i ← i + 1</div>"
   },
   // 6問目
@@ -399,10 +445,15 @@ const short_questions = [
     "theme": "配列",
     "subtheme": "要素のシフト（ずらし）",
     "text": "ビット配列 bin (要素数8) を左に n ビット論理シフトします。データを上書きしないよう、移動元のビットを移動先へコピーする処理を for ループで実装するとき、ループを開始すべき添え字 i の初期値を求める式はどれですか。",
-    "example": "入力: n=2 の場合、bin[8] \u2190 bin[6] が最後の有効なコピー処理となる。そのため、ループは i=6 から始める必要がある。",
-    "code": "1  // ビットを移動させるループの開始位置を特定する\n2  <span class=\"for\">for (i を [  a  ] から 1 まで 1 ずつ減らす)<\/span>\n3     bin[i + n] \u2190 bin[i]\n4  <span class=\"for\">endfor<\/span>",
-    "choices": ["binの要素数 - n", "binの要素数", "binの要素数 + n", "n"],
-    "specific_explanation": "1. 移動方向の確認\n   ビットを左（添え字が大きくなる方向）へ n だけずらす際、移動先 i + n が「配列の最大サイズ」を超えないようにする必要があります。\n\n2. 端の処理\n   移動先の最大値が binの要素数 であるため、i + n = binの要素数 となる i = binの要素数 - n が移動元の最大値となります。\n   <div class=\"important\">i = binの要素数 - n<\/div>"
+    "example": "入力: n=2 の場合、bin[8] ← bin[6] が最後の有効なコピー処理となる。そのため、ループは i=6 から始める必要がある。",
+    "code": "01  整数型の配列: bin\n02  整数型: i, n\n03  /* n ビット左シフト：上書きを避けるため末尾側から処理する */\n04  <span class=\"for\">for (i を [  a  ] から 1 まで 1 ずつ減らす)</span>\n05     bin[i + n] ← bin[i]\n06  <span class=\"for\">endfor</span>",
+    "choices": [
+      "binの要素数 - n",
+      "binの要素数",
+      "binの要素数 + n",
+      "n"
+    ],
+    "specific_explanation": "1. 移動方向の確認\n   ビットを左（添え字が大きくなる方向）へ n だけずらす際、移動先 i + n が「配列の最大サイズ」を超えないようにする必要があります。\n\n2. 端の処理\n   移動先の最大値が binの要素数 であるため、i + n = binの要素数 となる i = binの要素数 - n が移動元の最大値となります。\n   <div class=\"important\">i = binの要素数 - n</div>"
   },
   {
     "id": 28,
@@ -411,7 +462,7 @@ const short_questions = [
     "subtheme": "範囲と終端判定",
     "text": "要素数 8 の配列 bin を 3 ビット左シフトし、空いた下位（添え字小）のビットを 0 で埋める。i の範囲（空欄 a）を選べ。",
     "example": "添え字は 1 から開始。左シフトにより 1 から 3 番目が空きとなる。",
-    "code": "   01  整数型の配列: bin\n   02  整数型: i\n   03  // 空いた下位ビットを 0 で埋める\n   04  <span class=\"for\">for (i を [    a    ])</span>\n   05     bin[i] ← 0\n   06  <span class=\"for\">endfor</span>",
+    "code": "01  整数型の配列: bin\n02  整数型: i\n03  // 空いた下位ビットを 0 で埋める\n04  <span class=\"for\">for (i を [    a    ])</span>\n05     bin[i] ← 0\n06  <span class=\"for\">endfor</span>",
     "choices": [
       "1 から 3 まで",
       "1 から 8 まで",
@@ -430,7 +481,12 @@ const short_questions = [
     "text": "ビット配列 bin の要素を移動させるループ（i を bin の要素数-n から 1 まで 1 ずつ減らす）を while 文で実装する場合、ループ変数 i の更新処理としてループ内の最後に記述すべき処理はどれですか。",
     "example": "while (i ≥ 1) の条件がいつか偽(false)になるためには、i をどちらの方向へ変化させる必要があるか考えてみましょう。",
     "code": "01  整数型の配列: bin\n02  整数型: i, n\n03  i ← binの要素数 - n\n04  <span class=\"while\">while (i ≥ 1)</span>\n05     bin[i + n] ← bin[i]\n06     [      ?      ]\n07  <span class=\"while\">endwhile</span>",
-    "choices": ["i ← i - 1", "i ← i + 1", "i ← 0", "i ← binの要素数"],
+    "choices": [
+      "i ← i - 1",
+      "i ← i + 1",
+      "i ← 0",
+      "i ← binの要素数"
+    ],
     "specific_explanation": "1. 無限ループ回避\n   このループは「1 まで減らす」処理であるため、ループのたびに変数 i を 1 ずつ小さくする必要があります。\n\n2. 変数の変化\n   i を減らさないと条件 i ≥ 1 が常に真のままとなり、プログラムが停止しなくなります。\n   <div class=\"important\">i ← i - 1</div>"
   },
   // 7問目
@@ -443,7 +499,12 @@ const short_questions = [
     "text": "変数 num の値を 2 ずつ減らしながら加算を繰り返す while 文において、正しく合計値 sum を出し切るための「継続条件（空欄 a）」を選んでください。",
     "example": "num = 7 のとき、7, 5, 3, 1 の順に加算され、num が -1 になった時点でループを終了させたいとすると、継続条件はどう書けばよいでしょうか。",
     "code": "01  整数型: num, sum ← 0\n02  <span class=\"while\">while ([      a      ])</span>\n03     sum ← sum + num\n04     num ← num - 2\n05  <span class=\"while\">endwhile</span>",
-    "choices": ["num ≥ 1", "num > 1", "num mod 2 = 0", "num ≠ 0"],
+    "choices": [
+      "num ≥ 1",
+      "num > 1",
+      "num mod 2 == 0",
+      "num ≠ 0"
+    ],
     "specific_explanation": "1. 変数の変化\n   num は 2 ずつ減っていくため、最後は 1（奇数の場合）または 2（偶数の場合）になります。\n\n2. 無限ループ回避\n   数値が 1 以上の間は加算を続け、0 以下になったら終了するよう num ≥ 1 と設定するのが適切です。\n   <div class=\"important\">while (num ≥ 1)</div>"
   },
   {
@@ -471,8 +532,13 @@ const short_questions = [
     "subtheme": "条件に合う要素のカウント",
     "text": "合計値 sum を計算する際、次の加算対象を「1つ飛ばし（奇数なら次の奇数、偶数なら次の偶数）」にするための更新式（空欄 b）を選んでください。ここで、num は加算対象の数です。",
     "example": "num = 7 のとき、次に足すべき数は 5 です。",
-    "code": "1  while (num ≥ 1)\n2     sum ← sum + num\n3     num ← [      b      ]\n4  endwhile",
-    "choices": ["num - 2", "num - 1", "num / 2", "num mod 2"],
+    "code": "01  整数型: num, sum\n02  sum ← 0\n03  <span class=\"while\">while (num ≥ 1)</span>\n04     sum ← sum + num\n05     num ← [      b      ]\n06  <span class=\"while\">endwhile</span>",
+    "choices": [
+      "num - 2",
+      "num - 1",
+      "num / 2",
+      "num mod 2"
+    ],
     "specific_explanation": "1. 規則性の発見\n   奇数の次は「奇数-2」、偶数の次は「偶数-2」という規則性があります。\n\n2. 変数の変化\n   2 ずつ減らすことで、引数の性質（奇・偶）を維持したまま、1 または 2 に向かって数値を更新できます。\n   <div class=\"important\">num ← num - 2</div>"
   },
   {
@@ -501,7 +567,12 @@ const short_questions = [
     "text": "2進数の同じ位のビット bin1[i] と bin2[i] が「等しい」場合（0+0 または 1+1）の加算処理です。その位の結果ビットとして追加すべき値（空欄 a）を選んでください。なお、c は前の位からの繰り上がり（0 または 1）とします。",
     "example": "c=1 のとき：1+1 なら結果は 1 (繰り上がり発生)、0+0 なら結果は 1 (繰り上がりなし)",
     "code": "01  <span class=\"if\">if (bin1[i] == bin2[i])</span>\n02     sumの末尾に [  a  ] を追加する\n03     <span class=\"if\">if (bin1[i] == 1)</span>\n04        c = 1\n05     <span class=\"else\">else</span>\n06        c = 0\n07     <span class=\"endif\">endif</span>\n08  <span class=\"endif\">endif</span>",
-    "choices": ["c", "1", "0", "bin1[i]"],
+    "choices": [
+      "c",
+      "1",
+      "0",
+      "bin1[i]"
+    ],
     "specific_explanation": "1. 真理値の組み合わせ\n   bin1[i] と bin2[i] が等しいとき、0+0 なら合計は 0+c、1+1 なら合計は 2+c となります。どちらの場合も、その桁に書き込む値は繰り上がり変数 c と一致します。\n\n2. AND/OR/XORの基本\n   1+1+c の場合、合計は 3（2進数で11）または 2（10）となり、1の位には c の値が残ります。0+0+c の場合も合計は c となり、同様の結果になります。\n   <div class=\"important\">sumの末尾に c を追加する</div>"
   },
   {
@@ -512,7 +583,12 @@ const short_questions = [
     "text": "2進数のビットが「異なる」場合（1+0 または 0+1）の加算処理です。空欄 [ b ] に入る適切な条件判定を選んでください。なお、c は前の位からの繰り上がりとします。",
     "example": "1+0 の加算で、前の位からの繰り上がり c=1 がある場合、1+0+1 = 2 となり、その位の結果は 0 になります。",
     "code": "01  <span class=\"if\">else</span>\n02     <span class=\"if\">if ([  b  ])</span>\n03        sumの末尾に 1 を追加する\n04     <span class=\"else\">else</span>\n05        sumの末尾に 0 を追加する\n06     <span class=\"endif\">endif</span>\n07  <span class=\"endif\">endif</span>",
-    "choices": ["c == 0", "c == 1", "bin1[i] == 1", "c != 0"],
+    "choices": [
+      "c == 0",
+      "c == 1",
+      "bin1[i] == 1",
+      "c != 0"
+    ],
     "specific_explanation": "1. 真理値の組み合わせ\n   ビットが異なる場合、その桁の計算は 1 + 0 + c となります。\n\n2. スイッチの切り替え\n   c が 0 なら合計は 1（ビットは1）、c が 1 なら合計は 2（ビットは0で繰り上がり継続）となります。したがって、1 を追加するのは c が 0 のときです。\n   <div class=\"important\">if (c == 0)</div>"
   },
   {
@@ -523,7 +599,12 @@ const short_questions = [
     "text": "2進数加算のループ終了後、最上位桁からの「最後の繰り上がり」を処理します。空欄 [  条件  ] に入る適切なコードはどれですか。",
     "example": "全ての桁の計算が終わった後、c に 1 が残っている場合と残っていない場合で処理を変えるには、c の値を何と比較すればよいか考えてみましょう。",
     "code": "01  整数型: c\n02  /* for ループ終了後 */\n03  <span class=\"if\">if ([  条件  ])</span>\n04     sum の末尾に 1 を追加する\n05  <span class=\"if\">endif</span>",
-    "choices": ["c = 1", "c = 0", "bin1[i] = 1", "sum の要素数 > 0"],
+    "choices": [
+      "c = 1",
+      "c = 0",
+      "bin1[i] = 1",
+      "sum の要素数 > 0"
+    ],
     "specific_explanation": "1. 異常系の考慮\n   全ての桁を計算し終えた後、最後に繰り上がり c が 1 として残っている場合があります。これを処理しないと計算結果が不正になります。\n\n2. フラグによる終了判定\n   c が 1 であれば新しい桁として 1 を追加することで、正しい加算結果（オーバーフロー分の桁上げ）を保証します。\n   <div class=\"important\">if (c = 1)</div>"
   },
   // 9問目
@@ -537,7 +618,7 @@ const short_questions = [
     "subtheme": "インデックスの役割固定",
     "text": "配列の要素番号が 1 から始まる言語において、計算結果を格納する配列 result の 1番目の要素に「割られる数 x」を初期値として代入する処理を選んでください。",
     "example": "この問題における配列は「0番目」からではなく「1番目」からデータを格納していく仕様であることに注意してコードを読み解きましょう。",
-    "code": "1  result ← {0, 0}\n2  <span class=\"if\">if ((x > 0) and (y > 0))</span>\n3     [      a      ]\n4  <span class=\"endif\">endif</span>",
+    "code": "01  整数型: x, y\n02  整数型の配列: result ← {0, 0}\n03  <span class=\"if\">if ((x > 0) and (y > 0))</span>\n04     [      a      ]\n05  <span class=\"if\">endif</span>",
     "choices": [
       "result[1] ← x",
       "result[0] ← x",
@@ -558,8 +639,13 @@ const short_questions = [
     "subtheme": "条件に合う要素のカウント",
     "text": "2つの日付（from, to）の経過日数を求めるプログラムです。開始月と終了月が同じ場合に、日数の差を正しく計算する式を選んでください。ここで、from.month は開始月、to.month は終了月、from.day は開始日、to.day は終了日を表します。",
     "example": "1月2日から1月5日の場合、経過日数は 5 - 2 = 3日となります。",
-    "code": "1  countDays(Date: from, Date: to)\n2  整数型の配列: mDay ← {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}\n3  整数型: i, days\n4  <span class=\"if\">if (from.month = to.month)</span>\n5     days ← [      1      ]\n6  <span class=\"else\">else</span>\n7     // 月をまたぐ処理（省略）\n8  <span class=\"if\">endif</span>\n9  return days",
-    "choices": ["to.day - from.day", "from.day - to.day", "to.day", "mDay[from.month] - from.day"],
+    "code": "01  countDays(Date: from, Date: to)\n02  整数型の配列: mDay ← {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}\n03  整数型: i, days\n04  <span class=\"if\">if (from.month = to.month)</span>\n05     days ← [      1      ]\n06  <span class=\"if\">else</span>\n07     // 月をまたぐ処理（省略）\n08  <span class=\"if\">endif</span>\n09  return days",
+    "choices": [
+      "to.day - from.day",
+      "from.day - to.day",
+      "to.day",
+      "mDay[from.month] - from.day"
+    ],
     "specific_explanation": "1. 境界の特定\n   「同じ月」という境界条件では、月の合計日数を気にする必要はありません。単純に「日」の数値の差分を求めるだけで経過日数が算出できます。\n\n2. 含むか含まないか\n   問題文の例（2日と5日なら3日）に従い、「終了日」から「開始日」を引く単純な減算が適切です。\n   <div class=\"important\">days ← to.day - from.day</div>"
   },
   {
@@ -567,10 +653,15 @@ const short_questions = [
     "category": "定番アルゴリズム系",
     "theme": "集計とフラグ管理",
     "subtheme": "存在チェック",
-    "text": "月をまたぐ計算の際、まず「開始月の残り日数」を算出します。空欄 [  a  ] に入る適切な式はどれですか。ここで、mDay は各月の日数を格納した配列、from.month は開始月、from.day は開始日を表します。",
+    "text": "月をまたぐ日数計算において、最初に「開始月の残り日数」を求めます。空欄 [  a  ] に入る適切な式を選んでください。ここで、mDay は各月の日数を格納した配列、from.month は開始月、from.day は開始日を表します。",
     "example": "1月10日から始まる場合、1月の残り日数は 31 - 10 = 21日です。",
-    "code": "1  countDays(Date: from, Date: to)\n2  整数型の配列: mDay ← {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}\n3  // 同一月でない場合の処理\n4  days ← [      a      ]\n5  i ← from.month + 1\n6  <span class=\"while\">while (i < to.month)</span>\n7     // 中間の月の加算処理",
-    "choices": ["mDay[from.month] - from.day", "from.day", "mDay[from.month]", "0"],
+    "code": "01  countDays(Date: from, Date: to)\n02  整数型の配列: mDay ← {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}\n03  整数型: i, days\n04  days ← [      a      ]   /* 開始月の残り日数 */\n05  i ← from.month + 1\n06  <span class=\"while\">while (i < to.month)</span>\n07     days ← days + mDay[i]\n08     i ← i + 1\n09  <span class=\"while\">endwhile</span>\n10  days ← days + to.day\n11  return days",
+    "choices": [
+      "mDay[from.month] - from.day",
+      "from.day",
+      "mDay[from.month]",
+      "0"
+    ],
     "specific_explanation": "1. 初期状態の設定\n   月が異なる場合、まずは「最初の月」があと何日残っているかを計算して合計の土台にします。\n\n2. 状態の更新\n   その月の総日数（mDay[from.month]）から、既に過ぎた日数（from.day）を差し引くことで、翌月までの日数が求まります。\n   <div class=\"important\">days ← mDay[from.month] - from.day</div>"
   },
   {
@@ -581,7 +672,12 @@ const short_questions = [
     "text": "月をまたぐ計算で、中間の月をループで足し合わせる準備をします。ループ変数 i の初期値として適切なものを選んでください。ここで、from.month は開始月を表します。",
     "example": "開始月が 1月なら、ループで「丸ごと1ヶ月分」加算するのは何月から始まりますか。",
     "code": "01  countDays(Date: from, Date: to)\n02  整数型: i\n03  days ← mDay[from.month] - from.day  /* 開始月の残り日数 */\n04  i ← [      a      ]\n05  <span class=\"while\">while (i < to.month)</span>\n06     days ← days + mDay[i]\n07     i ← i + 1\n08  <span class=\"while\">endwhile</span>",
-    "choices": ["from.month + 1", "from.month", "1", "to.month - 1"],
+    "choices": [
+      "from.month + 1",
+      "from.month",
+      "1",
+      "to.month - 1"
+    ],
     "specific_explanation": "1. フラグの初期化\n   開始月の日数は 3行目で既に計算されています。次に処理すべきは「その翌月」からです。\n\n2. 変数の変化\n   開始月の月番号に 1 を足すことで、集計対象を正しく次の月にスライドさせます。\n   <div class=\"important\">i ← from.month + 1</div>"
   },
 
@@ -594,7 +690,12 @@ const short_questions = [
     "text": "中間の月（丸ごと1ヶ月ある月）を全て足し合わせるループにおいて、終了条件として適切なものを選んでください。ここで、i はループ変数、to.month は終了月を表します。",
     "example": "1月から4月の計算なら、ループで足すのは何月と何月だけか考えてみましょう。to.month 自体はループ内で処理すべきでしょうか。",
     "code": "01  整数型: i\n02  i ← from.month + 1\n03  <span class=\"while\">while ([      1      ])</span>\n04     days ← days + mDay[i]\n05     i ← i + 1\n06  <span class=\"while\">endwhile</span>\n07  days ← days + to.day",
-    "choices": ["i < to.month", "i ≤ to.month", "i < 12", "i ≠ to.month"],
+    "choices": [
+      "i < to.month",
+      "i ≤ to.month",
+      "i < 12",
+      "i ≠ to.month"
+    ],
     "specific_explanation": "1. 変数の変化\n   終了月（to.month）は丸ごと1ヶ月ではなく特定の日（to.day）までを足す必要があります。\n\n2. 無限ループ回避\n   そのためループでは終了月の「手前（未満）」で処理を止め、終了月の計算はループの外で行うのが日付計算の定石です。\n   <div class=\"important\">while (i < to.month)</div>"
   },
   {
@@ -604,7 +705,7 @@ const short_questions = [
     "subtheme": "全件比較と更新",
     "text": "期間内の「中間の月」の総日数を、ループを使って累計日数 days に加算していく処理です。各月の日数が格納された配列 mDay から、ループ変数 i を使って正しい日数を参照する式を選んでください。",
     "example": "ループ変数 i は「現在処理している月」を表しています。その月の日数が格納されている配列 mDay の要素をどうやって取り出すか考えます。",
-    "code": "1  i ← from.month + 1\n2  <span class=\"while\">while (i < to.month)</span>\n3     days ← days + [      a      ]\n4     i ← i + 1\n5  <span class=\"endwhile\">endwhile</span>",
+    "code": "01  i ← from.month + 1\n02  <span class=\"while\">while (i < to.month)</span>\n03     days ← days + [      a      ]\n04     i ← i + 1\n05  <span class=\"while\">endwhile</span>",
     "choices": [
       "mDay[i]",
       "mDay[from.month]",
@@ -618,10 +719,15 @@ const short_questions = [
     "category": "定番アルゴリズム系",
     "theme": "集計とフラグ管理",
     "subtheme": "条件に合う要素のカウント",
-    "text": "中間の月の集計が完了した後、最後に全体の合計日数を確定させるための処理を選んでください。ここで、days は累積日数、to.day は終了日を表します。",
+    "text": "中間の月の集計が完了した後、最後に全体の合計日数を確定させます。空欄 [  b  ] に入る適切な式を選んでください。ここで、days は現在の累積日数、to.day は終了日を表します。",
     "example": "ここまでで累計 100日あり、終了日が 5日の場合、最終的な合計を 105日にします。",
-    "code": "1  // 中間の月のループ終了後\n2  <span class=\"while\">endwhile</span>\n3  days ← [      b      ]\n4  return days",
-    "choices": ["days + to.day", "days - to.day", "to.day", "days + mDay[to.month]"],
+    "code": "01  countDays(Date: from, Date: to)\n02  整数型の配列: mDay ← {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}\n03  整数型: i, days\n04  days ← mDay[from.month] - from.day   /* 開始月の残り日数 */\n05  i ← from.month + 1\n06  <span class=\"while\">while (i < to.month)</span>\n07     days ← days + mDay[i]\n08     i ← i + 1\n09  <span class=\"while\">endwhile</span>\n10  days ← [      b      ]   /* 終了月の日数を加算 */\n11  return days",
+    "choices": [
+      "days + to.day",
+      "days - to.day",
+      "to.day",
+      "days + mDay[to.month]"
+    ],
     "specific_explanation": "1. 条件ヒットで加算\n   これまでの days には「開始月の残り」と「中間の月」の合計が入っています。\n\n2. 規則性の発見\n   最後に、終了月で経過した「○日（to.day）」という端数を足すことで、全期間の計算が完了します。\n   <div class=\"important\">days ← days + to.day</div>"
   },
   // 13問目
@@ -633,8 +739,13 @@ const short_questions = [
     "subtheme": "条件に合う要素のカウント",
     "text": "客が投入した貨幣の合計金額を求めるための正しい処理を選んでください。空欄 [  1  ] に入る適切な式を答えてください。ここで、payment[i] は投入枚数、money[i] は金種、pay は合計投入金額、stock[i] は在庫数を表します。",
     "example": "payment[2]=3（100円玉3枚）のとき、pay に 300円 を加算します。",
-    "code": "1  pay ← 0\n2  <span class=\"for\">for (i を 1 から moneyの要素数 まで 1 ずつ増やす)</span>\n3     pay ← [      1      ]\n4     stock[i] ← stock[i] + payment[i]\n5  <span class=\"for\">endfor</span>",
-    "choices": ["pay + payment[i] × money[i]", "pay + payment[i]", "payment[i] × money[i]", "pay + money[i]"],
+    "code": "01  pay ← 0\n02  <span class=\"for\">for (i を 1 から moneyの要素数 まで 1 ずつ増やす)</span>\n03     pay ← [      1      ]\n04     stock[i] ← stock[i] + payment[i]\n05  <span class=\"for\">endfor</span>",
+    "choices": [
+      "pay + payment[i] × money[i]",
+      "pay + payment[i]",
+      "payment[i] × money[i]",
+      "pay + money[i]"
+    ],
     "specific_explanation": "1. 規則性の発見\n   各金種の「投入枚数（payment[i]）」に「金額（money[i]）」を掛けることで、その金種での投入額が求まります。\n\n2. 条件ヒットで加算\n   これを累積変数 pay に足し合わせることで、最終的な合計投入金額を算出します。\n   <div class=\"important\">pay ← pay + payment[i] × money[i]</div>"
   },
   {
@@ -642,10 +753,15 @@ const short_questions = [
     "category": "データ構造",
     "theme": "配列",
     "subtheme": "要素のシフト（ずらし）",
-    "text": "貨幣が投入された際、自動販売機内の「在庫数（stock）」を更新する正しい処理を選んでください。ここで、payment[i] は投入枚数、stock[i] は在庫数を表します。",
+    "text": "貨幣が投入された際に、自動販売機内の在庫数（stock）を更新する処理です。空欄 [  1  ] に入る適切な式を選んでください。ここで、payment[i] は金種 i の投入枚数、stock[i] は金種 i の現在の在庫数を表します。",
     "example": "100円玉を 2枚 投入したとき、100円玉の在庫数を 2 増やします。",
-    "code": "1  <span class=\"for\">for (i を 1 から moneyの要素数 まで 1 ずつ増やす)</span>\n2     pay ← pay + payment[i] × money[i]\n3     [      1      ]\n4  <span class=\"for\">endfor</span>",
-    "choices": ["stock[i] ← stock[i] + payment[i]", "stock[i] ← payment[i]", "stock[i] ← stock[i] - payment[i]", "payment[i] ← stock[i]"],
+    "code": "01  整数型: pay ← 0, i\n02  整数型の配列: payment, money, stock\n03  <span class=\"for\">for (i を 1 から moneyの要素数 まで 1 ずつ増やす)</span>\n04     pay ← pay + payment[i] × money[i]\n05     [      1      ]\n06  <span class=\"for\">endfor</span>",
+    "choices": [
+      "stock[i] ← stock[i] + payment[i]",
+      "stock[i] ← payment[i]",
+      "stock[i] ← stock[i] - payment[i]",
+      "payment[i] ← stock[i]"
+    ],
     "specific_explanation": "1. 全件比較と更新\n   投入された貨幣は自動販売機の在庫に追加されます。\n\n2. 移動方向の確認\n   現在の在庫 stock[i] に、新しく投入された枚数 payment[i] を加算して上書きすることで、在庫状況を最新の状態に保ちます。\n   <div class=\"important\">stock[i] ← stock[i] + payment[i]</div>"
   },
   {
@@ -653,11 +769,16 @@ const short_questions = [
     "category": "数値計算系",
     "theme": "端数処理",
     "subtheme": "単位の調整",
-    "text": "投入合計金額 pay と商品価格 price から、払い出すべき「釣銭の総額」を求める式として正しいものを選んでください。ここで、change は釣銭の総額を表します。",
+    "text": "投入金額の集計が完了した後、払い出すべき釣銭の総額を求める式を選んでください。ここで、pay は合計投入金額、price は商品の価格、change は払い出すべき釣銭の総額を表します。",
     "example": "1000円投入し、160円の商品を購入した場合、釣銭は 840円 です。",
-    "code": "1  // 投入金額の集計完了後\n2  change ← [      1      ]",
-    "choices": ["pay - price", "price - pay", "pay + price", "pay mod price"],
-    "specific_explanation": "1. 単位の調整\n   釣銭は、客が支払った総額から商品の代金を差し引いた残額です。\n\n2. 切り捨てと整数型変換\n   単純な減算によって、これから払い出すべき目標金額 change を確定させます。\n   <div class=\"important\">change ← pay - price</div>"
+    "code": "01  整数型: pay, price, change\n02  /* 各金種 × 枚数の合計が pay に格納済み */\n03  change ← [      1      ]",
+    "choices": [
+      "pay - price",
+      "price - pay",
+      "pay + price",
+      "pay mod price"
+    ],
+    "specific_explanation": "1. 単位の調整\n   釣銭は、客が支払った総額から商品の代金を差し引いた残額です。\n\n2. 切り捨てと整数型変換\n   単純な減算によって、これから払い出すべき目標金額 change を確定させます。どの変数がどの役割を持っているか、しっかりと確認しましょう。\n   <div class=\"important\">change ← pay - price</div>"
   },
 
   // --- テーマ2：釣銭の算出ロジック（払い出し時） ---
@@ -682,10 +803,15 @@ const short_questions = [
     "category": "データ構造",
     "theme": "配列",
     "subtheme": "要素のスワップ処理",
-    "text": "釣銭として貨幣を払い出した後、その金種の在庫数を減らす正しい処理を選んでください。ここで、stock[i] は在庫数、cnt は払い出し枚数を表します。",
+    "text": "釣銭として貨幣を払い出した後、その金種の在庫数を正しく更新する処理を選んでください。ここで、stock[i] は金種 i の現在の在庫数、cnt は払い出し枚数を表します。",
     "example": "10円玉を 4枚 払い出したとき、10円玉の在庫を 4 減らします。",
-    "code": "1  // 払い出し枚数 cnt 確定後\n2  stock[i] ← [      1      ]",
-    "choices": ["stock[i] - cnt", "cnt - stock[i]", "stock[i] + cnt", "money[i] - cnt"],
+    "code": "01  整数型: change, cnt, i\n02  整数型の配列: money, stock\n03  cnt ← change ÷ money[i]\n04  <span class=\"if\">if (stock[i] < cnt)</span>\n05     cnt ← stock[i]  /* 在庫が不足する場合は在庫数を上限とする */\n06  <span class=\"if\">endif</span>\n07  /* 払い出し枚数 cnt が確定した後 */\n08  stock[i] ← [      1      ]",
+    "choices": [
+      "stock[i] - cnt",
+      "cnt - stock[i]",
+      "stock[i] + cnt",
+      "money[i] - cnt"
+    ],
     "specific_explanation": "1. 退避用変数の利用\n   決定した払い出し枚数 cnt 分だけ、その金種の在庫を減らす必要があります。\n\n2. 三段階の代入\n   現在の在庫 stock[i] から cnt を引き、その結果で stock[i] を更新します。\n   <div class=\"important\">stock[i] ← stock[i] - cnt</div>"
   },
   {
@@ -693,10 +819,15 @@ const short_questions = [
     "category": "数値計算系",
     "theme": "剰余演算",
     "subtheme": "範囲内に収める",
-    "text": "特定の金種での払い出しが終わった後、残りの釣銭額を更新する式を選んでください。空欄 [  b  ] に入る適切な式を答えてください。ここで、change は残りの釣銭額、cnt は払い出し枚数、money[i] は金種を表します。",
+    "text": "特定の金種で釣銭を払い出した後、残りの釣銭額を更新します。空欄 [  b  ] に入る適切な式を選んでください。ここで、change は残りの釣銭額、cnt は払い出し枚数、money[i] は金種の金額を表します。",
     "example": "残りの釣銭が 840円 で、500円玉を 1枚 払い出した場合、残りの釣銭額は 340円 になります。",
-    "code": "1  // 払い出し枚数 cnt 確定後\n2  stock[i] ← stock[i] - cnt\n3  change ← [      b      ]",
-    "choices": ["change - cnt × money[i]", "change - cnt", "change mod cnt", "change - money[i]"],
+    "code": "01  整数型: change, cnt, i\n02  整数型の配列: money, stock\n03  cnt ← change ÷ money[i]\n04  <span class=\"if\">if (stock[i] < cnt)</span>\n05     cnt ← stock[i]\n06  <span class=\"if\">endif</span>\n07  stock[i] ← stock[i] - cnt\n08  change ← [      b      ]",
+    "choices": [
+      "change - cnt × money[i]",
+      "change - cnt",
+      "change mod cnt",
+      "change - money[i]"
+    ],
     "specific_explanation": "1. 周期的なインデックス\n   払い出した「枚数 × 金額」の分だけ、まだ返すべき総額（change）から差し引きます。\n\n2. 範囲内に収める\n   これにより、次のループ（より小さな金種）で計算すべき「残りの金額」が正しく維持されます。\n   <div class=\"important\">change ← change - cnt × money[i]</div>"
   },
   // 14問目
@@ -706,10 +837,15 @@ const short_questions = [
     "category": "定番アルゴリズム系",
     "theme": "集計とフラグ管理",
     "subtheme": "条件に合う要素のカウント",
-    "text": "各商品の評価点（1〜5）がそれぞれ何回現れたかをカウントする処理です。空欄 [  1  ] に入る適切な式を答えてください。ここで、freq は評価点ごとの出現数を格納する配列、products[i].score は i 番目の商品の評価点を表します。",
+    "text": "各商品の評価点（1〜5）がそれぞれ何回現れたかをカウントする処理です。空欄 [  1  ] に入る適切な式を選んでください。ここで、freq は評価点ごとの出現数を格納する配列（freq[1]〜freq[5]）、products[i].score は i 番目の商品の評価点を表します。",
     "example": "評価点「3点」の商品が見つかるたびに、freq[3] の値を 1 増やします。",
-    "code": "1  // freqは評価点(1～5)ごとの出現数を格納する配列\n2  <span class=\"for\">for (i を 1 から productsの要素数 まで 1 ずつ増やす)</span>\n3     [      1      ]\n4  <span class=\"for\">endfor</span>",
-    "choices": ["freq[products[i].score] ← freq[products[i].score] + 1", "freq[i] ← freq[i] + 1", "freq[products[i].score] ← i", "freq[score] ← freq[score] + 1"],
+    "code": "01  整数型の配列: freq ← {0, 0, 0, 0, 0, 0}  /* 添字 1〜5 を使用 */\n02  整数型: i\n03  <span class=\"for\">for (i を 1 から productsの要素数 まで 1 ずつ増やす)</span>\n04     [      1      ]\n05  <span class=\"for\">endfor</span>",
+    "choices": [
+      "freq[products[i].score] ← freq[products[i].score] + 1",
+      "freq[i] ← freq[i] + 1",
+      "freq[products[i].score] ← i",
+      "freq[score] ← freq[score] + 1"
+    ],
     "specific_explanation": "1. カウンタの用意\n   配列 freq は、評価点を添え字としてその出現回数を記録するための専用変数です。\n\n2. 条件ヒットで加算\n   現在注目している商品の評価点（products[i].score）を添え字にして、対応する freq の要素を 1 ずつ増やしていくことで、度数分布表を作成します。\n   <div class=\"important\">freq[products[i].score] ← freq[products[i].score] + 1</div>"
   },
   {
@@ -3738,5 +3874,560 @@ const short_questions = [
       "data[i] ≠ 0"
     ],
     "specific_explanation": "1. 変数の変化\n   正の数である間は処理を続行したいため、現在の要素 data[i] が 0 より大きいことが継続条件となります。条件を満たさなくなった時点でループは終了します。\n\n2. 異常系の考慮\n   この配列では、0 以下の数が終端を示す番兵（センチネル）のような役割を果たしています。\n   <div class=\"important\">while (data[i] > 0)</div>"
-  }
+  },
+  {
+    "id": 265,
+    "category": "データ構造",
+    "theme": "キュー",
+    "subtheme": "Enq/Deq操作",
+    "text": "キューにデータを追加する Enq 操作のプログラムです。データを配列 queue の Tail が示す位置に格納した後、空欄 [  a  ] に入る適切な処理を選んでください。",
+    "example": "Tail = 3 のとき、value を格納し終えた直後に Tail はいくつになるべきか考えてみましょう。",
+    "code": "01  enqueue(整数型の配列: queue, 整数型: Tail, 整数型: value)\n02  queue[Tail] ← value\n03  [  a  ]",
+    "choices": [
+      "Tail ← Tail + 1",
+      "Head ← Head + 1",
+      "Tail ← Tail - 1",
+      "Tail ← 0"
+    ],
+    "specific_explanation": "1. 二つのポインタ\n   キューは「入口（Tail）」と「出口（Head）」の 2 つのポインタで管理します。Enq 操作はデータを Tail の位置に格納する操作であり、格納後は次の空き位置を示すために Tail を 1 進める必要があります。\n\n2. FIFO（先入れ先出し）\n   データを入れるたびに Tail だけが進み、Head はそのままです。こうすることで「先に入れたデータが Head 側に残り続ける」という FIFO の性質が保たれます。\n   <div class=\"important\">Tail ← Tail + 1</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 266  Enq/Deq操作
+  // 内容: Deq 操作で Head ポインタが進む処理を問う
+  // ---------------------------------------------------------------
+  {
+    "id": 266,
+    "category": "データ構造",
+    "theme": "キュー",
+    "subtheme": "Enq/Deq操作",
+    "text": "キューからデータを取り出す Deq 操作のプログラムです。Head が示す位置の値を取得した後、空欄 [  a  ] に入る適切な処理を選んでください。",
+    "example": "Head = 1 のとき、queue[1] の値を取り出した直後に Head はいくつになるべきか考えてみましょう。",
+    "code": "01  dequeue(整数型の配列: queue, 整数型: Head)\n02  整数型: value ← queue[Head]\n03  [  a  ]\n04  return value",
+    "choices": [
+      "Head ← Head + 1",
+      "Tail ← Tail + 1",
+      "Head ← Head - 1",
+      "Head ← 0"
+    ],
+    "specific_explanation": "1. 二つのポインタ\n   Deq 操作はデータを Head の位置から取り出す操作です。取り出し後は次に取り出すべき位置を示すために Head を 1 進める必要があります。Tail はそのままで変化しません。\n\n2. FIFO（先入れ先出し）\n   データを出すたびに Head だけが進むことで、最初に入れたデータから順に取り出せます。Tail（入口）と Head（出口）が独立して動くことが FIFO の仕組みの核心です。\n   <div class=\"important\">Head ← Head + 1</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 267  Enq/Deq操作
+  // 内容: 複数回の Enq/Deq 後の Head・Tail の状態と次の取り出し値を問う
+  // ---------------------------------------------------------------
+  {
+    "id": 267,
+    "category": "データ構造",
+    "theme": "キュー",
+    "subtheme": "Enq/Deq操作",
+    "text": "空のキュー（Head = 1, Tail = 1）に対して、10, 20, 30 の順に Enq を 3 回行い、その後 Deq を 2 回行いました。このとき、次に Deq で取り出される値として正しいものを選んでください。",
+    "example": "Enq するたびに Tail が進み、Deq するたびに Head が進みます。最終的な Head の位置はどこを指していますか。",
+    "code": "01  /* 初期状態: Head = 1, Tail = 1 */\n02  enqueue(queue, Tail, 10)  /* Tail: 1 → 2 */\n03  enqueue(queue, Tail, 20)  /* Tail: 2 → 3 */\n04  enqueue(queue, Tail, 30)  /* Tail: 3 → 4 */\n05  dequeue(queue, Head)      /* Head: 1 → 2, 戻り値: 10 */\n06  dequeue(queue, Head)      /* Head: 2 → 3, 戻り値: 20 */\n07  /* 次の Deq では何が返るか？ */",
+    "choices": [
+      "30",
+      "10",
+      "20",
+      "取り出せない（キューが空）"
+    ],
+    "specific_explanation": "1. 二つのポインタ\n   3 回の Enq で Tail は 1 → 4 に進み、queue[1]=10, queue[2]=20, queue[3]=30 が格納されます。その後 2 回の Deq で Head は 1 → 3 に進みます。次の Deq は Head = 3 の位置、すなわち queue[3] を参照します。\n\n2. FIFO（先入れ先出し）\n   最初に入れた 10 が最初に取り出され、次に 20、その次に 30 が取り出されます。入れた順番通りに出てくるのが FIFO（先入れ先出し）の性質です。\n   <div class=\"important\">Head = 3 → queue[3] = 30</div>"
+  },
+  // ===================================================================
+  // 新規作成問題
+  // 対象 id: 268, 269, 270
+  // category: "データ構造" / theme: "2分木" / subtheme: "木の巡回（走査順序）"
+  // ===================================================================
+
+  // 対象の木（3問共通）
+  //         1
+  //        / \
+  //       2   3
+  //      / \
+  //     4   5
+  //
+  // 行きがけ順  (preorder)  : 1 → 2 → 4 → 5 → 3
+  // 通りがけ順  (inorder)   : 4 → 2 → 5 → 1 → 3
+  // 帰りがけ順  (postorder) : 4 → 5 → 2 → 3 → 1
+
+  // ---------------------------------------------------------------
+  // id 268  木の巡回（走査順序）
+  // 内容: 行きがけ順（preorder）のコードを読んで出力順序を答える
+  // ---------------------------------------------------------------
+  {
+    "id": 268,
+    "category": "データ構造",
+    "theme": "2分木",
+    "subtheme": "木の巡回（走査順序）",
+    "text": "次の再帰関数 traverse は、2分木を巡回してノードの値を順に出力します。下の木に対して traverse(root) を呼び出したとき、出力される順序として正しいものを選んでください。",
+    "example": "1行目の print がどのタイミングで実行されるか（左の子を辿る前か後か）に注目してみましょう。",
+    "code": "01  traverse(node)\n02  <span class=\"if\">if (node ≠ null)</span>\n03     print(node.value)\n04     traverse(node.left)\n05     traverse(node.right)\n06  <span class=\"if\">endif</span>\n\n/* 対象の木 */\n/*       1      */\n/*      / \\    */\n/*     2   3   */\n/*    / \\      */\n/*   4   5     */",
+    "choices": [
+      "1, 2, 4, 5, 3",
+      "4, 2, 5, 1, 3",
+      "4, 5, 2, 3, 1",
+      "1, 3, 2, 5, 4"
+    ],
+    "specific_explanation": "1. 巡回パターンの把握\n   print が「左の子を辿る前（03行目）」に実行されています。これは「ノードに到達した瞬間（行きがけ）」に値を拾う行きがけ順（preorder）です。根 → 左部分木 → 右部分木 の順に処理が進みます。\n\n   実際の動きを追うと、まず root(1) に到達して 1 を出力、次に左の 2 に進んで 2 を出力、さらに左の 4 に進んで 4 を出力、4 の左右は null なので戻り 5 に進んで 5 を出力、最後に右の 3 に進んで 3 を出力します。\n   <div class=\"important\">行きがけ順（preorder）: 1 → 2 → 4 → 5 → 3</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 269  木の巡回（走査順序）
+  // 内容: 出力結果を見て通りがけ順（inorder）だと特定する
+  // ---------------------------------------------------------------
+  {
+    "id": 269,
+    "category": "データ構造",
+    "theme": "2分木",
+    "subtheme": "木の巡回（走査順序）",
+    "text": "下の木に対してある巡回プログラムを実行すると、出力が「4, 2, 5, 1, 3」になりました。この巡回はどの順序ですか。また、print の位置として正しいものを選んでください。",
+    "example": "根ノード（値が 1）が出力される位置に注目してみましょう。1 が先頭でも末尾でもなく途中に現れていますね。",
+    "code": "01  traverse(node)\n02  <span class=\"if\">if (node ≠ null)</span>\n03     traverse(node.left)\n04     [    print の位置    ]\n05     traverse(node.right)\n06  <span class=\"if\">endif</span>\n\n/* 対象の木・出力結果 */\n/*       1          出力: 4, 2, 5, 1, 3  */\n/*      / \\                              */\n/*     2   3                             */\n/*    / \\                               */\n/*   4   5                               */",
+    "choices": [
+      "通りがけ順（inorder）/ 左を辿った後・右を辿る前",
+      "行きがけ順（preorder）/ 左を辿る前",
+      "帰りがけ順（postorder）/ 左右を辿った後",
+      "幅優先順（BFS）/ 根から階層ごと"
+    ],
+    "specific_explanation": "1. 巡回パターンの把握\n   根ノード（1）が出力列の 4 番目に現れている点が手がかりです。根が「先頭でも末尾でもなく中間」に現れるのは、左部分木の処理が終わってから根を出力し、その後で右部分木を処理する通りがけ順（inorder）の特徴です。\n\n   左部分木（4 → 2 → 5）をすべて処理した後に根（1）を出力し、最後に右部分木（3）を処理するため、print は「左を辿った後・右を辿る前」の位置に置かれます。\n   <div class=\"important\">通りがけ順（inorder）: 左 → 根 → 右</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 270  木の巡回（走査順序）
+  // 内容: 帰りがけ順（postorder）のコードの空欄を埋める
+  // ---------------------------------------------------------------
+  {
+    "id": 270,
+    "category": "データ構造",
+    "theme": "2分木",
+    "subtheme": "木の巡回（走査順序）",
+    "text": "下の木を帰りがけ順（postorder）で巡回し、「4, 5, 2, 3, 1」と出力したいと考えています。空欄 [  a  ] に入る適切な処理を選んでください。",
+    "example": "帰りがけ順では、根ノード（値が 1）は出力列の一番最後に現れます。print がどのタイミングで呼ばれれば、根が最後になるか考えてみましょう。",
+    "code": "01  traverse(node)\n02  <span class=\"if\">if (node ≠ null)</span>\n03     traverse(node.left)\n04     traverse(node.right)\n05     [    a    ]\n06  <span class=\"if\">endif</span>\n\n/* 対象の木・期待する出力 */\n/*       1          出力: 4, 5, 2, 3, 1  */\n/*      / \\                              */\n/*     2   3                             */\n/*    / \\                               */\n/*   4   5                               */",
+    "choices": [
+      "print(node.value)",
+      "print(node.left)",
+      "traverse(node.value)",
+      "print(root.value)"
+    ],
+    "specific_explanation": "1. 巡回パターンの把握\n   帰りがけ順（postorder）は、左部分木 → 右部分木 の処理が両方終わった後に、そのノードの値を出力する方式です。print を左右の traverse より後（05行目）に置くことで、すべての子孫ノードを処理し終えてから「帰りがけ」に値を拾えます。\n\n   根（1）は最後に訪問されるため、出力列の末尾に現れます。木全体を葉から順に処理する必要がある「削除」や「サイズ計算」などの操作で活用される巡回順です。\n   <div class=\"important\">帰りがけ順（postorder）: 左 → 右 → 根</div>"
+  },
+  // ===================================================================
+  // 新規作成問題
+  // 対象 id: 271, 272, 273
+  // category: "数値計算系" / theme: "論理演算" / subtheme: "ビットマスクによる抽出"
+  // ===================================================================
+
+  // ---------------------------------------------------------------
+  // id 271  ビットマスクによる抽出
+  // 内容: 特定のビット位置を調べるためのマスク値を選ぶ
+  // ---------------------------------------------------------------
+  {
+    "id": 271,
+    "category": "数値計算系",
+    "theme": "論理演算",
+    "subtheme": "ビットマスクによる抽出",
+    "text": "8ビットの整数 flags の「3ビット目（右から3番目、0始まり）」が 1 かどうかを調べたいと考えています。AND 演算に使うマスク値として適切なものを選んでください。",
+    "example": "右から0番目が 1（= 00000001）、1番目が 2（= 00000010）のとき、3番目は何になりますか。",
+    "code": "01  整数型: flags, mask\n02  mask ← [    a    ]\n03  <span class=\"if\">if ((flags AND mask) ≠ 0)</span>\n04     /* 3ビット目が立っている場合の処理 */\n05  <span class=\"if\">endif</span>",
+    "choices": [
+      "8（= 00001000）",
+      "3（= 00000011）",
+      "4（= 00000100）",
+      "16（= 00010000）"
+    ],
+    "specific_explanation": "1. 特定の桁を取り出す\n   調べたいビット位置だけを「1」にしたマスク値を作ります。右から 0 始まりで数えると、0ビット目が 1（2^0）、1ビット目が 2（2^1）、2ビット目が 4（2^2）、3ビット目が 8（2^3）となります。3ビット目のみを「1」にしたマスク値は 8（= 00001000）です。\n\n2. フラグの判定\n   flags AND 8 の結果が 0 でなければ（= 8 であれば）、3ビット目にフラグが立っていると判断できます。AND 演算はマスクが 0 の桁を必ず 0 にするため、マスクが 1 の桁だけを抽出できます。\n   <div class=\"important\">3ビット目のマスク値 = 2^3 = 8（= 00001000）</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 272  ビットマスクによる抽出
+  // 内容: AND 演算の結果からフラグが立っているか判定する
+  // ---------------------------------------------------------------
+  {
+    "id": 272,
+    "category": "数値計算系",
+    "theme": "論理演算",
+    "subtheme": "ビットマスクによる抽出",
+    "text": "flags = 45（= 00101101）に対してマスク値 8（= 00001000）で AND 演算を行いました。この結果から「3ビット目のフラグが立っているか」を正しく判定しているものを選んでください。",
+    "example": "45（= 00101101）と 8（= 00001000）を桁ごとに AND してみましょう。3ビット目の値はそれぞれいくつですか。",
+    "code": "01  整数型: flags ← 45  /* 00101101 */\n02  整数型: mask  ← 8   /* 00001000 */\n03  整数型: result ← flags AND mask\n04  /* result の値は？ → フラグの有無を判定する */",
+    "choices": [
+      "result = 0 なので、3ビット目のフラグは立っていない",
+      "result = 8 なので、3ビット目のフラグが立っている",
+      "result = 45 なので、フラグが全て立っている",
+      "result = 1 なので、3ビット目のフラグが立っている"
+    ],
+    "specific_explanation": "1. 特定の桁を取り出す\n   45（00101101）と 8（00001000）を桁ごとに AND すると、3ビット目同士は「0 AND 1 = 0」となります。マスクが 1 の桁以外は全て 0 に潰されるため、result = 0 になります。\n\n2. フラグの判定\n   AND 演算の結果が 0 のとき、調べたビット位置は 0（フラグなし）と判断します。結果が 0 でない（マスク値と等しい）場合のみ「フラグが立っている」と判断できます。flags = 45 の 3ビット目は 0 であるため、フラグは立っていません。\n   <div class=\"important\">00101101 AND 00001000 = 00000000（result = 0）→ フラグなし</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 273  ビットマスクによる抽出
+  // 内容: 複数フラグを持つ値から特定フラグの組み合わせを抽出・判定する
+  // ---------------------------------------------------------------
+  {
+    "id": 273,
+    "category": "数値計算系",
+    "theme": "論理演算",
+    "subtheme": "ビットマスクによる抽出",
+    "text": "8ビットのフラグ変数 status に対して、0ビット目（読み取り権限）と 2ビット目（実行権限）の両方が立っているかを一度に確認したいと考えています。空欄 [  a  ] に入る適切なマスク値と判定式の組み合わせを選んでください。",
+    "example": "0ビット目のマスクは 1（00000001）、2ビット目のマスクは 4（00000100）です。「両方」を一度に調べるにはどうすればよいでしょうか。",
+    "code": "01  整数型: status\n02  整数型: mask ← [    a    ]\n03  <span class=\"if\">if ((status AND mask) = mask)</span>\n04     /* 読み取り権限と実行権限が両方ある場合の処理 */\n05  <span class=\"if\">endif</span>",
+    "choices": [
+      "5（= 00000101）",
+      "3（= 00000011）",
+      "1（= 00000001）",
+      "7（= 00000111）"
+    ],
+    "specific_explanation": "1. 特定の桁を取り出す\n   複数のビットを同時に調べるには、調べたいビット位置をすべて「1」にしたマスク値を使います。0ビット目（1 = 00000001）と 2ビット目（4 = 00000100）の両方を「1」にした値は、1 OR 4 = 5（= 00000101）です。\n\n2. フラグの判定\n   「両方立っているか」を確認するには、(status AND mask) ≠ 0 ではなく (status AND mask) = mask と比較します。AND の結果がマスクと完全に一致した場合のみ、指定したビットがすべて 1 と確定できます。どちらか片方だけが立っている場合は結果がマスクより小さくなるため除外されます。\n   <div class=\"important\">mask = 5（00000101）/ (status AND mask) = mask で両方立っていると判定</div>"
+  },
+
+  // ===================================================================
+  // 新規作成問題 id: 274 〜 288（5テーマ × 3問）
+  //
+  // 274~276: 数値計算系 > 端数処理 > 四捨五入のテクニック
+  // 277~279: 数値計算系 > ビット演算 > 符号ビットの扱い
+  // 280~282: 定番アルゴリズム系 > 探索 > 二分探索
+  // 283~285: 定番アルゴリズム系 > 並べ替え > 隣接要素の比較
+  // 286~288: 定番アルゴリズム系 > 並べ替え > 最小値の選択
+  // ===================================================================
+
+
+  // ===================================================================
+  // 数値計算系 > 端数処理 > 四捨五入のテクニック
+  // ===================================================================
+
+  // ---------------------------------------------------------------
+  // id 274  四捨五入のテクニック
+  // 内容: 小数第1位で四捨五入する基本パターン（空欄補充）
+  // ---------------------------------------------------------------
+  {
+    "id": 274,
+    "category": "数値計算系",
+    "theme": "端数処理",
+    "subtheme": "四捨五入のテクニック",
+    "text": "実数 x を小数第1位で四捨五入して整数を求める関数です。数学関数を使わず、加算と整数型変換のみで実装します。空欄 [  a  ] に入る適切な式を選んでください。",
+    "example": "x = 2.7 のとき結果は 3、x = 2.4 のとき結果は 2 になるはずです。それぞれ [  a  ] に各選択肢を当てはめて確認してみましょう。",
+    "code": "01  実数型: round(実数型: x)\n02  整数型: result\n03  result ← 整数型([  a  ])\n04  return result",
+    "choices": [
+      "x + 0.5",
+      "x + 1.0",
+      "x - 0.5",
+      "x × 2"
+    ],
+    "specific_explanation": "1. 0.5を足して切り捨てる\n   四捨五入を「0.5 を足してから小数点以下を切り捨てる」操作で再現します。x = 2.7 なら 2.7 + 0.5 = 3.2 → 整数型変換で 3 になります。x = 2.4 なら 2.4 + 0.5 = 2.9 → 整数型変換で 2 になります。\n\n   整数型への変換は小数点以下を切り捨てるため、0.5 以上の端数を持つ値だけが繰り上がります。これが数学的な四捨五入の定義と一致します。\n   <div class=\"important\">整数型(x + 0.5) で四捨五入を再現する</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 275  四捨五入のテクニック
+  // 内容: 小数第2位で四捨五入（×10 → +0.5 → 切り捨て → ÷10）
+  // ---------------------------------------------------------------
+  {
+    "id": 275,
+    "category": "数値計算系",
+    "theme": "端数処理",
+    "subtheme": "四捨五入のテクニック",
+    "text": "実数 x を小数第2位で四捨五入し、小数第1位までの値を返す関数です。空欄 [  a  ] に入る適切な処理を選んでください。",
+    "example": "x = 3.75 のとき結果は 3.8、x = 3.74 のとき結果は 3.7 になるはずです。",
+    "code": "01  実数型: roundAt1(実数型: x)\n02  整数型: tmp\n03  tmp ← 整数型([  a  ])\n04  return tmp ÷ 10.0",
+    "choices": [
+      "x × 10 + 0.5",
+      "x + 0.5",
+      "x × 10",
+      "x × 100 + 0.5"
+    ],
+    "specific_explanation": "1. 0.5を足して切り捨てる\n   小数第1位より下で四捨五入したい場合、まず「判断させたい桁」を整数の位まで引き上げる必要があります。x を 10 倍することで小数第2位が整数の位に来ます。その後 0.5 を足して整数型に変換（切り捨て）することで四捨五入が完成します。\n\n   x = 3.75 なら 3.75 × 10 + 0.5 = 38.0 → 整数型で 38 → 38 ÷ 10.0 = 3.8 となります。最後に 10.0 で割ることで元の桁に戻します。\n   <div class=\"important\">整数型(x × 10 + 0.5) ÷ 10.0 で小数第1位に丸める</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 276  四捨五入のテクニック
+  // 内容: 切り捨て・四捨五入の違いを数値で問う
+  // ---------------------------------------------------------------
+  {
+    "id": 276,
+    "category": "数値計算系",
+    "theme": "端数処理",
+    "subtheme": "四捨五入のテクニック",
+    "text": "x = 2.5 のとき、切り捨てと四捨五入それぞれの結果として正しい組み合わせを選んでください。",
+    "example": "「整数型(x)」と「整数型(x + 0.5)」のそれぞれに x = 2.5 を当てはめてみましょう。",
+    "code": "01  実数型: x ← 2.5\n02  整数型: a ← 整数型(x)        /* 切り捨て */\n03  整数型: b ← 整数型(x + 0.5)  /* 四捨五入 */\n04  /* a と b の値は？ */",
+    "choices": [
+      "a = 2, b = 3",
+      "a = 2, b = 2",
+      "a = 3, b = 3",
+      "a = 3, b = 4"
+    ],
+    "specific_explanation": "1. 0.5を足して切り捨てる\n   切り捨ては整数型への変換のみで実現します。x = 2.5 を整数型に変換すると小数部が捨てられ a = 2 となります。\n\n   四捨五入は 0.5 を足してから変換します。2.5 + 0.5 = 3.0 を整数型に変換すると b = 3 となります。0.5 の加算により「ちょうど半分」の値でも確実に繰り上がることが保証されます。\n   <div class=\"important\">切り捨て: 整数型(2.5) = 2 / 四捨五入: 整数型(2.5 + 0.5) = 3</div>"
+  },
+
+
+  // ===================================================================
+  // 数値計算系 > ビット演算 > 符号ビットの扱い
+  // ===================================================================
+
+  // ---------------------------------------------------------------
+  // id 277  符号ビットの扱い
+  // 内容: MSBを確認するマスク値を選ぶ
+  // ---------------------------------------------------------------
+  {
+    "id": 277,
+    "category": "数値計算系",
+    "theme": "ビット演算",
+    "subtheme": "符号ビットの扱い",
+    "text": "8ビット整数の符号（正か負か）を調べるため、最上位ビット（MSB = 7ビット目）だけを「1」にしたマスク値を使って AND 演算を行います。空欄 [  a  ] に入る適切なマスク値を選んでください。",
+    "example": "右から 0ビット目が 1（2^0）、1ビット目が 2（2^1）……と続くとき、7ビット目は 2 の何乗になりますか。",
+    "code": "01  整数型: value, mask\n02  mask ← [    a    ]\n03  <span class=\"if\">if ((value AND mask) ≠ 0)</span>\n04     /* MSB が 1 → 負の数 */\n05  <span class=\"if\">else</span>\n06     /* MSB が 0 → 正の数 */\n07  <span class=\"if\">endif</span>",
+    "choices": [
+      "128（= 10000000）",
+      "64（= 01000000）",
+      "255（= 11111111）",
+      "1（= 00000001）"
+    ],
+    "specific_explanation": "1. 最上位ビットの確認\n   8ビット表現では、右から 0 始まりで数えた 7ビット目が符号ビット（MSB）です。2^7 = 128（= 10000000）がこのビットだけを「1」にしたマスク値となります。\n\n   value AND 128 の結果が 0 でなければ MSB が 1、つまり負の数と判定できます。MSB が 0 であれば正の数です。\n   <div class=\"important\">8ビットの MSB マスク = 2^7 = 128（= 10000000）</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 278  符号ビットの扱い
+  // 内容: 与えられた8ビット値のMSBから正負を判定する
+  // ---------------------------------------------------------------
+  {
+    "id": 278,
+    "category": "数値計算系",
+    "theme": "ビット演算",
+    "subtheme": "符号ビットの扱い",
+    "text": "次の3つの8ビット値に対して MSB（最上位ビット）を確認し、「正・負」を正しく分類しているものを選んでください。",
+    "example": "2進数の一番左のビットが 0 なら正、1 なら負というルールで、それぞれの先頭桁を確認してみましょう。",
+    "code": "01  /* 各値の2進表現 */\n02  A ← 00110101  /* 10進数: 53  */\n03  B ← 10000001  /* 10進数: 129 （符号あり:-127） */\n04  C ← 01111111  /* 10進数: 127 */",
+    "choices": [
+      "A: 正, B: 負, C: 正",
+      "A: 正, B: 正, C: 負",
+      "A: 負, B: 負, C: 正",
+      "A: 正, B: 負, C: 負"
+    ],
+    "specific_explanation": "1. 最上位ビットの確認\n   8ビット符号あり整数では、左端（MSB）が 0 なら正の数、1 なら負の数と判断します。\n\n   A（00110101）は MSB = 0 → 正、B（10000001）は MSB = 1 → 負、C（01111111）は MSB = 0 → 正となります。10進数の大きさだけで判断すると誤りやすいため、必ずビット表現の先頭桁を確認することが重要です。\n   <div class=\"important\">MSB = 0 → 正 / MSB = 1 → 負</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 279  符号ビットの扱い
+  // 内容: 符号判定の結果に基づく処理分岐を完成させる
+  // ---------------------------------------------------------------
+  {
+    "id": 279,
+    "category": "数値計算系",
+    "theme": "ビット演算",
+    "subtheme": "符号ビットの扱い",
+    "text": "8ビット整数 value の符号を MSB で判定し、負であれば絶対値を返す関数です。空欄 [  a  ] に入る適切な式を選んでください。なお、8ビット符号あり整数では「負の数の絶対値 = 256 - value（符号なし解釈）」で求められます。",
+    "example": "value = 10000001（符号あり: -127）のとき、絶対値は 127 になるはずです。256 - 129 を計算してみましょう。",
+    "code": "01  整数型: absValue(整数型: value)\n02  整数型: mask ← 128  /* 10000000 */\n03  <span class=\"if\">if ((value AND mask) ≠ 0)</span>\n04     return [    a    ]  /* MSB=1 → 負 → 絶対値を返す */\n05  <span class=\"if\">else</span>\n06     return value        /* MSB=0 → 正 → そのまま返す */\n07  <span class=\"if\">endif</span>",
+    "choices": [
+      "256 - value",
+      "value - 128",
+      "value AND 127",
+      "128 - value"
+    ],
+    "specific_explanation": "1. 最上位ビットの確認\n   MSB が 1 のとき（符号あり解釈で負の数）、符号なし整数として読んだ value は 128〜255 の範囲になります。\n\n2. 0.5を足して切り捨てる ※類似操作\n   8ビット符号あり整数の負の数は 2 の補数で表現されており、その絶対値は「256 - value（符号なし解釈）」で求められます。例えば value = 129（= 10000001）なら 256 - 129 = 127 となり、-127 の絶対値が得られます。\n   <div class=\"important\">負の数の絶対値 = 256 - value（符号なし値）</div>"
+  },
+
+
+  // ===================================================================
+  // 定番アルゴリズム系 > 探索 > 二分探索
+  // ===================================================================
+
+  // ---------------------------------------------------------------
+  // id 280  二分探索
+  // 内容: middle の計算式を空欄で選ぶ
+  // ---------------------------------------------------------------
+  {
+    "id": 280,
+    "category": "定番アルゴリズム系",
+    "theme": "探索",
+    "subtheme": "二分探索",
+    "text": "昇順に整列された配列 array から目的の値 target を探す二分探索プログラムです。探索範囲の中央インデックス [  a  ] に入る計算式を選んでください。",
+    "example": "left = 1, right = 9 のとき、中央インデックスはいくつになるか計算してみましょう。",
+    "code": "01  binarySearch(整数型の配列: array, 整数型: n, 整数型: target)\n02  整数型: left ← 1, right ← n, middle\n03  <span class=\"while\">while (left ≤ right)</span>\n04     middle ← [    a    ]\n05     <span class=\"if\">if (array[middle] = target)</span>\n06        return middle\n07     <span class=\"if\">elseif (array[middle] < target)</span>\n08        left ← middle + 1\n09     <span class=\"if\">else</span>\n10        right ← middle - 1\n11     <span class=\"if\">endif</span>\n12  <span class=\"while\">endwhile</span>\n13  return -1",
+    "choices": [
+      "(left + right) ÷ 2",
+      "left + right",
+      "(right - left) ÷ 2",
+      "left ÷ 2"
+    ],
+    "specific_explanation": "1. 中央の値を見る\n   探索範囲の中央インデックスは「左端と右端の和の半分」で求めます。left = 1, right = 9 なら (1 + 9) ÷ 2 = 5 が中央です。整数型の割り算により小数部は切り捨てられます。\n\n2. 範囲を半分にする\n   中央の値が target より小さければ left を middle + 1 に、大きければ right を middle - 1 に更新することで、毎回探索範囲を半分に絞り込みます。\n   <div class=\"important\">middle ← (left + right) ÷ 2</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 281  二分探索
+  // 内容: 範囲を絞り込む条件の正しい組み合わせを選ぶ
+  // ---------------------------------------------------------------
+  {
+    "id": 281,
+    "category": "定番アルゴリズム系",
+    "theme": "探索",
+    "subtheme": "二分探索",
+    "text": "二分探索において、中央の値と target を比較した結果に応じて探索範囲を更新します。空欄 [  a  ] と [  b  ] に入る適切な処理の組み合わせを選んでください。",
+    "example": "array = {1, 3, 5, 7, 9}、target = 7 のとき、middle = 3（値5）です。7 > 5 なので次はどちら側を探すべきでしょうか。",
+    "code": "01  middle ← (left + right) ÷ 2\n02  <span class=\"if\">if (array[middle] = target)</span>\n03     return middle\n04  <span class=\"if\">elseif (array[middle] < target)</span>\n05     [    a    ]  /* target は右側にある */\n06  <span class=\"if\">else</span>\n07     [    b    ]  /* target は左側にある */\n08  <span class=\"if\">endif</span>",
+    "choices": [
+      "a: left ← middle + 1\nb: right ← middle - 1",
+      "a: right ← middle - 1\nb: left ← middle + 1",
+      "a: left ← middle\nb: right ← middle",
+      "a: left ← middle + 1\nb: left ← middle - 1"
+    ],
+    "specific_explanation": "1. 範囲を半分にする\n   中央値が target より小さい場合、target は中央の「右側」にあります。左端（left）を middle + 1 に移動させ、左半分を切り捨てます。\n\n   逆に中央値が target より大きい場合、target は「左側」にあります。右端（right）を middle - 1 に移動させ、右半分を切り捨てます。middle 自体は既に確認済みなので ±1 してから範囲を更新します。\n   <div class=\"important\">右側に絞る: left ← middle + 1 / 左側に絞る: right ← middle - 1</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 282  二分探索
+  // 内容: 比較回数の上限を理解する（探索回数と配列サイズの関係）
+  // ---------------------------------------------------------------
+  {
+    "id": 282,
+    "category": "定番アルゴリズム系",
+    "theme": "探索",
+    "subtheme": "二分探索",
+    "text": "要素数 8 の昇順配列 {1, 3, 5, 7, 9, 11, 13, 15} から target = 1 を二分探索で探します。見つかるまでに while 文のループが何回実行されるか、正しいものを選んでください。",
+    "example": "left と right の変化を追いながら middle を毎回計算してみましょう。target と array[middle] の大小比較の結果で次のステップが変わります。",
+    "code": "01  整数型の配列: array ← {1,3,5,7,9,11,13,15}\n02  整数型: left ← 1, right ← 8\n03  /* 1回目: middle = (1+8)÷2 = 4 → array[4]=7 → 1 < 7 なので right ← 3 */\n04  /* 2回目: middle = (1+3)÷2 = 2 → array[2]=3 → 1 < 3 なので right ← 1 */\n05  /* 3回目: middle = (1+1)÷2 = 1 → array[1]=1 → 一致！return 1 */",
+    "choices": [
+      "3回",
+      "1回",
+      "8回",
+      "4回"
+    ],
+    "specific_explanation": "1. 中央の値を見る\n   1回目: middle = 4, array[4] = 7。target(1) < 7 なので right ← 3 に更新します。\n\n2. 範囲を半分にする\n   2回目: middle = 2, array[2] = 3。target(1) < 3 なので right ← 1 に更新します。3回目: middle = 1, array[1] = 1 で一致し return 1 となります。要素数 8 の配列でも最大 3 回（log₂8 = 3）で見つかります。線形探索なら最悪 8 回かかるところを大幅に削減できます。\n   <div class=\"important\">要素数 8 の二分探索: 最大 3 回（= log₂8）で完了</div>"
+  },
+
+
+  // ===================================================================
+  // 定番アルゴリズム系 > 並べ替え > 隣接要素の比較（バブルソート）
+  // ===================================================================
+
+  // ---------------------------------------------------------------
+  // id 283  隣接要素の比較
+  // 内容: 内側ループの終了条件を選ぶ
+  // ---------------------------------------------------------------
+  {
+    "id": 283,
+    "category": "定番アルゴリズム系",
+    "theme": "並べ替え",
+    "subtheme": "隣接要素の比較",
+    "text": "バブルソートで配列を昇順に並べるプログラムです。外側のループが i 回目のとき、末尾から i 個はすでに確定済みです。内側ループの終了値 [  a  ] に入る適切な式を選んでください。",
+    "example": "1パス目（i=1）が終わると、最大値が末尾に確定します。2パス目では末尾から何個分を比較対象から外せますか。",
+    "code": "01  bubbleSort(整数型の配列: array, 整数型: n)\n02  整数型: i, j, tmp\n03  <span class=\"for\">for (i を 1 から n - 1 まで 1 ずつ増やす)</span>\n04     <span class=\"for\">for (j を 1 から [    a    ] まで 1 ずつ増やす)</span>\n05        <span class=\"if\">if (array[j] > array[j + 1])</span>\n06           tmp ← array[j]\n07           array[j] ← array[j + 1]\n08           array[j + 1] ← tmp\n09        <span class=\"if\">endif</span>\n10     <span class=\"for\">endfor</span>\n11  <span class=\"for\">endfor</span>",
+    "choices": [
+      "n - i",
+      "n",
+      "n - 1",
+      "n + i"
+    ],
+    "specific_explanation": "1. 端から確定させる\n   1パス目（i=1）が終わると配列の末尾（n番目）に最大値が確定します。2パス目では末尾を除いた範囲（1〜n-2）を比較すれば十分です。つまり i パス目の内側ループは 1 から n - i まで比較すれば済みます。\n\n2. お隣さんと比較\n   内側ループでは j と j+1 を比較するため、j の最大値が n - i のとき、比較対象は array[n-i] と array[n-i+1] となり、末尾の確定済み要素に触れずに済みます。\n   <div class=\"important\">内側ループ: j を 1 から n - i まで</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 284  隣接要素の比較
+  // 内容: 昇順・降順の交換条件の違いを問う
+  // ---------------------------------------------------------------
+  {
+    "id": 284,
+    "category": "定番アルゴリズム系",
+    "theme": "並べ替え",
+    "subtheme": "隣接要素の比較",
+    "text": "バブルソートを「降順（大きい順）」に変更したいと考えています。5行目の比較条件 [  a  ] に入る適切な式を選んでください。",
+    "example": "昇順のとき「左が大きければ交換（左を小さくする）」でした。降順にするには、どんな状態のときに交換すべきでしょうか。",
+    "code": "01  bubbleSortDesc(整数型の配列: array, 整数型: n)\n02  整数型: i, j, tmp\n03  <span class=\"for\">for (i を 1 から n - 1 まで 1 ずつ増やす)</span>\n04     <span class=\"for\">for (j を 1 から n - i まで 1 ずつ増やす)</span>\n05        <span class=\"if\">if ([    a    ])</span>\n06           tmp ← array[j]\n07           array[j] ← array[j + 1]\n08           array[j + 1] ← tmp\n09        <span class=\"if\">endif</span>\n10     <span class=\"for\">endfor</span>\n11  <span class=\"for\">endfor</span>",
+    "choices": [
+      "array[j] < array[j + 1]",
+      "array[j] > array[j + 1]",
+      "array[j] = array[j + 1]",
+      "array[j] ≥ array[j + 1]"
+    ],
+    "specific_explanation": "1. お隣さんと比較\n   昇順では「左が右より大きければ交換」することで、大きい値を右（末尾方向）に押し出します。降順では逆に「左が右より小さければ交換」することで、小さい値を末尾方向に押し出します。\n\n2. 端から確定させる\n   条件を array[j] < array[j + 1] に変えるだけで、各パスで最小値が末尾へと確定していき、結果として降順に並びます。交換処理自体は変更不要です。\n   <div class=\"important\">降順の交換条件: array[j] < array[j + 1]</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 285  隣接要素の比較
+  // 内容: {5,3,1,4,2} に対して1パス目終了後の配列状態を問う
+  // ---------------------------------------------------------------
+  {
+    "id": 285,
+    "category": "定番アルゴリズム系",
+    "theme": "並べ替え",
+    "subtheme": "隣接要素の比較",
+    "text": "配列 {5, 3, 1, 4, 2} に対してバブルソート（昇順）の1パス目（i=1）を実行した直後の配列の状態として正しいものを選んでください。",
+    "example": "j = 1 から始めて array[j] と array[j+1] を順に比較し、大きければ交換する動きを 1 ステップずつ手でたどってみましょう。",
+    "code": "01  /* 初期状態: {5, 3, 1, 4, 2} */\n02  /* j=1: array[1]=5 > array[2]=3 → 交換 → {3,5,1,4,2} */\n03  /* j=2: array[2]=5 > array[3]=1 → 交換 → {3,1,5,4,2} */\n04  /* j=3: array[3]=5 > array[4]=4 → 交換 → {3,1,4,5,2} */\n05  /* j=4: array[4]=5 > array[5]=2 → 交換 → {3,1,4,2,5} */",
+    "choices": [
+      "{3, 1, 4, 2, 5}",
+      "{1, 2, 3, 4, 5}",
+      "{3, 1, 5, 4, 2}",
+      "{5, 3, 1, 4, 2}"
+    ],
+    "specific_explanation": "1. お隣さんと比較\n   j = 1: 5 > 3 なので交換 → {3,5,1,4,2}。j = 2: 5 > 1 なので交換 → {3,1,5,4,2}。j = 3: 5 > 4 なので交換 → {3,1,4,5,2}。j = 4: 5 > 2 なので交換 → {3,1,4,2,5}。\n\n2. 端から確定させる\n   1パス目が終わると最大値の 5 が末尾（5番目）に確定します。2パス目以降は 5 を除いた範囲だけを処理すればよくなります。\n   <div class=\"important\">1パス目終了後: {3, 1, 4, 2, 5}（最大値5が末尾に確定）</div>"
+  },
+
+
+  // ===================================================================
+  // 定番アルゴリズム系 > 並べ替え > 最小値の選択（選択ソート）
+  // ===================================================================
+
+  // ---------------------------------------------------------------
+  // id 286  最小値の選択
+  // 内容: 最小値インデックスの更新条件を選ぶ
+  // ---------------------------------------------------------------
+  {
+    "id": 286,
+    "category": "定番アルゴリズム系",
+    "theme": "並べ替え",
+    "subtheme": "最小値の選択",
+    "text": "選択ソートで最小値のインデックスを記録するプログラムです。より小さい値を発見したとき minIdx を更新する条件 [  a  ] に入る適切な式を選んでください。",
+    "example": "現在の暫定最小値は array[minIdx] に入っています。j 番目の値がそれより小さければ更新します。どんな比較式になりますか。",
+    "code": "01  selectionSort(整数型の配列: array, 整数型: n)\n02  整数型: i, j, minIdx, tmp\n03  <span class=\"for\">for (i を 1 から n - 1 まで 1 ずつ増やす)</span>\n04     minIdx ← i\n05     <span class=\"for\">for (j を i + 1 から n まで 1 ずつ増やす)</span>\n06        <span class=\"if\">if ([    a    ])</span>\n07           minIdx ← j\n08        <span class=\"if\">endif</span>\n09     <span class=\"for\">endfor</span>\n10     /* minIdx の要素と i 番目の要素を交換 */\n11  <span class=\"for\">endfor</span>",
+    "choices": [
+      "array[j] < array[minIdx]",
+      "array[j] > array[minIdx]",
+      "j < minIdx",
+      "array[j] = array[minIdx]"
+    ],
+    "specific_explanation": "1. 一番小さいのを探す\n   内側ループでは未整列エリア（i 〜 n）を順に走査し、現在の暫定最小値 array[minIdx] より小さい値を発見したら minIdx をその位置に更新します。ループ終了時、minIdx が未整列エリア全体の最小値の位置を指しています。\n\n2. 先頭と入れ替える\n   内側ループで最小値の位置が確定したら、array[minIdx] と array[i]（未整列エリアの先頭）を交換して位置を確定させます。\n   <div class=\"important\">更新条件: array[j] < array[minIdx]</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 287  最小値の選択
+  // 内容: 最小値と先頭の交換処理の対象を選ぶ
+  // ---------------------------------------------------------------
+  {
+    "id": 287,
+    "category": "定番アルゴリズム系",
+    "theme": "並べ替え",
+    "subtheme": "最小値の選択",
+    "text": "選択ソートで最小値を見つけた後、未整列エリアの先頭と交換する処理を完成させます。空欄 [  a  ], [  b  ] に入る適切な組み合わせを選んでください。",
+    "example": "i = 1 のとき、未整列エリアの先頭は array[1] です。最小値が array[3] にあった場合、何と何を交換しますか。",
+    "code": "01  /* 内側ループで minIdx が確定した後 */\n02  整数型: tmp\n03  tmp       ← array[i]\n04  array[i]  ← [    a    ]\n05  [    b    ] ← tmp",
+    "choices": [
+      "a: array[minIdx]\nb: array[minIdx]",
+      "a: array[i + 1]\nb: array[i + 1]",
+      "a: array[minIdx]\nb: array[i]",
+      "a: array[i]\nb: array[minIdx]"
+    ],
+    "specific_explanation": "1. 先頭と入れ替える\n   スワップは tmp を使った 3 段階の代入で行います。① tmp ← array[i]（先頭を退避）、② array[i] ← array[minIdx]（最小値を先頭へ）、③ array[minIdx] ← tmp（退避した元の先頭を最小値の位置へ）。\n\n2. 一番小さいのを探す\n   この交換により i 番目の要素が確定し、次のパスでは i+1 以降の未整列エリアだけを対象にできます。\n   <div class=\"important\">a: array[minIdx] / b: array[minIdx]（元の先頭 tmp を最小値の位置へ戻す）</div>"
+  },
+
+  // ---------------------------------------------------------------
+  // id 288  最小値の選択
+  // 内容: {4,2,5,1,3} に対して2パス目終了後の配列状態を問う
+  // ---------------------------------------------------------------
+  {
+    "id": 288,
+    "category": "定番アルゴリズム系",
+    "theme": "並べ替え",
+    "subtheme": "最小値の選択",
+    "text": "配列 {4, 2, 5, 1, 3} に対して選択ソート（昇順）を実行します。2パス目（i=2）が終了した直後の配列の状態として正しいものを選んでください。",
+    "example": "1パス目（i=1）では全体の最小値を array[1] に置きます。2パス目（i=2）では残り（array[2]〜array[5]）の最小値を array[2] に置きます。それぞれ最小値はどれですか。",
+    "code": "01  /* 初期: {4, 2, 5, 1, 3} */\n02  /* i=1: 全体の最小=1(index4) → array[1]と交換 → {1, 2, 5, 4, 3} */\n03  /* i=2: array[2..5]={2,5,4,3} の最小=2(index2) → 交換不要 → {1, 2, 5, 4, 3} */",
+    "choices": [
+      "{1, 2, 5, 4, 3}",
+      "{1, 2, 3, 4, 5}",
+      "{1, 2, 4, 5, 3}",
+      "{2, 1, 5, 4, 3}"
+    ],
+    "specific_explanation": "1. 一番小さいのを探す\n   1パス目（i=1）: {4,2,5,1,3} の最小値は 1（index=4）。array[1] と array[4] を交換 → {1,2,5,4,3}。\n\n2. 先頭と入れ替える\n   2パス目（i=2）: 未整列エリア {2,5,4,3}（index=2〜5）の最小値は 2（index=2）。minIdx = i のため交換は発生せず配列はそのまま {1,2,5,4,3} です。1 と 2 の位置が確定済みとなり、3パス目以降で残り {5,4,3} が整列されます。\n   <div class=\"important\">2パス目終了後: {1, 2, 5, 4, 3}（先頭2要素が確定）</div>"
+  },
 ]

@@ -451,7 +451,7 @@ function loadQuestion(index) {
     
     document.getElementById('Q_num').innerHTML = `
     <div style="display: flex; align-items: center;">
-            <span>Q${index + 1}</span>
+            <span>第${index + 1}問</span>
             ${HistoryHTML}
             </div>
             <button id="favorite_btn" class="${favClass}">${favText}</button>
@@ -472,7 +472,7 @@ function loadQuestion(index) {
             }
         };
     }
-    
+
     window.scrollTo(0, document.getElementById("Q_num").getBoundingClientRect().top)
     console.log(document.getElementById("Q_num").getBoundingClientRect().top)
 }
