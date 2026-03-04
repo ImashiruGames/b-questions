@@ -182,6 +182,10 @@
     let foundTargetTheme = false;
     let recommendedTotalQuestions = 0;
 
+    let globalHasUnattempted = false;
+    let globalHasIncorrect = false;
+    let globalHasFavorite = false;
+
     for (let categoryName in categories) {
         let section = document.createElement("section");
         section.classList.add("category-group");
@@ -212,7 +216,7 @@
 
             let themeHasUnattempted = false;
             for (let subthemeName in subthemes) {
-                let status = checkSubthemeStatus(categoryName, themeName, subthemeName);
+                let status = checkSubthemeStatus(categoryName, themeName, subthemeName);                
                 if (status.hasUnattempted === true) {
                     themeHasUnattempted = true;
                     break;
@@ -231,6 +235,10 @@
                 subthemeItem.classList.add("subtheme-item");
 
                 let status = checkSubthemeStatus(categoryName, themeName, subthemeName);
+                                
+                if (status.hasUnattempted) globalHasUnattempted = true;
+                if (status.hasIncorrect) globalHasIncorrect = true;
+                if (status.hasFavorite) globalHasFavorite = true;
 
                 let isChecked = "";
                 if (isTargetTheme == true && status.hasUnattempted == true) {
@@ -335,6 +343,28 @@
         if (limitInput) {
             limitInput.value = Math.min(10, recommendedTotalQuestions);
         }
+    }
+
+    let chkUnattempted = document.getElementById("filter_unattempted");
+    let chkIncorrect = document.getElementById("filter_incorrect");
+    let chkFavorite = document.getElementById("filter_favorite");
+
+    if (!globalHasUnattempted && chkUnattempted) {
+        chkUnattempted.checked = false; // 裏側でチェックが残らないように外す
+        if (chkUnattempted.parentElement) chkUnattempted.parentElement.style.display = "none";
+    }
+    if (!globalHasIncorrect && chkIncorrect) {
+        chkIncorrect.checked = false;
+        if (chkIncorrect.parentElement) chkIncorrect.parentElement.style.display = "none";
+    }
+    if (!globalHasFavorite && chkFavorite) {
+        chkFavorite.checked = false;
+        if (chkFavorite.parentElement) chkFavorite.parentElement.style.display = "none";
+    }
+
+    if (!globalHasUnattempted && !globalHasIncorrect && !globalHasFavorite) {
+        let filterContainer = document.querySelector(".filter-options-container");
+        if (filterContainer) filterContainer.style.display = "none";
     }
 
 
