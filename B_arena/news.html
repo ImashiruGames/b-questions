@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imashiru - お知らせ</title>
+    <link rel="stylesheet" href="../css/destyle.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="light_theme">
+    <div id="header-placeholder"></div>
+    <div id="user_info_bar"></div>
+    <main>
+        <div class="breadcrumb"><a href="index.html">HOME</a> >> お知らせ</div>
+        <section class="introduction">
+            <h2>アップデート情報</h2>
+        </section>
+
+        <div class="news-container">
+
+            <article class="news-article">
+                <h3 class="news-title">
+                    <span class="news-date">2026/03/07</span>
+                    v1.2 リリース＆お知らせページ新設
+                </h3>
+                <p class="news-desc">
+                    ・お知らせページを新設しました。<br>
+                    ・表示オプションのUIを縦並びに改善しました。<br>
+                    ・フィルターの動的非表示機能を追加しました。
+                </p>
+            </article>
+
+            <article class="news-article">
+                <h3 class="news-title">
+                    <span class="news-date old">2026/03/01</span>
+                    v1.0 正式リリース
+                </h3>
+                <p class="news-desc old">
+                    ・アルゴリズム道場を公開しました。
+                </p>
+            </article>
+
+        </div>
+    </main>
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/makeHeader.js"></script>
+    <script src="../js/makeFooter.js"></script>
+    <script src="../js/makeUser_info_bar.js"></script>
+    <script src="../js/user_manager.js"></script>
+    <script>
+        // 💡 ページを開いた瞬間に、最新のニュースIDを「既読」としてローカルストレージに保存
+        localStorage.setItem("imashiru_read_news_id", "20260307_v1.2");
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+/* ==========================================
+   お知らせページ (news.html) 用スタイル
+   ========================================== */
+.news-container {
+    border: 2px solid #000; /* ストイックな太枠 */
+    padding: 20px;
+    background-color: #fff;
+
+    .news-article {
+        border-bottom: 1px dashed #ccc;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+
+        /* 最後の一番下の記事は、無駄な下線を消す */
+        &:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+    }
+
+    .news-title {
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        color: #222;
+    }
+
+    .news-date {
+        background-color: #333;
+        color: #fff;
+        padding: 3px 10px;
+        font-size: 0.9rem;
+        font-family: monospace;
+        
+        /* 過去のニュースは少し色を薄くして主張を抑える */
+        &.old {
+            background-color: #999;
+        }
+    }
+
+    .news-desc {
+        line-height: 1.8;
+        font-size: 0.95rem;
+        color: #333;
+        padding-left: 5px;
+
+        &.old {
+            color: #666;
+        }
+    }
+}

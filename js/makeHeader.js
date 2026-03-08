@@ -21,6 +21,9 @@ header.innerHTML = `
             <a href="achievement.html">
                 <li class="menuLink">アチーブメント</li>
             </a>
+            <a href="news.html">
+                <li class="menuLink">ニュース</li>
+            </a>
         </ul>
     </div>
 </header>

@@ -149,7 +149,7 @@ header {
                 }
 
                 li.menuLink {
-                    height: 3.5rem; // スマホでは指で押しやすいように高さを広げる
+                    height: 3rem; // スマホでは指で押しやすいように高さを広げる
                     justify-content: center;
                 }
             }
@@ -174,7 +174,7 @@ main {
     background-color: #ffffff;
     border: 1px solid #ccc; // ★フワッとした影（box-shadow）を廃止し、直線の枠線に
     min-height: 80vh;
-    margin-top: 20px;
+    margin-top: 4px;
     margin-bottom: 40px;
 
     /* パンくずリスト */

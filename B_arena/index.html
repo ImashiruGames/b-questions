@@ -12,6 +12,15 @@
 <body class="light_theme">
     <div id="header-placeholder"></div>
     <div id="user_info_bar"></div>
+    
+    <div class="flex-center">
+        <a href="news.html" id="unread_news_banner" class="unread-news-banner" style="display: none;">
+            <span class="news-badge">NEW!</span>
+            <span id="unread_news_text" class="news-text"></span>
+            <span class="news-arrow"> ▶</span>
+        </a>
+    </div>
+
     <main>
         <div class="breadcrumb">HOME</div>
         <section class="introduction">
@@ -81,7 +90,7 @@
 <script src="../js/user_manager.js"></script>
 <script src="../short_questions/questions.js"></script>
 <script>
-    
+
     // UserManagerの初期化を先に行う
     if (typeof UserManager !== 'undefined') {
         UserManager.init();
@@ -89,6 +98,21 @@
     if (typeof AchievementChecker !== 'undefined') {
         AchievementChecker.syncPastData();
     }
+
+    // 💡【追加】未読ニュースの判定ロジック
+    // ※アップデートの度に、ここと news.html の ID・テキストを書き換えて運用します
+    const LATEST_NEWS_ID = "20260307_v1.2";
+    const LATEST_NEWS_TEXT = "お知らせページを新設しました！";
+    let readNewsId = localStorage.getItem("imashiru_read_news_id");
+    if (readNewsId !== LATEST_NEWS_ID) {
+        let banner = document.getElementById("unread_news_banner");
+        let textSpan = document.getElementById("unread_news_text");
+        if (banner && textSpan) {
+            textSpan.innerText = LATEST_NEWS_TEXT;
+            banner.style.display = "flex"; // 未読なら表示する
+        }
+    }
+
 
     // ユーザーの統計データを取得
     let currentUsername = UserManager.currentUser;
@@ -216,7 +240,7 @@
 
             let themeHasUnattempted = false;
             for (let subthemeName in subthemes) {
-                let status = checkSubthemeStatus(categoryName, themeName, subthemeName);                
+                let status = checkSubthemeStatus(categoryName, themeName, subthemeName);
                 if (status.hasUnattempted === true) {
                     themeHasUnattempted = true;
                     break;
@@ -235,7 +259,7 @@
                 subthemeItem.classList.add("subtheme-item");
 
                 let status = checkSubthemeStatus(categoryName, themeName, subthemeName);
-                                
+
                 if (status.hasUnattempted) globalHasUnattempted = true;
                 if (status.hasIncorrect) globalHasIncorrect = true;
                 if (status.hasFavorite) globalHasFavorite = true;
