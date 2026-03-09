@@ -449,7 +449,7 @@ function loadQuestion(index) {
         HistoryHTML = `<span class="history-badge">❌${s.incorrect} ⭕${s.correct}</span>`; // 少し見やすく記号を追加
     }
 
-    let favText = "☆ お気に入りに追加";
+    let favText = "☆ お気に入り追加";
     let favClass = "fav-btn fav-unregistered";
     if (typeof UserManager !== 'undefined' && UserManager.isFavorite(q)) {
         favText = "★ お気に入り解除";
